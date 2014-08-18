@@ -5,16 +5,18 @@
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
-#include <fstream>
 
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
-bool missleFired = false;
+bool missleFired1 = false;
+bool missleFired2 = false;
+unsigned int missleNumber = 1;
+unsigned int playingField = 50;
 COORD charLocation;
 COORD consoleSize;
-COORD missleLocation;
-using std::ifstream;
+COORD missleLocation1;
+COORD missleLocation2;
 
 void init()
 {
@@ -79,11 +81,19 @@ void update(double dt)
         Beep(1440, 30);
         charLocation.X++; 
     }
-	if(keyPressed[K_SPACE])
+	if(keyPressed[K_SPACE] && missleNumber == 1)
 	{
-		missleFired = true;
-		missleLocation.X = charLocation.X+1;
-		missleLocation.Y = charLocation.Y;
+		missleFired1 = true;
+		missleNumber=2;
+		missleLocation1.X = charLocation.X+1;
+		missleLocation1.Y = charLocation.Y;
+	}
+	else if(keyPressed[K_SPACE] && missleNumber == 2)
+	{
+		missleFired2 = true;
+		missleNumber=1;
+		missleLocation2.X = charLocation.X+1;
+		missleLocation2.Y = charLocation.Y;
 	}
 
     // quits the game if player hits the escape key
@@ -118,11 +128,26 @@ void render()
     colour(0x0C);
     std::cout << (char)1;
 
-    //Render missles 
-	if(missleFired && missleLocation.X <= 30)
+	// render missles
+	if(missleFired1)
 	{
-	gotoXY(missleLocation.X++,missleLocation.Y);
-	std::cout << "==>" << std::endl;
+		gotoXY(missleLocation1.X++,missleLocation1.Y);
+		std::cout << '>' << std::endl;
+		if(missleLocation1.X >playingField)
+		{
+			missleFired1 = false;
+		}
+	}
+	if(missleFired2)
+	{
+		gotoXY(missleLocation2.X++,missleLocation2.Y);
+		std::cout << '>' << std::endl;
+		if(missleLocation2.X >playingField)
+		{
+			missleFired2 = false;
+		}
 	}
 
+		
+	
 }
