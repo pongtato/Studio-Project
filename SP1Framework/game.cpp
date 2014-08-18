@@ -119,7 +119,7 @@ void render()
     cls();
 
     //render the game
-
+	
     //render test screen code (not efficient at all)
     
 
@@ -132,11 +132,24 @@ void render()
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;
 
+
     // render character
+	renderCharacter();
+	// render missiles
+	renderMissile();
+		
+	
+}
+void renderCharacter()
+{
+	// render character
     gotoXY(charLocation);
     colour(0x0C);
     std::cout << (char)1;
 
+}
+void renderMissile()
+{
 	// render missles
 	if(missleFired1)
 	{
@@ -165,7 +178,4 @@ void render()
 			missleFired3 = false;
 		}
 	}
-
-		
-	
 }
