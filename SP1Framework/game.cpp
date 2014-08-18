@@ -26,8 +26,8 @@ void init()
     consoleSize.Y = csbi.srWindow.Bottom + 1;
 
     // set the character to be in the center of the screen.
-    charLocation.X = consoleSize.X / 2;
-    charLocation.Y = consoleSize.Y / 2;
+    charLocation.X = consoleSize.X%2;
+    charLocation.Y = consoleSize.Y/2;
 
     elapsedTime = 0.0;
 }
@@ -89,17 +89,7 @@ void render()
     //render the game
 
     //render test screen code (not efficient at all)
-    const WORD colors[] =   {
-	                        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-	                        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
-	                        };
-	
-	for (int i = 0; i < 12; ++i)
-	{
-		gotoXY(3*i,i+1);
-		colour(colors[i]);
-		std::cout << "WOW";
-	}
+    
 
     // render time taken to calculate this frame
     gotoXY(70, 0);
