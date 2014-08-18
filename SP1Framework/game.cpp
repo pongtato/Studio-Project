@@ -5,6 +5,7 @@
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 double elapsedTime;
 double deltaTime;
@@ -13,6 +14,7 @@ bool missleFired = false;
 COORD charLocation;
 COORD consoleSize;
 COORD missleLocation;
+using std::ifstream;
 
 void init()
 {

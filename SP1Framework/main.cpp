@@ -2,7 +2,7 @@
 
 #include "Framework\timer.h"
 #include "game.h"
-
+#include <string>
 
 StopWatch g_timer;            // Timer function to keep track of time and the frame rate
 bool g_quitGame = false;      // Set to true if you want to quit the game
@@ -20,6 +20,9 @@ int main()
     mainLoop();  // main loop
     shutdown();  // do clean up, if any. free memory.
 	
+	ifstream indata;
+	string data;
+
 	return 0;
 }
 

@@ -2,9 +2,13 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
+#include <fstream>
+#include <string>
 
 extern StopWatch g_timer;
 extern bool g_quitGame;
+using std::ifstream;
+using std::string;
 
 enum Keys
 {
