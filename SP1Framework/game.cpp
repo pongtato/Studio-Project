@@ -11,12 +11,14 @@ double deltaTime;
 bool keyPressed[K_COUNT];
 bool missleFired1 = false;
 bool missleFired2 = false;
+bool missleFired3 = false;
 unsigned int missleNumber = 1;
 unsigned int playingField = 50;
 COORD charLocation;
 COORD consoleSize;
 COORD missleLocation1;
 COORD missleLocation2;
+COORD missleLocation3;
 
 void init()
 {
@@ -84,16 +86,23 @@ void update(double dt)
 	if(keyPressed[K_SPACE] && missleNumber == 1)
 	{
 		missleFired1 = true;
-		missleNumber=2;
+		missleNumber++;
 		missleLocation1.X = charLocation.X+1;
 		missleLocation1.Y = charLocation.Y;
 	}
 	else if(keyPressed[K_SPACE] && missleNumber == 2)
 	{
 		missleFired2 = true;
-		missleNumber=1;
+		missleNumber++;
 		missleLocation2.X = charLocation.X+1;
 		missleLocation2.Y = charLocation.Y;
+	}
+	else if(keyPressed[K_SPACE] && missleNumber == 3)
+	{
+		missleFired3 = true;
+		missleNumber=1;
+		missleLocation3.X = charLocation.X+1;
+		missleLocation3.Y = charLocation.Y;
 	}
 
     // quits the game if player hits the escape key
@@ -145,6 +154,15 @@ void render()
 		if(missleLocation2.X >playingField)
 		{
 			missleFired2 = false;
+		}
+	}
+	if(missleFired3)
+	{
+		gotoXY(missleLocation3.X++,missleLocation3.Y);
+		std::cout << '>' << std::endl;
+		if(missleLocation3.X >playingField)
+		{
+			missleFired3 = false;
 		}
 	}
 
