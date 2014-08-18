@@ -9,8 +9,10 @@
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
+bool missleFired = false;
 COORD charLocation;
 COORD consoleSize;
+COORD missleLocation;
 
 void init()
 {
@@ -45,6 +47,7 @@ void getInput()
     keyPressed[K_LEFT] = isKeyPressed(VK_LEFT);
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
+	keyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
 }
 
 void update(double dt)
@@ -74,10 +77,18 @@ void update(double dt)
         Beep(1440, 30);
         charLocation.X++; 
     }
+	if(keyPressed[K_SPACE])
+	{
+		missleFired = true;
+		missleLocation.X = charLocation.X+1;
+		missleLocation.Y = charLocation.Y;
+	}
 
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
-        g_quitGame = true;    
+	{
+        g_quitGame = true;   
+	}
 }
 
 void render()
@@ -105,5 +116,10 @@ void render()
     colour(0x0C);
     std::cout << (char)1;
 
-    
+    //Render missles 
+	if(missleFired && missleLocation.X <= 30)
+	{
+	gotoXY(missleLocation.X++,missleLocation.Y);
+	std::cout << "==>" << std::endl;
+	}
 }
