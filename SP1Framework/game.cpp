@@ -10,15 +10,17 @@ double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
 bool missleFired1 = false;
-bool missleFired2 = false;
-bool missleFired3 = false;
 unsigned int missleNumber = 1;
 unsigned int playingField = 50;
+unsigned int currentMissile = 0;
+unsigned int maxMissile = 50;
+unsigned int lastFired = 0;
+unsigned int currentTime;
+
+StopWatch b_timer; 
 COORD charLocation;
 COORD consoleSize;
-COORD missleLocation1;
-COORD missleLocation2;
-COORD missleLocation3;
+BULLET missile[50];
 
 void init()
 {
@@ -83,26 +85,23 @@ void update(double dt)
         Beep(1440, 30);
         charLocation.X++; 
     }
-	if(keyPressed[K_SPACE] && missleNumber == 1)
+	if(keyPressed[K_SPACE] && currentMissile <maxMissile)
 	{
-		missleFired1 = true;
-		missleNumber++;
-		missleLocation1.X = charLocation.X+1;
-		missleLocation1.Y = charLocation.Y;
+		
+		missile[currentMissile].Active = true;
+		missile[currentMissile].corrdinates.X = charLocation.X+1;
+		missile[currentMissile].corrdinates.Y = charLocation.Y;
+		missile[currentMissile].number = currentMissile;
+		currentMissile++;
 	}
-	else if(keyPressed[K_SPACE] && missleNumber == 2)
+	if(keyPressed[K_SPACE] && currentMissile >=maxMissile)
 	{
-		missleFired2 = true;
-		missleNumber++;
-		missleLocation2.X = charLocation.X+1;
-		missleLocation2.Y = charLocation.Y;
-	}
-	else if(keyPressed[K_SPACE] && missleNumber == 3)
-	{
-		missleFired3 = true;
-		missleNumber=1;
-		missleLocation3.X = charLocation.X+1;
-		missleLocation3.Y = charLocation.Y;
+		currentMissile=0;
+		missile[currentMissile].Active = true;
+		missile[currentMissile].corrdinates.X = charLocation.X+1;
+		missile[currentMissile].corrdinates.Y = charLocation.Y;
+		missile[currentMissile].number = currentMissile;
+		
 	}
 
     // quits the game if player hits the escape key
@@ -118,6 +117,54 @@ void render()
     colour(0x0F);
     cls();
 
+
+    // render time taken to calculate this frame
+    gotoXY(70, 0);
+    colour(0x1A);
+    std::cout << 1.0 / deltaTime << "fps" << std::endl;
+  
+    gotoXY(0, 0);
+    colour(0x59);
+    std::cout << elapsedTime << "secs" << std::endl;
+
+	// render enemies
+	renderEnemies();
+    // render character
+	renderCharacter();
+	// render missiles
+	renderMissile();
+	
+		
+	
+}
+void renderCharacter()
+{
+	// render character
+    gotoXY(charLocation);
+    colour(0x0C);
+    std::cout << (char)1;
+
+}
+void renderMissile()
+{
+	for(int i = 0; i<maxMissile;i++)
+	{
+		if(missile[i].Active)
+		{
+			gotoXY(missile[i].corrdinates.X++,missile[i].corrdinates.Y);
+			std::cout << '>'<< std::endl;
+
+			if(missile[i].corrdinates.X > playingField)
+			{
+				missile[i].Active = false;
+			}
+		}
+	}
+
+}
+void renderEnemies()
+{
+	
     for ( int i = 1; i<10; ++i)
 	{
 		if ( i%2 == 0)
@@ -138,62 +185,6 @@ void render()
 				std::cout << (char)5;
 				}
 			}
-		}
-	}
-
-    // render time taken to calculate this frame
-    gotoXY(70, 0);
-    colour(0x1A);
-    std::cout << 1.0 / deltaTime << "fps" << std::endl;
-  
-    gotoXY(0, 0);
-    colour(0x59);
-    std::cout << elapsedTime << "secs" << std::endl;
-
-
-    // render character
-	renderCharacter();
-	// render missiles
-	renderMissile();
-		
-	
-}
-void renderCharacter()
-{
-	// render character
-    gotoXY(charLocation);
-    colour(0x0C);
-    std::cout << (char)1;
-
-}
-void renderMissile()
-{
-	// render missles
-	if(missleFired1)
-	{
-		gotoXY(missleLocation1.X++,missleLocation1.Y);
-		std::cout << '>' << std::endl;
-		if(missleLocation1.X >playingField)
-		{
-			missleFired1 = false;
-		}
-	}
-	if(missleFired2)
-	{
-		gotoXY(missleLocation2.X++,missleLocation2.Y);
-		std::cout << '>' << std::endl;
-		if(missleLocation2.X >playingField)
-		{
-			missleFired2 = false;
-		}
-	}
-	if(missleFired3)
-	{
-		gotoXY(missleLocation3.X++,missleLocation3.Y);
-		std::cout << '>' << std::endl;
-		if(missleLocation3.X >playingField)
-		{
-			missleFired3 = false;
 		}
 	}
 }
