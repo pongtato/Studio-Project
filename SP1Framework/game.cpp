@@ -45,7 +45,7 @@ void init()
     // set the character to be in the center of the screen.
     charLocation.X = consoleSize.X%2;
     charLocation.Y = consoleSize.Y/2;
-
+	
     elapsedTime = 0.0;
 }
 
@@ -141,7 +141,7 @@ void render()
 	// render missiles
 	renderMissile();
 	
-		
+	//leveldesign();
 	
 }
 void renderCharacter()
@@ -158,11 +158,6 @@ void renderMissile()
 	{
 
 		if(missile[i].Active)
-=======
-		gotoXY(missleLocation1.X++,missleLocation1.Y);
-		std::cout << "==D;  " << std::endl;
-		if(missleLocation1.X >playingField)
-
 		{
 			gotoXY(missile[i].corrdinates.X++,missile[i].corrdinates.Y);
 			std::cout << '>'<< std::endl;
@@ -177,45 +172,33 @@ void renderMissile()
 }
 void renderEnemies()
 {
-	
-    for ( int i = 1; i<10; ++i)
+
+	for ( int i = 1; i<10; ++i)
 	{
 
 		if ( i%2 == 0)
-		gotoXY(missleLocation2.X++,missleLocation2.Y);
-		std::cout << "==D;  " << std::endl;
-		if(missleLocation2.X >playingField)
-
 		{
-		std::cout << " ";
+			std::cout << " ";
 		}
-
 		else
-
-	}
-	if(missleFired3)
-	{
-		gotoXY(missleLocation3.X++,missleLocation3.Y);
-		std::cout << "==D;  " << std::endl;
-		if(missleLocation3.X >playingField)
-
 		{
 			for ( int j = 1; j<12; ++j)
 			{
 				if ( j%2==0)
 				{
-				std::cout << " ";
+					std::cout << " ";
 				}
 				else 
 				{
-				gotoXY(consoleSize.X/2 - (i+5), consoleSize.Y/4 + j);
-				std::cout << (char)5;
+					gotoXY(consoleSize.X/2 - (i+5), consoleSize.Y/4 + j);
+					std::cout << (char)5;
 				}
 			}
 		}
 	}
 }
-void leveldesign(){
+void leveldesign()
+{
 	ifstream indata;
 	string data;
 	indata.open("GLD/GLD.txt");
