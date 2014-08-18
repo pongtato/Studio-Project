@@ -9,6 +9,7 @@ extern StopWatch g_timer;
 extern bool g_quitGame;
 using std::ifstream;
 using std::string;
+using std::endl;
 
 enum Keys
 {
@@ -35,5 +36,9 @@ void shutdown();            // do clean up, free memory
 void renderMissile();		// renders missiles in the game
 void renderCharacter();		// renders player character
 void renderEnemies();
+
+void renderCharacter();
+void leveldesign();
+
 
 #endif // _GAME_H

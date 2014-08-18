@@ -19,9 +19,7 @@ int main()
 	init();      // initialize your variables
     mainLoop();  // main loop
     shutdown();  // do clean up, if any. free memory.
-	
-	ifstream indata;
-	string data;
+	//leveldesign();
 
 	return 0;
 }
@@ -32,7 +30,8 @@ void mainLoop()
 {
     g_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
     while (!g_quitGame)      // run this loop until user wants to quit 
-	{        
+	{     
+		leveldesign();
         getInput();                         // get keyboard input
         update(g_timer.getElapsedTime());   // update the game
         render();                           // render the graphics output to screen

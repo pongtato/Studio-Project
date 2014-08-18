@@ -20,7 +20,14 @@ unsigned int currentTime;
 StopWatch b_timer; 
 COORD charLocation;
 COORD consoleSize;
+
 BULLET missile[50];
+
+COORD missleLocation1;
+COORD missleLocation2;
+COORD missleLocation3;
+using std::cout; 
+
 
 void init()
 {
@@ -149,7 +156,13 @@ void renderMissile()
 {
 	for(int i = 0; i<maxMissile;i++)
 	{
+
 		if(missile[i].Active)
+=======
+		gotoXY(missleLocation1.X++,missleLocation1.Y);
+		std::cout << "==D;  " << std::endl;
+		if(missleLocation1.X >playingField)
+
 		{
 			gotoXY(missile[i].corrdinates.X++,missile[i].corrdinates.Y);
 			std::cout << '>'<< std::endl;
@@ -167,11 +180,25 @@ void renderEnemies()
 	
     for ( int i = 1; i<10; ++i)
 	{
+
 		if ( i%2 == 0)
+		gotoXY(missleLocation2.X++,missleLocation2.Y);
+		std::cout << "==D;  " << std::endl;
+		if(missleLocation2.X >playingField)
+
 		{
 		std::cout << " ";
 		}
+
 		else
+
+	}
+	if(missleFired3)
+	{
+		gotoXY(missleLocation3.X++,missleLocation3.Y);
+		std::cout << "==D;  " << std::endl;
+		if(missleLocation3.X >playingField)
+
 		{
 			for ( int j = 1; j<12; ++j)
 			{
@@ -186,5 +213,18 @@ void renderEnemies()
 				}
 			}
 		}
+	}
+}
+void leveldesign(){
+	ifstream indata;
+	string data;
+	indata.open("GLD/GLD.txt");
+	if(indata.is_open())
+	{
+		while( getline (indata, data))
+		{
+			cout << data << endl;
+		}
+		indata.close();
 	}
 }
