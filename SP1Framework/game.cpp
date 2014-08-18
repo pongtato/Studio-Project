@@ -122,4 +122,5 @@ void render()
 	gotoXY(missleLocation.X++,missleLocation.Y);
 	std::cout << "==>" << std::endl;
 	}
+
 }
