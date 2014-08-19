@@ -5,6 +5,8 @@
 #include <fstream>
 #include <string>
 
+#define NO_OF_ENEMIES 20
+
 extern StopWatch g_timer;
 extern bool g_quitGame;
 

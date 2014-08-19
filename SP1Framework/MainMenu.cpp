@@ -31,8 +31,6 @@ void menuscreen()
 			std::cin >> choice;
 		}
 		
-
-		
 		switch(choice)
 		{
 

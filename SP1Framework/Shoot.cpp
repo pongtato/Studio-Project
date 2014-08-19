@@ -45,7 +45,7 @@ void renderMissile()
 	}
 
 }
-void checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
+bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 {
 
 	if(((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
@@ -60,6 +60,9 @@ void checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 		checkEnemy.icon = ' ';
 		checkEnemy.Active = false;
 		//increase score
+
+		return true;
 	}
 
+	return false;
 }

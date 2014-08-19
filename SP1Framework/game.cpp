@@ -11,7 +11,6 @@
 #include <iostream>
 #include <iomanip>
 
-
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
@@ -23,6 +22,7 @@ StopWatch b_timer;
 COORD charLocation;
 COORD consoleSize;
 
+int globalscore = 0;
 unsigned int currentMissile = 0;
 unsigned int currentEnemy = 0;
 unsigned int maxMissile = 50;
@@ -73,29 +73,59 @@ void update(double dt)
     elapsedTime += dt;
     deltaTime = dt;
 
-	SpawnEnemy(currentEnemy);
+	// spawn enemies
+	static double timer_spawn = elapsedTime;
+	if ( elapsedTime - timer_spawn > 1 )
+	{
+		timer_spawn = elapsedTime;
 
-    // Updating the location of the character based on the key press
-    if (keyPressed[K_UP] && charLocation.Y > 0)
-    {
-        Beep(0, 0);
-        charLocation.Y--; 
-    }
-    if (keyPressed[K_LEFT] && charLocation.X > 0)
-    {
-        Beep(0, 0);
-        charLocation.X--; 
-    }
-    if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
-    {
-        Beep(0, 0);
-        charLocation.Y++; 
-    }
-    if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
-    {
-        Beep(0, 0);
-        charLocation.X++; 
-    }
+		if ( currentEnemy < NO_OF_ENEMIES )
+			SpawnEnemy(currentEnemy);
+	}
+
+	// move enemies
+	static double timer_move = elapsedTime;
+	if ( elapsedTime - timer_move > 0.5 )
+	{
+		timer_move = elapsedTime;
+
+		moveEnemies();
+	}
+
+	// check collision
+	for(int i = 0; i<50;i++)
+	{
+		for(int j = 0; j<NO_OF_ENEMIES;j++)
+		{
+			if ( checkCollisionBullet(missile[i], counter[j]) )
+			{
+				currentEnemy --;
+				globalscore += counter[j].score;
+			}
+		}
+	}
+
+	// Updating the location of the character based on the key press
+	if (keyPressed[K_UP] && charLocation.Y > 0)
+	{
+		Beep(0, 0);
+		charLocation.Y--; 
+	}
+	if (keyPressed[K_LEFT] && charLocation.X > 0)
+	{
+		Beep(0, 0);
+		charLocation.X--; 
+	}
+	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
+	{
+		Beep(0, 0);
+		charLocation.Y++; 
+	}
+	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
+	{
+		Beep(0, 0);
+		charLocation.X++; 
+	}
 	if(keyPressed[K_SPACE] && currentMissile <maxMissile && !missleFired1)
 	{
 		shootMissile1(currentMissile,charLocation);
@@ -103,7 +133,6 @@ void update(double dt)
 	}
 	if(keyPressed[K_SPACE] && currentMissile >=maxMissile && !missleFired1)
 	{
-		
 		shootMissile2(currentMissile,charLocation);
 		missleFired1 = true;
 	}
@@ -121,14 +150,6 @@ void update(double dt)
 	if (keyPressed[K_P])
 	{
 		system("PAUSE");
-		
-	}
-	for(int i = 0; i<50;i++)
-	{
-		for(int j = 0; j<20;j++)
-		{
-			checkCollisionBullet(missile[i], counter[j]);
-		}
 	}
 }
 
@@ -137,11 +158,6 @@ void render()
     // clear previous screen
     colour(0x0F);
     cls();
-	
-
-	moveEnemies();
-
-
 
     // render time taken to calculate this frame
     gotoXY(70, 0);
@@ -152,19 +168,37 @@ void render()
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;
 
+	gotoXY(60, 0);
+    colour(0x03);
+    std::cout << "Score:" << globalscore << std::endl;
+
     // render character
 	renderCharacter();
 	// render missiles
 	renderMissile();
-
-	
-	//leveldesign();
-	
+	// render enemies
+	colour(0x07);
+	renderEnemies();
 }
+
 void renderCharacter()
 {
 	// render character
 	gotoXY(charLocation);
 	colour(0x0C);
 	std::cout << (char)1;
+}
+
+void renderEnemies()
+{
+	// render enemies
+	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
+	{
+		//is enemy alive
+		if(counter[i].Active == true)
+		{
+			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
+			std::cout << counter[i].icon;
+		}
+	}
 }

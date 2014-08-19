@@ -18,7 +18,7 @@ struct BULLET
 void renderMissile();		// renders missiles in the game
 void shootMissile1(unsigned int &currentMissile, COORD charLocation);
 void shootMissile2(unsigned int &currentMissile, COORD charLocation);
-void checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy);
+bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy);
 
 
 
