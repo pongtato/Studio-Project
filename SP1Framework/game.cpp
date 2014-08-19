@@ -72,6 +72,8 @@ void update(double dt)
     elapsedTime += dt;
     deltaTime = dt;
 
+	SpawnEnemy(currentEnemy);
+
     // Updating the location of the character based on the key press
     if (keyPressed[K_UP] && charLocation.Y > 0)
     {
@@ -134,11 +136,10 @@ void render()
     // clear previous screen
     colour(0x0F);
     cls();
+	
 
-	// render enemies
-	enemyMove(currentEnemy);
-	//renderEnemies();
 	moveEnemies();
+
 
 
     // render time taken to calculate this frame

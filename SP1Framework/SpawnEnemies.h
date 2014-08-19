@@ -22,7 +22,7 @@ void renderEnemies();
 void moveEnemies();
 void stateCheck();
 void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, bool Active,int hp, int score,int number, int state);
-void enemyMove(unsigned int &currentEnemy);
+void SpawnEnemy(unsigned int &currentEnemy);
 
 
 
