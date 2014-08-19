@@ -15,4 +15,5 @@ void shootMissile1(unsigned int &currentMissile, COORD charLocation);
 void shootMissile2(unsigned int &currentMissile, COORD charLocation);
 
 
+
 #endif // _SHOOT_H

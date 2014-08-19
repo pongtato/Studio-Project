@@ -2,9 +2,6 @@
 #include "game.h"
 #include <iostream>
 
-bool missleFired1 = false;
-unsigned int lastFired = 0;
-unsigned int currentTime;
 
 BULLET missile[50];
 
