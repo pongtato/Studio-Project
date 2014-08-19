@@ -5,7 +5,7 @@
 
 #include "SpawnEnemies.h"
 
-extern ENEMY Wew;
+extern ENEMY counter[26];
 
 struct BULLET
 {

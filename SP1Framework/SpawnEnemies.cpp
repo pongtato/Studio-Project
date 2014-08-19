@@ -4,8 +4,8 @@
 #include <iomanip>
 #include <iostream>
 
+
 ENEMY counter[999];
-ENEMY Wew;
 int state = 1;
 
 void moveEnemies()

@@ -41,7 +41,7 @@ void renderMissile()
 			{
 				missile[i].Active = false;
 			}
-			checkCollisionBullet(missile[i], Wew);
+			checkCollisionBullet(missile[i], counter[i]);
 		}
 	}
 
