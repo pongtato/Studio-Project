@@ -22,6 +22,7 @@ COORD consoleSize;
 unsigned int currentMissile = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
+bool missleFired1 = false;
 
 
 void init()
@@ -87,14 +88,20 @@ void update(double dt)
         Beep(1440, 30);
         charLocation.X++; 
     }
-	if(keyPressed[K_SPACE] && currentMissile <maxMissile)
+	if(keyPressed[K_SPACE] && currentMissile <maxMissile && !missleFired1)
 	{
 		shootMissile1(currentMissile,charLocation);
+		missleFired1 = true;
 	}
-	if(keyPressed[K_SPACE] && currentMissile >=maxMissile)
+	if(keyPressed[K_SPACE] && currentMissile >=maxMissile && !missleFired1)
 	{
 		
 		shootMissile2(currentMissile,charLocation);
+		missleFired1 = true;
+	}
+	if(keyPressed[K_SPACE] == false)
+	{
+		missleFired1= false;
 	}
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
