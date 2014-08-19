@@ -78,6 +78,7 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="leveldesign.cpp" />
     <ClCompile Include="LoadLevel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -88,6 +89,7 @@
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="leveldesign.h" />
     <ClInclude Include="LoadLevel.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Shoot.h" />

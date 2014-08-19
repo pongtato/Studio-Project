@@ -4,6 +4,7 @@
 #include "game.h"
 #include "Shoot.h"
 #include "SpawnEnemies.h"
+#include "leveldesign.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
@@ -21,8 +22,6 @@ COORD consoleSize;
 unsigned int currentMissile = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
-
-using std::cout; 
 
 
 void init()
@@ -132,24 +131,7 @@ void render()
 void renderCharacter()
 {
 	// render character
-    gotoXY(charLocation);
-    colour(0x0C);
-    std::cout << (char)1;
-
-}
-
-
-void leveldesign()
-{
-	ifstream indata;
-	string data;
-	indata.open("GLD/GLD.txt");
-	if(indata.is_open())
-	{
-		while( getline (indata, data))
-		{
-			cout << data << endl;
-		}
-		indata.close();
-	}
+	gotoXY(charLocation);
+	colour(0x0C);
+	std::cout << (char)1;
 }

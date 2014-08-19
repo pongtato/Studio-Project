@@ -19,7 +19,6 @@ int main()
 	init();      // initialize your variables
     mainLoop();  // main loop
     shutdown();  // do clean up, if any. free memory.
-	//leveldesign();
 
 	return 0;
 }
