@@ -7,6 +7,7 @@
 #include "SpawnEnemies.h"
 #include "leveldesign.h"
 #include "Framework\console.h"
+#include "MainMenu.h"
 #include <iostream>
 #include <iomanip>
 

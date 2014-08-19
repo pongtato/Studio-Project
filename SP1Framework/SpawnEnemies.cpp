@@ -20,6 +20,8 @@ void moveEnemies()
 			if ( state == 1)
 			{
 				gotoXY(counter[i].coordinates.X--,counter[i].coordinates.Y);
+				gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y--);
+
 				std::cout << counter[i].icon;
 
 			/*	if ( counter[i].coordinates.Y< 5 )
