@@ -4,9 +4,10 @@
 #include "Framework\console.h"
 #include <string>
 
+
 struct ENEMY
 {
-	string name;
+	std::string name;
 	COORD corrdinates;
 	bool Active;
 	int number;

@@ -120,7 +120,7 @@ void render()
     std::cout << elapsedTime << "secs" << std::endl;
 
 	// render enemies
-	renderEnemies();
+	//renderEnemies();
     // render character
 	renderCharacter();
 	// render missiles
