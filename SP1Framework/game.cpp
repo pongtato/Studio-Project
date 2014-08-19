@@ -116,6 +116,9 @@ void render()
     colour(0x0F);
     cls();
 
+	// render enemies
+	renderEnemies();
+
     // render time taken to calculate this frame
     gotoXY(70, 0);
     colour(0x1A);
@@ -125,8 +128,6 @@ void render()
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;
 
-	// render enemies
-	//renderEnemies();
     // render character
 	renderCharacter();
 	// render missiles

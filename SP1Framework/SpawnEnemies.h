@@ -8,11 +8,16 @@
 struct ENEMY
 {
 	std::string name;
-	COORD corrdinates;
+	char icon;
+	COORD coordinates;
 	bool Active;
-	int number;
+	int hp;
 	int score;
+	
 };
+
+void renderEnemies();
+void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, bool Active,int hp, int score);
 
 
 
