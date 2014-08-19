@@ -5,6 +5,7 @@
 #include <iostream>
 
 
+ENEMY Wew;
 
 void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, bool Active, int hp, int score)
 {
@@ -37,7 +38,6 @@ void renderEnemies()
 				}
 				else 
 				{
-					ENEMY Wew;
 					COORD coord;
 					coord.X = 30 + i;
 					coord.Y = 5 + j;

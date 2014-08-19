@@ -109,6 +109,8 @@ void update(double dt)
 	{
         g_quitGame = true;   
 	}
+
+	
 }
 
 void render()

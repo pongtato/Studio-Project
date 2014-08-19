@@ -3,9 +3,14 @@
 
 #include "Framework\console.h"
 
+#include "SpawnEnemies.h"
+
+extern ENEMY Wew;
+
 struct BULLET
 {
 	COORD corrdinates;
+	char icon;
 	bool Active;
 	int number;
 };
@@ -13,6 +18,7 @@ struct BULLET
 void renderMissile();		// renders missiles in the game
 void shootMissile1(unsigned int &currentMissile, COORD charLocation);
 void shootMissile2(unsigned int &currentMissile, COORD charLocation);
+void checkCollision(BULLET &missile, ENEMY &checkEnemy);
 
 
 
