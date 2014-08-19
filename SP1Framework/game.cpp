@@ -21,6 +21,7 @@ COORD charLocation;
 COORD consoleSize;
 
 unsigned int currentMissile = 0;
+unsigned int currentEnemy = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
 bool missleFired1 = false;
@@ -71,22 +72,22 @@ void update(double dt)
     // Updating the location of the character based on the key press
     if (keyPressed[K_UP] && charLocation.Y > 0)
     {
-        Beep(1440, 30);
+        Beep(0, 0);
         charLocation.Y--; 
     }
     if (keyPressed[K_LEFT] && charLocation.X > 0)
     {
-        Beep(1440, 30);
+        Beep(0, 0);
         charLocation.X--; 
     }
     if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
     {
-        Beep(1440, 30);
+        Beep(0, 0);
         charLocation.Y++; 
     }
     if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
     {
-        Beep(1440, 30);
+        Beep(0, 0);
         charLocation.X++; 
     }
 	if(keyPressed[K_SPACE] && currentMissile <maxMissile && !missleFired1)
@@ -120,7 +121,10 @@ void render()
     cls();
 
 	// render enemies
-	renderEnemies();
+	enemyMove(currentEnemy);
+	//renderEnemies();
+	moveEnemies();
+
 
     // render time taken to calculate this frame
     gotoXY(70, 0);
@@ -135,6 +139,7 @@ void render()
 	renderCharacter();
 	// render missiles
 	renderMissile();
+
 	
 	//leveldesign();
 	

@@ -13,11 +13,16 @@ struct ENEMY
 	bool Active;
 	int hp;
 	int score;
+	int number;
+	int state;
 	
 };
 
 void renderEnemies();
-void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, bool Active,int hp, int score);
+void moveEnemies();
+void stateCheck();
+void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, bool Active,int hp, int score,int number, int state);
+void enemyMove(unsigned int &currentEnemy);
 
 
 
