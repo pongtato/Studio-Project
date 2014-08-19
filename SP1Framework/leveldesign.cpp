@@ -9,7 +9,7 @@ void leveldesign();
 void leveldesign()
 {
 	ifstream indata;
-	string data;
+	string data; 
 	indata.open("GLD/GLD.txt");
 	if (indata.is_open())
 	{
