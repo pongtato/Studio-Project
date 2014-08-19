@@ -4,26 +4,42 @@
 #include <iomanip>
 #include <iostream>
 
-ENEMY counter[26];
+ENEMY counter[999];
 ENEMY Wew;
-int state = 0;
+int state = 1;
 
 void moveEnemies()
 {
-	for(int i = 0; i<1;i++)
-	{
+	// number of enemies
+		int i=1;
+		//is enemy alive
 		if(counter[i].Active == true)
 		{
-			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y--);
-			std::cout << counter[i].icon;
-			
-			if ( counter[i].coordinates.Y<=1 )
+			if ( state == 1)
 			{
-				counter[i].Active = false;
-				
+				gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y--);
+				std::cout << counter[i].icon;
+
+				if ( counter[i].coordinates.Y< 5 )
+				{
+					counter[i].coordinates.X--;
+					state=3;
+				}
+			}
+
+			if ( state == 3)
+			{
+				gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y++);
+				std::cout << counter[i].icon;
+
+				if ( counter[i].coordinates.Y>=15 )
+				{
+					counter[i].coordinates.X--;
+					state=1;
+				}
 			}
 		}
-	}
+	
 }
 
 void enemyMove(unsigned int &currentEnemy)
