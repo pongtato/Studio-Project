@@ -49,7 +49,8 @@ void renderMissile()
 void checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 {
 	
-	if(missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)
+	if((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y) 
+		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y))
 	{
 		
 		missile.icon = ' ';
