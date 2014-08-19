@@ -41,7 +41,6 @@ void renderMissile()
 			{
 				missile[i].Active = false;
 			}
-			checkCollisionBullet(missile[i], counter[i]);
 		}
 	}
 
@@ -49,11 +48,12 @@ void renderMissile()
 void checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 {
 	
-	if((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y) 
-		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y))
+	if(((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
+		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y-1 == checkEnemy.coordinates.Y)//Check above
+		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y+1 == checkEnemy.coordinates.Y))&&checkEnemy.Active)//Check below
 	{
 		
-		missile.icon = ' ';
+ 		missile.icon = ' ';
 		missile.Active = false;
 		
 		checkEnemy.icon = ' ';

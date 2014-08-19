@@ -15,6 +15,8 @@ double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
 
+extern ENEMY counter[26];
+extern BULLET missile[50];
 
 StopWatch b_timer; 
 COORD charLocation;
@@ -118,8 +120,13 @@ void update(double dt)
 		system("PAUSE");
 		
 	}
-
-	
+	for(int i = 0; i<50;i++)
+	{
+		for(int j = 0; j<50;j++)
+		{
+			checkCollisionBullet(missile[j], counter[i]);
+		}
+	}
 }
 
 void render()
