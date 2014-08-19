@@ -61,6 +61,7 @@ void getInput()
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	keyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
+	keyPressed[K_P] = isKeyPressed(0x50);
 }
 
 void update(double dt)
@@ -108,7 +109,14 @@ void update(double dt)
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
 	{
-        g_quitGame = true;   
+        colour(0x0F);
+		cls();
+		menuscreen();   
+	}
+	if (keyPressed[K_P])
+	{
+		system("PAUSE");
+		
 	}
 
 	

@@ -7,6 +7,7 @@ enum MainMenu
 {
 	PLAYGAME = 1,
 	SCORE,
+	INSTRUCTION,
 	EXITGAME
 };
 

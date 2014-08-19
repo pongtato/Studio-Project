@@ -14,7 +14,8 @@ void menuscreen()
 	std::cout<< "OPTIONS:\nPlease Select\n\n";
 	std::cout<< "1: Start Game\n";
 	std::cout<< "2: Score\n";
-	std::cout<< "3: Exit Game\n";
+	std::cout<< "3: Instructions\n";
+	std::cout<< "4: Exit Game\n";
 
 
 	int choice = 0;
@@ -43,8 +44,10 @@ void menuscreen()
 
 		case SCORE: std::cout<< "SCORE\n";
 			break;
+			
+		case INSTRUCTION: std::cout<< "instructions\n";
 
-		case EXITGAME: g_quitGame = true;
+		case EXITGAME: exit ( 0 );
 			break;
 
 		default: std::cout<< "Invalid Input, Please Reselect\n\n";
