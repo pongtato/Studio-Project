@@ -47,15 +47,16 @@ void renderMissile()
 }
 void checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 {
-	
+
 	if(((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
-		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y-1 == checkEnemy.coordinates.Y)//Check above
-		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y+1 == checkEnemy.coordinates.Y))&&checkEnemy.Active)//Check below
+		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y))//Check above
+		//|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y+1 == checkEnemy.coordinates.Y))
+		&&checkEnemy.Active && missile.Active)//Check below
 	{
-		
- 		missile.icon = ' ';
+
+		missile.icon = ' ';
 		missile.Active = false;
-		
+
 		checkEnemy.icon = ' ';
 		checkEnemy.Active = false;
 		//increase score
