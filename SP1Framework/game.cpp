@@ -1,6 +1,7 @@
 // This is the main file for the game logic and function
 //
 //
+#include "MainMenu.h"
 #include "game.h"
 #include "Shoot.h"
 #include "SpawnEnemies.h"
