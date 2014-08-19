@@ -41,12 +41,12 @@ void renderMissile()
 			{
 				missile[i].Active = false;
 			}
-			checkCollision(missile[i], Wew);
+			checkCollisionBullet(missile[i], Wew);
 		}
 	}
 
 }
-void checkCollision(BULLET &missile, ENEMY &checkEnemy)
+void checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 {
 	
 	if(missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)
