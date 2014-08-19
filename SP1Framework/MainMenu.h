@@ -2,6 +2,7 @@
 #define _MAINMENU_H
 
 void menuscreen();
+void menuscreen2();
 
 enum MainMenu
 {

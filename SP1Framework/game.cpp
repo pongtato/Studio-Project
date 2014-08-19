@@ -111,7 +111,7 @@ void update(double dt)
 	{
         colour(0x0F);
 		cls();
-		menuscreen();   
+		menuscreen2();   
 	}
 	if (keyPressed[K_P])
 	{
