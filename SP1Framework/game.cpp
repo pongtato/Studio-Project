@@ -2,30 +2,25 @@
 //
 //
 #include "game.h"
+#include "Shoot.h"
 #include "Framework\console.h"
 #include <iostream>
 #include <iomanip>
 
+
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
-bool missleFired1 = false;
-unsigned int missleNumber = 1;
-unsigned int playingField = 50;
-unsigned int currentMissile = 0;
-unsigned int maxMissile = 50;
-unsigned int lastFired = 0;
-unsigned int currentTime;
+
 
 StopWatch b_timer; 
 COORD charLocation;
 COORD consoleSize;
 
-BULLET missile[50];
+unsigned int currentMissile = 0;
+unsigned int maxMissile = 50;
+unsigned int playingField = 50;
 
-COORD missleLocation1;
-COORD missleLocation2;
-COORD missleLocation3;
 using std::cout; 
 
 
@@ -94,23 +89,13 @@ void update(double dt)
     }
 	if(keyPressed[K_SPACE] && currentMissile <maxMissile)
 	{
-		
-		missile[currentMissile].Active = true;
-		missile[currentMissile].corrdinates.X = charLocation.X+1;
-		missile[currentMissile].corrdinates.Y = charLocation.Y;
-		missile[currentMissile].number = currentMissile;
-		currentMissile++;
+		shootMissile1(currentMissile,charLocation);
 	}
 	if(keyPressed[K_SPACE] && currentMissile >=maxMissile)
 	{
-		currentMissile=0;
-		missile[currentMissile].Active = true;
-		missile[currentMissile].corrdinates.X = charLocation.X+1;
-		missile[currentMissile].corrdinates.Y = charLocation.Y;
-		missile[currentMissile].number = currentMissile;
 		
+		shootMissile2(currentMissile,charLocation);
 	}
-
     // quits the game if player hits the escape key
     if (keyPressed[K_ESCAPE])
 	{
@@ -152,24 +137,7 @@ void renderCharacter()
     std::cout << (char)1;
 
 }
-void renderMissile()
-{
-	for(int i = 0; i<maxMissile;i++)
-	{
 
-		if(missile[i].Active)
-		{
-			gotoXY(missile[i].corrdinates.X++,missile[i].corrdinates.Y);
-			std::cout << '>'<< std::endl;
-
-			if(missile[i].corrdinates.X > playingField)
-			{
-				missile[i].Active = false;
-			}
-		}
-	}
-
-}
 void renderEnemies()
 {
 
@@ -197,6 +165,7 @@ void renderEnemies()
 		}
 	}
 }
+
 void leveldesign()
 {
 	ifstream indata;

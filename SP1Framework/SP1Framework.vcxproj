@@ -78,12 +78,20 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="LoadLevel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Shoot.cpp" />
+    <ClCompile Include="SpawnEnemies.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="LoadLevel.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Shoot.h" />
+    <ClInclude Include="SpawnEnemies.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

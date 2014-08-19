@@ -33,6 +33,18 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LoadLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shoot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnEnemies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -42,6 +54,18 @@
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shoot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnEnemies.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
