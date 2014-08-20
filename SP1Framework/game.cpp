@@ -166,7 +166,7 @@ void update(double dt)
 	{
 		missleFired1= false;
 	}
-    // quits the game if player hits the escape key
+    // goes to menu 2 if player hits the escape key ( a way of pause )
     if (keyPressed[K_ESCAPE])
 	{
         colour(0x0F);
@@ -220,7 +220,7 @@ void renderCharacter()
 void renderEnemies()
 {
 	// render enemies
-	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
+	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
 	{
 		//is enemy alive
 		if(counter[i].Active == true)

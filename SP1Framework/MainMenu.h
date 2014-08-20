@@ -1,6 +1,7 @@
 #ifndef _MAINMENU_H
 #define _MAINMENU_H
 
+bool is_int();
 void menuscreen();
 void menuscreen2();
 
