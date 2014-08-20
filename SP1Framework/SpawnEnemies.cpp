@@ -21,6 +21,30 @@ void moveEnemies()
 	}
 }
 
+void moveEnemiesUp()
+{
+	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
+	{
+		//is enemy alive
+		if(counter[i].Active == true)
+		{
+			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y--);
+		}
+	}
+}
+
+void moveEnemiesDown()
+{
+	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
+	{
+		//is enemy alive
+		if(counter[i].Active == true)
+		{
+			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y++);
+		}
+	}
+}
+
 
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
@@ -35,6 +59,8 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 	counter[currentEnemy].state = 0;
 	currentEnemy++;
 }
+
+
 
 
 

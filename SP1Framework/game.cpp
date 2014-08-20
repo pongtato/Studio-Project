@@ -23,9 +23,14 @@ StopWatch b_timer;
 COORD charLocation;
 COORD consoleSize;
 
-int modifyY =5;
-int modifyX = 0;
+int modifyY =7;
+int modifyX =50;
+int moveYUP = modifyY;
+int moveYDOWN = 0;
+int upordown = 1;
 int globalscore = 0;
+int moveState = 1;
+int wew = 1;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
@@ -78,9 +83,8 @@ void update(double dt)
     elapsedTime += dt;
     deltaTime = dt;
 
-
 		// spawn enemies
-		if ( modifyX <5 )
+		if ( modifyX <55 )
 		{
 			static double timer_spawn = elapsedTime;
 			if ( elapsedTime - timer_spawn > 0.1 )
@@ -88,30 +92,64 @@ void update(double dt)
 				timer_spawn = elapsedTime;
 				if ( currentEnemy < NO_OF_ENEMIES )
 				{
-					SpawnEnemy(currentEnemy,50,modifyY);
-					modifyX++;
-					if ( modifyY <9)
+					SpawnEnemy(currentEnemy,modifyX,modifyY);
+					//per row
+					if ( modifyY < 15)
 					{
-						modifyY++;
+						modifyY=modifyY+2;
 					}
+					//next row and spawn interval
 					else
 					{
-						modifyY = 5;
+						modifyY = 7;	
+						modifyX++;
 					}
 				}
 			}
 		}
-
-		if ( modifyX > 4)
+		else if ( wew != 0)
 		{
-			static double timer_spawn = elapsedTime;
-			if ( elapsedTime - timer_spawn > 0.5 )
+			moveState=2;
+		}
+
+		// move enemies
+
+		static double timer_move = elapsedTime;
+		if ( elapsedTime - timer_move > 0.5 )
+		{
+			timer_move = elapsedTime;
+			if (moveState == 1)
 			{
-				modifyX = 0;
+				//move towards left
+			moveEnemies();
+			}
+			else if ( moveState == 2)
+			{
+				//move upwards
+				moveEnemiesUp();
+				moveYUP--;
+				moveYDOWN = moveYUP;
+				if (moveYUP < 2)
+				{
+					wew = 0;
+					moveState = 3;
+					moveEnemies();
+				}
+			}
+			else if ( moveState == 3)
+			{
+				moveEnemiesDown();
+				moveYDOWN++;
+				if (moveYDOWN > 14)
+				{
+					moveYUP = moveYDOWN;
+					moveState = 2;
+					moveEnemies();
+				}
 			}
 		}
-	//Enemy shooting
 
+	//Enemy shooting
 	static double timer_shoot = elapsedTime;
 	for(int i =0; i<NO_OF_ENEMIES;i++)
 	{
@@ -130,14 +168,6 @@ void update(double dt)
 				}
 			}
 		}
-	}
-	// move enemies
-	static double timer_move = elapsedTime;
-	if ( elapsedTime - timer_move > 0.5 )
-	{
-		timer_move = elapsedTime;
-
-		moveEnemies();
 	}
 
 	// check collision
