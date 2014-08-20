@@ -277,7 +277,13 @@ void renderCharacter()
 	// render character
 	gotoXY(charLocation);
 	colour(0x0C);
-	std::cout << (char)1;
+	std::cout << (char)15 << (char)16;
+	gotoXY(charLocation.X,charLocation.Y-1);
+	colour(0x0C);
+	std::cout << (char)4;
+	gotoXY(charLocation.X,charLocation.Y+1);
+	colour(0x0C);
+	std::cout << (char)4;
 }
 
 void renderEnemies()
