@@ -23,6 +23,8 @@ StopWatch b_timer;
 COORD charLocation;
 COORD consoleSize;
 
+int modifyY =5;
+int modifyX = 0;
 int globalscore = 0;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
@@ -76,18 +78,37 @@ void update(double dt)
     elapsedTime += dt;
     deltaTime = dt;
 
-	// spawn enemies
-	static double timer_spawn = elapsedTime;
-	if ( elapsedTime - timer_spawn > 1 )
-	{
-		//Timer interval for spawn
-		timer_spawn = elapsedTime;
 
-		if ( currentEnemy < NO_OF_ENEMIES )
-			SpawnEnemy(currentEnemy);
+		// spawn enemies
+		if ( modifyX <5 )
+		{
+			static double timer_spawn = elapsedTime;
+			if ( elapsedTime - timer_spawn > 0.1 )
+			{
+				timer_spawn = elapsedTime;
+				if ( currentEnemy < NO_OF_ENEMIES )
+				{
+					SpawnEnemy(currentEnemy,50,modifyY);
+					modifyX++;
+					if ( modifyY <9)
+					{
+						modifyY++;
+					}
+					else
+					{
+						modifyY = 5;
+					}
+				}
+			}
+		}
 
-
-	}
+		if ( modifyX > 4)
+		{
+			static double timer_spawn = elapsedTime;
+			if ( elapsedTime - timer_spawn > 0.5 )
+			{
+				modifyX = 0;
+			}
 	//Enemy shooting
 
 	static double timer_shoot = elapsedTime;
@@ -117,8 +138,7 @@ void update(double dt)
 
 		moveEnemies();
 	}
-	
-	
+
 	// check collision
 	for(int i = 0; i<50;i++)
 	{

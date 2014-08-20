@@ -8,6 +8,7 @@
 ENEMY counter[999];
 int enemycounter;
 
+
 void moveEnemies()
 {
 	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
@@ -21,11 +22,12 @@ void moveEnemies()
 }
 
 
-void SpawnEnemy(unsigned int &currentEnemy)
+void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
+	enemycounter = 10;
 	counter[currentEnemy].Active = true;
-	counter[currentEnemy].coordinates.X = 50;
-	counter[currentEnemy].coordinates.Y = rand()%15 + 5;
+	counter[currentEnemy].coordinates.X = modX;
+	counter[currentEnemy].coordinates.Y = modY;
 	counter[currentEnemy].hp=1;
 	counter[currentEnemy].score=10;
 	counter[currentEnemy].icon=(char)5;
@@ -33,5 +35,7 @@ void SpawnEnemy(unsigned int &currentEnemy)
 	counter[currentEnemy].state = 0;
 	currentEnemy++;
 }
+
+
 
 
