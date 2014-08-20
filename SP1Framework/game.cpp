@@ -23,8 +23,8 @@ StopWatch b_timer;
 COORD charLocation;
 COORD consoleSize;
 
-int modifyY =7;
-int modifyX =50;
+int modifyY =6;
+int modifyX =43;
 int moveYUP = modifyY;
 int moveYDOWN = 0;
 int upordown = 1;
@@ -84,7 +84,7 @@ void update(double dt)
     deltaTime = dt;
 
 		// spawn enemies
-		if ( modifyX <55 )
+		if ( modifyX <48 )
 		{
 			static double timer_spawn = elapsedTime;
 			if ( elapsedTime - timer_spawn > 0.1 )
@@ -94,14 +94,14 @@ void update(double dt)
 				{
 					SpawnEnemy(currentEnemy,modifyX,modifyY);
 					//per row
-					if ( modifyY < 15)
+					if ( modifyY < 14)
 					{
 						modifyY=modifyY+2;
 					}
 					//next row and spawn interval
 					else
 					{
-						modifyY = 7;	
+						modifyY = 6;	
 						modifyX++;
 					}
 				}
@@ -129,7 +129,7 @@ void update(double dt)
 				moveEnemiesUp();
 				moveYUP--;
 				moveYDOWN = moveYUP;
-				if (moveYUP < 2)
+				if (moveYUP < 3)
 				{
 					wew = 0;
 					moveState = 3;
@@ -140,7 +140,7 @@ void update(double dt)
 			{
 				moveEnemiesDown();
 				moveYDOWN++;
-				if (moveYDOWN > 14)
+				if (moveYDOWN > 9)
 				{
 					moveYUP = moveYDOWN;
 					moveState = 2;
@@ -247,7 +247,7 @@ void render()
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;
 
-	gotoXY(60, 0);
+	gotoXY(50, 3);
     colour(0x03);
     std::cout << "Score:" << globalscore << std::endl;
 
