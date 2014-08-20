@@ -104,3 +104,15 @@ void renderEnemyMissile()
 	}
 
 }
+bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySPawn)
+{
+	if((player.X == enemyBullet.corrdinates.X && player.Y == enemyBullet.corrdinates.Y)
+		|| player.X  == enemyBullet.corrdinates.X+1 && player.Y == enemyBullet.corrdinates.Y)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

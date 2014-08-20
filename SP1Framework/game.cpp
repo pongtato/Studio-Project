@@ -173,12 +173,18 @@ void update(double dt)
 	// check collision
 	for(int i = 0; i<50;i++)
 	{
+		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
+		{
+			//PLAYER DEATH SCREEN
+			system("pause");
+		}
 		for(int j = 0; j<NO_OF_ENEMIES;j++)
 		{
 			if ( checkCollisionBullet(missile[i], counter[j]) )
 			{
 				globalscore += counter[j].score;
 			}
+			
 		}
 	}
 
@@ -228,6 +234,7 @@ void update(double dt)
 	{
 		system("PAUSE");
 	}
+	
 }
 
 void render()
