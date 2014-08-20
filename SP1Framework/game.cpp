@@ -206,6 +206,8 @@ void render()
     colour(0x0F);
     cls();
 
+	leveldesign();
+
     // render time taken to calculate this frame
     gotoXY(70, 0);
     colour(0x1A);
