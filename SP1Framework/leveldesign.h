@@ -10,6 +10,6 @@ using std::string;
 using std::endl;
 
 void leveldesign();
- 
+void loseScreen();
 
 #endif // _LEVELDESIGN_H

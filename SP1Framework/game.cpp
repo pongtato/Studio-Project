@@ -51,7 +51,7 @@ void init()
     /* get the number of character cells in the current buffer */ 
     GetConsoleScreenBufferInfo( GetStdHandle( STD_OUTPUT_HANDLE ), &csbi );
     consoleSize.X = csbi.srWindow.Right + 2;
-    consoleSize.Y = csbi.srWindow.Bottom + 1;
+    consoleSize.Y = csbi.srWindow.Bottom + 2;
 
     // set the character to be in the center of the screen.
     charLocation.X = consoleSize.X%2;
@@ -176,7 +176,10 @@ void update(double dt)
 		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
 		{
 			//PLAYER DEATH SCREEN
+			cls();
+			loseScreen();
 			system("pause");
+			menuscreen();
 		}
 		for(int j = 0; j<NO_OF_ENEMIES;j++)
 		{
@@ -194,7 +197,7 @@ void update(double dt)
 		Beep(0, 0);
 		charLocation.Y--; 
 	}
-	if (keyPressed[K_LEFT] && charLocation.X > 1)
+	if (keyPressed[K_LEFT] && charLocation.X > 2)
 	{
 		Beep(0, 0);
 		charLocation.X--; 
