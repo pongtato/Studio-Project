@@ -109,6 +109,7 @@ void update(double dt)
 			{
 				modifyX = 0;
 			}
+		}
 	//Enemy shooting
 
 	static double timer_shoot = elapsedTime;
