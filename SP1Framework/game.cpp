@@ -264,6 +264,7 @@ void render()
     // render character
 	renderCharacter();
 	// render missiles
+	 colour(0x0B);
 	renderMissile();
 	// render enemies
 	colour(0x07);
@@ -277,12 +278,18 @@ void renderCharacter()
 	// render character
 	gotoXY(charLocation);
 	colour(0x0C);
-	std::cout << (char)15 << (char)16;
+	std::cout << (char)15;
+
+	gotoXY(charLocation.X+1,charLocation.Y);
+	colour(0x0F);
+	std::cout << (char)16;
+
 	gotoXY(charLocation.X,charLocation.Y-1);
-	colour(0x0C);
+	colour(0x0F);
 	std::cout << (char)4;
+
 	gotoXY(charLocation.X,charLocation.Y+1);
-	colour(0x0C);
+	colour(0x0F);
 	std::cout << (char)4;
 }
 
