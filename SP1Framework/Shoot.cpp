@@ -38,7 +38,7 @@ void renderMissile()
 			std::cout << missile[i].icon << std::endl;
 
 			//Check if out of bound
-			if(missile[i].corrdinates.X > 50)
+			if(missile[i].corrdinates.X > 47)
 			{
 				missile[i].Active = false;
 			}

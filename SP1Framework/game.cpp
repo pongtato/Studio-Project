@@ -50,7 +50,7 @@ void init()
 
     /* get the number of character cells in the current buffer */ 
     GetConsoleScreenBufferInfo( GetStdHandle( STD_OUTPUT_HANDLE ), &csbi );
-    consoleSize.X = csbi.srWindow.Right + 1;
+    consoleSize.X = csbi.srWindow.Right + 2;
     consoleSize.Y = csbi.srWindow.Bottom + 1;
 
     // set the character to be in the center of the screen.
@@ -183,22 +183,22 @@ void update(double dt)
 	}
 
 	// Updating the location of the character based on the key press
-	if (keyPressed[K_UP] && charLocation.Y > 0)
+	if (keyPressed[K_UP] && charLocation.Y > 2)
 	{
 		Beep(0, 0);
 		charLocation.Y--; 
 	}
-	if (keyPressed[K_LEFT] && charLocation.X > 0)
+	if (keyPressed[K_LEFT] && charLocation.X > 1)
 	{
 		Beep(0, 0);
 		charLocation.X--; 
 	}
-	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 1)
+	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 7)
 	{
 		Beep(0, 0);
 		charLocation.Y++; 
 	}
-	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 1)
+	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 47)
 	{
 		Beep(0, 0);
 		charLocation.X++; 
