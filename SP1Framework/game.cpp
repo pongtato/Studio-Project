@@ -17,6 +17,7 @@ bool keyPressed[K_COUNT];
 
 extern ENEMY counter[26];
 extern BULLET missile[50];
+extern BULLET enemyBullet[50];
 
 StopWatch b_timer; 
 COORD charLocation;
@@ -24,6 +25,8 @@ COORD consoleSize;
 
 int globalscore = 0;
 unsigned int currentMissile = 0;
+unsigned int enemyCurrentMissile = 0;
+unsigned int enemyMaxMissile = 0;
 unsigned int currentEnemy = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
@@ -77,12 +80,35 @@ void update(double dt)
 	static double timer_spawn = elapsedTime;
 	if ( elapsedTime - timer_spawn > 1 )
 	{
+		//Timer interval for spawn
 		timer_spawn = elapsedTime;
 
 		if ( currentEnemy < NO_OF_ENEMIES )
 			SpawnEnemy(currentEnemy);
-	}
 
+
+	}
+	//Enemy shooting
+
+	static double timer_shoot = elapsedTime;
+	for(int i =0; i<NO_OF_ENEMIES;i++)
+	{
+		if(counter[i].Active)
+		{
+			if ( elapsedTime - timer_shoot >rand()%6+1)
+			{
+				timer_shoot = elapsedTime;
+				if(enemyCurrentMissile < 50)
+				{
+					enemyShootBullet1(enemyCurrentMissile,counter[i].coordinates);
+				}
+				else
+				{
+					enemyShootBullet2(enemyCurrentMissile,counter[i].coordinates);
+				}
+			}
+		}
+	}
 	// move enemies
 	static double timer_move = elapsedTime;
 	if ( elapsedTime - timer_move > 0.5 )
@@ -91,7 +117,8 @@ void update(double dt)
 
 		moveEnemies();
 	}
-
+	
+	
 	// check collision
 	for(int i = 0; i<50;i++)
 	{
@@ -99,7 +126,6 @@ void update(double dt)
 		{
 			if ( checkCollisionBullet(missile[i], counter[j]) )
 			{
-				currentEnemy --;
 				globalscore += counter[j].score;
 			}
 		}
@@ -179,6 +205,8 @@ void render()
 	// render enemies
 	colour(0x07);
 	renderEnemies();
+	//render enemy bullet
+	renderEnemyMissile();
 }
 
 void renderCharacter()
