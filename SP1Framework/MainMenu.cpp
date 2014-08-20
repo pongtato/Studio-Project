@@ -2,7 +2,9 @@
 #include "game.h"
 #include <iostream>
 #include "Framework\console.h"
-
+#include <fstream>
+#include <string>
+using namespace std;
 long long choice = 0;
 
 
@@ -12,6 +14,20 @@ void menuscreen()
 	const unsigned int frameTime = 1000 / FPS; // time for each frame
 
 	colour(0x0F);
+		
+	ifstream inData;
+	string data;
+
+	inData.open ("GLD/Header.txt");
+	
+	while (!inData.eof())
+	{
+		getline (inData, data);
+		std::cout << data << "\n";
+	}
+
+	inData.close ();
+
 	std::cout<< "WELCOME TO PONGTATO INVASION GAME!\n\n";
 	std::cout<< "OPTIONS:\nPlease Select\n\n";
 	std::cout<< "1: Start Game\n";
@@ -29,7 +45,7 @@ void menuscreen()
 		if(choice != PLAYGAME)
 		{
 			std::cout<< "Your Number Choice: ";
-			std::cin >> choice;
+			std::cin >> choice; 
 		}
 		
 
