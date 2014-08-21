@@ -24,13 +24,16 @@ COORD charLocation;
 COORD consoleSize;
 
 int modifyY =6;
-int modifyX =43;
+int modifyX =38;
 int moveYUP = modifyY;
 int moveYDOWN = 0;
 int upordown = 1;
 int globalscore = 0;
 int moveState = 1;
 int wew = 1;
+int enemieskilled =0;
+int spawncounter = 0;
+int spawnclear = 1;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
@@ -79,41 +82,55 @@ void getInput()
 
 void update(double dt)
 {
-    // get the delta time
-    elapsedTime += dt;
-    deltaTime = dt;
+	// get the delta time
+	elapsedTime += dt;
+	deltaTime = dt;
 
-		// spawn enemies
-		if ( modifyX <48 )
+	// spawn enemies
+	if ( modifyX <48)
+	{
+		static double timer_spawn = elapsedTime;
+		if ( elapsedTime - timer_spawn > 0.1 )
 		{
-			static double timer_spawn = elapsedTime;
-			if ( elapsedTime - timer_spawn > 0.1 )
+			timer_spawn = elapsedTime;
+			if ( currentEnemy < NO_OF_ENEMIES )
 			{
-				timer_spawn = elapsedTime;
-				if ( currentEnemy < NO_OF_ENEMIES )
+				SpawnEnemy(currentEnemy,modifyX,modifyY);
+				spawncounter++;
+				moveState = 1;
+				//per row
+				if ( modifyY < 14)
 				{
-					SpawnEnemy(currentEnemy,modifyX,modifyY);
-					//per row
-					if ( modifyY < 14)
-					{
-						modifyY=modifyY+2;
-					}
-					//next row and spawn interval
-					else
-					{
-						modifyY = 6;	
-						modifyX++;
-					}
+					modifyY=modifyY+2;
+				}
+				//next row and spawn interval
+				else
+				{
+					modifyY = 6;	
+					modifyX = modifyX + 2;
 				}
 			}
 		}
-		else if ( wew != 0)
-		{
-			moveState=2;
-		}
+	}
+	else if ( wew != 0)
+	{
+		moveState=2;
+		spawnclear = 0;
+	}
 
-		// move enemies
+	if ( spawncounter >=5)
+	{
+		spawncounter = 0;
+		spawnclear = 0;
+	}
+	else if ( spawncounter = 0)
+	{
+		spawnclear = 1;
+	}
 
+	// move enemies
+	if ( spawnclear == 0)
+	{
 		static double timer_move = elapsedTime;
 		if ( elapsedTime - timer_move > 0.5 )
 		{
@@ -121,7 +138,7 @@ void update(double dt)
 			if (moveState == 1)
 			{
 				//move towards left
-			moveEnemies();
+				moveEnemies();
 			}
 			else if ( moveState == 2)
 			{
@@ -148,6 +165,7 @@ void update(double dt)
 				}
 			}
 		}
+	}
 
 	//Enemy shooting
 	static double timer_shoot = elapsedTime;
@@ -186,9 +204,22 @@ void update(double dt)
 			if ( checkCollisionBullet(missile[i], counter[j]) )
 			{
 				globalscore += counter[j].score;
+				enemieskilled++;
 			}
 			
 		}
+	}
+
+	if (enemieskilled >= 25)
+	{
+		currentEnemy =0;
+		enemieskilled =0;
+		modifyX = 38;
+		modifyY = 6;
+		moveYUP = modifyY;
+		moveYDOWN = 0;
+		wew =1;
+		spawnclear = 1;
 	}
 
 	// Updating the location of the character based on the key press
