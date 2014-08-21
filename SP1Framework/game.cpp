@@ -34,6 +34,7 @@ int wew = 1;
 int enemieskilled =0;
 int spawncounter = 0;
 int spawnclear = 1;
+int loadlevel =3;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
@@ -62,7 +63,7 @@ void init()
 	
     elapsedTime = 0.0;
 
-	loadfromtext();
+	
 }
 
 void shutdown()
@@ -87,6 +88,15 @@ void update(double dt)
 	// get the delta time
 	elapsedTime += dt;
 	deltaTime = dt;
+
+	if ( loadlevel%4 != 0)
+	{
+		loadfromtext(loadlevel);
+	}
+	else 
+	{
+		loadbossfromtext(loadlevel);
+	}
 
 	// spawn enemies
 	if ( modifyX <48)
@@ -119,12 +129,13 @@ void update(double dt)
 		moveState=2;
 		spawnclear = 0;
 	}
-
+	//check if row has spawned
 	if ( spawncounter >=5)
 	{
 		spawncounter = 0;
 		spawnclear = 0;
 	}
+	//clear to move
 	else if ( spawncounter = 0)
 	{
 		spawnclear = 1;
@@ -214,7 +225,7 @@ void update(double dt)
 			
 		}
 	}
-
+	//if stage is clear, proceed
 	if (enemieskilled >= 25)
 	{
 		currentEnemy =0;
@@ -225,6 +236,7 @@ void update(double dt)
 		moveYDOWN = 0;
 		wew =1;
 		spawnclear = 1;
+		loadlevel++;
 	}
 
 	// Updating the location of the character based on the key press

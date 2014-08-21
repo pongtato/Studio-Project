@@ -6,6 +6,7 @@
 #include <string>
 
 #define NO_OF_ENEMIES 25
+#define BOSS_No 1
 
 extern StopWatch g_timer;
 extern bool g_quitGame;
