@@ -11,13 +11,13 @@ int enemycounter;
 int activefromtext;
 int hpfromtext;
 int scorefromtext;
-char iconfromtext;
+int iconfromtext;
 int statefromtext;
 
 void loadfromtext()
 {
 	std::ifstream indata;
-	indata.open("GLD/Variables/test.txt");
+	indata.open("GLD/Variables/boss1.txt");
 	if ( indata.is_open())
 	{
 		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
@@ -72,7 +72,7 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 	counter[currentEnemy].coordinates.Y = modY;
 	counter[currentEnemy].hp= hpfromtext;
 	counter[currentEnemy].score= scorefromtext;
-	counter[currentEnemy].icon= (char)(iconfromtext-48);
+	counter[currentEnemy].icon= (char)(iconfromtext);
 	counter[currentEnemy].number = currentEnemy;
 	counter[currentEnemy].state = statefromtext;
 	currentEnemy++;
