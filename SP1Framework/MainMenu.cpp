@@ -4,93 +4,111 @@
 #include "Framework\console.h"
 #include <fstream>
 #include <string>
+#include "leveldesign.h"
 using namespace std;
 long long choice = 0;
+bool gameover = true;
 
+
+  
 
 void menuscreen()
 {
 	const unsigned char FPS = 10; // FPS of this game
 	const unsigned int frameTime = 1000 / FPS; // time for each frame
 
-	colour(0x0F);
-		
-	ifstream inData;
-	string data;
-
-	inData.open ("GLD/Header.txt");
 	
-	while (!inData.eof())
+	string Menu[4] = {"                                  Start Game",
+		              "                                  High Scores", 
+					  "                                  Instructions", 
+					  "                                  Exit"};
+	int pointer = 0;
+	
+	while(true)
 	{
-		getline (inData, data);
-		std::cout << data << "\n";
-	}
-
-	inData.close ();
-
-	std::cout<< "WELCOME TO PONGTATO INVASION GAME!\n\n";
-	std::cout<< "OPTIONS:\nPlease Select\n\n";
-	std::cout<< "1: Start Game\n";
-	std::cout<< "2: Score\n";
-	std::cout<< "3: Instructions\n";
-	std::cout<< "4: Exit Game\n";
-
-
-	choice = 0;
-	MainMenu state = PLAYGAME;
-
-
-	while (choice != EXITGAME)
-	{
-		if(choice != PLAYGAME)
-		{
-			std::cout<< "Your Number Choice: ";
-			std::cin >> choice; 
-		}
+		cls();
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+		mainScreen();
 		
-
-			switch(choice)
+		
+		for (int i = 0; i < 4; ++i)
+		{
+			if (i == pointer)
 			{
-
-			case PLAYGAME:
-
-				getInput();                         // get keyboard input
-				update(g_timer.getElapsedTime());   // update the game
-				render();
-				g_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms. // render the graphics output to screen
-				break;
-
-			case SCORE:	
-				colour(0x0F);
-				cls();
-				std::cout<< "WELCOME TO PONGTATO INVASION GAME!\n\n";
-				std::cout<< "OPTIONS:\nPlease Select\n\n";
-				std::cout<< "1: Start Game\n";
-				std::cout<< "2: Score\n";
-				std::cout<< "3: Instructions\n";
-				std::cout<< "4: Exit Game\n\n";
-				std::cout<< "SCORE\n\n";
-				break;
-
-			case INSTRUCTION: 
-				colour(0x0F);
-				cls();
-				std::cout<< "WELCOME TO PONGTATO INVASION GAME!\n\n";
-				std::cout<< "OPTIONS:\nPlease Select\n\n";
-				std::cout<< "1: Start Game\n";
-				std::cout<< "2: Score\n";
-				std::cout<< "3: Instructions\n";
-				std::cout<< "4: Exit Game\n\n";
-				std::cout<< "ESC: Main Menu\nP: In-Game Pause\nSpace: Shoot\nArrowKeys: Move\n\n";
-				break;
-
-			case EXITGAME: exit ( 0 );
-				break;
-
-			default: std::cout<< "Invalid Input, Please Reselect\n\n";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
+				cout << Menu[i] << endl;
+			}
+			else
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << Menu[i] << endl;
 			}
 		}
+	
+		while(true)
+		{
+			if (GetAsyncKeyState(VK_UP) != 0)
+			{
+				pointer -= 1;
+				if (pointer == -1)
+				{
+					pointer = 3;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			{
+				pointer += 1;
+				if (pointer == 4)
+				{
+					pointer = 0;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_RETURN) != 0)
+			{
+				switch (pointer)
+				{
+					case 0:
+					while(true)
+					{
+						getInput();                         // get keyboard input
+						update(g_timer.getElapsedTime());   // update the game
+						render();
+						g_timer.waitUntil(frameTime); // Frame rate limiter. Limits each frame to a specified time in ms. // render the graphics output to screen
+					}
+					break;
+					
+					case 1:
+					colour(0x0F);
+					cls();
+					mainScreen();
+					score();
+			    	break;
+						
+					case 2:
+					colour(0x0F);
+					cls();
+					mainScreen();
+					instructions();
+					break;
+
+					
+					case 3:
+					colour(0x0F);
+					cls();
+					exit ( 0 );
+					break;
+				}
+			}
+		}
+		Sleep(150);
+		}	
+	
 }
+
+
+
 
 
 void menuscreen2()
@@ -98,70 +116,103 @@ void menuscreen2()
 	const unsigned char FPS = 10; // FPS of this game
 	const unsigned int frameTime = 1000 / FPS; // time for each frame
 
-
-	std::cout<< "GAME PAUSE!\n\n";
-	std::cout<< "OPTIONS:\nPlease Select\n\n";
-	std::cout<< "1: Resume Game\n";
-	std::cout<< "2: Score\n";
-	std::cout<< "3: Instructions\n";
-	std::cout<< "4: Exit Game\n\n";
-
-
-	choice = 0;
-	MainMenu state = PLAYGAME;
-
-
-	while (choice != EXITGAME)
+	
+	string Menu[4] = {"                                  Resume Game",
+		              "                                  High Scores", 
+					  "                                  Instructions", 
+					  "                                  Exit"};
+	int pointer = 0;
+	
+	while(true)
 	{
-		if(choice != PLAYGAME)
+		cls();
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+		pauseScreen();
+		
+		
+		for (int i = 0; i < 4; ++i)
 		{
-			std::cout<< "Your Number Choice: ";
-			std::cin >> choice;
+			if (i == pointer)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
+				cout << Menu[i] << endl;
+			}
+			else
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << Menu[i] << endl;
+			}
 		}
-
-
-
-		switch(choice)
+	
+		while(true)
 		{
+			if (GetAsyncKeyState(VK_UP) != 0)
+			{
+				pointer -= 1;
+				if (pointer == -1)
+				{
+					pointer = 3;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_DOWN) != 0)
+			{
+				pointer += 1;
+				if (pointer == 4)
+				{
+					pointer = 0;
+				}
+				break;
+			}
+			else if (GetAsyncKeyState(VK_RETURN) != 0)
+			{
+				switch (pointer)
+				{
+					case 0:
+					while(true)
+					{
+						getInput();                         // get keyboard input
+						update(g_timer.getElapsedTime());   // update the game
+						render();
+						g_timer.waitUntil(frameTime); // Frame rate limiter. Limits each frame to a specified time in ms. // render the graphics output to screen
+					}
+					break;
+					
+					case 1:
+					colour(0x0F);
+					cls();
+					mainScreen();
+					score();
+			    	break;
+						
+					case 2:
+					colour(0x0F);
+					cls();
+					mainScreen();
+					instructions();
+					break;
 
-		case PLAYGAME:
-
-			getInput();                         // get keyboard input
-			update(g_timer.getElapsedTime());   // update the game
-			render();
-			g_timer.waitUntil(frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms. // render the graphics output to screen
-			break;
-
-		case SCORE:
-			colour(0x0F);
-			cls();
-			std::cout<< "GAME PAUSE!\n\n";
-			std::cout<< "OPTIONS:\nPlease Select\n\n";
-			std::cout<< "1: Resume Game\n";
-			std::cout<< "2: Score\n";
-			std::cout<< "3: Instructions\n";
-			std::cout<< "4: Exit Game\n\n";
-			std::cout<< "SCORE\n\n";
-			break;
-
-		case INSTRUCTION: 
-			colour(0x0F);
-			cls();
-			std::cout<< "GAME PAUSE!\n\n";
-			std::cout<< "OPTIONS:\nPlease Select\n\n";
-			std::cout<< "1: Resume Game\n";
-			std::cout<< "2: Score\n";
-			std::cout<< "3: Instructions\n";
-			std::cout<< "4: Exit Game\n\n";
-			std::cout<< "ESC: Main Menu\nP: In-Game Pause\nSpace: Shoot\nArrowKeys: Move\n\n";
-			break;
-
-		case EXITGAME: exit ( 0 );
-			break;
-
-		default: std::cout<< "Invalid Input, Please Reselect\n\n";
-
+					
+					case 3:
+					colour(0x0F);
+					cls();
+					exit ( 0 );
+					break;
+				}
+			}
 		}
-	}
+		Sleep(150);
+		}	
+	
 }
 
+
+void instructions()
+{
+	std::cout<< "                                ESC: Main Menu\n                                P: In-Game Pause\n                                Space: Shoot\n                                ArrowKeys: Move\n\n";	
+}
+
+void score()
+{
+	std::cout<< "score";
+}

@@ -11,5 +11,9 @@ using std::endl;
 
 void leveldesign();
 void loseScreen();
+void pauseScreen();
+void mainScreen();
+void mainScreen2();
+
 
 #endif // _LEVELDESIGN_H

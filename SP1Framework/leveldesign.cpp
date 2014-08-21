@@ -5,7 +5,6 @@
 using std::cout;
 
 
-
 void leveldesign()
 {
 	ifstream indata;
@@ -33,4 +32,36 @@ void loseScreen()
 		}
 		indata.close();
 	}
+}
+
+void mainScreen()
+{
+	ifstream inData;
+	string data;
+
+	inData.open ("GLD/Header.txt");
+	
+	while (!inData.eof())
+	{
+		getline (inData, data);
+		std::cout << data << "\n";
+	}
+
+	inData.close ();
+}
+
+void pauseScreen()
+{
+	ifstream inData;
+	string data;
+
+	inData.open ("GLD/Pause.txt");
+	
+	while (!inData.eof())
+	{
+		getline (inData, data);
+		std::cout << data << "\n";
+	}
+
+	inData.close ();
 }

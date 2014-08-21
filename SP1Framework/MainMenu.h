@@ -1,13 +1,14 @@
 #ifndef _MAINMENU_H
 #define _MAINMENU_H
 
-bool is_int();
 void menuscreen();
 void menuscreen2();
+void instructions();
+void score();
 
 enum MainMenu
 {
-	PLAYGAME = 1,
+	PLAYGAME,
 	SCORE,
 	INSTRUCTION,
 	EXITGAME
