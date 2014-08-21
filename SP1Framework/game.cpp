@@ -132,7 +132,7 @@ void update(double dt)
 	if ( spawnclear == 0)
 	{
 		static double timer_move = elapsedTime;
-		if ( elapsedTime - timer_move > 0.5 )
+		if ( elapsedTime - timer_move > 0.2 )
 		{
 			timer_move = elapsedTime;
 			if (moveState == 1)
@@ -243,15 +243,25 @@ void update(double dt)
 		Beep(0, 0);
 		charLocation.X++; 
 	}
-	if(keyPressed[K_SPACE] && currentMissile <maxMissile && !missleFired1)
+	static double timer_player = elapsedTime;
+
+	if(keyPressed[K_SPACE] && currentMissile <maxMissile)// && !missleFired1)
 	{
-		shootMissile1(currentMissile,charLocation);
-		missleFired1 = true;
+		if ( elapsedTime - timer_player > 1)
+		{
+			timer_player = elapsedTime;
+			shootMissile1(currentMissile,charLocation);
+			//missleFired1 = true;
+		}
 	}
-	if(keyPressed[K_SPACE] && currentMissile >=maxMissile && !missleFired1)
+	if(keyPressed[K_SPACE] && currentMissile >=maxMissile)// && !missleFired1)
 	{
-		shootMissile2(currentMissile,charLocation);
-		missleFired1 = true;
+		if ( elapsedTime - timer_player > 1)
+		{
+			timer_player = elapsedTime;
+			shootMissile2(currentMissile,charLocation);
+			//missleFired1 = true;
+		}
 	}
 	if(keyPressed[K_SPACE] == false)
 	{
