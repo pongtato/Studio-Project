@@ -205,8 +205,11 @@ void update(double dt)
 		{
 			if ( checkCollisionBullet(missile[i], counter[j]) )
 			{
+				if ( counter[j].hp <= 0 )
+				{
 				globalscore += counter[j].score;
 				enemieskilled++;
+				}
 			}
 			
 		}
@@ -249,7 +252,7 @@ void update(double dt)
 
 	if(keyPressed[K_SPACE] && currentMissile <maxMissile)// && !missleFired1)
 	{
-		if ( elapsedTime - timer_player > 1)
+		if ( elapsedTime - timer_player > 0.5)
 		{
 			timer_player = elapsedTime;
 			shootMissile1(currentMissile,charLocation);
@@ -258,7 +261,7 @@ void update(double dt)
 	}
 	if(keyPressed[K_SPACE] && currentMissile >=maxMissile)// && !missleFired1)
 	{
-		if ( elapsedTime - timer_player > 1)
+		if ( elapsedTime - timer_player > 0.5)
 		{
 			timer_player = elapsedTime;
 			shootMissile2(currentMissile,charLocation);
