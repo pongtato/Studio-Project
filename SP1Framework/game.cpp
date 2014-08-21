@@ -34,7 +34,7 @@ int wew = 1;
 int enemieskilled =0;
 int spawncounter = 0;
 int spawnclear = 1;
-int loadlevel =3;
+int loadlevel = 4;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
@@ -42,7 +42,6 @@ unsigned int currentEnemy = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
 bool missleFired1 = false;
-
 
 void init()
 {
@@ -85,50 +84,166 @@ void getInput()
 
 void update(double dt)
 {
-	// get the delta time
-	elapsedTime += dt;
-	deltaTime = dt;
+		// get the delta time
+		elapsedTime += dt;
+		deltaTime = dt;
 
+		// update game
+		updateGame();
+
+		// Updating the location of the character based on the key press
+		if (keyPressed[K_UP] && charLocation.Y > 3)
+		{
+			Beep(0, 0);
+			charLocation.Y--; 
+		}
+		if (keyPressed[K_LEFT] && charLocation.X > 3)
+		{
+			Beep(0, 0);
+			charLocation.X--; 
+		}
+		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 7)
+		{
+			Beep(0, 0);
+			charLocation.Y++; 
+		}
+		if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 47)
+		{
+			Beep(0, 0);
+			charLocation.X++; 
+		}
+		static double timer_player = elapsedTime;
+
+		if(keyPressed[K_SPACE] && currentMissile <maxMissile)// && !missleFired1)
+		{
+			if ( elapsedTime - timer_player > 0.5)
+			{
+				timer_player = elapsedTime;
+				shootMissile1(currentMissile,charLocation);
+				//missleFired1 = true;
+			}
+		}
+		if(keyPressed[K_SPACE] && currentMissile >=maxMissile)// && !missleFired1)
+		{
+			if ( elapsedTime - timer_player > 0.5)
+			{
+				timer_player = elapsedTime;
+				shootMissile2(currentMissile,charLocation);
+				//missleFired1 = true;
+			}
+		}
+		if(keyPressed[K_SPACE] == false)
+		{
+			missleFired1= false;
+		}
+		// goes to menu 2 if player hits the escape key ( a way of pause )
+		if (keyPressed[K_ESCAPE])
+		{
+			colour(0x0F);
+			cls();
+			menuscreen2();   
+		}
+		if (keyPressed[K_P])
+		{
+			system("PAUSE");
+		}
+}
+
+void render()
+{
+    // clear previous screen
+    colour(0x0F);
+    cls();
+
+	leveldesign();
+
+    // render time taken to calculate this frame
+    gotoXY(70, 0);
+    colour(0x1A);
+    std::cout << 1.0 / deltaTime << "fps" << std::endl;
+  
+    gotoXY(0, 0);
+    colour(0x59);
+    std::cout << elapsedTime << "secs" << std::endl;
+
+	gotoXY(50, 3);
+    colour(0x03);
+    std::cout << "Score:" << globalscore << std::endl;
+
+    // render character
+	renderCharacter();
+	// render missiles
+	 colour(0x0B);
+	renderMissile();
+	// render enemies
+	renderEnemies();
+	//render enemy bullet
+	renderEnemyMissile();
+}
+
+void renderCharacter()
+{
+	// render character
+	gotoXY(charLocation);
+	colour(0x0C);
+	std::cout << (char)15;
+
+	gotoXY(charLocation.X+1,charLocation.Y);
+	colour(0x0F);
+	std::cout << (char)16;
+
+	gotoXY(charLocation.X,charLocation.Y-1);
+	colour(0x0F);
+	std::cout << (char)4;
+
+	gotoXY(charLocation.X,charLocation.Y+1);
+	colour(0x0F);
+	std::cout << (char)4;
+}
+
+void renderEnemies()
+{
+	enemycolour();
+	// render enemies
+	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
+	{
+		//is enemy alive
+		if(counter[i].Active == true)
+		{
+			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
+			std::cout << counter[i].icon;
+		}
+		if(counter[i].coordinates.X <=2)
+		{
+			counter[i].Active = false;
+			counter[i].icon = ' ';
+		}
+	}
+}
+
+void updateGame()
+{
+	//check if boss stage
 	if ( loadlevel%4 != 0)
 	{
 		loadfromtext(loadlevel);
+		enemySpawn();
+		enemyMove();
 	}
 	else 
 	{
 		loadbossfromtext(loadlevel);
+		bossSpawn();
+		bossMove();
 	}
 
-	// spawn enemies
-	if ( modifyX <48)
-	{
-		static double timer_spawn = elapsedTime;
-		if ( elapsedTime - timer_spawn > 0.1 )
-		{
-			timer_spawn = elapsedTime;
-			if ( currentEnemy < NO_OF_ENEMIES )
-			{
-				SpawnEnemy(currentEnemy,modifyX,modifyY);
-				spawncounter++;
-				moveState = 1;
-				//per row
-				if ( modifyY < 14)
-				{
-					modifyY=modifyY+2;
-				}
-				//next row and spawn interval
-				else
-				{
-					modifyY = 6;	
-					modifyX = modifyX + 2;
-				}
-			}
-		}
-	}
-	else if ( wew != 0)
-	{
-		moveState=2;
-		spawnclear = 0;
-	}
+	enemyShooting();
+	collision();
+	stageclear();
+}
+
+void enemyMove()
+{
 	//check if row has spawned
 	if ( spawncounter >=5)
 	{
@@ -179,7 +294,125 @@ void update(double dt)
 			}
 		}
 	}
+}
 
+void bossMove()
+{
+	//check if row has spawned
+	if ( spawncounter >=5)
+	{
+		spawncounter = 0;
+		spawnclear = 0;
+	}
+	//clear to move
+	else if ( spawncounter = 0)
+	{
+		spawnclear = 1;
+	}
+
+	// move enemies
+	if ( spawnclear == 0)
+	{
+		static double timer_move = elapsedTime;
+		if ( elapsedTime - timer_move > 0.5 )
+		{
+			timer_move = elapsedTime;
+			if (moveState == 1)
+			{
+				//move towards left
+				moveEnemies();
+			}
+			else if ( moveState == 2)
+			{
+				//move upwards
+				moveEnemiesUp();
+				moveYUP--;
+				moveYDOWN = moveYUP;
+				if (moveYUP < 3)
+				{
+					wew = 0;
+					moveState = 3;
+					moveEnemies();
+				}
+			}
+			else if ( moveState == 3)
+			{
+				moveEnemiesDown();
+				moveYDOWN++;
+				if (moveYDOWN > 17)
+				{
+					moveYUP = moveYDOWN;
+					moveState = 2;
+					moveEnemies();
+				}
+			}
+		}
+	}
+}
+
+void enemySpawn()
+{
+	// spawn enemies
+		if ( modifyX <48)
+		{
+			static double timer_spawn = elapsedTime;
+			if ( elapsedTime - timer_spawn > 0.1 )
+			{
+				timer_spawn = elapsedTime;
+				if ( currentEnemy < NO_OF_ENEMIES )
+				{
+					SpawnEnemy(currentEnemy,modifyX,modifyY);
+					spawncounter++;
+					moveState = 1;
+					//per row
+					if ( modifyY < 14)
+					{
+						modifyY=modifyY+2;
+					}
+					//next row and spawn interval
+					else
+					{
+						modifyY = 6;	
+						modifyX = modifyX + 2;
+					}
+				}
+			}
+		}
+		else if ( wew != 0)
+		{
+			moveState=2;
+			spawnclear = 0;
+		}
+}
+
+void bossSpawn()
+{
+		// spawn enemies
+		if ( modifyX <39)
+		{
+			static double timer_spawn = elapsedTime;
+			if ( elapsedTime - timer_spawn > 0.1 )
+			{
+				timer_spawn = elapsedTime;
+				if ( currentEnemy < BOSS_NO )
+				{
+					SpawnBoss(currentEnemy,modifyX,modifyY);
+					spawnclear = 0;
+					moveState = 1;
+					modifyY = 10;	
+					modifyX = modifyX + 2;
+				}
+			}
+		}
+		else if ( wew != 0)
+		{
+			moveState=2;
+			spawnclear = 0;
+		}
+}
+
+void enemyShooting()
+{
 	//Enemy shooting
 	static double timer_shoot = elapsedTime;
 	for(int i =0; i<NO_OF_ENEMIES;i++)
@@ -200,7 +433,27 @@ void update(double dt)
 			}
 		}
 	}
+}
 
+void stageclear()
+{
+		//if stage is clear, proceed
+	if (enemieskilled >= 25)
+	{
+		currentEnemy =0;
+		enemieskilled =0;
+		modifyX = 38;
+		modifyY = 6;
+		moveYUP = modifyY;
+		moveYDOWN = 0;
+		wew =1;
+		spawnclear = 1;
+		loadlevel++;
+	}
+}
+
+void collision()
+{
 	// check collision
 	for(int i = 0; i<50;i++)
 	{
@@ -218,154 +471,16 @@ void update(double dt)
 			{
 				if ( counter[j].hp <= 0 )
 				{
-				globalscore += counter[j].score;
-				enemieskilled++;
+					globalscore += counter[j].score;
+					enemieskilled++;
 				}
 			}
-			
-		}
-	}
-	//if stage is clear, proceed
-	if (enemieskilled >= 25)
-	{
-		currentEnemy =0;
-		enemieskilled =0;
-		modifyX = 38;
-		modifyY = 6;
-		moveYUP = modifyY;
-		moveYDOWN = 0;
-		wew =1;
-		spawnclear = 1;
-		loadlevel++;
-	}
 
-	// Updating the location of the character based on the key press
-	if (keyPressed[K_UP] && charLocation.Y > 3)
-	{
-		Beep(0, 0);
-		charLocation.Y--; 
-	}
-	if (keyPressed[K_LEFT] && charLocation.X > 3)
-	{
-		Beep(0, 0);
-		charLocation.X--; 
-	}
-	if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 7)
-	{
-		Beep(0, 0);
-		charLocation.Y++; 
-	}
-	if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 47)
-	{
-		Beep(0, 0);
-		charLocation.X++; 
-	}
-	static double timer_player = elapsedTime;
-
-	if(keyPressed[K_SPACE] && currentMissile <maxMissile)// && !missleFired1)
-	{
-		if ( elapsedTime - timer_player > 0.5)
-		{
-			timer_player = elapsedTime;
-			shootMissile1(currentMissile,charLocation);
-			//missleFired1 = true;
 		}
 	}
-	if(keyPressed[K_SPACE] && currentMissile >=maxMissile)// && !missleFired1)
-	{
-		if ( elapsedTime - timer_player > 0.5)
-		{
-			timer_player = elapsedTime;
-			shootMissile2(currentMissile,charLocation);
-			//missleFired1 = true;
-		}
-	}
-	if(keyPressed[K_SPACE] == false)
-	{
-		missleFired1= false;
-	}
-    // goes to menu 2 if player hits the escape key ( a way of pause )
-    if (keyPressed[K_ESCAPE])
-	{
-        colour(0x0F);
-		cls();
-		menuscreen2();   
-	}
-	if (keyPressed[K_P])
-	{
-		system("PAUSE");
-	}
-	
 }
 
-void render()
+void enemycolour()
 {
-    // clear previous screen
-    colour(0x0F);
-    cls();
-
-	leveldesign();
-
-    // render time taken to calculate this frame
-    gotoXY(70, 0);
-    colour(0x1A);
-    std::cout << 1.0 / deltaTime << "fps" << std::endl;
-  
-    gotoXY(0, 0);
-    colour(0x59);
-    std::cout << elapsedTime << "secs" << std::endl;
-
-	gotoXY(50, 3);
-    colour(0x03);
-    std::cout << "Score:" << globalscore << std::endl;
-
-    // render character
-	renderCharacter();
-	// render missiles
-	 colour(0x0B);
-	renderMissile();
-	// render enemies
-	colour(0x07);
-	renderEnemies();
-	//render enemy bullet
-	renderEnemyMissile();
-}
-
-void renderCharacter()
-{
-	// render character
-	gotoXY(charLocation);
-	colour(0x0C);
-	std::cout << (char)15;
-
-	gotoXY(charLocation.X+1,charLocation.Y);
-	colour(0x0F);
-	std::cout << (char)16;
-
-	gotoXY(charLocation.X,charLocation.Y-1);
-	colour(0x0F);
-	std::cout << (char)4;
-
-	gotoXY(charLocation.X,charLocation.Y+1);
-	colour(0x0F);
-	std::cout << (char)4;
-}
-
-void renderEnemies()
-{
-	// render enemies
-	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
-	{
-		//is enemy alive
-		if(counter[i].Active == true)
-		{
-			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
-			std::cout << counter[i].icon;
-		}
-		if(counter[i].coordinates.X <=2)
-		{
-			counter[i].Active = false;
-			counter[i].icon = ' ';
-		}
-	}
+	colour(0x09);
 }

@@ -6,7 +6,7 @@
 #include <string>
 
 #define NO_OF_ENEMIES 25
-#define BOSS_No 1
+#define BOSS_NO 1
 
 extern StopWatch g_timer;
 extern bool g_quitGame;
@@ -34,6 +34,16 @@ void shutdown();            // do clean up, free memory
 void renderCharacter();		// renders player character
 void renderEnemies();
 void leveldesign();
+void updateGame();
+void enemyMove();
+void bossMove();
+void enemySpawn();
+void bossSpawn();
+void enemyShooting();
+void stageclear();
+void collision();
+void enemycolour();
+
 
 
 #endif // _GAME_H

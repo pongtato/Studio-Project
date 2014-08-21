@@ -7,6 +7,7 @@
 
 
 ENEMY counter[999];
+BOSS count[10];
 int enemycounter;
 int activefromtext;
 int hpfromtext;
@@ -54,6 +55,7 @@ void loadfromtext(int loadcase)
 
 void loadbossfromtext(int loadcase)
 {
+
 	std::ifstream indata;
 	switch (loadcase)
 	{
@@ -62,16 +64,13 @@ void loadbossfromtext(int loadcase)
 		break;
 	}
 	if ( indata.is_open())
+	{
+		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> BossfromtextTL >> BossfromtextU >> 
+			BossfromtextTR >> BossfromtextL >> Bossfromtext >> BossfromtextR >> BossfromtextBL >> BossfromtextD >>
+			BossfromtextBR >>  statefromtext)
 		{
-			if (indata >> activefromtext >> hpfromtext >> scorefromtext >> BossfromtextTL >> BossfromtextU >> 
-				BossfromtextTR >> BossfromtextL >> Bossfromtext >> BossfromtextR >> BossfromtextBL >> BossfromtextD >>
-				BossfromtextBR >>  statefromtext)
-			{
-
-			}
 		}
-
-
+	}
 }
 
 void moveEnemies()
@@ -124,7 +123,6 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 	currentEnemy++;
 }
 
-
 void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
 {
 	enemycounter = 10;
@@ -133,19 +131,14 @@ void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
 	counter[currentEnemy].coordinates.Y = modY;
 	counter[currentEnemy].hp= hpfromtext;
 	counter[currentEnemy].score= scorefromtext;
-	counter[currentEnemy].icon= (char)(BossfromtextTL);
-	counter[currentEnemy].icon= (char)(BossfromtextU);
-	counter[currentEnemy].icon= (char)(BossfromtextTR);
-	counter[currentEnemy].icon= (char)(BossfromtextL);
 	counter[currentEnemy].icon= (char)(Bossfromtext);
-	counter[currentEnemy].icon= (char)(BossfromtextR);
-	counter[currentEnemy].icon= (char)(BossfromtextBL);
-	counter[currentEnemy].icon= (char)(BossfromtextD);
-	counter[currentEnemy].icon= (char)(BossfromtextBR);
 	counter[currentEnemy].number = currentEnemy;
 	counter[currentEnemy].state = statefromtext;
 	currentEnemy++;
 }
+
+
+
 
 
 
