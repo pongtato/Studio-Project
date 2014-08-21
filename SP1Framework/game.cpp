@@ -61,6 +61,8 @@ void init()
     charLocation.Y = consoleSize.Y/2;
 	
     elapsedTime = 0.0;
+
+	loadfromtext();
 }
 
 void shutdown()

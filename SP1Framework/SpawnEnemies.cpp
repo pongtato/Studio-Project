@@ -5,9 +5,27 @@
 #include <iostream>
 
 
+
 ENEMY counter[999];
 int enemycounter;
+int activefromtext;
+int hpfromtext;
+int scorefromtext;
+char iconfromtext;
+int statefromtext;
 
+void loadfromtext()
+{
+	std::ifstream indata;
+	indata.open("GLD/Variables/test.txt");
+	if ( indata.is_open())
+	{
+		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
+		{
+
+		}
+	}
+}
 
 void moveEnemies()
 {
@@ -49,14 +67,14 @@ void moveEnemiesDown()
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
 	enemycounter = 10;
-	counter[currentEnemy].Active = true;
+	counter[currentEnemy].Active = activefromtext;
 	counter[currentEnemy].coordinates.X = modX;
 	counter[currentEnemy].coordinates.Y = modY;
-	counter[currentEnemy].hp=1;
-	counter[currentEnemy].score=10;
-	counter[currentEnemy].icon=(char)5;
+	counter[currentEnemy].hp= hpfromtext;
+	counter[currentEnemy].score= scorefromtext;
+	counter[currentEnemy].icon= (char)(iconfromtext-48);
 	counter[currentEnemy].number = currentEnemy;
-	counter[currentEnemy].state = 0;
+	counter[currentEnemy].state = statefromtext;
 	currentEnemy++;
 }
 

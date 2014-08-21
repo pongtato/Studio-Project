@@ -1,0 +1,5 @@
+     1   2    10        2     0
+// T/F  HP SCORE CHARICON STATE
+// Enemy 1
+
+	

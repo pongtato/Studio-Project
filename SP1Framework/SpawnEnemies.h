@@ -2,7 +2,9 @@
 #define _SPAWNENEMIES_H
 
 #include "Framework\console.h"
+#include <fstream>
 #include <string>
+
 
 
 struct ENEMY
@@ -10,7 +12,7 @@ struct ENEMY
 	std::string name;
 	char icon;
 	COORD coordinates;
-	bool Active;
+	int Active;
 	int hp;
 	int score;
 	int number;
@@ -21,7 +23,8 @@ struct ENEMY
 void moveEnemies();
 void moveEnemiesUp();
 void moveEnemiesDown();
-void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, bool Active,int hp, int score,int number, int state);
+void loadfromtext();
+void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, int Active,int hp, int score,int number, int state);
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY);
 
 

@@ -54,9 +54,14 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 		&&(checkEnemy.Active && missile.Active))//Check below
 	{
 		missile.Active = false;
-		checkEnemy.Active = false;
+		checkEnemy.hp--;		
 		missile.icon = ' ';
-		checkEnemy.icon = ' ';
+		if (checkEnemy.hp <= 0)
+		{
+			checkEnemy.Active = false;
+			checkEnemy.icon = ' ';
+		}
+		
 		//increase score
 
 		return true;
