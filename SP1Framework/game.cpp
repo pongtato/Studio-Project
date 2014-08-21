@@ -350,5 +350,10 @@ void renderEnemies()
 			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
 			std::cout << counter[i].icon;
 		}
+		if(counter[i].coordinates.X <=2)
+		{
+			counter[i].Active = false;
+			counter[i].icon = ' ';
+		}
 	}
 }
