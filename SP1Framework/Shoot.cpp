@@ -17,6 +17,15 @@ void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 		missile[currentMissile].number = currentMissile;
 		currentMissile++;
 }
+void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLocationY)
+{
+		missile[currentMissile].Active = true;
+		missile[currentMissile].icon = player.playerMissleIcon;
+		missile[currentMissile].corrdinates.X = charLocationX+1;
+		missile[currentMissile].corrdinates.Y = charLocationY;
+		missile[currentMissile].number = currentMissile;
+		currentMissile++;
+}
 void shootMissile2(unsigned int &currentMissile, COORD charLocation)
 {
 	currentMissile=0;
@@ -26,6 +35,7 @@ void shootMissile2(unsigned int &currentMissile, COORD charLocation)
 	missile[currentMissile].corrdinates.Y = charLocation.Y;
 	missile[currentMissile].number = currentMissile;
 }
+
 void renderMissile()
 {
 	for(int i = 0; i<50;i++)

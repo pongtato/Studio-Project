@@ -70,7 +70,6 @@ void init()
     elapsedTime = 0.0;
 
 	loadPlayerFromText();
-
 	powerUp.icon = PowerupIcon;
 	powerUp.Active = false;
 }
@@ -126,10 +125,19 @@ void update(double dt)
 
 		if(keyPressed[K_SPACE] && currentMissile <maxMissile)// && !missleFired1)
 		{
+			
 			if ( elapsedTime - timer_player > 0.5)
 			{
 				timer_player = elapsedTime;
+				if(player.PowerUp >= 2)
+				{
+					shootMissile1(currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else
+				{
 				shootMissile1(currentMissile,charLocation);
+				}
 				//missleFired1 = true;
 			}
 		}
@@ -138,7 +146,16 @@ void update(double dt)
 			if ( elapsedTime - timer_player > 0.5)
 			{
 				timer_player = elapsedTime;
+				/*if(player.PowerUp == 2)
+				{
+					system("pause");
+					shootMissile1(currentMissile,charLocation,charLocation);
+					shootMissile1(currentMissile,charLocation,charLocation);
+				}*/
+				/*else
+				{*/
 				shootMissile2(currentMissile,charLocation);
+				//}
 				//missleFired1 = true;
 			}
 		}
@@ -583,8 +600,9 @@ void collision()
 	//Check Powerup collide
 	if(powerUpPlayerCollision(charLocation,powerUp))
 	{
-		powerUp.Active = false;
+		
 		player.PowerUp++;
+		powerUp.Active = false;
 	}
 	// check collision
 	for(int i = 0; i<50;i++)
