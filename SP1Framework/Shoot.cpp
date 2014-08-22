@@ -71,6 +71,40 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 		return false;
 	}
 }
+
+bool BosscheckCollisionBullet(BULLET &missile, BOSS &checkEnemy)
+{
+
+	if(((missile.corrdinates.X+1 == checkEnemy.coordinates.X-1 && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
+		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X-1 && missile.corrdinates.Y == checkEnemy.coordinates.Y)
+		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X+1 && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check above
+		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X-1 && missile.corrdinates.Y == checkEnemy.coordinates.Y-1))//Check above
+		&&(checkEnemy.Active && missile.Active))//Check below
+	{
+		missile.Active = false;
+		checkEnemy.hp--;		
+		missile.icon = ' ';
+		if (checkEnemy.hp <= 0)
+		{
+			checkEnemy.Active = false;
+			checkEnemy.iconbottomleft = ' ';
+			checkEnemy.iconbottomright = ' ';
+			checkEnemy.iconcenter = ' ';
+			checkEnemy.iconup = ' ';
+			checkEnemy.icondown = ' ';
+			checkEnemy.iconbottomleft = ' ';
+			checkEnemy.iconbottomright = ' ';
+		}
+		
+		//increase score
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation)
 {
 	enemyBullet[bulletCount].Active = true;

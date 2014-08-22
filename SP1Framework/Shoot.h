@@ -19,6 +19,7 @@ void renderMissile();		// renders missiles in the game
 void shootMissile1(unsigned int &currentMissile, COORD charLocation);
 void shootMissile2(unsigned int &currentMissile, COORD charLocation);
 bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy);
+bool BosscheckCollisionBullet(BULLET &missile, BOSS &checkEnemy);
 void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation);
 void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation);
 void renderEnemyMissile();

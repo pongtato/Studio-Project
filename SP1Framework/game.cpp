@@ -512,17 +512,35 @@ void collision()
 			system("pause");
 			menuscreen();
 		}
-		for(int j = 0; j<NO_OF_ENEMIES;j++)
+		if ( loadlevel%4 != 0)
 		{
-			if ( checkCollisionBullet(missile[i], counter[j]) )
+			for(int j = 0; j<NO_OF_ENEMIES;j++)
 			{
-				if ( counter[j].hp <= 0 )
+				if ( checkCollisionBullet(missile[i], counter[j]) )
 				{
-					globalscore += counter[j].score;
-					enemieskilled++;
+					if ( counter[j].hp <= 0 )
+					{
+						globalscore += counter[j].score;
+						enemieskilled++;
+					}
 				}
-			}
 
+			}
+		}
+		else
+		{
+			for(int j = 0; j<BOSS_NO;j++)
+			{
+				if ( BosscheckCollisionBullet(missile[i], Bcounter[j]) )
+				{
+					if ( Bcounter[j].hp <= 0 )
+					{
+						globalscore += Bcounter[j].score;
+						enemieskilled++;
+					}
+				}
+
+			}
 		}
 	}
 }
