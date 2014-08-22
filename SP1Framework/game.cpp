@@ -298,14 +298,14 @@ void updateGame()
 		enemySpawn();
 		enemyMove();
 	}
-	else 
+	else if (loadlevel ==4)
 	{
 		loadbossfromtext(loadlevel);
 		bossSpawn();
 		bossMove();
 
 	}
-    if (loadlevel == 5)
+    else if (loadlevel == 5)
 	{
 		bonusesloadfromtext(loadlevel);
 		bonusSpawn();

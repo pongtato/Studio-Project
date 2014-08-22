@@ -7,7 +7,7 @@
 
 #define NO_OF_ENEMIES 25
 #define BOSS_NO 1
-#define Bonus 20
+#define Bonus 25
 
 extern StopWatch g_timer;
 extern bool g_quitGame;
