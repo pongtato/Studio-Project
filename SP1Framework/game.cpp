@@ -37,11 +37,13 @@ int wew = 1;
 int enemieskilled =0;
 int spawncounter = 0;
 int spawnclear = 1;
-int loadlevel = 4;
+int loadlevel = 3;
+int powerupclear =0;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
 unsigned int currentEnemy = 0;
+unsigned int powerupEnemy = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
 bool missleFired1 = false;
@@ -212,6 +214,14 @@ void renderEnemies()
 	// render enemies
 	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
 	{
+		if ( i < 5)
+		{
+			enemycolour();
+		}
+		else
+		{
+			colour(0x0F);
+		}
 		//is enemy alive
 		if(counter[i].Active == true)
 		{
@@ -427,6 +437,7 @@ void enemySpawn()
 		}
 		else if ( wew != 0)
 		{
+			powerupclear = 0;
 			moveState=2;
 			spawnclear = 0;
 		}
@@ -493,9 +504,10 @@ void stageclear()
 		modifyY = 6;
 		moveYUP = modifyY;
 		moveYDOWN = 0;
-		wew =1;
+		wew = 1;
 		spawnclear = 1;
 		loadlevel++;
+		powerupclear = 1;
 	}
 }
 
@@ -536,7 +548,7 @@ void collision()
 					if ( Bcounter[j].hp <= 0 )
 					{
 						globalscore += Bcounter[j].score;
-						enemieskilled++;
+						enemieskilled = 25;
 					}
 				}
 

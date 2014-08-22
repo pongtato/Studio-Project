@@ -39,6 +39,7 @@ void updateGame();
 void enemyMove();
 void bossMove();
 void enemySpawn();
+void SpecialSpawn();
 void bossSpawn();
 void enemyShooting();
 void stageclear();

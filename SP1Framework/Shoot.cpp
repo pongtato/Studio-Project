@@ -2,12 +2,10 @@
 #include "game.h"
 #include <iostream>
 
-
 extern PLAYER player;
 
 BULLET missile[50];
 BULLET enemyBullet[50];
-
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
@@ -71,7 +69,6 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 		return false;
 	}
 }
-
 bool BosscheckCollisionBullet(BULLET &missile, BOSS &checkEnemy)
 {
 

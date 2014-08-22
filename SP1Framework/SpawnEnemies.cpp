@@ -7,6 +7,7 @@
 
 
 ENEMY counter[999];
+ENEMY powerup[1];
 BOSS Bcounter[10];
 int enemycounter;
 int activefromtext;
@@ -39,6 +40,12 @@ void loadfromtext(int loadcase)
 		indata.open("GLD/Variables/enemy1.txt");
 		break;
 	case 3:	
+		indata.open("GLD/Variables/enemy1.txt");
+		break;
+	case 5:	
+		indata.open("GLD/Variables/enemy1.txt");
+		break;
+	case 6:	
 		indata.open("GLD/Variables/enemy1.txt");
 		break;
 	}
@@ -178,6 +185,10 @@ void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
 	Bcounter[currentEnemy].state = statefromtext;
 	currentEnemy++;
 }
+
+
+
+
 
 
 
