@@ -14,7 +14,7 @@ struct PLAYER
 	char playerMissleIcon;
 	COORD coordinates;
 	int Active;
-	int hp;
+	int PowerUp;
 };
 
 void loadPlayerFromText();

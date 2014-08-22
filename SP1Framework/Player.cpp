@@ -22,7 +22,7 @@ void loadPlayerFromText()
 		}
 	}
 	player.Active = PlayerActivefromtext;
-	player.hp = PlayerHpfromtext;
+	player.PowerUp = PlayerHpfromtext;
 	player.icon = PlayerIconfromtext;
 	player.headIcon = PlayerHeadIcon;
 	player.wingIcon = PlayerWingIcon;
