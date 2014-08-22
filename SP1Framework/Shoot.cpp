@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-
+extern PLAYER player;
 
 BULLET missile[50];
 BULLET enemyBullet[50];
@@ -12,7 +12,7 @@ BULLET enemyBullet[50];
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
 		missile[currentMissile].Active = true;
-		missile[currentMissile].icon = '>';
+		missile[currentMissile].icon = player.playerMissleIcon;
 		missile[currentMissile].corrdinates.X = charLocation.X+1;
 		missile[currentMissile].corrdinates.Y = charLocation.Y;
 		missile[currentMissile].number = currentMissile;
@@ -22,7 +22,7 @@ void shootMissile2(unsigned int &currentMissile, COORD charLocation)
 {
 	currentMissile=0;
 	missile[currentMissile].Active = true;
-	missile[currentMissile].icon = '>';
+	missile[currentMissile].icon = player.playerMissleIcon;
 	missile[currentMissile].corrdinates.X = charLocation.X+1;
 	missile[currentMissile].corrdinates.Y = charLocation.Y;
 	missile[currentMissile].number = currentMissile;

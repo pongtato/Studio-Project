@@ -5,6 +5,7 @@
 #include "game.h"
 #include "Shoot.h"
 #include "SpawnEnemies.h"
+#include "Player.h"
 #include "leveldesign.h"
 #include "Framework\console.h"
 #include "MainMenu.h"
@@ -18,6 +19,7 @@ bool keyPressed[K_COUNT];
 extern ENEMY counter[26];
 extern BULLET missile[50];
 extern BULLET enemyBullet[50];
+extern PLAYER player;
 
 StopWatch b_timer; 
 COORD charLocation;
@@ -62,7 +64,7 @@ void init()
 	
     elapsedTime = 0.0;
 
-	
+	loadPlayerFromText();
 }
 
 void shutdown()
@@ -186,19 +188,19 @@ void renderCharacter()
 	// render character
 	gotoXY(charLocation);
 	colour(0x0C);
-	std::cout << (char)15;
+	std::cout << player.icon;
 
 	gotoXY(charLocation.X+1,charLocation.Y);
 	colour(0x0F);
-	std::cout << (char)16;
+	std::cout << player.headIcon;
 
 	gotoXY(charLocation.X,charLocation.Y-1);
 	colour(0x0F);
-	std::cout << (char)4;
+	std::cout << player.wingIcon;
 
 	gotoXY(charLocation.X,charLocation.Y+1);
 	colour(0x0F);
-	std::cout << (char)4;
+	std::cout <<  player.wingIcon;
 }
 
 void renderEnemies()

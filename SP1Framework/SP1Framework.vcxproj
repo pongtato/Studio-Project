@@ -82,6 +82,7 @@
     <ClCompile Include="LoadLevel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shoot.cpp" />
     <ClCompile Include="SpawnEnemies.cpp" />
   </ItemGroup>
@@ -92,6 +93,7 @@
     <ClInclude Include="leveldesign.h" />
     <ClInclude Include="LoadLevel.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Shoot.h" />
     <ClInclude Include="SpawnEnemies.h" />
   </ItemGroup>

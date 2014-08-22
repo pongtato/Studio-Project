@@ -43,14 +43,12 @@ void loadfromtext(int loadcase)
 		break;
 	}
 	if ( indata.is_open())
+	{
+		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
 		{
-			if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
-			{
 
-			}
 		}
-
-
+	}
 }
 
 void loadbossfromtext(int loadcase)
