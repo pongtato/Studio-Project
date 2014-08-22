@@ -3,7 +3,8 @@
 #include <iostream>
 
 extern PLAYER player;
-
+extern double elapseTime;
+BULLET powerUp;
 BULLET missile[50];
 BULLET enemyBullet[50];
 
@@ -54,10 +55,18 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 		missile.Active = false;
 		checkEnemy.hp--;		
 		missile.icon = ' ';
+		//Enemy death
 		if (checkEnemy.hp <= 0)
 		{
 			checkEnemy.Active = false;
 			checkEnemy.icon = ' ';
+
+			//Chance to spawn powerup at enemy death
+			if(rand()%2 == 1)
+			{
+				powerUp.Active = true;
+				powerUp.corrdinates = checkEnemy.coordinates;
+			}
 		}
 		
 		//increase score
@@ -140,11 +149,31 @@ void renderEnemyMissile()
 	}
 
 }
-bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySPawn)
+bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 {
 	if((player.X == enemyBullet.corrdinates.X && player.Y == enemyBullet.corrdinates.Y)
 		|| player.X  == enemyBullet.corrdinates.X+1 && player.Y == enemyBullet.corrdinates.Y)
 	{
+		return true;
+	}
+	if((player.X == enemySpawn.coordinates.X && player.Y == enemySpawn.coordinates.Y)
+		|| player.X  == enemySpawn.coordinates.X+1 && player.Y == enemySpawn.coordinates.Y)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+bool powerUpPlayerCollision(PLAYER &player, BULLET powerPlayer)
+{
+	if((player.coordinates.X == powerUp.corrdinates.X && player.coordinates.Y == powerUp.corrdinates.Y)&& powerUp.Active)//Check below
+	{
+		powerUp.Active = false;
+		player.PowerUp++;
 		return true;
 	}
 	else

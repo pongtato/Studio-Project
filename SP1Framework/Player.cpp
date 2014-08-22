@@ -1,13 +1,13 @@
 #include "Player.h"
 
 PLAYER player;
-
 int PlayerActivefromtext;
 int PlayerHpfromtext;
 int PlayerIconfromtext;
 int PlayerHeadIcon;
 int PlayerWingIcon;
 int PlayerMissileIcon;
+int PowerupIcon;
 
 void loadPlayerFromText()
 {
@@ -16,7 +16,7 @@ void loadPlayerFromText()
 	
 	if ( indata.is_open())
 	{
-		if (indata >> PlayerActivefromtext >> PlayerHpfromtext >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon)
+		if (indata >> PlayerActivefromtext >> PlayerHpfromtext >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon)
 		{
 			
 		}
@@ -27,5 +27,6 @@ void loadPlayerFromText()
 	player.headIcon = PlayerHeadIcon;
 	player.wingIcon = PlayerWingIcon;
 	player.playerMissleIcon = PlayerMissileIcon;
+	
 
 }

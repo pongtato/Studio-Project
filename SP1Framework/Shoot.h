@@ -23,7 +23,8 @@ bool BosscheckCollisionBullet(BULLET &missile, BOSS &checkEnemy);
 void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation);
 void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation);
 void renderEnemyMissile();
-bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySPawn);
+bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn);
 
+bool powerUpPlayerCollision(PLAYER &player, BULLET powerPlayer);
 
 #endif // _SHOOT_H

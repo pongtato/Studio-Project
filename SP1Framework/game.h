@@ -47,7 +47,7 @@ void enemyShooting();
 void stageclear();
 void collision();
 void enemycolour();
-
+void renderPowerUp();
 
 
 #endif // _GAME_H

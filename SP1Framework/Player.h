@@ -1,8 +1,6 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
-
-
-#include <string>
+#include <iostream>
 #include <fstream>
 #include "Framework\console.h"
 
@@ -18,5 +16,6 @@ struct PLAYER
 };
 
 void loadPlayerFromText();
+
 
 #endif // _PLAYER_H

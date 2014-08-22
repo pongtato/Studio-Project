@@ -21,6 +21,7 @@ extern ENEMY counter[26];
 extern BULLET missile[50];
 extern BULLET enemyBullet[50];
 extern PLAYER player;
+extern BULLET powerUp;
 
 StopWatch b_timer; 
 COORD charLocation;
@@ -47,6 +48,7 @@ unsigned int powerupEnemy = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
 bool missleFired1 = false;
+extern int PowerupIcon;
 
 void init()
 {
@@ -68,6 +70,7 @@ void init()
     elapsedTime = 0.0;
 
 	loadPlayerFromText();
+	powerUp.icon = PowerupIcon;
 }
 
 void shutdown()
@@ -186,6 +189,8 @@ void render()
 	renderBoss();
 	//render enemy bullet
 	renderEnemyMissile();
+	// render powerup
+	renderPowerUp();
 }
 
 void renderCharacter()
@@ -223,7 +228,7 @@ void renderEnemies()
 			colour(0x0F);
 		}
 		//is enemy alive
-		if(counter[i].Active == true)
+		if(counter[i].Active)
 		{
 			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
 			std::cout << counter[i].icon;
@@ -243,7 +248,7 @@ void renderBoss()
 	for ( int i = 0; i < BOSS_NO; ++i)
 	{
 		//is boss alive
-		if(Bcounter[i].Active == true)
+		if(Bcounter[i].Active)
 		{
 			gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y-1);
 			std::cout << Bcounter[i].icontopleft;
@@ -288,7 +293,29 @@ void renderBoss()
 		}
 	}
 }
-
+void renderPowerUp()
+{
+	if(powerUp.Active)
+	{
+		static double timer_powerUp = elapsedTime;
+		if ( elapsedTime - timer_powerUp > 0.5 )
+		{
+			timer_powerUp = elapsedTime;
+			gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
+			std::cout << powerUp.icon << std::endl;
+		}
+		else
+		{
+			gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
+			std::cout << powerUp.icon << std::endl;
+		}
+		//Check if out of bound
+		if(powerUp.corrdinates.X <= 1)
+		{
+			powerUp.Active = false;
+		}
+	}
+}
 void updateGame()
 {
 	//check if boss stage
@@ -546,6 +573,11 @@ void stageclear()
 
 void collision()
 {
+	if(powerUpPlayerCollision(player,powerUp))
+	{
+		powerUp.Active = false;
+		player.PowerUp++;
+	}
 	// check collision
 	for(int i = 0; i<50;i++)
 	{
