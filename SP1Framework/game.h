@@ -44,6 +44,7 @@ void SpecialSpawn();
 void bossSpawn();
 void bonusSpawn();
 void enemyShooting();
+void bossShooting();
 void stageclear();
 void collision();
 void enemycolour();

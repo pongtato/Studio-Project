@@ -55,7 +55,7 @@ void renderMissile()
 	}
 
 }
-bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
+bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 {
 
 	if(((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
@@ -72,7 +72,7 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 			checkEnemy.icon = ' ';
 
 			//Chance to spawn powerup at enemy death
-			if(rand()%2 == 1)
+			if(rand()%2 == 1 && spawnpowerup == true)
 			{
 				powerUp.Active = true;
 				powerUp.corrdinates.X = checkEnemy.coordinates.X;
@@ -177,15 +177,12 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 		return false;
 	}
 }
-
-
 bool powerUpPlayerCollision(COORD player, BULLET powerPlayer)
 {
 	if((player.X == powerPlayer.corrdinates.X && player.Y == powerPlayer.corrdinates.Y)
 		|| (player.X == powerPlayer.corrdinates.X-1 && player.Y == powerPlayer.corrdinates.Y)
 		&&powerPlayer.Active)//Check below
 	{
-		
 		return true;
 	}
 	else

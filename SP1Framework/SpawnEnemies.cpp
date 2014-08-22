@@ -4,8 +4,6 @@
 #include <iomanip>
 #include <iostream>
 
-
-
 ENEMY counter[999];
 ENEMY powerup[1];
 BOSS Bcounter[10];
@@ -25,7 +23,6 @@ int BossfromtextBL;	// bottom left
 int BossfromtextBR;	//botom right
 int BossfromtextU;	//up
 int BossfromtextD; //down
-
 
 int statefromtext;
 
@@ -95,7 +92,6 @@ void bonusesloadfromtext(int loadcase)
 			}
 	}
 }
-
 
 void moveEnemies()
 {

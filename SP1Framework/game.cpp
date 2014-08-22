@@ -38,8 +38,8 @@ int wew = 1;
 int enemieskilled =0;
 int spawncounter = 0;
 int spawnclear = 1;
-int loadlevel = 5;
-int powerupclear =0;
+int loadlevel = 4;
+bool droppowerup = true;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
@@ -73,13 +73,11 @@ void init()
 	powerUp.icon = PowerupIcon;
 	powerUp.Active = false;
 }
-
 void shutdown()
 {
     // Reset to white text on black background
 	colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 }
-
 void getInput()
 {    
     keyPressed[K_UP] = isKeyPressed(VK_UP);
@@ -90,7 +88,6 @@ void getInput()
 	keyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
 	keyPressed[K_P] = isKeyPressed(0x50);
 }
-
 void update(double dt)
 {
 		// get the delta time
@@ -111,7 +108,7 @@ void update(double dt)
 			Beep(0, 0);
 			charLocation.X--; 
 		}
-		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 8)
+		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 7)
 		{
 			Beep(0, 0);
 			charLocation.Y++; 
@@ -129,12 +126,18 @@ void update(double dt)
 			if ( elapsedTime - timer_player > 0.5)
 			{
 				timer_player = elapsedTime;
-				if(player.PowerUp >= 2)
+				if(player.PowerUp >= 3)
+				{
+					shootMissile1(currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(currentMissile,charLocation.X+2,charLocation.Y);
+					shootMissile1(currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else if(player.PowerUp == 2)
 				{
 					shootMissile1(currentMissile,charLocation.X,charLocation.Y+1);
 					shootMissile1(currentMissile,charLocation.X,charLocation.Y-1);
 				}
-				else
+				else  if(player.PowerUp == 1)
 				{
 				shootMissile1(currentMissile,charLocation);
 				}
@@ -177,7 +180,6 @@ void update(double dt)
 
 
 }
-
 void render()
 {
     // clear previous screen
@@ -199,6 +201,10 @@ void render()
     colour(0x03);
     std::cout << "Score:" << globalscore << std::endl;
 
+	gotoXY(50, 4);
+    colour(0x03);
+    std::cout << "Wave:" << loadlevel << std::endl;
+
     // render character
 	renderCharacter();
 	// render missiles
@@ -213,7 +219,6 @@ void render()
 	// render powerup
 	renderPowerUp();
 }
-
 void renderCharacter()
 {
 	// render character
@@ -233,21 +238,12 @@ void renderCharacter()
 	colour(0x0F);
 	std::cout <<  player.wingIcon;
 }
-
 void renderEnemies()
 {
 	enemycolour();
 	// render enemies
 	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
 	{
-		if ( i < 5)
-		{
-			enemycolour();
-		}
-		else
-		{
-			colour(0x0F);
-		}
 		//is enemy alive
 		if(counter[i].Active)
 		{
@@ -261,7 +257,6 @@ void renderEnemies()
 		}
 	}
 }
-
 void renderBoss()
 {
 	enemycolour();
@@ -316,8 +311,10 @@ void renderBoss()
 }
 void renderPowerUp()
 {
+	colour(0xA0);
 	if(powerUp.Active)
 	{
+		droppowerup = false;
 		static double timer_powerUp = elapsedTime;
 		if ( elapsedTime - timer_powerUp > 0.5 )
 		{
@@ -334,12 +331,10 @@ void renderPowerUp()
 		if(powerUp.corrdinates.X <= 1)
 		{
 			powerUp.Active = false;
+			droppowerup = true;
 		}
 	}
 }
-	
-
-
 void updateGame()
 {
 	//check if boss stage
@@ -348,12 +343,14 @@ void updateGame()
 		loadfromtext(loadlevel);
 		enemySpawn();
 		enemyMove();
+		enemyShooting();
 	}
-	else if (loadlevel ==4)
+	else if (loadlevel%4 == 0)
 	{
 		loadbossfromtext(loadlevel);
 		bossSpawn();
 		bossMove();
+		bossShooting();
 
 	}
     else if (loadlevel == 5)
@@ -361,12 +358,9 @@ void updateGame()
 		bonusesloadfromtext(loadlevel);
 		bonusSpawn();
 	}
-
-	enemyShooting();
 	collision();
 	stageclear();
 }
-
 void enemyMove()
 {
 	//check if row has spawned
@@ -420,7 +414,6 @@ void enemyMove()
 		}
 	}
 }
-
 void bossMove()
 {
 
@@ -463,7 +456,6 @@ void bossMove()
 		}
 	}
 }
-
 void enemySpawn()
 {
 	// spawn enemies
@@ -494,12 +486,10 @@ void enemySpawn()
 		}
 		else if ( wew != 0)
 		{
-			powerupclear = 0;
 			moveState=2;
 			spawnclear = 0;
 		}
 }
-
 void bossSpawn()
 {
 		// spawn enemies
@@ -552,7 +542,6 @@ void bonusSpawn()
 		spawnclear = 0;
 	}
 }
-
 void enemyShooting()
 {
 	//Enemy shooting
@@ -576,7 +565,29 @@ void enemyShooting()
 		}
 	}
 }
-
+void bossShooting()
+{
+	//Enemy shooting
+	static double timer_shoot = elapsedTime;
+	for(int i =0; i<BOSS_NO;i++)
+	{
+		if(Bcounter[i].Active)
+		{
+			if ( elapsedTime - timer_shoot >0.2)
+			{
+				timer_shoot = elapsedTime;
+				if(enemyCurrentMissile < 50)
+				{
+					enemyShootBullet1(enemyCurrentMissile,Bcounter[i].coordinates);
+				}
+				else
+				{
+					enemyShootBullet2(enemyCurrentMissile,Bcounter[i].coordinates);
+				}
+			}
+		}
+	}
+}
 void stageclear()
 {
 		//if stage is clear, proceed
@@ -591,18 +602,21 @@ void stageclear()
 		wew = 1;
 		spawnclear = 1;
 		loadlevel++;
-		powerupclear = 1;
 	}
 }
-
 void collision()
 {
 	//Check Powerup collide
 	if(powerUpPlayerCollision(charLocation,powerUp))
 	{
-		
-		player.PowerUp++;
-		powerUp.Active = false;
+		static double timer_spawn = elapsedTime;
+		if ( elapsedTime - timer_spawn > 0.5 )
+		{
+			timer_spawn = elapsedTime;
+			powerUp.Active = false;
+			player.PowerUp++;
+			droppowerup = true;
+		}
 	}
 	// check collision
 	for(int i = 0; i<50;i++)
@@ -620,7 +634,7 @@ void collision()
 		{
 			for(int j = 0; j<NO_OF_ENEMIES;j++)
 			{
-				if ( checkCollisionBullet(missile[i], counter[j]) )
+				if ( checkCollisionBullet(missile[i], counter[j],droppowerup))
 				{
 					if ( counter[j].hp <= 0 )
 					{
@@ -635,7 +649,7 @@ void collision()
 		{
 			for(int j = 0; j<BOSS_NO;j++)
 			{
-				if ( BosscheckCollisionBullet(missile[i], Bcounter[j]) )
+				if ( BosscheckCollisionBullet(missile[i], Bcounter[j]))
 				{
 					if ( Bcounter[j].hp <= 0 )
 					{
@@ -648,8 +662,18 @@ void collision()
 		}
 	}
 }
-
 void enemycolour()
 {
-	colour(0x09);
+	if (loadlevel%4 != 0)
+	{
+		colour(0x0D);
+	}
+	else if ( loadlevel%4 == 0)
+	{
+		colour(0x0C);
+	}
+	else if ( loadlevel%5 ==0)
+	{
+		colour(0x0E);
+	}
 }
