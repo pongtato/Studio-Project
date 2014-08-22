@@ -43,14 +43,30 @@ struct BOSS
 void moveBoss();
 void moveBossUp();
 void moveBossDown();
+
+struct Bonuses
+{
+	std::string name;
+	char icon;
+	COORD coordinates;
+	int Active;
+	int hp;
+	int score;
+	int number;
+	int state;
+
+};
+
 void moveEnemies();
 void moveEnemiesUp();
 void moveEnemiesDown();
 void loadfromtext(int loadcase);
 void loadbossfromtext(int loadbosscase);
+void bonusesloadfromtext(int loadcase);
 void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, int Active,int hp, int score,int number, int state);
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY);
 void SpawnBoss(unsigned int &currentEnemy, int modX, int modY);
+void SpawnBonus(unsigned int &currentEnemy, int modX, int modY);
 
 
 

@@ -37,7 +37,7 @@ int wew = 1;
 int enemieskilled =0;
 int spawncounter = 0;
 int spawnclear = 1;
-int loadlevel = 3;
+int loadlevel = 5;
 int powerupclear =0;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
@@ -303,6 +303,12 @@ void updateGame()
 		loadbossfromtext(loadlevel);
 		bossSpawn();
 		bossMove();
+
+	}
+    if (loadlevel == 5)
+	{
+		bonusesloadfromtext(loadlevel);
+		bonusSpawn();
 	}
 
 	enemyShooting();
@@ -467,6 +473,33 @@ void bossSpawn()
 			moveState=2;
 			spawnclear = 0;
 		}
+}
+void bonusSpawn()
+{
+	//spawn enemines
+	if (modifyX <48)
+	{
+		static double timer_spawn = elapsedTime;
+		if (elapsedTime - timer_spawn > 0.1)
+		{
+			timer_spawn = elapsedTime;
+			if (currentEnemy < Bonus)
+			{
+				SpawnBonus(currentEnemy, modifyX, modifyY);
+				spawncounter++;
+				//per row
+				if (modifyY < 14)
+				{
+					modifyY = modifyY + 2;
+				}
+			}
+		}
+	}
+	else if (wew != 0)
+	{
+		moveState = 2;
+		spawnclear = 0;
+	}
 }
 
 void enemyShooting()

@@ -26,6 +26,7 @@ int BossfromtextBR;	//botom right
 int BossfromtextU;	//up
 int BossfromtextD; //down
 
+
 int statefromtext;
 
 void loadfromtext(int loadcase)
@@ -77,6 +78,24 @@ void loadbossfromtext(int loadcase)
 		}
 	}
 }
+
+void bonusesloadfromtext(int loadcase)
+{
+	std::ifstream indata;
+	switch (loadcase)
+	{
+	case 5:
+		indata.open("GLD/Variables/Bonus1.txt");
+		break;
+	}
+	if ( indata.is_open())
+	{
+			if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
+			{
+			}
+	}
+}
+
 
 void moveEnemies()
 {
@@ -186,6 +205,19 @@ void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
 	currentEnemy++;
 }
 
+void SpawnBonus(unsigned int &currentEnemy, int modX, int modY)
+{
+	enemycounter = 10;
+	counter[currentEnemy].Active = activefromtext;
+	counter[currentEnemy].coordinates.X = modX;
+	counter[currentEnemy].coordinates.Y = modY;
+	counter[currentEnemy].hp = hpfromtext;
+	counter[currentEnemy].score = scorefromtext;
+	counter[currentEnemy].icon = (char)(iconfromtext);
+	counter[currentEnemy].number = currentEnemy;
+	counter[currentEnemy].state = statefromtext;
+	currentEnemy++;
+}
 
 
 
