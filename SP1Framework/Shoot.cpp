@@ -65,7 +65,8 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy)
 			if(rand()%2 == 1)
 			{
 				powerUp.Active = true;
-				powerUp.corrdinates = checkEnemy.coordinates;
+				powerUp.corrdinates.X = checkEnemy.coordinates.X;
+				powerUp.corrdinates.Y = checkEnemy.coordinates.Y;
 			}
 		}
 		
@@ -168,12 +169,13 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 }
 
 
-bool powerUpPlayerCollision(PLAYER &player, BULLET powerPlayer)
+bool powerUpPlayerCollision(COORD player, BULLET powerPlayer)
 {
-	if((player.coordinates.X == powerUp.corrdinates.X && player.coordinates.Y == powerUp.corrdinates.Y)&& powerUp.Active)//Check below
+	if((player.X == powerPlayer.corrdinates.X && player.Y == powerPlayer.corrdinates.Y)
+		|| (player.X == powerPlayer.corrdinates.X-1 && player.Y == powerPlayer.corrdinates.Y)
+		&&powerPlayer.Active)//Check below
 	{
-		powerUp.Active = false;
-		player.PowerUp++;
+		
 		return true;
 	}
 	else

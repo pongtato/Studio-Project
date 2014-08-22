@@ -25,6 +25,6 @@ void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation);
 void renderEnemyMissile();
 bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn);
 
-bool powerUpPlayerCollision(PLAYER &player, BULLET powerPlayer);
+bool powerUpPlayerCollision(COORD player, BULLET powerPlayer);
 
 #endif // _SHOOT_H

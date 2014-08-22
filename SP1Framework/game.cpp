@@ -70,7 +70,9 @@ void init()
     elapsedTime = 0.0;
 
 	loadPlayerFromText();
+
 	powerUp.icon = PowerupIcon;
+	powerUp.Active = false;
 }
 
 void shutdown()
@@ -155,6 +157,8 @@ void update(double dt)
 		{
 			system("PAUSE");
 		}
+
+
 }
 
 void render()
@@ -316,6 +320,9 @@ void renderPowerUp()
 		}
 	}
 }
+	
+
+
 void updateGame()
 {
 	//check if boss stage
@@ -573,7 +580,8 @@ void stageclear()
 
 void collision()
 {
-	if(powerUpPlayerCollision(player,powerUp))
+	//Check Powerup collide
+	if(powerUpPlayerCollision(charLocation,powerUp))
 	{
 		powerUp.Active = false;
 		player.PowerUp++;
@@ -581,6 +589,7 @@ void collision()
 	// check collision
 	for(int i = 0; i<50;i++)
 	{
+
 		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
 		{
 			//PLAYER DEATH SCREEN
