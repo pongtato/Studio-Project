@@ -181,14 +181,14 @@ void menuscreen2()
 					case 1:
 					colour(0x0F);
 					cls();
-					mainScreen();
+					pauseScreen();
 					score();
 			    	break;
 						
 					case 2:
 					colour(0x0F);
 					cls();
-					mainScreen();
+					pauseScreen();
 					instructions();
 					break;
 

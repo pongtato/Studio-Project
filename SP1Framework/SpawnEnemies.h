@@ -40,7 +40,9 @@ struct BOSS
 	int state;
 	
 };
-
+void moveBoss();
+void moveBossUp();
+void moveBossDown();
 void moveEnemies();
 void moveEnemiesUp();
 void moveEnemiesDown();

@@ -33,6 +33,7 @@ void shutdown();            // do clean up, free memory
 
 void renderCharacter();		// renders player character
 void renderEnemies();
+void renderBoss();
 void leveldesign();
 void updateGame();
 void enemyMove();

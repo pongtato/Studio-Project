@@ -16,6 +16,7 @@ double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
 
+extern BOSS Bcounter[10]; 
 extern ENEMY counter[26];
 extern BULLET missile[50];
 extern BULLET enemyBullet[50];
@@ -179,6 +180,8 @@ void render()
 	renderMissile();
 	// render enemies
 	renderEnemies();
+	//render boss
+	renderBoss();
 	//render enemy bullet
 	renderEnemyMissile();
 }
@@ -219,6 +222,59 @@ void renderEnemies()
 		{
 			counter[i].Active = false;
 			counter[i].icon = ' ';
+		}
+	}
+}
+
+void renderBoss()
+{
+	enemycolour();
+	// render boss
+	for ( int i = 0; i < BOSS_NO; ++i)
+	{
+		//is boss alive
+		if(Bcounter[i].Active == true)
+		{
+			gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y-1);
+			std::cout << Bcounter[i].icontopleft;
+			
+			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y-1);
+			std::cout << Bcounter[i].iconup;
+
+			gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y-1);
+			std::cout << Bcounter[i].icontopright;
+
+			gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y);
+			std::cout << Bcounter[i].iconleft;
+
+			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y);
+			std::cout << Bcounter[i].iconcenter;
+
+			gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y);
+			std::cout << Bcounter[i].iconright;
+
+			gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y+1);
+			std::cout << Bcounter[i].iconbottomleft;
+
+			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y+1);
+			std::cout << Bcounter[i].icondown;
+			
+			gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y+1); 
+			std::cout << Bcounter[i].iconbottomright; 
+	
+		}
+		if(Bcounter[i].coordinates.X <=2)
+		{
+			Bcounter[i].Active = false;
+			Bcounter[i].icontopleft = ' ';
+			Bcounter[i].iconup = ' ';
+			Bcounter[i].icontopright = ' ';
+			Bcounter[i].iconleft = ' ';
+			Bcounter[i].iconcenter = ' ';
+			Bcounter[i].iconright = ' ';
+			Bcounter[i].iconbottomleft = ' ';
+			Bcounter[i].icondown = ' ';
+			Bcounter[i].iconbottomright = ' ';
 		}
 	}
 }
@@ -300,19 +356,8 @@ void enemyMove()
 
 void bossMove()
 {
-	//check if row has spawned
-	if ( spawncounter >=5)
-	{
-		spawncounter = 0;
-		spawnclear = 0;
-	}
-	//clear to move
-	else if ( spawncounter = 0)
-	{
-		spawnclear = 1;
-	}
 
-	// move enemies
+	// move boss
 	if ( spawnclear == 0)
 	{
 		static double timer_move = elapsedTime;
@@ -322,12 +367,12 @@ void bossMove()
 			if (moveState == 1)
 			{
 				//move towards left
-				moveEnemies();
+				moveBoss();
 			}
 			else if ( moveState == 2)
 			{
 				//move upwards
-				moveEnemiesUp();
+				moveBossUp();
 				moveYUP--;
 				moveYDOWN = moveYUP;
 				if (moveYUP < 3)
@@ -339,7 +384,7 @@ void bossMove()
 			}
 			else if ( moveState == 3)
 			{
-				moveEnemiesDown();
+				moveBossDown();
 				moveYDOWN++;
 				if (moveYDOWN > 17)
 				{

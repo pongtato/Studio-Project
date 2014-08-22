@@ -7,7 +7,7 @@
 
 
 ENEMY counter[999];
-BOSS count[10];
+BOSS Bcounter[10];
 int enemycounter;
 int activefromtext;
 int hpfromtext;
@@ -107,6 +107,42 @@ void moveEnemiesDown()
 	}
 }
 
+void moveBoss()
+{
+	for ( int i = 0; i  < BOSS_NO; ++i)
+	{
+		//is enemy alive
+		if(Bcounter[i].Active == true)
+		{
+			gotoXY(Bcounter[i].coordinates.X--,Bcounter[i].coordinates.Y);
+		}
+	}
+}
+
+void moveBossUp()
+{
+	for ( int i = 0; i  < BOSS_NO; ++i)
+	{
+		//is enemy alive
+		if(Bcounter[i].Active == true)
+		{
+			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y--);
+		}
+	}
+}
+
+void moveBossDown()
+{
+	for ( int i = 0; i  < BOSS_NO; ++i)
+	{
+		//is enemy alive
+		if(Bcounter[i].Active == true)
+		{
+			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y++);
+		}
+	}
+}
+
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
 	enemycounter = 10;
@@ -124,14 +160,22 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
 {
 	enemycounter = 10;
-	counter[currentEnemy].Active = activefromtext;
-	counter[currentEnemy].coordinates.X = modX;
-	counter[currentEnemy].coordinates.Y = modY;
-	counter[currentEnemy].hp= hpfromtext;
-	counter[currentEnemy].score= scorefromtext;
-	counter[currentEnemy].icon= (char)(Bossfromtext);
-	counter[currentEnemy].number = currentEnemy;
-	counter[currentEnemy].state = statefromtext;
+	Bcounter[currentEnemy].Active = activefromtext;
+	Bcounter[currentEnemy].coordinates.X = modX;
+	Bcounter[currentEnemy].coordinates.Y = modY;
+	Bcounter[currentEnemy].hp= hpfromtext;
+	Bcounter[currentEnemy].score= scorefromtext;
+	Bcounter[currentEnemy].icontopleft= (char)(BossfromtextTL);
+	Bcounter[currentEnemy].iconup= (char)(BossfromtextU);
+	Bcounter[currentEnemy].icontopright= (char)(BossfromtextTR);
+	Bcounter[currentEnemy].iconleft= (char)(BossfromtextL);
+	Bcounter[currentEnemy].iconcenter= (char)(Bossfromtext);
+	Bcounter[currentEnemy].iconright= (char)(BossfromtextR);
+	Bcounter[currentEnemy].iconbottomleft= (char)(BossfromtextBL);
+	Bcounter[currentEnemy].icondown= (char)(BossfromtextD);
+	Bcounter[currentEnemy].iconbottomright= (char)(BossfromtextBR);
+	Bcounter[currentEnemy].number = currentEnemy;
+	Bcounter[currentEnemy].state = statefromtext;
 	currentEnemy++;
 }
 
