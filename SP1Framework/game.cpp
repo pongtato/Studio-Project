@@ -100,12 +100,12 @@ void update(double dt)
 			Beep(0, 0);
 			charLocation.Y--; 
 		}
-		if (keyPressed[K_LEFT] && charLocation.X > 3)
+		if (keyPressed[K_LEFT] && charLocation.X > 2)
 		{
 			Beep(0, 0);
 			charLocation.X--; 
 		}
-		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 7)
+		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 8)
 		{
 			Beep(0, 0);
 			charLocation.Y++; 
@@ -375,7 +375,7 @@ void bossMove()
 				moveBossUp();
 				moveYUP--;
 				moveYDOWN = moveYUP;
-				if (moveYUP < 3)
+				if (moveYUP < 4)
 				{
 					wew = 0;
 					moveState = 3;
@@ -386,7 +386,7 @@ void bossMove()
 			{
 				moveBossDown();
 				moveYDOWN++;
-				if (moveYDOWN > 17)
+				if (moveYDOWN > 16)
 				{
 					moveYUP = moveYDOWN;
 					moveState = 2;
