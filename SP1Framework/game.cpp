@@ -22,28 +22,43 @@ extern BULLET missile[50];
 extern BULLET enemyBullet[50];
 extern PLAYER player;
 extern BULLET powerUp;
+extern WORLD generator[999];
 
 StopWatch b_timer; 
 COORD charLocation;
 COORD consoleSize;
 
-int modifyY =6;
-int modifyX =38;
-int moveYUP = modifyY;
-int moveYDOWN = 0;
-int upordown = 1;
-int globalscore = 0;
-int moveState = 1;
-int wew = 1;
-int enemieskilled =0;
-int spawncounter = 0;
-int spawnclear = 1;
-int loadlevel = 4;
+int modifyY;
+int modifyX;
+int moveYUP;
+int moveYDOWN;
+int upordown;
+int globalscore;
+int moveState;
+int wew;
+int enemieskilled;
+int spawncounter;
+int spawnclear;
+int loadlevel;
+int terrainModX;
+int terrainModY;
+int terrainlevel;
+int terrainicon;
+int terraingo = 0;
+int terraindestory;
+bool terrain = true;
+double enemymovespeed;
+int enemyshootspeedrange1;
+int enemyshootspeedrange2;
+double bossmovespeed;
+double bossshootspeed;
+bool nextstage = true;
 bool droppowerup = true;
 unsigned int currentMissile = 0;
 unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
 unsigned int currentEnemy = 0;
+unsigned int currentTerrain = 0;
 unsigned int powerupEnemy = 0;
 unsigned int maxMissile = 50;
 unsigned int playingField = 50;
@@ -72,6 +87,8 @@ void init()
 	loadPlayerFromText();
 	powerUp.icon = PowerupIcon;
 	powerUp.Active = false;
+
+	GameVariables();
 }
 void shutdown()
 {
@@ -218,7 +235,11 @@ void render()
 	renderEnemyMissile();
 	// render powerup
 	renderPowerUp();
+	// randomly generate terrain
+	renderTerrain();
 }
+
+// CHARACTERS
 void renderCharacter()
 {
 	// render character
@@ -227,17 +248,39 @@ void renderCharacter()
 	std::cout << player.icon;
 
 	gotoXY(charLocation.X+1,charLocation.Y);
-	colour(0x0F);
+	if (player.PowerUp == 1 || player.PowerUp >= 3)
+	{
+	colour(0x0B);
+	}
+	else if ( player.PowerUp == 2)
+	{
+	colour (0x0F);
+	}
 	std::cout << player.headIcon;
 
 	gotoXY(charLocation.X,charLocation.Y-1);
-	colour(0x0F);
+	if (player.PowerUp >= 2)
+	{
+	colour(0x0B);
+	}
+	else
+	{
+	colour (0x0F);
+	}
 	std::cout << player.wingIcon;
 
 	gotoXY(charLocation.X,charLocation.Y+1);
-	colour(0x0F);
+	if (player.PowerUp >= 2)
+	{
+	colour(0x0B);
+	}
+	else
+	{
+	colour (0x0F);
+	}
 	std::cout <<  player.wingIcon;
 }
+// ENEMIES
 void renderEnemies()
 {
 	enemycolour();
@@ -257,6 +300,7 @@ void renderEnemies()
 		}
 	}
 }
+// BOSS
 void renderBoss()
 {
 	enemycolour();
@@ -309,6 +353,7 @@ void renderBoss()
 		}
 	}
 }
+// POWER UPS
 void renderPowerUp()
 {
 	colour(0xA0);
@@ -335,10 +380,11 @@ void renderPowerUp()
 		}
 	}
 }
+// ALL GAME FUNCTIONS
 void updateGame()
 {
 	//check if boss stage
-	if ( loadlevel%4 != 0)
+	if ( loadlevel < 4)
 	{
 		loadfromtext(loadlevel);
 		enemySpawn();
@@ -357,10 +403,15 @@ void updateGame()
 	{
 		bonusesloadfromtext(loadlevel);
 		bonusSpawn();
+		enemyMove();
+		enemyShooting();
 	}
+	FormTerrain();
+	terrainMove();
 	collision();
 	stageclear();
 }
+// ENEMY MOVE
 void enemyMove()
 {
 	//check if row has spawned
@@ -379,7 +430,7 @@ void enemyMove()
 	if ( spawnclear == 0)
 	{
 		static double timer_move = elapsedTime;
-		if ( elapsedTime - timer_move > 0.2 )
+		if ( elapsedTime - timer_move > enemymovespeed )
 		{
 			timer_move = elapsedTime;
 			if (moveState == 1)
@@ -393,7 +444,7 @@ void enemyMove()
 				moveEnemiesUp();
 				moveYUP--;
 				moveYDOWN = moveYUP;
-				if (moveYUP < 3)
+				if (moveYUP < 6)
 				{
 					wew = 0;
 					moveState = 3;
@@ -414,6 +465,7 @@ void enemyMove()
 		}
 	}
 }
+// BOSS MOVE
 void bossMove()
 {
 
@@ -421,7 +473,7 @@ void bossMove()
 	if ( spawnclear == 0)
 	{
 		static double timer_move = elapsedTime;
-		if ( elapsedTime - timer_move > 0.5 )
+		if ( elapsedTime - timer_move > bossmovespeed )
 		{
 			timer_move = elapsedTime;
 			if (moveState == 1)
@@ -435,7 +487,7 @@ void bossMove()
 				moveBossUp();
 				moveYUP--;
 				moveYDOWN = moveYUP;
-				if (moveYUP < 4)
+				if (moveYUP < 6)
 				{
 					wew = 0;
 					moveState = 3;
@@ -456,6 +508,7 @@ void bossMove()
 		}
 	}
 }
+// SPAWN ENEMY
 void enemySpawn()
 {
 	// spawn enemies
@@ -490,6 +543,7 @@ void enemySpawn()
 			spawnclear = 0;
 		}
 }
+// SPAWN BOSS
 void bossSpawn()
 {
 		// spawn enemies
@@ -515,23 +569,30 @@ void bossSpawn()
 			spawnclear = 0;
 		}
 }
+// SPAWN BONUS
 void bonusSpawn()
 {
 	//spawn enemines
-	if (modifyX <48)
+	if (modifyX < 48)
 	{
 		static double timer_spawn = elapsedTime;
 		if (elapsedTime - timer_spawn > 0.1)
 		{
 			timer_spawn = elapsedTime;
-			if (currentEnemy < Bonus)
+			if (currentEnemy < BONUS)
 			{
 				SpawnBonus(currentEnemy, modifyX, modifyY);
 				spawncounter++;
 				//per row
+				moveState = 1;
 				if (modifyY < 14)
 				{
 					modifyY = modifyY + 2;
+				}
+				else
+				{
+					modifyY = 6;	
+					modifyX = modifyX + 2;
 				}
 			}
 		}
@@ -542,6 +603,7 @@ void bonusSpawn()
 		spawnclear = 0;
 	}
 }
+// ENEMY SHOOTS
 void enemyShooting()
 {
 	//Enemy shooting
@@ -550,7 +612,7 @@ void enemyShooting()
 	{
 		if(counter[i].Active)
 		{
-			if ( elapsedTime - timer_shoot >rand()%6+1)
+			if ( elapsedTime - timer_shoot >rand()%enemyshootspeedrange1 + enemyshootspeedrange2 )
 			{
 				timer_shoot = elapsedTime;
 				if(enemyCurrentMissile < 50)
@@ -565,6 +627,7 @@ void enemyShooting()
 		}
 	}
 }
+//BOSS SHOOTS
 void bossShooting()
 {
 	//Enemy shooting
@@ -573,7 +636,7 @@ void bossShooting()
 	{
 		if(Bcounter[i].Active)
 		{
-			if ( elapsedTime - timer_shoot >0.2)
+			if ( elapsedTime - timer_shoot >bossshootspeed)
 			{
 				timer_shoot = elapsedTime;
 				if(enemyCurrentMissile < 50)
@@ -588,11 +651,13 @@ void bossShooting()
 		}
 	}
 }
+//IS STAGE CLEARED?
 void stageclear()
 {
 		//if stage is clear, proceed
 	if (enemieskilled >= 25)
 	{
+		loadlevel++;
 		currentEnemy =0;
 		enemieskilled =0;
 		modifyX = 38;
@@ -601,16 +666,16 @@ void stageclear()
 		moveYDOWN = 0;
 		wew = 1;
 		spawnclear = 1;
-		loadlevel++;
 	}
 }
+// COLLOSION
 void collision()
 {
 	//Check Powerup collide
 	if(powerUpPlayerCollision(charLocation,powerUp))
 	{
 		static double timer_spawn = elapsedTime;
-		if ( elapsedTime - timer_spawn > 0.5 )
+		if ( elapsedTime - timer_spawn > 0.1 )
 		{
 			timer_spawn = elapsedTime;
 			powerUp.Active = false;
@@ -662,18 +727,116 @@ void collision()
 		}
 	}
 }
+// COLOURS OF ENEMIES
 void enemycolour()
 {
-	if (loadlevel%4 != 0)
+	switch (loadlevel)
 	{
-		colour(0x0D);
-	}
-	else if ( loadlevel%4 == 0)
-	{
-		colour(0x0C);
-	}
-	else if ( loadlevel%5 ==0)
-	{
-		colour(0x0E);
+	case 1:colour(0x0E);
+		break;
+	case 2:colour(0x06);
+		break;
+	case 3:colour(0x0F);
+		break;
+	case 4:colour(0x0C);
+		break;
+	case 5: colour(0x0D);
+		break;
 	}
 }
+// GAME SETTINGS
+void GameVariables()
+{
+	std::ifstream indata;
+	indata.open("GLD/Variables/GameSettings.txt");
+	if ( indata.is_open())
+	{				//modifyY & X - spawning points X&Y 
+					//modifyYDOWN - movement cap					
+					//upordown - which direction? 
+					//wew - move left				
+					//spawncounter - spawn per row 
+					//spawnclear - move on to next spawn
+		if (indata >> modifyY >> modifyX >> moveYUP >> moveYDOWN >> upordown >> globalscore >> moveState >> wew >> enemieskilled >> spawncounter >> spawnclear >> loadlevel >> enemymovespeed >> enemyshootspeedrange1 >> enemyshootspeedrange2 >> bossmovespeed >> bossmovespeed >> terrainModX >> terrainModY >> terrainicon)
+		{
+		}
+	}
+}
+// RANDOMLY GENERATED TERRAIN
+void FormTerrain() 
+{
+	static double timer_spawn = elapsedTime;
+	if ( elapsedTime - timer_spawn > 0.2 )
+	{
+		timer_spawn = elapsedTime;
+		if ( currentTerrain < TERRAIN )
+		{
+			SpawnTerrain(currentTerrain,terrainModX, terrainModY, terrainicon);
+			if ( terrainModY < 3)
+			{
+				terrainModY++;
+			}
+			else if ( terrainModY == 3)
+			{
+				if ( rand()%3+1 == 1)
+				{
+					terrainModY--;
+				}
+				else if ( rand()%3+1 == 2)
+				{	
+				}
+				else if ( rand()%3+1 == 3)
+				{
+					terrainModY++;
+				}
+			}
+			else if ( terrainModY == 4)
+			{
+				terrainModY--;
+			}
+		}
+	}	
+
+}
+// RENDER TERRAIN
+void renderTerrain()
+{
+	colour(0x0F);
+	// render enemies
+	for ( int i = terraingo; i < TERRAIN; ++i)
+	{
+		//is enemy alive
+		if(generator[i].Active)
+		{
+			gotoXY(generator[i].coordinates.X,generator[i].coordinates.Y);
+			std::cout << generator[i].icon;
+		}
+		if(generator[i].coordinates.X <=2)
+		{
+			generator[i].Active = false;
+			generator[i].icon = ' ';
+			terraindestory++;
+		}
+	}
+
+	if (terraindestory >= 10)
+	{
+		terraingo = 0;
+	}
+}
+// SCROLL TERRAIN
+void terrainMove()
+{
+	static double timer_move = elapsedTime;
+	if ( elapsedTime - timer_move > 0.2 )
+	{
+		timer_move = elapsedTime;
+		{
+			//move towards left
+			moveTerrain();
+		}
+	}
+}
+
+
+
+

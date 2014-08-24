@@ -33,7 +33,6 @@ void loseScreen()
 		indata.close();
 	}
 }
-
 void mainScreen()
 {
 	ifstream inData;
@@ -49,7 +48,6 @@ void mainScreen()
 
 	inData.close ();
 }
-
 void pauseScreen()
 {
 	ifstream inData;

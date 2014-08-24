@@ -19,7 +19,6 @@ struct ENEMY
 	int state;
 	
 };
-
 struct BOSS
 {
 	std::string name;
@@ -43,7 +42,6 @@ struct BOSS
 void moveBoss();
 void moveBossUp();
 void moveBossDown();
-
 struct Bonuses
 {
 	std::string name;
@@ -57,6 +55,14 @@ struct Bonuses
 
 };
 
+struct WORLD
+{
+	char icon;
+	int level;
+	COORD coordinates;
+	int Active;
+};
+
 void moveEnemies();
 void moveEnemiesUp();
 void moveEnemiesDown();
@@ -67,7 +73,8 @@ void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, int 
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY);
 void SpawnBoss(unsigned int &currentEnemy, int modX, int modY);
 void SpawnBonus(unsigned int &currentEnemy, int modX, int modY);
-
+void SpawnTerrain(unsigned int &currentEnemy, int terrainModX, int terrainModY, int terrainChar);
+void moveTerrain();
 
 
 

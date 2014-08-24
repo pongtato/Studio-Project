@@ -7,7 +7,8 @@
 
 #define NO_OF_ENEMIES 25
 #define BOSS_NO 1
-#define Bonus 25
+#define BONUS 25
+#define TERRAIN 999
 
 extern StopWatch g_timer;
 extern bool g_quitGame;
@@ -33,22 +34,25 @@ void render();              // renders the current state of the game to the cons
 void shutdown();            // do clean up, free memory
 
 void renderCharacter();		// renders player character
-void renderEnemies();
-void renderBoss();
-void leveldesign();
-void updateGame();
-void enemyMove();
-void bossMove();
-void enemySpawn();
-void SpecialSpawn();
-void bossSpawn();
-void bonusSpawn();
-void enemyShooting();
-void bossShooting();
-void stageclear();
-void collision();
-void enemycolour();
-void renderPowerUp();
+void renderEnemies();		// reneder enemies
+void renderBoss();			// render boss
+void leveldesign();			// load game frame
+void updateGame();			// all the functions in this functions
+void enemyMove();			// move enemies
+void bossMove();			// moves boss
+void enemySpawn();			// enemy spawn
+void bossSpawn();			// spawns boss
+void bonusSpawn();			// spawbs bonus
+void enemyShooting();		// enemy shooting
+void bossShooting();		// boss shooting
+void stageclear();			// is stage cleared?
+void collision();			// collision duh
+void enemycolour();			// colour of enemies
+void renderPowerUp();		// renders power up drop
+void GameVariables();		// settings of the game taken from text file
+void FormTerrain();			//load terrain data
+void renderTerrain();
+void terrainMove();
 
 
 #endif // _GAME_H

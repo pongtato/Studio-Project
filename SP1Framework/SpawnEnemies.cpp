@@ -7,6 +7,7 @@
 ENEMY counter[999];
 ENEMY powerup[1];
 BOSS Bcounter[10];
+WORLD generator[999];
 int enemycounter;
 int activefromtext;
 int hpfromtext;
@@ -35,23 +36,16 @@ void loadfromtext(int loadcase)
 		indata.open("GLD/Variables/enemy1.txt");
 		break;
 	case 2:	
-		indata.open("GLD/Variables/enemy1.txt");
+		indata.open("GLD/Variables/enemy2.txt");
 		break;
 	case 3:	
-		indata.open("GLD/Variables/enemy1.txt");
-		break;
-	case 5:	
-		indata.open("GLD/Variables/enemy1.txt");
-		break;
-	case 6:	
-		indata.open("GLD/Variables/enemy1.txt");
+		indata.open("GLD/Variables/enemy3.txt");
 		break;
 	}
 	if ( indata.is_open())
 	{
 		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
 		{
-
 		}
 	}
 }
@@ -213,6 +207,28 @@ void SpawnBonus(unsigned int &currentEnemy, int modX, int modY)
 	counter[currentEnemy].number = currentEnemy;
 	counter[currentEnemy].state = statefromtext;
 	currentEnemy++;
+}
+
+void SpawnTerrain(unsigned int &currentTerrain, int terrainModX, int terrainModY, int terrainChar)
+{
+	generator[currentTerrain].icon = char(219);
+	generator[currentTerrain].coordinates.X = terrainModX;
+	generator[currentTerrain].coordinates.Y = terrainModY;
+	generator[currentTerrain].level = 2;
+	generator[currentTerrain].Active = activefromtext;
+	currentTerrain++;
+}
+
+void moveTerrain()
+{
+	for ( int i = 0; i  < TERRAIN; ++i)
+	{
+		//is enemy alive
+		if(generator[i].Active == true)
+		{
+			gotoXY(generator[i].coordinates.X--,generator[i].coordinates.Y);
+		}
+	}
 }
 
 
