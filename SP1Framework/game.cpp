@@ -250,7 +250,6 @@ void render()
 	// randomly generate terrain
 	renderTerrain();
 }
-
 // CHARACTERS
 void renderCharacter()
 {
@@ -674,7 +673,7 @@ void stageclear()
 		currentEnemy =0;
 		enemieskilled =0;
 		modifyX = 38;
-		modifyY = 6;
+		modifyY = 8;
 		moveYUP = modifyY;
 		moveYDOWN = 0;
 		wew = 1;
