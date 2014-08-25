@@ -550,40 +550,6 @@ void renderPowerUp()
 		}
 	}
 }
-void enemySpawn()
-{
-	// spawn enemies
-	if ( combined.enemySettings.modifyX <48)
-		{
-			static double timer_spawn = elapsedTime;
-			if ( elapsedTime - timer_spawn > 0.1 )
-			{
-				timer_spawn = elapsedTime;
-				if ( combined.enemySettings.currentEnemy < NO_OF_ENEMIES )
-				{
-					SpawnEnemy(combined.enemySettings.currentEnemy,combined.enemySettings.modifyX,combined.enemySettings.modifyY);
-					combined.enemySettings.spawncounter++;
-					combined.enemySettings.moveState = 1;
-					//per row
-					if ( combined.enemySettings.modifyY < 14)
-					{
-						combined.enemySettings.modifyY=combined.enemySettings.modifyY+2;
-					}
-					//next row and spawn interval
-					else
-					{
-						combined.enemySettings.modifyY = 6;	
-						combined.enemySettings.modifyX = combined.enemySettings.modifyX + 2;
-					}
-				}
-			}
-		}
-	else if ( combined.enemySettings.wew != 0)
-		{
-			combined.enemySettings.moveState=2;
-			combined.enemySettings.spawnclear=0;
-		}
-}
 // ENEMY MOVE
 void enemyMove()
 {
