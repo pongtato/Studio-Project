@@ -11,6 +11,10 @@
 #include "MainMenu.h"
 #include <iostream>
 #include <iomanip>
+#include <sstream>
+
+// Console size, width by height
+COORD ConsoleSize = {80, 25};
 
 double elapsedTime;
 double deltaTime;
@@ -24,6 +28,8 @@ extern PLAYER player;
 extern BULLET powerUp;
 extern WORLD generator[999];
 extern WORLD generator2[999];
+
+string display[5] = {"Score:","Wave:"};
 
 StopWatch b_timer; 
 COORD charLocation;
@@ -73,19 +79,11 @@ extern int PowerupIcon;
 void init()
 {
     // Set precision for floating point output
-    std::cout << std::fixed << std::setprecision(3);
-
-    // Get console width and height
-    CONSOLE_SCREEN_BUFFER_INFO csbi; /* to get buffer info */     
-
-    /* get the number of character cells in the current buffer */ 
-    GetConsoleScreenBufferInfo( GetStdHandle( STD_OUTPUT_HANDLE ), &csbi );
-    consoleSize.X = csbi.srWindow.Right;
-    consoleSize.Y = csbi.srWindow.Bottom;
+    initConsole(ConsoleSize, "SP1 Framework");
 
     // set the character to be in the center of the screen.
-    charLocation.X = consoleSize.X%2+2;
-    charLocation.Y = consoleSize.Y/2;
+	charLocation.X = 3;
+    charLocation.Y = ConsoleSize.Y/2;
 	
     elapsedTime = 0.0;
 
@@ -99,7 +97,10 @@ void shutdown()
 {
     // Reset to white text on black background
 	colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+
+    shutDownConsole();
 }
+
 void getInput()
 {    
     keyPressed[K_UP] = isKeyPressed(VK_UP);
@@ -120,7 +121,7 @@ void update(double dt)
 		updateGame();
 
 		// Updating the location of the character based on the key press
-		if (keyPressed[K_UP] && charLocation.Y > 6)
+		if (keyPressed[K_UP] && charLocation.Y > 5)
 		{
 			Beep(0, 0);
 			charLocation.Y--; 
@@ -130,12 +131,12 @@ void update(double dt)
 			Beep(0, 0);
 			charLocation.X--; 
 		}
-		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 6)
+		if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 8)
 		{
 			Beep(0, 0);
 			charLocation.Y++; 
 		}
-		if (keyPressed[K_RIGHT] && charLocation.X < consoleSize.X - 47)
+		if (keyPressed[K_RIGHT] && charLocation.X <46)
 		{
 			Beep(0, 0);
 			charLocation.X++; 
@@ -211,33 +212,36 @@ void update(double dt)
 }
 void render()
 {
-    // clear previous screen
-    colour(0x0F);
-    cls();
+    // Clears the buffer with this colour attribute
+    clearBuffer(0x0F);
+
+    
 
 	leveldesign();
 
     // render time taken to calculate this frame
-    gotoXY(70, 0);
+  /*  gotoXY(70, 0);
     colour(0x1A);
     std::cout << 1.0 / deltaTime << "fps" << std::endl;
   
     gotoXY(0, 0);
     colour(0x59);
-    std::cout << elapsedTime << "secs" << std::endl;
+    std::cout << elapsedTime << "secs" << std::endl;*/
 
-	gotoXY(50, 3);
+	/*gotoXY(50, 3);
     colour(0x03);
-    std::cout << "Score:" << globalscore << std::endl;
+    std::cout << "Score:" << globalscore << std::endl;*/
+	writeToBuffer(50,3,display[0],0x03);
 
-	gotoXY(50, 4);
+	/*gotoXY(50, 4);
     colour(0x03);
-    std::cout << "Wave:" << loadlevel << std::endl;
+    std::cout << "Wave:" << loadlevel << std::endl;*/
+	writeToBuffer(50,4,display[1],0x03);
 
     // render character
 	renderCharacter();
 	// render missiles
-	 colour(0x0B);
+	 //colour(0x0B);
 	renderMissile();
 	// render enemies
 	renderEnemies();
@@ -249,60 +253,70 @@ void render()
 	renderPowerUp();
 	// randomly generate terrain
 	renderTerrain();
+
+	// Writes the buffer to the console, hence you will see what you have written
+    flushBufferToConsole();
 }
 // CHARACTERS
 void renderCharacter()
 {
 	// render character
-	gotoXY(charLocation);
+	/*gotoXY(charLocation);
 	colour(0x0C);
-	std::cout << player.icon;
+	std::cout << player.icon;*/
+	writeToBuffer(charLocation,player.icon,0x0C);
 
-	gotoXY(charLocation.X+1,charLocation.Y);
+	//gotoXY(charLocation.X+1,charLocation.Y);
 	if (player.PowerUp == 1 || player.PowerUp >= 3)
 	{
-	colour(0x0B);
+	//colour(0x0B);
+		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0B);
 	}
 	else if ( player.PowerUp == 2)
 	{
-	colour (0x0F);
+	//colour (0x0F);
+		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0F);
 	}
-	std::cout << player.headIcon;
 
-	gotoXY(charLocation.X,charLocation.Y-1);
+	//gotoXY(charLocation.X,charLocation.Y-1);
 	if (player.PowerUp >= 2)
 	{
-	colour(0x0B);
+	//colour(0x0B);
+		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0B);
 	}
 	else
 	{
-	colour (0x0F);
+	//colour (0x0F);
+		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0F);
 	}
-	std::cout << player.wingIcon;
+	//std::cout << player.wingIcon;
 
-	gotoXY(charLocation.X,charLocation.Y+1);
+//	gotoXY(charLocation.X,charLocation.Y+1);
 	if (player.PowerUp >= 2)
 	{
-	colour(0x0B);
+	//colour(0x0B);
+		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0B);
 	}
 	else
 	{
-	colour (0x0F);
+	//colour (0x0F);
+		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0F);
 	}
-	std::cout <<  player.wingIcon;
+	//std::cout <<  player.wingIcon;
 }
 // ENEMIES
 void renderEnemies()
 {
-	enemycolour();
+	//enemycolour();
 	// render enemies
 	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
 	{
 		//is enemy alive
 		if(counter[i].Active)
 		{
-			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
-			std::cout << counter[i].icon;
+			/*gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
+			std::cout << counter[i].icon;*/
+			writeToBuffer(counter[i].coordinates,counter[i].icon);
 		}
 		if(counter[i].coordinates.X <=2)
 		{
@@ -314,40 +328,40 @@ void renderEnemies()
 // BOSS
 void renderBoss()
 {
-	enemycolour();
+	//enemycolour();
 	// render boss
 	for ( int i = 0; i < BOSS_NO; ++i)
 	{
 		//is boss alive
 		if(Bcounter[i].Active)
 		{
-			gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y-1);
-			std::cout << Bcounter[i].icontopleft;
-			
-			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y-1);
-			std::cout << Bcounter[i].iconup;
-
-			gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y-1);
-			std::cout << Bcounter[i].icontopright;
-
-			gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y);
-			std::cout << Bcounter[i].iconleft;
-
-			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y);
-			std::cout << Bcounter[i].iconcenter;
-
-			gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y);
-			std::cout << Bcounter[i].iconright;
-
-			gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y+1);
-			std::cout << Bcounter[i].iconbottomleft;
-
-			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y+1);
-			std::cout << Bcounter[i].icondown;
-			
-			gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y+1); 
-			std::cout << Bcounter[i].iconbottomright; 
-	
+			/*gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y-1);
+			std::cout << Bcounter[i].icontopleft;*/
+			writeToBuffer(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y-1,Bcounter[i].iconbottomleft,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y-1);
+			std::cout << Bcounter[i].iconup;*/
+			writeToBuffer(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y-1,Bcounter[i].iconup,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y-1);
+			std::cout << Bcounter[i].icontopright;*/
+			writeToBuffer(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y-1,Bcounter[i].icontopright,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y);
+			std::cout << Bcounter[i].iconleft;*/
+			writeToBuffer(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y,Bcounter[i].iconleft,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y);
+			std::cout << Bcounter[i].iconcenter;*/
+			writeToBuffer(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y,Bcounter[i].iconcenter,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y);
+			std::cout << Bcounter[i].iconright;*/
+			writeToBuffer(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y,Bcounter[i].iconright,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y+1);
+			std::cout << Bcounter[i].iconbottomleft;*/
+			writeToBuffer(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y+1,Bcounter[i].iconbottomleft,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y+1);
+			std::cout << Bcounter[i].icondown;*/
+			writeToBuffer(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y+1,Bcounter[i].icondown,0x0F);
+			/*gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y+1); 
+			std::cout << Bcounter[i].iconbottomright; */
+			writeToBuffer(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y+1,Bcounter[i].iconbottomright,0x0F);
 		}
 		if(Bcounter[i].coordinates.X <=2)
 		{
@@ -367,7 +381,7 @@ void renderBoss()
 // POWER UPS
 void renderPowerUp()
 {
-	colour(0xA0);
+	//colour(0xA0);
 	if(powerUp.Active)
 	{
 		droppowerup = false;
@@ -375,13 +389,15 @@ void renderPowerUp()
 		if ( elapsedTime - timer_powerUp > 0.5 )
 		{
 			timer_powerUp = elapsedTime;
-			gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
-			std::cout << powerUp.icon << std::endl;
+			//gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
+			//std::cout << powerUp.icon << std::endl;
+			writeToBuffer(powerUp.corrdinates.X--,powerUp.corrdinates.Y,powerUp.icon,0xA0);
 		}
 		else
 		{
-			gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
-			std::cout << powerUp.icon << std::endl;
+			/*gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
+			std::cout << powerUp.icon << std::endl;*/
+			writeToBuffer(powerUp.corrdinates.X,powerUp.corrdinates.Y,powerUp.icon,0xA0);
 		}
 		//Check if out of bound
 		if(powerUp.corrdinates.X <= 1)
@@ -848,15 +864,16 @@ void FormTerrainBot()
 // RENDER TERRAIN
 void renderTerrain()
 {
-	colour(0x0F);
+	//colour(0x0F);
 	// render top terrain
 	for ( int i = terraingo; i < TERRAIN; ++i)
 	{
 		//is terrain active?
 		if(generator[i].Active)
 		{
-			gotoXY(generator[i].coordinates.X,generator[i].coordinates.Y);
-			std::cout << generator[i].icon;
+			/*gotoXY(generator[i].coordinates.X,generator[i].coordinates.Y);
+			std::cout << generator[i].icon;*/
+			writeToBuffer(generator[i].coordinates,generator[i].icon,0x0F);
 		}
 		if(generator[i].coordinates.X <=2)
 		{
@@ -872,8 +889,9 @@ void renderTerrain()
 		//is terrain bot active?
 		if(generator2[i].Active)
 		{
-			gotoXY(generator2[i].coordinates.X,generator2[i].coordinates.Y);
-			std::cout << generator2[i].icon;
+			/*gotoXY(generator2[i].coordinates.X,generator2[i].coordinates.Y);
+			std::cout << generator2[i].icon;*/
+			writeToBuffer(generator2[i].coordinates,generator2[i].icon,0x0F);
 		}
 		if(generator2[i].coordinates.X <=2)
 		{

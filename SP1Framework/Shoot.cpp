@@ -1,5 +1,6 @@
 #include "Shoot.h"
 #include "game.h"
+#include "Framework\console.h"
 #include <iostream>
 
 extern PLAYER player;
@@ -13,7 +14,7 @@ void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
 		missile[currentMissile].Active = true;
 		missile[currentMissile].icon = player.playerMissleIcon;
-		missile[currentMissile].corrdinates.X = charLocation.X+1;
+		missile[currentMissile].corrdinates.X = charLocation.X++;
 		missile[currentMissile].corrdinates.Y = charLocation.Y;
 		missile[currentMissile].number = currentMissile;
 		currentMissile++;
@@ -22,7 +23,7 @@ void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLoca
 {
 		missile[currentMissile].Active = true;
 		missile[currentMissile].icon = player.playerMissleIcon;
-		missile[currentMissile].corrdinates.X = charLocationX+1;
+		missile[currentMissile].corrdinates.X = charLocationX++;
 		missile[currentMissile].corrdinates.Y = charLocationY;
 		missile[currentMissile].number = currentMissile;
 		currentMissile++;
@@ -54,11 +55,12 @@ void renderMissile()
 
 		if(missile[i].Active)
 		{
-			gotoXY(missile[i].corrdinates.X++,missile[i].corrdinates.Y);
-			std::cout << missile[i].icon << std::endl;
-
+			/*gotoXY(missile[i].corrdinates.X++,missile[i].corrdinates.Y);
+			std::cout << missile[i].icon << std::endl;*/
+			missile[i].corrdinates.X++;
+			writeToBuffer(missile[i].corrdinates,missile[i].icon,0x0B);
 			//Check if out of bound
-			if(missile[i].corrdinates.X > 47)
+			if(missile[i].corrdinates.X >46)
 			{
 				missile[i].Active = false;
 			}
@@ -159,9 +161,10 @@ void renderEnemyMissile()
 
 		if(enemyBullet[i].Active)
 		{
-			gotoXY(enemyBullet[i].corrdinates.X-=2,enemyBullet[i].corrdinates.Y);
-			std::cout << enemyBullet[i].icon << std::endl;
-
+			/*gotoXY(enemyBullet[i].corrdinates.X-=2,enemyBullet[i].corrdinates.Y);
+			std::cout << enemyBullet[i].icon << std::endl;*/
+			enemyBullet[i].corrdinates.X-=2;
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
 			if(enemyBullet[i].corrdinates.X <= 1)
 			{

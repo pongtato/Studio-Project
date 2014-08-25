@@ -6,7 +6,7 @@ int PlayerHpfromtext;
 int PlayerIconfromtext;
 int PlayerHeadIcon;
 int PlayerWingIcon;
-int PlayerMissileIcon;
+char PlayerMissileIcon;
 int PowerupIcon;
 
 void loadPlayerFromText()

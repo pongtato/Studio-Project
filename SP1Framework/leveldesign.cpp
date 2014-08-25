@@ -1,4 +1,5 @@
 #include "game.h"
+#include "Framework\console.h"
 #include "leveldesign.h"
 #include <iostream>
 
@@ -12,9 +13,13 @@ void leveldesign()
 	indata.open("GLD/GLD.txt");
 	if (indata.is_open())
 	{
-		while (getline(indata, data))
+		for(int i = 0; i < 80;i++)
 		{
-			std::cout << data << endl;
+			for(int j = 0; j<25;j++)
+			{
+				getline(indata, data);
+				writeToBuffer(i,j,data);
+			}
 		}
 		indata.close();
 	}
