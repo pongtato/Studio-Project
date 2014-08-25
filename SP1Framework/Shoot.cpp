@@ -4,8 +4,9 @@
 
 extern PLAYER player;
 extern double elapseTime;
+extern unsigned int maxMissile;
 BULLET powerUp;
-BULLET missile[50];
+BULLET missile[60];
 BULLET enemyBullet[50];
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
@@ -28,17 +29,28 @@ void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLoca
 }
 void shootMissile2(unsigned int &currentMissile, COORD charLocation)
 {
-	currentMissile=0;
+
 	missile[currentMissile].Active = true;
 	missile[currentMissile].icon = player.playerMissleIcon;
 	missile[currentMissile].corrdinates.X = charLocation.X+1;
 	missile[currentMissile].corrdinates.Y = charLocation.Y;
 	missile[currentMissile].number = currentMissile;
+	currentMissile++;
+}
+void shootMissile2(unsigned int &currentMissile,  int charLocationX, int charLocationY)
+{
+	
+	missile[currentMissile].Active = true;
+	missile[currentMissile].icon = player.playerMissleIcon;
+	missile[currentMissile].corrdinates.X = charLocationX+1;
+	missile[currentMissile].corrdinates.Y = charLocationY;
+	missile[currentMissile].number = currentMissile;
+	currentMissile++;
 }
 
 void renderMissile()
 {
-	for(int i = 0; i<50;i++)
+	for(int i = 0; i<maxMissile;i++)
 	{
 
 		if(missile[i].Active)
@@ -180,7 +192,6 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 bool powerUpPlayerCollision(COORD player, BULLET powerPlayer)
 {
 	if((player.X == powerPlayer.corrdinates.X && player.Y == powerPlayer.corrdinates.Y)
-		|| (player.X == powerPlayer.corrdinates.X-1 && player.Y == powerPlayer.corrdinates.Y)
 		&&powerPlayer.Active)//Check below
 	{
 		return true;

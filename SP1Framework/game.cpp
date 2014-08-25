@@ -60,7 +60,7 @@ unsigned int enemyMaxMissile = 0;
 unsigned int currentEnemy = 0;
 unsigned int currentTerrain = 0;
 unsigned int powerupEnemy = 0;
-unsigned int maxMissile = 50;
+unsigned int maxMissile = 60;
 unsigned int playingField = 50;
 bool missleFired1 = false;
 extern int PowerupIcon;
@@ -120,7 +120,7 @@ void update(double dt)
 			Beep(0, 0);
 			charLocation.Y--; 
 		}
-		if (keyPressed[K_LEFT] && charLocation.X > 2)
+		if (keyPressed[K_LEFT] && charLocation.X > 3)
 		{
 			Beep(0, 0);
 			charLocation.X--; 
@@ -137,7 +137,7 @@ void update(double dt)
 		}
 		static double timer_player = elapsedTime;
 
-		if(keyPressed[K_SPACE] && currentMissile <maxMissile)// && !missleFired1)
+		if(keyPressed[K_SPACE] && currentMissile <maxMissile-4)// && !missleFired1)
 		{
 			
 			if ( elapsedTime - timer_player > 0.5)
@@ -161,22 +161,29 @@ void update(double dt)
 				//missleFired1 = true;
 			}
 		}
-		if(keyPressed[K_SPACE] && currentMissile >=maxMissile)// && !missleFired1)
+		if(keyPressed[K_SPACE] && currentMissile >=maxMissile-4)// && !missleFired1)
 		{
 			if ( elapsedTime - timer_player > 0.5)
 			{
 				timer_player = elapsedTime;
-				/*if(player.PowerUp == 2)
+				if(player.PowerUp >= 3)
 				{
-					system("pause");
-					shootMissile1(currentMissile,charLocation,charLocation);
-					shootMissile1(currentMissile,charLocation,charLocation);
-				}*/
-				/*else
-				{*/
-				shootMissile2(currentMissile,charLocation);
-				//}
-				//missleFired1 = true;
+					currentMissile=0;
+					shootMissile2(currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(currentMissile,charLocation.X+2,charLocation.Y);
+					shootMissile1(currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else if(player.PowerUp == 2)
+				{
+					currentMissile=0;
+					shootMissile2(currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else  if(player.PowerUp == 1)
+				{
+					currentMissile=0;
+					shootMissile2(currentMissile,charLocation);
+				}
 			}
 		}
 		if(keyPressed[K_SPACE] == false)
