@@ -73,8 +73,10 @@ void EnemySpawn(ENEMY& enemy,std::string name,char icon, COORD coordinates, int 
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY);
 void SpawnBoss(unsigned int &currentEnemy, int modX, int modY);
 void SpawnBonus(unsigned int &currentEnemy, int modX, int modY);
-void SpawnTerrain(unsigned int &currentEnemy, int terrainModX, int terrainModY, int terrainChar);
+void SpawnTerrain(unsigned int &currentTerrain, int terrainModX, int terrainModY, int terrainChar);
 void moveTerrain();
+void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terrainBotModY, int terrainChar);
+void moveTerrainBot();
 
 
 

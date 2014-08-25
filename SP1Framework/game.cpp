@@ -23,6 +23,7 @@ extern BULLET enemyBullet[50];
 extern PLAYER player;
 extern BULLET powerUp;
 extern WORLD generator[999];
+extern WORLD generator2[999];
 
 StopWatch b_timer; 
 COORD charLocation;
@@ -42,10 +43,13 @@ int spawnclear;
 int loadlevel;
 int terrainModX;
 int terrainModY;
+int terrainBotModY;
 int terrainlevel;
 int terrainicon;
 int terraingo = 0;
+int terraingobot = 0;
 int terraindestory;
+int terraindestorybot = 0;
 bool terrain = true;
 double enemymovespeed;
 int enemyshootspeedrange1;
@@ -59,6 +63,7 @@ unsigned int enemyCurrentMissile = 0;
 unsigned int enemyMaxMissile = 0;
 unsigned int currentEnemy = 0;
 unsigned int currentTerrain = 0;
+unsigned int currentTerrainBot = 0;
 unsigned int powerupEnemy = 0;
 unsigned int maxMissile = 60;
 unsigned int playingField = 50;
@@ -414,6 +419,7 @@ void updateGame()
 		enemyShooting();
 	}
 	FormTerrain();
+	FormTerrainBot();
 	terrainMove();
 	collision();
 	stageclear();
@@ -451,7 +457,7 @@ void enemyMove()
 				moveEnemiesUp();
 				moveYUP--;
 				moveYDOWN = moveYUP;
-				if (moveYUP < 6)
+				if (moveYUP < 4)
 				{
 					wew = 0;
 					moveState = 3;
@@ -462,7 +468,7 @@ void enemyMove()
 			{
 				moveEnemiesDown();
 				moveYDOWN++;
-				if (moveYDOWN > 9)
+				if (moveYDOWN > 8)
 				{
 					moveYUP = moveYDOWN;
 					moveState = 2;
@@ -531,14 +537,14 @@ void enemySpawn()
 					spawncounter++;
 					moveState = 1;
 					//per row
-					if ( modifyY < 14)
+					if ( modifyY < 16)
 					{
 						modifyY=modifyY+2;
 					}
 					//next row and spawn interval
 					else
 					{
-						modifyY = 6;	
+						modifyY = 8;	
 						modifyX = modifyX + 2;
 					}
 				}
@@ -763,12 +769,12 @@ void GameVariables()
 					//wew - move left				
 					//spawncounter - spawn per row 
 					//spawnclear - move on to next spawn
-		if (indata >> modifyY >> modifyX >> moveYUP >> moveYDOWN >> upordown >> globalscore >> moveState >> wew >> enemieskilled >> spawncounter >> spawnclear >> loadlevel >> enemymovespeed >> enemyshootspeedrange1 >> enemyshootspeedrange2 >> bossmovespeed >> bossmovespeed >> terrainModX >> terrainModY >> terrainicon)
+		if (indata >> modifyY >> modifyX >> moveYUP >> moveYDOWN >> upordown >> globalscore >> moveState >> wew >> enemieskilled >> spawncounter >> spawnclear >> loadlevel >> enemymovespeed >> enemyshootspeedrange1 >> enemyshootspeedrange2 >> bossmovespeed >> bossmovespeed >> terrainModX >> terrainModY >> terrainBotModY >> terrainicon)
 		{
 		}
 	}
 }
-// RANDOMLY GENERATED TERRAIN
+// RANDOMLY GENERATED TERRAIN TOP
 void FormTerrain() 
 {
 	static double timer_spawn = elapsedTime;
@@ -804,14 +810,50 @@ void FormTerrain()
 	}	
 
 }
+// RANDOMLY GENERATED TERRAIN BOT
+void FormTerrainBot() 
+{
+	static double timer_spawn = elapsedTime;
+	if ( elapsedTime - timer_spawn > 0.2 )
+	{
+		timer_spawn = elapsedTime;
+		if ( currentTerrain < TERRAIN )
+		{
+			SpawnTerrainBot(currentTerrain,terrainModX, terrainBotModY, terrainicon);
+			if ( terrainBotModY > 21)
+			{
+				terrainBotModY--;
+			}
+			else if ( terrainBotModY == 21)
+			{
+				if ( rand()%3+1 == 1)
+				{
+					terrainBotModY++;
+				}
+				else if ( rand()%3+1 == 2)
+				{	
+				}
+				else if ( rand()%3+1 == 3)
+				{
+					terrainBotModY--;
+				}
+			}
+			else if ( terrainBotModY == 20)
+			{
+				terrainBotModY++;
+			}
+		}
+	}	
+
+}
 // RENDER TERRAIN
 void renderTerrain()
 {
 	colour(0x0F);
-	// render enemies
+	// render top terrain
 	for ( int i = terraingo; i < TERRAIN; ++i)
 	{
-		//is enemy alive
+		//is terrain active?
 		if(generator[i].Active)
 		{
 			gotoXY(generator[i].coordinates.X,generator[i].coordinates.Y);
@@ -825,9 +867,33 @@ void renderTerrain()
 		}
 	}
 
+	// render bot terrain
+	for ( int i = terraingobot; i < TERRAIN; ++i)
+	{
+		//is terrain bot active?
+		if(generator2[i].Active)
+		{
+			gotoXY(generator2[i].coordinates.X,generator2[i].coordinates.Y);
+			std::cout << generator2[i].icon;
+		}
+		if(generator2[i].coordinates.X <=2)
+		{
+			generator2[i].Active = false;
+			generator2[i].icon = ' ';
+			terraindestorybot++;
+		}
+	}
+
+	//terrain top reset
 	if (terraindestory >= 10)
 	{
 		terraingo = 0;
+	}
+
+	//terrain bot reset
+	if (terraindestorybot >= 10)
+	{
+		terraingobot = 0;
 	}
 }
 // SCROLL TERRAIN
@@ -840,6 +906,7 @@ void terrainMove()
 		{
 			//move towards left
 			moveTerrain();
+			moveTerrainBot();
 		}
 	}
 }

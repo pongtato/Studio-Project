@@ -7,7 +7,10 @@
 ENEMY counter[999];
 ENEMY powerup[1];
 BOSS Bcounter[10];
+//top terrain
 WORLD generator[999];
+//bottom terrain
+WORLD generator2[999];
 int enemycounter;
 int activefromtext;
 int hpfromtext;
@@ -227,6 +230,27 @@ void moveTerrain()
 		if(generator[i].Active == true)
 		{
 			gotoXY(generator[i].coordinates.X--,generator[i].coordinates.Y);
+		}
+	}
+}
+void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terrainBotModY, int terrainChar)
+{
+	generator2[currentTerrainBot].icon = char(219);
+	generator2[currentTerrainBot].coordinates.X = terrainModX;
+	generator2[currentTerrainBot].coordinates.Y = terrainBotModY;
+	generator2[currentTerrainBot].level = 22;
+	generator2[currentTerrainBot].Active = activefromtext;
+	currentTerrainBot++;
+}
+
+void moveTerrainBot()
+{
+	for ( int i = 0; i  < TERRAIN; ++i)
+	{
+		//is enemy alive
+		if(generator2[i].Active == true)
+		{
+			gotoXY(generator2[i].coordinates.X--,generator2[i].coordinates.Y);
 		}
 	}
 }

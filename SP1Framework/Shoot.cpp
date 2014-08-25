@@ -47,7 +47,6 @@ void shootMissile2(unsigned int &currentMissile,  int charLocationX, int charLoc
 	missile[currentMissile].number = currentMissile;
 	currentMissile++;
 }
-
 void renderMissile()
 {
 	for(int i = 0; i<maxMissile;i++)
