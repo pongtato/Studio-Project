@@ -120,7 +120,7 @@ void update(double dt)
 		updateGame();
 
 		// Updating the location of the character based on the key press
-		if (keyPressed[K_UP] && charLocation.Y > 3)
+		if (keyPressed[K_UP] && charLocation.Y > 6)
 		{
 			Beep(0, 0);
 			charLocation.Y--; 
@@ -130,7 +130,7 @@ void update(double dt)
 			Beep(0, 0);
 			charLocation.X--; 
 		}
-		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 7)
+		if (keyPressed[K_DOWN] && charLocation.Y < consoleSize.Y - 6)
 		{
 			Beep(0, 0);
 			charLocation.Y++; 
