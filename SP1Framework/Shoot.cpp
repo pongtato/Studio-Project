@@ -8,7 +8,7 @@ extern double elapseTime;
 BULLET powerUp;
 BULLET missile[60];
 BULLET enemyBullet[50];
-GLOBAL wew;
+extern GLOBAL combined;
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
@@ -49,7 +49,7 @@ void shootMissile2(unsigned int &currentMissile,  int charLocationX, int charLoc
 }
 void renderMissile()
 {
-	for(int i = 0; i<wew.globalSettings.maxMissile;i++)
+	for(int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
 
 		if(missile[i].Active)

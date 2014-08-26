@@ -46,6 +46,8 @@ void init()
 	charLocation.X = 3;
     charLocation.Y = ConsoleSize.Y/2;
 	
+
+
     elapsedTime = 0.0;
 
 	loadPlayerFromText();
@@ -103,55 +105,55 @@ void update(double dt)
 		}
 		static double timer_player = elapsedTime;
 
-		//if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile <combined.globalSettings.maxMissile-4)// && !missleFired1)
-		//{
-		//	
-		//	if ( elapsedTime - timer_player > 0.5)
-		//	{
-		//		timer_player = elapsedTime;
-		//		if(player.PowerUp >= 3)
-		//		{
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X+2,charLocation.Y);
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
-		//		}
-		//		else if(player.PowerUp == 2)
-		//		{
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
-		//		}
-		//		else  if(player.PowerUp == 1)
-		//		{
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation);
-		//		}
-		//		//missleFired1 = true;
-		//	}
-		//}
-		//if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile>=combined.globalSettings.maxMissile-4)// && !missleFired1)
-		//{
-		//	if ( elapsedTime - timer_player > 0.5)
-		//	{
-		//		timer_player = elapsedTime;
-		//		if(player.PowerUp >= 3)
-		//		{
-		//			combined.globalSettings.currentMissile=0;
-		//			shootMissile2(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X+2,charLocation.Y);
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
-		//		}
-		//		else if(player.PowerUp == 2)
-		//		{
-		//			combined.globalSettings.currentMissile=0;
-		//			shootMissile2(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
-		//			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
-		//		}
-		//		else  if(player.PowerUp == 1)
-		//		{
-		//			combined.globalSettings.currentMissile=0;
-		//			shootMissile2(combined.globalSettings.currentMissile,charLocation);
-		//		}
-		//	}
-		//}
+		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile <combined.globalSettings.maxMissile-4)// && !missleFired1)
+		{
+			
+			if ( elapsedTime - timer_player > 0.5)
+				{
+				timer_player = elapsedTime;
+				if(player.PowerUp >= 3)
+				{
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X+2,charLocation.Y);
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else if(player.PowerUp == 2)
+				{
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else  if(player.PowerUp == 1)
+				{
+					shootMissile1(combined.globalSettings.currentMissile,charLocation);
+				}
+				//missleFired1 = true;
+			}
+		}
+		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile>=combined.globalSettings.maxMissile-4)// && !missleFired1)
+		{
+			if ( elapsedTime - timer_player > 0.5)
+			{
+				timer_player = elapsedTime;
+				if(player.PowerUp >= 3)
+				{
+					combined.globalSettings.currentMissile=0;
+					shootMissile2(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X+2,charLocation.Y);
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else if(player.PowerUp == 2)
+				{
+					combined.globalSettings.currentMissile=0;
+					shootMissile2(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
+					shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
+				}
+				else  if(player.PowerUp == 1)
+				{
+					combined.globalSettings.currentMissile=0;
+					shootMissile2(combined.globalSettings.currentMissile,charLocation);
+				}
+			}
+		}
 		// goes to menu 2 if player hits the escape key ( a way of pause )
 		if (keyPressed[K_ESCAPE])
 		{
@@ -198,7 +200,7 @@ void render()
 	renderCharacter();
 	// render missiles
 	 //colour(0x0B);
-	//renderMissile();
+	renderMissile();
 	// render enemies
 	renderEnemies();
 	//render boss
