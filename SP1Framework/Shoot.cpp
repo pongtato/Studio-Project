@@ -5,10 +5,10 @@
 
 extern PLAYER player;
 extern double elapseTime;
-extern unsigned int maxMissile;
 BULLET powerUp;
 BULLET missile[60];
 BULLET enemyBullet[50];
+GLOBAL wew;
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
@@ -30,7 +30,6 @@ void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLoca
 }
 void shootMissile2(unsigned int &currentMissile, COORD charLocation)
 {
-
 	missile[currentMissile].Active = true;
 	missile[currentMissile].icon = player.playerMissleIcon;
 	missile[currentMissile].corrdinates.X = charLocation.X+1;
@@ -50,7 +49,7 @@ void shootMissile2(unsigned int &currentMissile,  int charLocationX, int charLoc
 }
 void renderMissile()
 {
-	for(int i = 0; i<maxMissile;i++)
+	for(int i = 0; i<wew.globalSettings.maxMissile;i++)
 	{
 
 		if(missile[i].Active)

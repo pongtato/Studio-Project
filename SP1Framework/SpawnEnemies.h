@@ -54,7 +54,6 @@ struct Bonuses
 	int state;
 
 };
-
 struct WORLD
 {
 	char icon;

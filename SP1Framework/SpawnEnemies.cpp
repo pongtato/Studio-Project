@@ -164,7 +164,6 @@ void moveBossDown()
 
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
-	enemycounter = 10;
 	counter[currentEnemy].Active = activefromtext;
 	counter[currentEnemy].coordinates.X = modX;
 	counter[currentEnemy].coordinates.Y = modY;
@@ -178,7 +177,6 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 
 void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
 {
-	enemycounter = 10;
 	Bcounter[currentEnemy].Active = activefromtext;
 	Bcounter[currentEnemy].coordinates.X = modX;
 	Bcounter[currentEnemy].coordinates.Y = modY;
@@ -200,7 +198,6 @@ void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
 
 void SpawnBonus(unsigned int &currentEnemy, int modX, int modY)
 {
-	enemycounter = 10;
 	counter[currentEnemy].Active = activefromtext;
 	counter[currentEnemy].coordinates.X = modX;
 	counter[currentEnemy].coordinates.Y = modY;
@@ -254,6 +251,7 @@ void moveTerrainBot()
 		}
 	}
 }
+
 
 
 

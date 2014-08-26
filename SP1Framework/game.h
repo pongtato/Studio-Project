@@ -26,6 +26,60 @@ enum Keys
     K_COUNT
 };
 
+struct EnemySettings
+{
+	int modifyY;
+	int modifyX;
+	int moveYUP;
+	int moveYDOWN;
+	int upordown;
+	int moveState;
+	int wew;
+	int enemieskilled;
+	int spawncounter;
+	int spawnclear;
+	int enemyshootspeedrange1;
+	int enemyshootspeedrange2;
+	double enemymovespeed;
+	double bossmovespeed;
+	double bossshootspeed;
+	unsigned int currentEnemy;
+	unsigned int enemyCurrentMissile;
+	unsigned int enemyMaxMissile;
+	unsigned int powerupEnemy;
+	bool droppowerup;
+
+};
+struct TerrainSettings
+{
+	int terrainModX;
+	int terrainModY;
+	int terrainBotModY;
+	int terrainlevel;
+	int terrainicon;
+	int terraingo;
+	int terraingobot;
+	int terraindestory;
+	int terraindestorybot;
+	bool terrain;
+	unsigned int currentTerrain;
+	unsigned int currentTerrainBot;
+};
+struct GeneralSettings
+{
+	int globalscore;
+	int loadlevel;
+	unsigned int currentMissile;
+	unsigned int maxMissile;
+	unsigned int playingField;
+	bool nextstage;
+};
+struct GLOBAL
+{
+	EnemySettings enemySettings;
+	TerrainSettings terrainSettings;
+	GeneralSettings globalSettings;
+}; 
 
 void init();                // initialize your variables, allocate memory, etc
 void getInput();            // get input from player
@@ -35,7 +89,7 @@ void shutdown();            // do clean up, free memory
 
 void renderCharacter();		// renders player character
 void renderEnemies();		// reneder enemies
-void renderBoss();			// render boss
+//void renderBoss();			// render boss
 void leveldesign();			// load game frame
 void updateGame();			// all the functions in this functions
 void enemyMove();			// move enemies
@@ -48,10 +102,10 @@ void bossShooting();		// boss shooting
 void stageclear();			// is stage cleared?
 void collision();			// collision duh
 void enemycolour();			// colour of enemies
-void renderPowerUp();		// renders power up drop
+//void renderPowerUp();		// renders power up drop
 void GameVariables();		// settings of the game taken from text file
 void FormTerrain();			//load terrain data
-void renderTerrain();
+//void renderTerrain();
 void terrainMove();
 void FormTerrainBot();
 
