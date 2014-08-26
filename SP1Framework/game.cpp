@@ -53,7 +53,7 @@ void init()
 	loadPlayerFromText();
 	powerUp.icon = PowerupIcon;
 	powerUp.Active = false;
-
+	combined.enemySettings.droppowerup = true;
 	GameVariables();
 }
 void shutdown()
