@@ -231,6 +231,7 @@ void moveTerrain()
 		}
 	}
 }
+
 void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terrainBotModY, int terrainChar)
 {
 	generator2[currentTerrainBot].icon = terrainChar;

@@ -772,16 +772,16 @@ void FormTerrain()
 			SpawnTerrain(combined.terrainSettings.currentTerrain,combined.terrainSettings.terrainModX,combined.terrainSettings.terrainModY, combined.terrainSettings.terrainicon);
 			if ( combined.terrainSettings.terrainModY < 3)
 			{
+				if ( rand()%2+1 == 1)
+				{
 				combined.terrainSettings.terrainModY++;
+				}
 			}
 			else if ( combined.terrainSettings.terrainModY == 3)
 			{
 				if ( rand()%3+1 == 1)
 				{
 					combined.terrainSettings.terrainModY--;
-				}
-				else if ( rand()%3+1 == 2)
-				{	
 				}
 				else if ( rand()%3+1 == 3)
 				{
@@ -790,7 +790,10 @@ void FormTerrain()
 			}
 			else if ( combined.terrainSettings.terrainModY == 4)
 			{
+				if ( rand()%2+1 == 1)
+				{
 				combined.terrainSettings.terrainModY--;
+				}
 			}
 		}
 	}	
@@ -809,7 +812,10 @@ void FormTerrainBot()
 			SpawnTerrainBot(combined.terrainSettings.currentTerrain,combined.terrainSettings.terrainModX, combined.terrainSettings.terrainBotModY, combined.terrainSettings.terrainicon);
 			if ( combined.terrainSettings.terrainBotModY > 21)
 			{
-				combined.terrainSettings.terrainBotModY--;
+				if ( rand()%2+1 == 1)
+				{
+					combined.terrainSettings.terrainBotModY--;
+				}
 			}
 			else if ( combined.terrainSettings.terrainBotModY == 21)
 			{
@@ -817,17 +823,17 @@ void FormTerrainBot()
 				{
 					combined.terrainSettings.terrainBotModY++;
 				}
-				else if ( rand()%3+1 == 2)
-				{	
-				}
 				else if ( rand()%3+1 == 3)
 				{
-					combined.terrainSettings.terrainBotModY--;
+					combined.terrainSettings.terrainBotModY --;
 				}
 			}
 			else if ( combined.terrainSettings.terrainBotModY == 20)
 			{
-				combined.terrainSettings.terrainBotModY++;
+				if ( rand()%2+1 == 1)
+				{
+					combined.terrainSettings.terrainBotModY++;
+				}
 			}
 		}
 	}	
