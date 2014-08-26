@@ -210,7 +210,7 @@ void render()
 	// render powerup
 	//renderPowerUp();
 	// randomly generate terrain
-	//renderTerrain();
+	renderTerrain();
 
 	// Writes the buffer to the console, hence you will see what you have written
     flushBufferToConsole();
