@@ -49,6 +49,7 @@ struct EnemySettings
 	unsigned int powerupEnemy;
 	bool droppowerup;
 
+	EnemySettings():enemyMaxMissile(50),enemyCurrentMissile(0){};
 };
 struct TerrainSettings
 {

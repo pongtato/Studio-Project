@@ -155,9 +155,8 @@ void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation)
 }
 void renderEnemyMissile()
 {
-	for(int i = 0; i<50;i++)
+	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i++)
 	{
-
 		if(enemyBullet[i].Active)
 		{
 			/*gotoXY(enemyBullet[i].corrdinates.X-=2,enemyBullet[i].corrdinates.Y);
