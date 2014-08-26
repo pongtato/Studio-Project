@@ -228,7 +228,7 @@ void GameVariables()
 					//wew - move left				
 					//spawncounter - spawn per row 
 					//spawnclear - move on to next spawn
-		if (indata >> combined.enemySettings.modifyY >> combined.enemySettings.modifyX >> combined.enemySettings.moveYUP >> combined.enemySettings.moveYDOWN >> combined.enemySettings.upordown >> combined.globalSettings.globalscore>> combined.enemySettings.moveState >> combined.enemySettings.wew>> combined.enemySettings.enemieskilled>> combined.enemySettings.spawncounter>> combined.enemySettings.spawnclear >>combined.globalSettings.loadlevel>> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2>> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed>>combined.terrainSettings.terrainModX>>combined.terrainSettings.terrainModY>> combined.terrainSettings.terrainBotModY>> combined.terrainSettings.terrainicon  >> combined.globalSettings.maxMissile >> combined.globalSettings.playingField )
+		if (indata >> combined.enemySettings.modifyY >> combined.enemySettings.modifyX >> combined.enemySettings.moveYUP >> combined.enemySettings.moveYDOWN >> combined.enemySettings.upordown >> combined.globalSettings.globalscore>> combined.enemySettings.moveState >> combined.enemySettings.wew>> combined.enemySettings.enemieskilled>> combined.enemySettings.spawncounter>> combined.enemySettings.spawnclear >>combined.globalSettings.loadlevel>> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2>> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed>>combined.terrainSettings.terrainModX>>combined.terrainSettings.terrainModY>> combined.terrainSettings.terrainBotModY>> combined.terrainSettings.terrainicon>> combined.enemySettings.enemyMaxMissile >> combined.globalSettings.maxMissile >> combined.globalSettings.playingField )
 		{
 		}
 	}
@@ -677,8 +677,8 @@ void enemyShooting()
 //}
 //// COLLOSION
 //
-//void collision()
-//{
+void collision()
+{
 //	//Check Powerup collide
 //	if(powerUpPlayerCollision(charLocation,powerUp))
 //	{
@@ -691,33 +691,33 @@ void enemyShooting()
 //			droppowerup = true;
 //		}
 //	}
-//	// check collision
-//	for(int i = 0; i<50;i++)
-//	{
-//
-//		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
-//		{
-//			//PLAYER DEATH SCREEN
-//			cls();
-//			loseScreen();
-//			system("pause");
-//			menuscreen();
-//		}
-//		if ( loadlevel%4 != 0)
-//		{
-//			for(int j = 0; j<NO_OF_ENEMIES;j++)
-//			{
-//				if ( checkCollisionBullet(missile[i], counter[j],droppowerup))
-//				{
-//					if ( counter[j].hp <= 0 )
-//					{
-//						globalscore += counter[j].score;
-//						enemieskilled++;
-//					}
-//				}
-//
-//			}
-//		}
+	// check collision
+	for(int i = 0; i<50;i++)
+	{
+		//
+		//		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
+		//		{
+		//			//PLAYER DEATH SCREEN
+		//			cls();
+		//			loseScreen();
+		//			system("pause");
+		//			menuscreen();
+		//		}
+		//		if ( loadlevel%4 != 0)
+		//		{
+		for(int j = 0; j<NO_OF_ENEMIES;j++)
+		{
+			if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
+			{
+				if ( counter[j].hp <= 0 )
+				{
+					combined.globalSettings.globalscore += counter[j].score;
+					combined.enemySettings.enemieskilled++;
+				}
+			}
+
+		}
+	}
 //		else
 //		{
 //			for(int j = 0; j<BOSS_NO;j++)
@@ -734,7 +734,7 @@ void enemyShooting()
 //			}
 //		}
 //	}
-//}
+}
 //// COLOURS OF ENEMIES
 //
 //void enemycolour()

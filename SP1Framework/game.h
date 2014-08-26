@@ -74,8 +74,6 @@ struct GeneralSettings
 	unsigned int maxMissile;
 	unsigned int playingField;
 	bool nextstage;
-
-	GeneralSettings():currentMissile(0),maxMissile(60){};
 };
 struct GLOBAL
 {
