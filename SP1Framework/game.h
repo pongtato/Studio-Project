@@ -107,7 +107,7 @@ void enemycolour();			// colour of enemies
 void GameVariables();		// settings of the game taken from text file
 void FormTerrain();			//load terrain data
 void renderTerrain();
-void terrainMove();
+void terrainMove(); 
 void FormTerrainBot();
 
 

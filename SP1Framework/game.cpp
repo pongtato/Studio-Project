@@ -837,6 +837,7 @@ void FormTerrainBot()
 // RENDER TERRAIN
 void renderTerrain()
 {
+	//colour(0x0F);
 	// render top terrain
 	for ( int i = combined.terrainSettings.terraingo; i < TERRAIN; ++i)
 	{
