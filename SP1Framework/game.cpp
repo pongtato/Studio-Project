@@ -83,7 +83,7 @@ void update(double dt)
 		updateGame();
 
 		// Updating the location of the character based on the key press
-		if (keyPressed[K_UP] && charLocation.Y > 5)
+		if (keyPressed[K_UP] && charLocation.Y > 3)
 		{
 			Beep(0, 0);
 			charLocation.Y--; 
@@ -93,7 +93,7 @@ void update(double dt)
 			Beep(0, 0);
 			charLocation.X--; 
 		}
-		if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 8)
+		if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 4)
 		{
 			Beep(0, 0);
 			charLocation.Y++; 
@@ -216,125 +216,6 @@ void render()
     flushBufferToConsole();
 }
 
-// GAME SETTINGS
-void GameVariables()
-{
-	std::ifstream indata;
-	indata.open("GLD/Variables/GameSettings.txt");
-	if ( indata.is_open())
-	{				//modifyY & X - spawning points X&Y 
-					//modifyYDOWN - movement cap					
-					//upordown - which direction? 
-					//wew - move left				
-					//spawncounter - spawn per row 
-					//spawnclear - move on to next spawn
-		if (indata >> combined.enemySettings.modifyY >> combined.enemySettings.modifyX >> combined.enemySettings.moveYUP >> combined.enemySettings.moveYDOWN >> combined.enemySettings.upordown >> combined.globalSettings.globalscore>> combined.enemySettings.moveState >> combined.enemySettings.wew>> combined.enemySettings.enemieskilled>> combined.enemySettings.spawncounter>> combined.enemySettings.spawnclear >>combined.globalSettings.loadlevel>> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2>> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed>>combined.terrainSettings.terrainModX>>combined.terrainSettings.terrainModY>> combined.terrainSettings.terrainBotModY>> combined.terrainSettings.terrainicon>> combined.enemySettings.enemyMaxMissile >> combined.globalSettings.maxMissile >> combined.globalSettings.playingField )
-		{
-		}
-	}
-}
-// FUNCTIONS COMBINED
-void updateGame()
-{
-	//check if boss stage
-	if (combined.globalSettings.loadlevel < 4)
-	{
-		loadfromtext(combined.globalSettings.loadlevel);
-		enemySpawn();
-		enemyMove();
-		enemyShooting();
-	}
-	else if (combined.globalSettings.loadlevel%4 == 0)
-	{
-		loadbossfromtext(combined.globalSettings.loadlevel);
-		//bossSpawn();
-		//bossMove();
-		//bossShooting();
-
-	}
-   /* else if (loadlevel == 5)
-	{
-		bonusesloadfromtext(loadlevel);
-		bonusSpawn();
-		enemyMove();
-		enemyShooting();
-	}*/
-	FormTerrain();
-	FormTerrainBot();
-	terrainMove();
-	collision();
-	//stageclear();
-}
-// CHARACTERS
-void renderCharacter()
-{
-	// render character
-	/*gotoXY(charLocation);
-	colour(0x0C);
-	std::cout << player.icon;*/
-	writeToBuffer(charLocation,player.icon,0x0C);
-
-	//gotoXY(charLocation.X+1,charLocation.Y);
-	if (player.PowerUp == 1 || player.PowerUp >= 3)
-	{
-	//colour(0x0B);
-		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0B);
-	}
-	else if ( player.PowerUp == 2)
-	{
-	//colour (0x0F);
-		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0F);
-	}
-
-	//gotoXY(charLocation.X,charLocation.Y-1);
-	if (player.PowerUp >= 2)
-	{
-	//colour(0x0B);
-		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0B);
-	}
-	else
-	{
-	//colour (0x0F);
-		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0F);
-	}
-	//std::cout << player.wingIcon;
-
-//	gotoXY(charLocation.X,charLocation.Y+1);
-	if (player.PowerUp >= 2)
-	{
-	//colour(0x0B);
-		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0B);
-	}
-	else
-	{
-	//colour (0x0F);
-		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0F);
-	}
-	//std::cout <<  player.wingIcon;
-}
-
-// ENEMIES
-// RENDER ENEMIES
-void renderEnemies()
-{
-	//enemycolour();
-	// render enemies
-	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
-	{
-		//is enemy alive
-		if(counter[i].Active)
-		{
-			/*gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
-			std::cout << counter[i].icon;*/
-			writeToBuffer(counter[i].coordinates,counter[i].icon);
-		}
-		if(counter[i].coordinates.X <=2)
-		{
-			counter[i].Active = false;
-			counter[i].icon = ' ';
-		}
-	}
-}
 //// BOSS
 //void renderBoss()
 //{
@@ -389,34 +270,6 @@ void renderEnemies()
 //	}
 //}
 //// POWER UPS
-void renderPowerUp()
-{
-//	//colour(0xA0);
-	if(powerUp.Active)
-	{
-		combined.enemySettings.droppowerup = false;
-		static double timer_powerUp = elapsedTime;
-		if ( elapsedTime - timer_powerUp > 0.5 )
-		{
-			timer_powerUp = elapsedTime;
-			//gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
-			//std::cout << powerUp.icon << std::endl;
-			writeToBuffer(powerUp.corrdinates.X--,powerUp.corrdinates.Y,powerUp.icon,0xA0);
-		}
-		else
-		{
-			/*gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
-			std::cout << powerUp.icon << std::endl;*/
-			writeToBuffer(powerUp.corrdinates.X,powerUp.corrdinates.Y,powerUp.icon,0xA0);
-		}
-		//Check if out of bound
-		if(powerUp.corrdinates.X <= 1)
-		{
-			powerUp.Active = false;
-			combined.enemySettings.droppowerup = true;
-		}
-	}
-}
 // BOSS MOVE
 //void bossMove()
 //{
@@ -462,118 +315,6 @@ void renderPowerUp()
 //}
 
 // SPAWN ENEMIES
-void enemySpawn()
-{
-	// spawn enemies
-	if ( combined.enemySettings.modifyX <48)
-		{
-			static double timer_spawn = elapsedTime;
-			if ( elapsedTime - timer_spawn > 0.1 )
-			{
-				timer_spawn = elapsedTime;
-				if ( combined.enemySettings.currentEnemy < NO_OF_ENEMIES )
-				{
-					SpawnEnemy(combined.enemySettings.currentEnemy,combined.enemySettings.modifyX,combined.enemySettings.modifyY);
-					combined.enemySettings.spawncounter++;
-					combined.enemySettings.moveState = 1;
-					//per row
-					if ( combined.enemySettings.modifyY < 16)
-					{
-						combined.enemySettings.modifyY=combined.enemySettings.modifyY+2;
-					}
-					//next row and spawn interval
-					else
-					{
-						combined.enemySettings.modifyY = 8;	
-						combined.enemySettings.modifyX = combined.enemySettings.modifyX + 2;
-					}
-				}
-			}
-		}
-	else if ( combined.enemySettings.wew != 0)
-		{
-			combined.enemySettings.moveState=2;
-			combined.enemySettings.spawnclear=0;
-		}
-}
-// ENEMY MOVE
-void enemyMove()
-{
-	//check if row has spawned
-	if ( combined.enemySettings.spawncounter >=5)
-	{
-		combined.enemySettings.spawncounter = 0;
-		combined.enemySettings.spawnclear = 0;
-	}
-	//clear to move
-	else if ( combined.enemySettings.spawncounter = 0)
-	{
-		combined.enemySettings.spawnclear = 1;
-	}
-
-	// move enemies
-	if ( combined.enemySettings.spawnclear == 0)
-	{
-		static double timer_move = elapsedTime;
-		if ( elapsedTime - timer_move > combined.enemySettings.enemymovespeed )
-		{
-			timer_move = elapsedTime;
-			if (combined.enemySettings.moveState == 1)
-			{
-				//move towards left
-				moveEnemies();
-			}
-			else if ( combined.enemySettings.moveState == 2)
-			{
-				//move upwards
-				moveEnemiesUp();
-				combined.enemySettings.moveYUP--;
-				combined.enemySettings.moveYDOWN = combined.enemySettings.moveYUP;
-				if (combined.enemySettings.moveYUP < 4)
-				{
-					combined.enemySettings.wew = 0;
-					combined.enemySettings.moveState = 3;
-					moveEnemies();
-				}
-			}
-			else if (combined.enemySettings.moveState == 3)
-			{
-				moveEnemiesDown();
-				combined.enemySettings.moveYDOWN++;
-				if (combined.enemySettings.moveYDOWN > 8)
-				{
-					combined.enemySettings.moveYUP = combined.enemySettings.moveYDOWN;
-					combined.enemySettings.moveState = 2;
-					moveEnemies();
-				}
-			}
-		}
-	}
-}
-// ENEMY SHOOTS
-void enemyShooting()
-{
-	//Enemy shooting
-	static double timer_shoot = elapsedTime;
-	for(int i =0; i<NO_OF_ENEMIES;i++)
-	{
-		if(counter[i].Active)
-		{
-			if ( elapsedTime - timer_shoot >rand()%combined.enemySettings.enemyshootspeedrange1 + combined.enemySettings.enemyshootspeedrange2 )
-			{
-				timer_shoot = elapsedTime;
-				if(combined.enemySettings.enemyCurrentMissile < 50)
-				{
-					enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
-				}
-				else
-				{
-					enemyShootBullet2(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
-				}
-			}
-		}
-	}
-}
 // SPAWN BOSS
 //
 //void bossSpawn()
@@ -661,26 +402,266 @@ void enemyShooting()
 //		}
 //	}
 //}
-////IS STAGE CLEARED?
-//
-//void stageclear()
-//{
-//		//if stage is clear, proceed
-//	if (enemieskilled >= 25)
-//	{
-//		loadlevel++;
-//		currentEnemy =0;
-//		enemieskilled =0;
-//		modifyX = 38;
-//		modifyY = 8;
-//		moveYUP = modifyY;
-//		moveYDOWN = 0;
-//		wew = 1;
-//		spawnclear = 1;
-//	}
-//}
-//// COLLOSION
-//
+
+// GAME SETTINGS
+void GameVariables()
+{
+	std::ifstream indata;
+	indata.open("GLD/Variables/GameSettings.txt");
+	if ( indata.is_open())
+	{				//modifyY & X - spawning points X&Y 
+					//modifyYDOWN - movement cap					
+					//upordown - which direction? 
+					//wew - move left				
+					//spawncounter - spawn per row 
+					//spawnclear - move on to next spawn
+		if (indata >> combined.enemySettings.modifyY >> combined.enemySettings.modifyX >> combined.enemySettings.moveYUP >> combined.enemySettings.moveYDOWN >> combined.enemySettings.upordown >> combined.globalSettings.globalscore>> combined.enemySettings.moveState >> combined.enemySettings.wew>> combined.enemySettings.enemieskilled>> combined.enemySettings.spawncounter>> combined.enemySettings.spawnclear >>combined.globalSettings.loadlevel>> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2>> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed>>combined.terrainSettings.terrainModX>>combined.terrainSettings.terrainModY>> combined.terrainSettings.terrainBotModY>> combined.terrainSettings.terrainicon>> combined.enemySettings.enemyMaxMissile >> combined.globalSettings.maxMissile >> combined.globalSettings.playingField )
+		{
+		}
+	}
+}
+// FUNCTIONS COMBINED
+void updateGame()
+{
+	//check if boss stage
+	if (combined.globalSettings.loadlevel < 4)
+	{
+		loadfromtext(combined.globalSettings.loadlevel);
+		enemySpawn();
+		enemyMove();
+		enemyShooting();
+	}
+	else if (combined.globalSettings.loadlevel%4 == 0)
+	{
+		loadbossfromtext(combined.globalSettings.loadlevel);
+		//bossSpawn();
+		//bossMove();
+		//bossShooting();
+
+	}
+   /* else if (loadlevel == 5)
+	{
+		bonusesloadfromtext(loadlevel);
+		bonusSpawn();
+		enemyMove();
+		enemyShooting();
+	}*/
+	FormTerrain();
+	FormTerrainBot();
+	terrainMove();
+	collision();
+	stageclear();
+}
+// CHARACTERS
+void renderCharacter()
+{
+	// render character
+	/*gotoXY(charLocation);
+	colour(0x0C);
+	std::cout << player.icon;*/
+	writeToBuffer(charLocation,player.icon,0x0C);
+
+	//gotoXY(charLocation.X+1,charLocation.Y);
+	if (player.PowerUp == 1 || player.PowerUp >= 3)
+	{
+	//colour(0x0B);
+		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0B);
+	}
+	else if ( player.PowerUp == 2)
+	{
+	//colour (0x0F);
+		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0F);
+	}
+
+	//gotoXY(charLocation.X,charLocation.Y-1);
+	if (player.PowerUp >= 2)
+	{
+	//colour(0x0B);
+		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0B);
+	}
+	else
+	{
+	//colour (0x0F);
+		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0F);
+	}
+	//std::cout << player.wingIcon;
+
+//	gotoXY(charLocation.X,charLocation.Y+1);
+	if (player.PowerUp >= 2)
+	{
+	//colour(0x0B);
+		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0B);
+	}
+	else
+	{
+	//colour (0x0F);
+		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0F);
+	}
+	//std::cout <<  player.wingIcon;
+}
+
+//								ENEMIES
+// RENDER ENEMIES
+void renderEnemies()
+{
+	//enemycolour();
+	// render enemies
+	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
+	{
+		//is enemy alive
+		if(counter[i].Active)
+		{
+			/*gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
+			std::cout << counter[i].icon;*/
+			writeToBuffer(counter[i].coordinates,counter[i].icon);
+		}
+		if(counter[i].coordinates.X <=2)
+		{
+			counter[i].Active = false;
+			counter[i].icon = ' ';
+		}
+	}
+}
+void renderPowerUp()
+{
+//	//colour(0xA0);
+	if(powerUp.Active)
+	{
+		combined.enemySettings.droppowerup = false;
+		static double timer_powerUp = elapsedTime;
+		if ( elapsedTime - timer_powerUp > 0.5 )
+		{
+			timer_powerUp = elapsedTime;
+			//gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
+			//std::cout << powerUp.icon << std::endl;
+			writeToBuffer(powerUp.corrdinates.X--,powerUp.corrdinates.Y,powerUp.icon,0xA0);
+		}
+		else
+		{
+			/*gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
+			std::cout << powerUp.icon << std::endl;*/
+			writeToBuffer(powerUp.corrdinates.X,powerUp.corrdinates.Y,powerUp.icon,0xA0);
+		}
+		//Check if out of bound
+		if(powerUp.corrdinates.X <= 1)
+		{
+			powerUp.Active = false;
+			combined.enemySettings.droppowerup = true;
+		}
+	}
+}
+void enemySpawn()
+{
+	// spawn enemies
+	if ( combined.enemySettings.modifyX <48)
+		{
+			static double timer_spawn = elapsedTime;
+			if ( elapsedTime - timer_spawn > 0.1 )
+			{
+				timer_spawn = elapsedTime;
+				if ( combined.enemySettings.currentEnemy < NO_OF_ENEMIES )
+				{
+					SpawnEnemy(combined.enemySettings.currentEnemy,combined.enemySettings.modifyX,combined.enemySettings.modifyY);
+					combined.enemySettings.spawncounter++;
+					combined.enemySettings.moveState = 1;
+					//per row
+					if ( combined.enemySettings.modifyY < 14)
+					{
+						combined.enemySettings.modifyY=combined.enemySettings.modifyY+2;
+					}
+					//next row and spawn interval
+					else
+					{
+						combined.enemySettings.modifyY = 6;	
+						combined.enemySettings.modifyX = combined.enemySettings.modifyX + 2;
+					}
+				}
+			}
+		}
+	else if ( combined.enemySettings.wew != 0)
+		{
+			combined.enemySettings.moveState=2;
+			combined.enemySettings.spawnclear=0;
+		}
+}
+// ENEMY MOVE
+void enemyMove()
+{
+	//check if row has spawned
+	if ( combined.enemySettings.spawncounter >=5)
+	{
+		combined.enemySettings.spawncounter = 0;
+		combined.enemySettings.spawnclear = 0;
+	}
+	//clear to move
+	else if ( combined.enemySettings.spawncounter = 0)
+	{
+		combined.enemySettings.spawnclear = 1;
+	}
+
+	// move enemies
+	if ( combined.enemySettings.spawnclear == 0)
+	{
+		static double timer_move = elapsedTime;
+		if ( elapsedTime - timer_move > combined.enemySettings.enemymovespeed )
+		{
+			timer_move = elapsedTime;
+			if (combined.enemySettings.moveState == 1)
+			{
+				//move towards left
+				moveEnemies();
+			}
+			else if ( combined.enemySettings.moveState == 2)
+			{
+				//move upwards
+				moveEnemiesUp();
+				combined.enemySettings.moveYUP--;
+				combined.enemySettings.moveYDOWN = combined.enemySettings.moveYUP;
+				if (combined.enemySettings.moveYUP < 6)
+				{
+					combined.enemySettings.wew = 0;
+					combined.enemySettings.moveState = 3;
+					moveEnemies();
+				}
+			}
+			else if (combined.enemySettings.moveState == 3)
+			{
+				moveEnemiesDown();
+				combined.enemySettings.moveYDOWN++;
+				if (combined.enemySettings.moveYDOWN > 10)
+				{
+					combined.enemySettings.moveYUP = combined.enemySettings.moveYDOWN;
+					combined.enemySettings.moveState = 2;
+					moveEnemies();
+				}
+			}
+		}
+	}
+}
+// ENEMY SHOOTS
+void enemyShooting()
+{
+	//Enemy shooting
+	static double timer_shoot = elapsedTime;
+	for(int i =0; i<NO_OF_ENEMIES;i++)
+	{
+		if(counter[i].Active)
+		{
+			if ( elapsedTime - timer_shoot >rand()%combined.enemySettings.enemyshootspeedrange1 + combined.enemySettings.enemyshootspeedrange2 )
+			{
+				timer_shoot = elapsedTime;
+				if(combined.enemySettings.enemyCurrentMissile < 50)
+				{
+					enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+				}
+				else
+				{
+					enemyShootBullet2(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+				}
+			}
+		}
+	}
+}
 void collision()
 {
 	//Check Powerup collide
@@ -698,49 +679,68 @@ void collision()
 	// check collision
 	for(int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
-		//
-		//		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
-		//		{
-		//			//PLAYER DEATH SCREEN
-		//			cls();
-		//			loseScreen();
-		//			system("pause");
-		//			menuscreen();
-		//		}
-		//		if ( loadlevel%4 != 0)
-		//		{
-		for(int j = 0; j<NO_OF_ENEMIES;j++)
-		{
-			if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
-			{
-				if ( counter[j].hp <= 0 )
-				{
-					combined.globalSettings.globalscore += counter[j].score;
-					combined.enemySettings.enemieskilled++;
-				}
-			}
 
+		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
+		{
+			//PLAYER DEATH SCREEN
+			//cls();
+			//loseScreen();
+			system("pause");
+			//menuscreen();
 		}
+		if ( combined.globalSettings.loadlevel%4 != 0)
+		{
+			for(int j = 0; j<NO_OF_ENEMIES;j++)
+			{
+				if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
+				{
+					if ( counter[j].hp <= 0 )
+					{
+						combined.globalSettings.globalscore += counter[j].score;
+						combined.enemySettings.enemieskilled++;
+					}
+				}
+
+			}
+		}
+		//		else
+		//		{
+		//			for(int j = 0; j<BOSS_NO;j++)
+		//			{
+		//				if ( BosscheckCollisionBullet(missile[i], Bcounter[j]))
+		//				{
+		//					if ( Bcounter[j].hp <= 0 )
+		//					{
+		//						globalscore += Bcounter[j].score;
+		//						enemieskilled = 25;
+		//					}
+		//				}
+		//
+		//			}
+		//		}
+		//	}
 	}
-//		else
-//		{
-//			for(int j = 0; j<BOSS_NO;j++)
-//			{
-//				if ( BosscheckCollisionBullet(missile[i], Bcounter[j]))
-//				{
-//					if ( Bcounter[j].hp <= 0 )
-//					{
-//						globalscore += Bcounter[j].score;
-//						enemieskilled = 25;
-//					}
-//				}
-//
-//			}
-//		}
-//	}
+}
+//IS STAGE CLEARED?
+void stageclear()
+{
+		//if stage is clear, proceed
+	if (combined.enemySettings.enemieskilled >= 25)
+	{
+		combined.globalSettings.loadlevel++;
+		combined.enemySettings.currentEnemy =0;
+		combined.enemySettings.enemieskilled =0;
+		combined.enemySettings.modifyX = 38;
+		combined.enemySettings.modifyY = 6;
+		combined.enemySettings.moveYUP = combined.enemySettings.modifyY;
+		combined.enemySettings.moveYDOWN = 0;
+		combined.enemySettings.wew = 1;
+		combined.enemySettings.spawnclear = 1;
+	}
 }
 
-// TERRAIN 
+
+//								TERRAIN 
 // RANDOMLY GENERATED TERRAIN TOP
 void FormTerrain() 
 {
@@ -822,7 +822,6 @@ void FormTerrainBot()
 // RENDER TERRAIN
 void renderTerrain()
 {
-	//colour(0x0F);
 	// render top terrain
 	for ( int i = combined.terrainSettings.terraingo; i < TERRAIN; ++i)
 	{
@@ -885,3 +884,4 @@ void terrainMove()
 		}
 	}
 }
+
