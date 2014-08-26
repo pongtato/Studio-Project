@@ -208,7 +208,7 @@ void render()
 	//render enemy bullet
 	renderEnemyMissile();
 	// render powerup
-	//renderPowerUp();
+	renderPowerUp();
 	// randomly generate terrain
 	renderTerrain();
 
@@ -355,34 +355,34 @@ void renderEnemies()
 //	}
 //}
 //// POWER UPS
-//void renderPowerUp()
-//{
+void renderPowerUp()
+{
 //	//colour(0xA0);
-//	if(powerUp.Active)
-//	{
-//		droppowerup = false;
-//		static double timer_powerUp = elapsedTime;
-//		if ( elapsedTime - timer_powerUp > 0.5 )
-//		{
-//			timer_powerUp = elapsedTime;
-//			//gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
-//			//std::cout << powerUp.icon << std::endl;
-//			writeToBuffer(powerUp.corrdinates.X--,powerUp.corrdinates.Y,powerUp.icon,0xA0);
-//		}
-//		else
-//		{
-//			/*gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
-//			std::cout << powerUp.icon << std::endl;*/
-//			writeToBuffer(powerUp.corrdinates.X,powerUp.corrdinates.Y,powerUp.icon,0xA0);
-//		}
-//		//Check if out of bound
-//		if(powerUp.corrdinates.X <= 1)
-//		{
-//			powerUp.Active = false;
-//			droppowerup = true;
-//		}
-//	}
-//}
+	if(powerUp.Active)
+	{
+		combined.enemySettings.droppowerup = false;
+		static double timer_powerUp = elapsedTime;
+		if ( elapsedTime - timer_powerUp > 0.5 )
+		{
+			timer_powerUp = elapsedTime;
+			//gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
+			//std::cout << powerUp.icon << std::endl;
+			writeToBuffer(powerUp.corrdinates.X--,powerUp.corrdinates.Y,powerUp.icon,0xA0);
+		}
+		else
+		{
+			/*gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
+			std::cout << powerUp.icon << std::endl;*/
+			writeToBuffer(powerUp.corrdinates.X,powerUp.corrdinates.Y,powerUp.icon,0xA0);
+		}
+		//Check if out of bound
+		if(powerUp.corrdinates.X <= 1)
+		{
+			powerUp.Active = false;
+			combined.enemySettings.droppowerup = true;
+		}
+	}
+}
 //// BOSS MOVE
 //void bossMove()
 //{
@@ -455,7 +455,7 @@ void updateGame()
 	FormTerrain();
 	FormTerrainBot();
 	terrainMove();
-	//collision();
+	collision();
 	//stageclear();
 }
 void enemySpawn()
@@ -679,20 +679,20 @@ void enemyShooting()
 //
 void collision()
 {
-//	//Check Powerup collide
-//	if(powerUpPlayerCollision(charLocation,powerUp))
-//	{
-//		static double timer_spawn = elapsedTime;
-//		if ( elapsedTime - timer_spawn > 0.1 )
-//		{
-//			timer_spawn = elapsedTime;
-//			powerUp.Active = false;
-//			player.PowerUp++;
-//			droppowerup = true;
-//		}
-//	}
+	//Check Powerup collide
+	if(powerUpPlayerCollision(charLocation,powerUp))
+	{
+		static double timer_spawn = elapsedTime;
+		if ( elapsedTime - timer_spawn > 0.1 )
+		{
+			timer_spawn = elapsedTime;
+			powerUp.Active = false;
+			player.PowerUp++;
+			combined.enemySettings.droppowerup = true;
+		}
+	}
 	// check collision
-	for(int i = 0; i<50;i++)
+	for(int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
 		//
 		//		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))

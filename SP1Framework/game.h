@@ -48,8 +48,6 @@ struct EnemySettings
 	unsigned int enemyMaxMissile;
 	unsigned int powerupEnemy;
 	bool droppowerup;
-
-	EnemySettings():enemyMaxMissile(50),enemyCurrentMissile(0){};
 };
 struct TerrainSettings
 {
@@ -103,7 +101,7 @@ void bossShooting();		// boss shooting
 void stageclear();			// is stage cleared?
 void collision();			// collision duh
 void enemycolour();			// colour of enemies
-//void renderPowerUp();		// renders power up drop
+void renderPowerUp();		// renders power up drop
 void GameVariables();		// settings of the game taken from text file
 void FormTerrain();			//load terrain data
 void renderTerrain();
