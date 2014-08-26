@@ -100,7 +100,6 @@ void enemyShooting();		// enemy shooting
 void bossShooting();		// boss shooting
 void stageclear();			// is stage cleared?
 void collision();			// collision duh
-void enemycolour();			// colour of enemies
 void renderPowerUp();		// renders power up drop
 void GameVariables();		// settings of the game taken from text file
 void FormTerrain();			//load terrain data

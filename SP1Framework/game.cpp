@@ -233,6 +233,38 @@ void GameVariables()
 		}
 	}
 }
+// FUNCTIONS COMBINED
+void updateGame()
+{
+	//check if boss stage
+	if (combined.globalSettings.loadlevel < 4)
+	{
+		loadfromtext(combined.globalSettings.loadlevel);
+		enemySpawn();
+		enemyMove();
+		enemyShooting();
+	}
+	else if (combined.globalSettings.loadlevel%4 == 0)
+	{
+		loadbossfromtext(combined.globalSettings.loadlevel);
+		//bossSpawn();
+		//bossMove();
+		//bossShooting();
+
+	}
+   /* else if (loadlevel == 5)
+	{
+		bonusesloadfromtext(loadlevel);
+		bonusSpawn();
+		enemyMove();
+		enemyShooting();
+	}*/
+	FormTerrain();
+	FormTerrainBot();
+	terrainMove();
+	collision();
+	//stageclear();
+}
 // CHARACTERS
 void renderCharacter()
 {
@@ -280,7 +312,9 @@ void renderCharacter()
 	}
 	//std::cout <<  player.wingIcon;
 }
+
 // ENEMIES
+// RENDER ENEMIES
 void renderEnemies()
 {
 	//enemycolour();
@@ -383,7 +417,7 @@ void renderPowerUp()
 		}
 	}
 }
-//// BOSS MOVE
+// BOSS MOVE
 //void bossMove()
 //{
 //
@@ -426,38 +460,8 @@ void renderPowerUp()
 //		}
 //	}
 //}
-// ALL GAME FUNCTIONS
-void updateGame()
-{
-	//check if boss stage
-	if (combined.globalSettings.loadlevel < 4)
-	{
-		loadfromtext(combined.globalSettings.loadlevel);
-		enemySpawn();
-		enemyMove();
-		enemyShooting();
-	}
-	else if (combined.globalSettings.loadlevel%4 == 0)
-	{
-		loadbossfromtext(combined.globalSettings.loadlevel);
-		//bossSpawn();
-		//bossMove();
-		//bossShooting();
 
-	}
-   /* else if (loadlevel == 5)
-	{
-		bonusesloadfromtext(loadlevel);
-		bonusSpawn();
-		enemyMove();
-		enemyShooting();
-	}*/
-	FormTerrain();
-	FormTerrainBot();
-	terrainMove();
-	collision();
-	//stageclear();
-}
+// SPAWN ENEMIES
 void enemySpawn()
 {
 	// spawn enemies
@@ -735,31 +739,8 @@ void collision()
 //		}
 //	}
 }
-//// COLOURS OF ENEMIES
-//
-//void enemycolour()
-//{
-//	switch (loadlevel)
-//	{
-//	case 1:colour(0x0E);
-//		break;
-//	case 2:colour(0x06);
-//		break;
-//	case 3:colour(0x0F);
-//		break;
-//	case 4:colour(0x0C);
-//		break;
-//	case 5: colour(0x0D);
-//		break;
-//	}
-//}
-//
 
-
-
-
-
-
+// TERRAIN 
 // RANDOMLY GENERATED TERRAIN TOP
 void FormTerrain() 
 {
@@ -799,7 +780,6 @@ void FormTerrain()
 	}	
 
 }
-
 // RANDOMLY GENERATED TERRAIN BOT
 void FormTerrainBot() 
 {
@@ -839,7 +819,6 @@ void FormTerrainBot()
 	}	
 
 }
-
 // RENDER TERRAIN
 void renderTerrain()
 {
@@ -854,7 +833,7 @@ void renderTerrain()
 			std::cout << generator[i].icon;*/
 			writeToBuffer(generator[i].coordinates,generator[i].icon,0x0F);
 		}
-		if(generator[i].coordinates.X <=2)
+		if(generator[i].coordinates.X <=1)
 		{
 			generator[i].Active = false;
 			generator[i].icon = ' ';
@@ -872,7 +851,7 @@ void renderTerrain()
 			std::cout << generator2[i].icon;*/
 			writeToBuffer(generator2[i].coordinates,generator2[i].icon,0x0F);
 		}
-		if(generator2[i].coordinates.X <=2)
+		if(generator2[i].coordinates.X <=1)
 		{
 			generator2[i].Active = false;
 			generator2[i].icon = ' ';
@@ -892,7 +871,6 @@ void renderTerrain()
 		combined.terrainSettings.terraingobot = 0;
 	}
 }
-
 // SCROLL TERRAIN
 void terrainMove()
 {
