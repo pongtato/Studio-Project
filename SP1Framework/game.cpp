@@ -452,9 +452,9 @@ void updateGame()
 		enemyMove();
 		enemyShooting();
 	}*/
-	//FormTerrain();
-	//FormTerrainBot();
-	//terrainMove();
+	FormTerrain();
+	FormTerrainBot();
+	terrainMove();
 	//collision();
 	//stageclear();
 }
@@ -754,148 +754,150 @@ void collision()
 //	}
 //}
 //
-//// RANDOMLY GENERATED TERRAIN TOP
-//void FormTerrain() 
-//{
-//	static double timer_spawn = elapsedTime;
-//	if ( elapsedTime - timer_spawn > 0.2 )
-//	{
-//		timer_spawn = elapsedTime;
-//		if ( currentTerrain < TERRAIN )
-//		{
-//			SpawnTerrain(currentTerrain,terrainModX, terrainModY, terrainicon);
-//			if ( terrainModY < 3)
-//			{
-//				terrainModY++;
-//			}
-//			else if ( terrainModY == 3)
-//			{
-//				if ( rand()%3+1 == 1)
-//				{
-//					terrainModY--;
-//				}
-//				else if ( rand()%3+1 == 2)
-//				{	
-//				}
-//				else if ( rand()%3+1 == 3)
-//				{
-//					terrainModY++;
-//				}
-//			}
-//			else if ( terrainModY == 4)
-//			{
-//				terrainModY--;
-//			}
-//		}
-//	}	
-//
-//}
-//
-//// RANDOMLY GENERATED TERRAIN BOT
-//void FormTerrainBot() 
-//{
-//	static double timer_spawn = elapsedTime;
-//	if ( elapsedTime - timer_spawn > 0.2 )
-//	{
-//		timer_spawn = elapsedTime;
-//		if ( currentTerrain < TERRAIN )
-//		{
-//			SpawnTerrainBot(currentTerrain,terrainModX, terrainBotModY, terrainicon);
-//			if ( terrainBotModY > 21)
-//			{
-//				terrainBotModY--;
-//			}
-//			else if ( terrainBotModY == 21)
-//			{
-//				if ( rand()%3+1 == 1)
-//				{
-//					terrainBotModY++;
-//				}
-//				else if ( rand()%3+1 == 2)
-//				{	
-//				}
-//				else if ( rand()%3+1 == 3)
-//				{
-//					terrainBotModY--;
-//				}
-//			}
-//			else if ( terrainBotModY == 20)
-//			{
-//				terrainBotModY++;
-//			}
-//		}
-//	}	
-//
-//}
-//
-//// RENDER TERRAIN
-//void renderTerrain()
-//{
-//	//colour(0x0F);
-//	// render top terrain
-//	for ( int i = terraingo; i < TERRAIN; ++i)
-//	{
-//		//is terrain active?
-//		if(generator[i].Active)
-//		{
-//			/*gotoXY(generator[i].coordinates.X,generator[i].coordinates.Y);
-//			std::cout << generator[i].icon;*/
-//			writeToBuffer(generator[i].coordinates,generator[i].icon,0x0F);
-//		}
-//		if(generator[i].coordinates.X <=2)
-//		{
-//			generator[i].Active = false;
-//			generator[i].icon = ' ';
-//			terraindestory++;
-//		}
-//	}
-//
-//	// render bot terrain
-//	for ( int i = terraingobot; i < TERRAIN; ++i)
-//	{
-//		//is terrain bot active?
-//		if(generator2[i].Active)
-//		{
-//			/*gotoXY(generator2[i].coordinates.X,generator2[i].coordinates.Y);
-//			std::cout << generator2[i].icon;*/
-//			writeToBuffer(generator2[i].coordinates,generator2[i].icon,0x0F);
-//		}
-//		if(generator2[i].coordinates.X <=2)
-//		{
-//			generator2[i].Active = false;
-//			generator2[i].icon = ' ';
-//			terraindestorybot++;
-//		}
-//	}
-//
-//	//terrain top reset
-//	if (terraindestory >= 10)
-//	{
-//		terraingo = 0;
-//	}
-//
-//	//terrain bot reset
-//	if (terraindestorybot >= 10)
-//	{
-//		terraingobot = 0;
-//	}
-//}
-//
-//// SCROLL TERRAIN
-//void terrainMove()
-//{
-//	static double timer_move = elapsedTime;
-//	if ( elapsedTime - timer_move > 0.2 )
-//	{
-//		timer_move = elapsedTime;
-//		{
-//			//move towards left
-//			moveTerrain();
-//			moveTerrainBot();
-//		}
-//	}
-//}
 
 
 
 
+
+
+// RANDOMLY GENERATED TERRAIN TOP
+void FormTerrain() 
+{
+	static double timer_spawn = elapsedTime;
+	if ( elapsedTime - timer_spawn > 0.2 )
+	{
+		timer_spawn = elapsedTime;
+		if ( combined.terrainSettings.currentTerrain < TERRAIN )
+		{
+			SpawnTerrain(combined.terrainSettings.currentTerrain,combined.terrainSettings.terrainModX,combined.terrainSettings.terrainModY, combined.terrainSettings.terrainicon);
+			if ( combined.terrainSettings.terrainModY < 3)
+			{
+				combined.terrainSettings.terrainModY++;
+			}
+			else if ( combined.terrainSettings.terrainModY == 3)
+			{
+				if ( rand()%3+1 == 1)
+				{
+					combined.terrainSettings.terrainModY--;
+				}
+				else if ( rand()%3+1 == 2)
+				{	
+				}
+				else if ( rand()%3+1 == 3)
+				{
+					combined.terrainSettings.terrainModY++;
+				}
+			}
+			else if ( combined.terrainSettings.terrainModY == 4)
+			{
+				combined.terrainSettings.terrainModY--;
+			}
+		}
+	}	
+
+}
+
+// RANDOMLY GENERATED TERRAIN BOT
+void FormTerrainBot() 
+{
+	static double timer_spawn = elapsedTime;
+	if ( elapsedTime - timer_spawn > 0.2 )
+	{
+		timer_spawn = elapsedTime;
+		if ( combined.terrainSettings.currentTerrain < TERRAIN )
+		{
+			SpawnTerrainBot(combined.terrainSettings.currentTerrain,combined.terrainSettings.terrainModX, combined.terrainSettings.terrainBotModY, combined.terrainSettings.terrainicon);
+			if ( combined.terrainSettings.terrainBotModY > 21)
+			{
+				combined.terrainSettings.terrainBotModY--;
+			}
+			else if ( combined.terrainSettings.terrainBotModY == 21)
+			{
+				if ( rand()%3+1 == 1)
+				{
+					combined.terrainSettings.terrainBotModY++;
+				}
+				else if ( rand()%3+1 == 2)
+				{	
+				}
+				else if ( rand()%3+1 == 3)
+				{
+					combined.terrainSettings.terrainBotModY--;
+				}
+			}
+			else if ( combined.terrainSettings.terrainBotModY == 20)
+			{
+				combined.terrainSettings.terrainBotModY++;
+			}
+		}
+	}	
+
+}
+
+// RENDER TERRAIN
+void renderTerrain()
+{
+	//colour(0x0F);
+	// render top terrain
+	for ( int i = combined.terrainSettings.terraingo; i < TERRAIN; ++i)
+	{
+		//is terrain active?
+		if(generator[i].Active)
+		{
+			/*gotoXY(generator[i].coordinates.X,generator[i].coordinates.Y);
+			std::cout << generator[i].icon;*/
+			writeToBuffer(generator[i].coordinates,generator[i].icon,0x0F);
+		}
+		if(generator[i].coordinates.X <=2)
+		{
+			generator[i].Active = false;
+			generator[i].icon = ' ';
+			combined.terrainSettings.terraindestory++;
+		}
+	}
+
+	// render bot terrain
+	for ( int i = combined.terrainSettings.terraingobot; i < TERRAIN; ++i)
+	{
+		//is terrain bot active?
+		if(generator2[i].Active)
+		{
+			/*gotoXY(generator2[i].coordinates.X,generator2[i].coordinates.Y);
+			std::cout << generator2[i].icon;*/
+			writeToBuffer(generator2[i].coordinates,generator2[i].icon,0x0F);
+		}
+		if(generator2[i].coordinates.X <=2)
+		{
+			generator2[i].Active = false;
+			generator2[i].icon = ' ';
+			combined.terrainSettings.terraindestorybot++;
+		}
+	}
+
+	//terrain top reset
+	if (combined.terrainSettings.terraindestory >= 10)
+	{
+		combined.terrainSettings.terraingo = 0;
+	}
+
+	//terrain bot reset
+	if (combined.terrainSettings.terraindestorybot >= 10)
+	{
+		combined.terrainSettings.terraingobot = 0;
+	}
+}
+
+// SCROLL TERRAIN
+void terrainMove()
+{
+	static double timer_move = elapsedTime;
+	if ( elapsedTime - timer_move > 0.2 )
+	{
+		timer_move = elapsedTime;
+		{
+			//move towards left
+			moveTerrain();
+			moveTerrainBot();
+		}
+	}
+}
