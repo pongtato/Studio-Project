@@ -11,6 +11,7 @@ BOSS Bcounter[10];
 WORLD generator[999];
 //bottom terrain
 WORLD generator2[999];
+extern GLOBAL combined;
 int enemycounter;
 int activefromtext;
 int hpfromtext;
@@ -211,11 +212,11 @@ void SpawnBonus(unsigned int &currentEnemy, int modX, int modY)
 
 void SpawnTerrain(unsigned int &currentTerrain, int terrainModX, int terrainModY, int terrainChar)
 {
-	generator[currentTerrain].icon = char(219);
+	generator[currentTerrain].icon = terrainChar;
 	generator[currentTerrain].coordinates.X = terrainModX;
 	generator[currentTerrain].coordinates.Y = terrainModY;
 	generator[currentTerrain].level = 2;
-	generator[currentTerrain].Active = activefromtext;
+	generator[currentTerrain].Active = true;
 	currentTerrain++;
 }
 
@@ -232,11 +233,11 @@ void moveTerrain()
 }
 void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terrainBotModY, int terrainChar)
 {
-	generator2[currentTerrainBot].icon = char(219);
+	generator2[currentTerrainBot].icon = terrainChar;
 	generator2[currentTerrainBot].coordinates.X = terrainModX;
 	generator2[currentTerrainBot].coordinates.Y = terrainBotModY;
 	generator2[currentTerrainBot].level = 22;
-	generator2[currentTerrainBot].Active = activefromtext;
+	generator2[currentTerrainBot].Active = true;
 	currentTerrainBot++;
 }
 
