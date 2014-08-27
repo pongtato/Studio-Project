@@ -3,9 +3,6 @@
 #include "leveldesign.h"
 #include <iostream>
 
-using std::cout;
-
-
 void leveldesign()
 {
 	ifstream indata;
@@ -30,18 +27,15 @@ void loseScreen()
 	indata.open("GLD/Lose.txt");
 	if (indata.is_open())
 	{
-
-		for(int i = 0; i < 80;i++)
-		{
-			for(int j = 0; j<25;j++)
+			for(int j = 0; j<13;j++)
 			{
 				getline(indata, data);
-				writeToBuffer(i,j,data);
+				writeToBuffer(0,j,data);
 			}
-		}
-		indata.close();
 	}
+		indata.close();
 }
+
 void mainScreen()
 {
 	ifstream indata;
@@ -60,7 +54,8 @@ void mainScreen()
 		indata.close();
 	}
 }
-void pauseScreen()
+
+/*void pauseScreen()
 {
 	ifstream inData;
 	string data;
@@ -75,3 +70,4 @@ void pauseScreen()
 
 	inData.close ();
 }
+*/

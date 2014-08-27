@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Shoot.h"
 #include "game.h"
+#include "leveldesign.h"
+#include "MainMenu.h"
 
 PLAYER player;
 int PlayerActivefromtext;
@@ -95,8 +97,11 @@ void collision()
 		{
 			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
 			{
-				
+				clearBuffer(0x0F);
+				loseScreen();
+				flushBufferToConsole();
 				system("pause");
+				menuscreen();
 			}
 				if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
 				{
