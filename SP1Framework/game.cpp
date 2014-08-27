@@ -398,6 +398,7 @@ void render()
 //}
 
 // GAME SETTINGS
+// VARIABLES FOR GLOBAL STRUCT
 void GameVariables()
 {
 	std::ifstream indata;
@@ -446,7 +447,7 @@ void updateGame()
 	collision();
 	stageclear();
 }
-
+// IS STAGE CLEAR?
 void stageclear()
 {
 		//if stage is clear, proceed
