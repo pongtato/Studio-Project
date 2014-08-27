@@ -1,5 +1,5 @@
-     1   1    10        6     0
-// T/F  HP SCORE CHARICON STATE
+     1   1    10        6     0      20      
+// T/F  HP SCORE CHARICON STATE SPAWNNO 
 // Enemy 1
 
 	

@@ -24,6 +24,7 @@ bool keyPressed[K_COUNT];
 extern BULLET powerUp;
 extern PLAYER player;
 extern int PowerupIcon;
+extern int spawnno;
 GLOBAL combined;
 
 string display[5] = {"Score:","Wave:"};
@@ -248,7 +249,7 @@ void updateGame()
 void stageclear()
 {
 		//if stage is clear, proceed
-	if (combined.enemySettings.enemieskilled >= 25)
+	if (combined.enemySettings.enemieskilled >= spawnno)
 	{
 		combined.globalSettings.loadlevel++;
 		combined.enemySettings.currentEnemy =0;
