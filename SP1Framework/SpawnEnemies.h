@@ -77,6 +77,14 @@ void moveTerrain();
 void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terrainBotModY, int terrainChar);
 void moveTerrainBot();
 void enemySpawn();
+void renderEnemies();
+void enemyMove();
+void enemyShooting();
+void FormTerrain();
+void FormTerrainBot();
+void renderTerrain();
+void terrainMove();
+
 
 
 
