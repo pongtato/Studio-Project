@@ -48,6 +48,8 @@ struct EnemySettings
 	unsigned int enemyCurrentMissile;
 	unsigned int enemyMaxMissile;
 	unsigned int powerupEnemy;
+	std::string stagechecker[256];
+	std::string spawnlevel;
 	bool droppowerup;
 };
 struct TerrainSettings

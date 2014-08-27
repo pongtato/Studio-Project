@@ -84,6 +84,7 @@ void FormTerrain();
 void FormTerrainBot();
 void renderTerrain();
 void terrainMove();
+void levelCheck();
 
 
 
