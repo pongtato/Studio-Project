@@ -13,7 +13,7 @@ int PowerupIcon;
 extern GLOBAL combined;
 extern BULLET powerUp;
 extern double elapsedTime;
-extern ENEMY counter[25];
+extern ENEMY counter[999];
 extern BULLET enemyBullet[50];
 extern BULLET missile[50];
 
@@ -87,16 +87,17 @@ void collision()
 	// check collision
 	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
-		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
+
+		
+		/*if ( combined.globalSettings.loadlevel%4 != 0)
+		{*/
+		for(int j = 0; j<NO_OF_ENEMIES;j++)
 		{
-			counter[i].Active = false;
-			enemyBullet[i].Active = false;
-			system("pause");
-		}
-		if ( combined.globalSettings.loadlevel%4 != 0)
-		{
-			for(int j = 0; j<NO_OF_ENEMIES;j++)
+			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
 			{
+				
+				system("pause");
+			}
 				if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
 				{
 					if ( counter[j].hp <= 0 )
@@ -125,7 +126,7 @@ void collision()
 		//		}
 		//	}
 	}
-}
+//}
 
 void renderCharacter()
 {
