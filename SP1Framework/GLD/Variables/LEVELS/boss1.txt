@@ -1,5 +1,5 @@
-     1  1   100      197      0
-// T/F  HP SCORE CHARICON STATE
+     1  15   100      197      0 1	|=)
+// T/F  HP SCORE CHARICON STATE COUNT PATTERN
 // Boss1
 
 	

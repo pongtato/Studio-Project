@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 
-#define NO_OF_ENEMIES 25
+//#define NO_OF_ENEMIES 25
 #define BOSS_NO 1
 #define BONUS 25
 #define TERRAIN 999

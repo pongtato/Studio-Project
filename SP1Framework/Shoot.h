@@ -21,7 +21,6 @@ void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLoca
 void shootMissile2(unsigned int &currentMissile, COORD charLocation);
 void shootMissile2(unsigned int &currentMissile,  int charLocationX, int charLocationY);
 bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy,bool spawnpowerup);
-bool BosscheckCollisionBullet(BULLET &missile, BOSS &checkEnemy);
 void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation);
 void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation);
 void renderEnemyMissile();

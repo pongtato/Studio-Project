@@ -8,7 +8,6 @@
 
 ENEMY counter[999];
 ENEMY powerup[1];
-BOSS Bcounter[10];
 //top terrain
 WORLD generator[999];
 //bottom terrain
@@ -20,17 +19,8 @@ int activefromtext;
 int hpfromtext;
 int scorefromtext;
 int iconfromtext;
-
-//boss icon
-int Bossfromtext;
-int BossfromtextL;	// left
-int BossfromtextR;	// right
-int BossfromtextTL;	// top left
-int BossfromtextTR;	// top right
-int BossfromtextBL;	// bottom left
-int BossfromtextBR;	//botom right
-int BossfromtextU;	//up
-int BossfromtextD; //down
+int spawnno;
+std::string patternfromtext;
 
 int statefromtext;
 
@@ -45,52 +35,14 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 	if ( indata.is_open())
 	{
-		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
+		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> patternfromtext)
 		{
 		}
 	}
 }
-
-void loadbossfromtext(int loadcase)
-{
-
-	std::ifstream indata;
-	switch (loadcase)
-	{
-	case 4:	
-		indata.open("GLD/Variables/boss1.txt");
-		break;
-	}
-	if ( indata.is_open())
-	{
-		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> BossfromtextTL >> BossfromtextU >> 
-			BossfromtextTR >> BossfromtextL >> Bossfromtext >> BossfromtextR >> BossfromtextBL >> BossfromtextD >>
-			BossfromtextBR >>  statefromtext)
-		{
-		}
-	}
-}
-
-void bonusesloadfromtext(int loadcase)
-{
-	std::ifstream indata;
-	switch (loadcase)
-	{
-	case 5:
-		indata.open("GLD/Variables/Bonus1.txt");
-		break;
-	}
-	if ( indata.is_open())
-	{
-			if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext)
-			{
-			}
-	}
-}
-
 void moveEnemies()
 {
-	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
+	for ( int i = 0; i  < spawnno; ++i)
 	{
 		//is enemy alive
 		if(counter[i].Active == true)
@@ -99,10 +51,9 @@ void moveEnemies()
 		}
 	}
 }
-
 void moveEnemiesUp()
 {
-	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
+	for ( int i = 0; i  < spawnno; ++i)
 	{
 		//is enemy alive
 		if(counter[i].Active == true)
@@ -111,10 +62,9 @@ void moveEnemiesUp()
 		}
 	}
 }
-
 void moveEnemiesDown()
 {
-	for ( int i = 0; i  < NO_OF_ENEMIES; ++i)
+	for ( int i = 0; i  < spawnno; ++i)
 	{
 		//is enemy alive
 		if(counter[i].Active == true)
@@ -124,44 +74,10 @@ void moveEnemiesDown()
 	}
 }
 
-void moveBoss()
-{
-	for ( int i = 0; i  < BOSS_NO; ++i)
-	{
-		//is enemy alive
-		if(Bcounter[i].Active == true)
-		{
-			gotoXY(Bcounter[i].coordinates.X--,Bcounter[i].coordinates.Y);
-		}
-	}
-}
-
-void moveBossUp()
-{
-	for ( int i = 0; i  < BOSS_NO; ++i)
-	{
-		//is enemy alive
-		if(Bcounter[i].Active == true)
-		{
-			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y--);
-		}
-	}
-}
-
-void moveBossDown()
-{
-	for ( int i = 0; i  < BOSS_NO; ++i)
-	{
-		//is enemy alive
-		if(Bcounter[i].Active == true)
-		{
-			gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y++);
-		}
-	}
-}
-
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
+	if ( combined.globalSettings.loadlevel %4!= 0)
+	{
 	counter[currentEnemy].Active = activefromtext;
 	counter[currentEnemy].coordinates.X = modX;
 	counter[currentEnemy].coordinates.Y = modY;
@@ -170,40 +86,18 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 	counter[currentEnemy].icon= (char)(iconfromtext);
 	counter[currentEnemy].number = currentEnemy;
 	counter[currentEnemy].state = statefromtext;
-	currentEnemy++;
-}
-
-void SpawnBoss(unsigned int &currentEnemy, int modX, int modY)
-{
-	Bcounter[currentEnemy].Active = activefromtext;
-	Bcounter[currentEnemy].coordinates.X = modX;
-	Bcounter[currentEnemy].coordinates.Y = modY;
-	Bcounter[currentEnemy].hp= hpfromtext;
-	Bcounter[currentEnemy].score= scorefromtext;
-	Bcounter[currentEnemy].icontopleft= (char)(BossfromtextTL);
-	Bcounter[currentEnemy].iconup= (char)(BossfromtextU);
-	Bcounter[currentEnemy].icontopright= (char)(BossfromtextTR);
-	Bcounter[currentEnemy].iconleft= (char)(BossfromtextL);
-	Bcounter[currentEnemy].iconcenter= (char)(Bossfromtext);
-	Bcounter[currentEnemy].iconright= (char)(BossfromtextR);
-	Bcounter[currentEnemy].iconbottomleft= (char)(BossfromtextBL);
-	Bcounter[currentEnemy].icondown= (char)(BossfromtextD);
-	Bcounter[currentEnemy].iconbottomright= (char)(BossfromtextBR);
-	Bcounter[currentEnemy].number = currentEnemy;
-	Bcounter[currentEnemy].state = statefromtext;
-	currentEnemy++;
-}
-
-void SpawnBonus(unsigned int &currentEnemy, int modX, int modY)
-{
+	}
+	else
+	{
 	counter[currentEnemy].Active = activefromtext;
 	counter[currentEnemy].coordinates.X = modX;
 	counter[currentEnemy].coordinates.Y = modY;
-	counter[currentEnemy].hp = hpfromtext;
-	counter[currentEnemy].score = scorefromtext;
-	counter[currentEnemy].icon = (char)(iconfromtext);
+	counter[currentEnemy].hp= hpfromtext;
+	counter[currentEnemy].score= scorefromtext;
+	counter[currentEnemy].row= patternfromtext;
 	counter[currentEnemy].number = currentEnemy;
 	counter[currentEnemy].state = statefromtext;
+	}
 	currentEnemy++;
 }
 
@@ -253,6 +147,8 @@ void moveTerrainBot()
 
 void enemySpawn()
 {
+	if ( combined.globalSettings.loadlevel%4!=0)
+	{
 	// spawn enemies
 	if ( combined.enemySettings.modifyX <48)
 		{
@@ -260,7 +156,7 @@ void enemySpawn()
 			if ( elapsedTime - timer_spawn > 0.1 )
 			{
 				timer_spawn = elapsedTime;
-				if ( combined.enemySettings.currentEnemy < NO_OF_ENEMIES )
+				if ( combined.enemySettings.currentEnemy < spawnno )
 				{
 					SpawnEnemy(combined.enemySettings.currentEnemy,combined.enemySettings.modifyX,combined.enemySettings.modifyY);
 					combined.enemySettings.spawncounter++;
@@ -284,19 +180,51 @@ void enemySpawn()
 			combined.enemySettings.moveState=2;
 			combined.enemySettings.spawnclear=0;
 		}
+	}
+	else
+	{
+		if ( combined.enemySettings.modifyX <39)
+		{
+			static double timer_spawn = elapsedTime;
+			if ( elapsedTime - timer_spawn > 0.1 )
+			{
+				timer_spawn = elapsedTime;
+				if ( combined.enemySettings.currentEnemy < spawnno )
+				{
+					SpawnEnemy(combined.enemySettings.currentEnemy,combined.enemySettings.modifyX,combined.enemySettings.modifyY);
+					combined.enemySettings.spawnclear=0;
+					combined.enemySettings.moveState = 1;
+					combined.enemySettings.modifyY = 10;
+					combined.enemySettings.modifyX = combined.enemySettings.modifyX + 2;
+				}
+			}
+		}
+		else if ( combined.enemySettings.wew != 0)
+		{
+			combined.enemySettings.moveState=2;
+			combined.enemySettings.spawnclear=0;
+		}
+	}
 }
 
 void renderEnemies()
 {
 	// render enemies
-	for ( int i = 0; i < NO_OF_ENEMIES; ++i)
+	for ( int i = 0; i < spawnno; ++i)
 	{
 		//is enemy alive
 		if(counter[i].Active)
 		{
 			/*gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
 			std::cout << counter[i].icon;*/
+			if (combined.globalSettings.loadlevel%4 != 0)
+			{
 			writeToBuffer(counter[i].coordinates,counter[i].icon);
+			}
+			else
+			{
+			writeToBuffer(counter[i].coordinates,counter[i].row);
+			}
 		}
 		if(counter[i].coordinates.X <=2)
 		{
@@ -319,9 +247,48 @@ void enemyMove()
 	{
 		combined.enemySettings.spawnclear = 1;
 	}
-
-	// move enemies
-	if ( combined.enemySettings.spawnclear == 0)
+	if (combined.globalSettings.loadlevel%4!=0)
+	{
+		// move enemies
+		if ( combined.enemySettings.spawnclear == 0)
+		{
+			static double timer_move = elapsedTime;
+			if ( elapsedTime - timer_move > combined.enemySettings.enemymovespeed )
+			{
+				timer_move = elapsedTime;
+				if (combined.enemySettings.moveState == 1)
+				{
+					//move towards left
+					moveEnemies();
+				}
+				else if ( combined.enemySettings.moveState == 2)
+				{
+					//move upwards
+					moveEnemiesUp();
+					combined.enemySettings.moveYUP--;
+					combined.enemySettings.moveYDOWN = combined.enemySettings.moveYUP;
+					if (combined.enemySettings.moveYUP < 6)
+					{
+						combined.enemySettings.wew = 0;
+						combined.enemySettings.moveState = 3;
+						moveEnemies();
+					}
+				}
+				else if (combined.enemySettings.moveState == 3)
+				{
+					moveEnemiesDown();
+					combined.enemySettings.moveYDOWN++;
+					if (combined.enemySettings.moveYDOWN > 10)
+					{
+						combined.enemySettings.moveYUP = combined.enemySettings.moveYDOWN;
+						combined.enemySettings.moveState = 2;
+						moveEnemies();
+					}
+				}
+			}
+		}
+	}
+	else
 	{
 		static double timer_move = elapsedTime;
 		if ( elapsedTime - timer_move > combined.enemySettings.enemymovespeed )
@@ -349,7 +316,7 @@ void enemyMove()
 			{
 				moveEnemiesDown();
 				combined.enemySettings.moveYDOWN++;
-				if (combined.enemySettings.moveYDOWN > 10)
+				if (combined.enemySettings.moveYDOWN > 18)
 				{
 					combined.enemySettings.moveYUP = combined.enemySettings.moveYDOWN;
 					combined.enemySettings.moveState = 2;
@@ -358,26 +325,51 @@ void enemyMove()
 			}
 		}
 	}
+
 }
 
 void enemyShooting()
 {
 	//Enemy shooting
 	static double timer_shoot = elapsedTime;
-	for(int i =0; i<NO_OF_ENEMIES;i++)
+	if ( combined.globalSettings.loadlevel%4!=0)
 	{
-		if(counter[i].Active)
+		for(int i =0; i<spawnno;i++)
 		{
-			if ( elapsedTime - timer_shoot >rand()%combined.enemySettings.enemyshootspeedrange1 + combined.enemySettings.enemyshootspeedrange2 )
+			if(counter[i].Active)
 			{
-				timer_shoot = elapsedTime;
-				if(combined.enemySettings.enemyCurrentMissile < 50)
+				if ( elapsedTime - timer_shoot >rand()%combined.enemySettings.enemyshootspeedrange1 + combined.enemySettings.enemyshootspeedrange2 )
 				{
-					enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+					timer_shoot = elapsedTime;
+					if(combined.enemySettings.enemyCurrentMissile < 50)
+					{
+						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+					}
+					else
+					{
+						enemyShootBullet2(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+					}
 				}
-				else
+			}
+		}
+	}
+	else
+	{
+		for(int i =0; i<spawnno;i++)
+		{
+			if(counter[i].Active)
+			{
+				if ( elapsedTime - timer_shoot >combined.enemySettings.bossshootspeed)
 				{
-					enemyShootBullet2(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+					timer_shoot = elapsedTime;
+					if(combined.enemySettings.enemyCurrentMissile < 50)
+					{
+						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+					}
+					else
+					{
+						enemyShootBullet2(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+					}
 				}
 			}
 		}
@@ -560,207 +552,3 @@ void levelCheck()
 		combined.enemySettings.lvltospawn = combined.globalSettings.bonus;
 	}
 }
-
-//// BOSS
-//void renderBoss()
-//{
-//	//enemycolour();
-//	// render boss
-//	for ( int i = 0; i < BOSS_NO; ++i)
-//	{
-//		//is boss alive
-//		if(Bcounter[i].Active)
-//		{
-//			/*gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y-1);
-//			std::cout << Bcounter[i].icontopleft;*/
-//			writeToBuffer(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y-1,Bcounter[i].iconbottomleft,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y-1);
-//			std::cout << Bcounter[i].iconup;*/
-//			writeToBuffer(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y-1,Bcounter[i].iconup,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y-1);
-//			std::cout << Bcounter[i].icontopright;*/
-//			writeToBuffer(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y-1,Bcounter[i].icontopright,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y);
-//			std::cout << Bcounter[i].iconleft;*/
-//			writeToBuffer(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y,Bcounter[i].iconleft,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y);
-//			std::cout << Bcounter[i].iconcenter;*/
-//			writeToBuffer(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y,Bcounter[i].iconcenter,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y);
-//			std::cout << Bcounter[i].iconright;*/
-//			writeToBuffer(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y,Bcounter[i].iconright,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y+1);
-//			std::cout << Bcounter[i].iconbottomleft;*/
-//			writeToBuffer(Bcounter[i].coordinates.X-1,Bcounter[i].coordinates.Y+1,Bcounter[i].iconbottomleft,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y+1);
-//			std::cout << Bcounter[i].icondown;*/
-//			writeToBuffer(Bcounter[i].coordinates.X,Bcounter[i].coordinates.Y+1,Bcounter[i].icondown,0x0F);
-//			/*gotoXY(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y+1); 
-//			std::cout << Bcounter[i].iconbottomright; */
-//			writeToBuffer(Bcounter[i].coordinates.X+1,Bcounter[i].coordinates.Y+1,Bcounter[i].iconbottomright,0x0F);
-//		}
-//		if(Bcounter[i].coordinates.X <=2)
-//		{
-//			Bcounter[i].Active = false;
-//			Bcounter[i].icontopleft = ' ';
-//			Bcounter[i].iconup = ' ';
-//			Bcounter[i].icontopright = ' ';
-//			Bcounter[i].iconleft = ' ';
-//			Bcounter[i].iconcenter = ' ';
-//			Bcounter[i].iconright = ' ';
-//			Bcounter[i].iconbottomleft = ' ';
-//			Bcounter[i].icondown = ' ';
-//			Bcounter[i].iconbottomright = ' ';
-//		}
-//	}
-//}
-//// POWER UPS
-// BOSS MOVE
-//void bossMove()
-//{
-//
-//	// move boss
-//	if ( spawnclear == 0)
-//	{
-//		static double timer_move = elapsedTime;
-//		if ( elapsedTime - timer_move > bossmovespeed )
-//		{
-//			timer_move = elapsedTime;
-//			if (moveState == 1)
-//			{
-//				//move towards left
-//				moveBoss();
-//			}
-//			else if ( moveState == 2)
-//			{
-//				//move upwards
-//				moveBossUp();
-//				moveYUP--;
-//				moveYDOWN = moveYUP;
-//				if (moveYUP < 6)
-//				{
-//					wew = 0;
-//					moveState = 3;
-//					moveEnemies();
-//				}
-//			}
-//			else if ( moveState == 3)
-//			{
-//				moveBossDown();
-//				moveYDOWN++;
-//				if (moveYDOWN > 16)
-//				{
-//					moveYUP = moveYDOWN;
-//					moveState = 2;
-//					moveEnemies();
-//				}
-//			}
-//		}
-//	}
-//}
-
-// SPAWN ENEMIES
-// SPAWN BOSS
-//
-//void bossSpawn()
-//{
-//		// spawn enemies
-//		if ( modifyX <39)
-//		{
-//			static double timer_spawn = elapsedTime;
-//			if ( elapsedTime - timer_spawn > 0.1 )
-//			{
-//				timer_spawn = elapsedTime;
-//				if ( currentEnemy < BOSS_NO )
-//				{
-//					SpawnBoss(currentEnemy,modifyX,modifyY);
-//					spawnclear = 0;
-//					moveState = 1;
-//					modifyY = 10;	
-//					modifyX = modifyX + 2;
-//				}
-//			}
-//		}
-//		else if ( wew != 0)
-//		{
-//			moveState=2;
-//			spawnclear = 0;
-//		}
-//}
-//// SPAWN BONUS
-//
-//void bonusSpawn()
-//{
-//	//spawn enemines
-//	if (combined.enemySettings.modifyX < 48)
-//	{
-//		static double timer_spawn = elapsedTime;
-//		if (elapsedTime - timer_spawn > 0.1)
-//		{
-//			timer_spawn = elapsedTime;
-//			if (combined.enemySettings.currentEnemy < BONUS)
-//			{
-//				SpawnBonus(currentEnemy, modifyX,combined.enemySettings.modifyY);
-//				combined.enemySettings.spawncounter++;
-//				//per row
-//				combined.enemySettings.moveState = 1;
-//				if (modifyY < 14)
-//				{
-//					modifyY = modifyY + 2;
-//				}
-//				else
-//				{
-//					modifyY = 6;	
-//					modifyX = modifyX + 2;
-//				}
-//			}
-//		}
-//	}
-//	else if (combined.enemySettings.wew != 0)
-//	{
-//		combined.enemySettings.moveState = 2;
-//		combined.enemySettings.spawnclear = 0;
-//	}
-//}
-////BOSS SHOOTS
-//
-//void bossShooting()
-//{
-//	//Enemy shooting
-//	static double timer_shoot = elapsedTime;
-//	for(int i =0; i<BOSS_NO;i++)
-//	{
-//		if(Bcounter[i].Active)
-//		{
-//			if ( elapsedTime - timer_shoot >bossshootspeed)
-//			{
-//				timer_shoot = elapsedTime;
-//				if(enemyCurrentMissile < 50)
-//				{
-//					enemyShootBullet1(enemyCurrentMissile,Bcounter[i].coordinates);
-//				}
-//				else
-//				{
-//					enemyShootBullet2(enemyCurrentMissile,Bcounter[i].coordinates);
-//				}
-//			}
-//		}
-//	}
-//}
-
-// GAME SETTINGS
-// VARIABLES FOR GLOBAL STRUCT
-
-
-
-
-
-
-
-
-
-
-
-
-
-

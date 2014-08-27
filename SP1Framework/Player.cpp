@@ -3,6 +3,7 @@
 #include "game.h"
 #include "leveldesign.h"
 #include "MainMenu.h"
+#include "SpawnEnemies.h"
 
 PLAYER player;
 int PlayerActivefromtext;
@@ -18,6 +19,7 @@ extern double elapsedTime;
 extern ENEMY counter[999];
 extern BULLET enemyBullet[50];
 extern BULLET missile[50];
+extern int spawnno;
 
 extern COORD charLocation;
 
@@ -93,7 +95,7 @@ void collision()
 		
 		/*if ( combined.globalSettings.loadlevel%4 != 0)
 		{*/
-		for(int j = 0; j<NO_OF_ENEMIES;j++)
+		for(int j = 0; j<spawnno;j++)
 		{
 			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
 			{
