@@ -40,6 +40,7 @@ struct EnemySettings
 	int spawnclear;
 	int enemyshootspeedrange1;
 	int enemyshootspeedrange2;
+	int enemycount;
 	double enemymovespeed;
 	double bossmovespeed;
 	double bossshootspeed;
@@ -68,6 +69,10 @@ struct GeneralSettings
 {
 	int globalscore;
 	int loadlevel;
+	int bonus;
+	int boss;
+	int stage;
+	int lvl;
 	unsigned int currentMissile;
 	unsigned int maxMissile;
 	unsigned int playingField;
