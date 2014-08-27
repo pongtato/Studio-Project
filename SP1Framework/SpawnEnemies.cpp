@@ -39,13 +39,13 @@ void loadfromtext(int loadcase)
 	switch (loadcase)
 	{
 	case 1:	
-		indata.open("GLD/Variables/enemy1.txt");
+		indata.open("GLD/Variables/LEVELS/enemy1.txt");
 		break;
 	case 2:	
-		indata.open("GLD/Variables/enemy2.txt");
+		indata.open("GLD/Variables/LEVELS/enemy2.txt");
 		break;
 	case 3:	
-		indata.open("GLD/Variables/enemy3.txt");
+		indata.open("GLD/Variables/LEVELS/enemy3.txt");
 		break;
 	}
 	if ( indata.is_open())
