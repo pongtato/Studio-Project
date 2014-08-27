@@ -153,7 +153,7 @@ void update(double dt)
 		{
 			colour(0x0F);
 			cls();
-			menuscreen2();   
+			menuscreen();   
 		}
 		if (keyPressed[K_P])
 		{
@@ -166,10 +166,11 @@ void render()
 {
     // Clears the buffer with this colour attribute
     clearBuffer(0x0F);
-
-    
-
+	
+	
+	
 	leveldesign();
+	
 
     // render time taken to calculate this frame
   /*  gotoXY(70, 0);

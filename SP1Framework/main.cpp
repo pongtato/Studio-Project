@@ -10,7 +10,7 @@ bool g_quitGame = false;      // Set to true if you want to quit the game
 const unsigned char FPS = 15; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
-void mainLoop();
+
 
 // TODO:
 // Bug in waitUnitil. it waits for the time from getElapsedTime to waitUntil, but should be insignificant.
@@ -18,7 +18,7 @@ void mainLoop();
 int main()
 {
 	init();      // initialize your variables
-    mainLoop();  // main loop
+    menuscreen();
     shutdown();  // do clean up, if any. free memory.
 
 	return 0;

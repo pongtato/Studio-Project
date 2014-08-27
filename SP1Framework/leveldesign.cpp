@@ -13,7 +13,6 @@ void leveldesign()
 	indata.open("GLD/GLD.txt");
 	if (indata.is_open())
 	{
-		
 			for(int j = 0; j<25;j++)
 			{
 				getline(indata, data);
@@ -23,6 +22,7 @@ void leveldesign()
 		indata.close();
 	}
 }
+
 void loseScreen()
 {
 	ifstream indata;
@@ -30,39 +30,46 @@ void loseScreen()
 	indata.open("GLD/Lose.txt");
 	if (indata.is_open())
 	{
-		while (getline(indata, data))
+
+		for(int i = 0; i < 80;i++)
 		{
-			std::cout << data << endl;
+			for(int j = 0; j<25;j++)
+			{
+				getline(indata, data);
+				writeToBuffer(i,j,data);
+			}
 		}
 		indata.close();
 	}
 }
 void mainScreen()
 {
-	ifstream inData;
-	string data;
-
-	inData.open ("GLD/Header.txt");
-	
-	while (!inData.eof())
+	ifstream indata;
+	string data; 
+	indata.open("GLD/Header.txt");
+	if (indata.is_open())
 	{
-		getline (inData, data);
-		std::cout << data << "\n";
+		
+			for(int i = 0; i <12; i++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,i,data);
+			}
+			
+		
+		indata.close();
 	}
-
-	inData.close ();
-}
 void pauseScreen()
 {
 	ifstream inData;
 	string data;
 
 	inData.open ("GLD/Pause.txt");
-	
+
 	while (!inData.eof())
 	{
 		getline (inData, data);
-		std::cout << data << "\n";
+		writeToBuffer(0,0,data);
 	}
 
 	inData.close ();

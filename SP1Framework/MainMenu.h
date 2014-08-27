@@ -2,7 +2,6 @@
 #define _MAINMENU_H
 
 void menuscreen();
-void menuscreen2();
 void instructions();
 void score();
 

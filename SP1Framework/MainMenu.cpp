@@ -5,214 +5,104 @@
 #include <fstream>
 #include <string>
 #include "leveldesign.h"
-using namespace std;
-long long choice = 0;
-bool gameover = true;
+#include <conio.h>  
+string Instruction[99] = {"ESC: Pause Menu", "Space: Shoot", "ArrowKeys: Move"};
+string pongMenu[5] = {"1:StartGame", "2:HighScores", "3:Instruction", "4:Exit", "Welcome to the Pongtato Invasion Game!!!"};
 
+char c;
 
-  
 
 void menuscreen()
-{
-	const unsigned char FPS = 10; // FPS of this game
-	const unsigned int frameTime = 1000 / FPS; // time for each frame
+{		
+	
+	clearBuffer(0x0F);
+	mainScreen();
+	writeToBuffer(20,14,pongMenu[4],0x03);
+	writeToBuffer(30,18,pongMenu[0],0x07);
+	writeToBuffer(30,19,pongMenu[1],0x07);
+	writeToBuffer(30,20,pongMenu[2],0x07);
+	writeToBuffer(30,21,pongMenu[3],0x07);
+	flushBufferToConsole();
 
-	
-	string Menu[4] = {"                                  Start Game",
-		              "                                  High Scores", 
-					  "                                  Instructions", 
-					  "                                  Exit"};
-	int pointer = 0;
-	
-	while(true)
-	{
-		cls();
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-		mainScreen();
-		
-		
-		for (int i = 0; i < 4; ++i)
+		c = getch();
+
+		switch (c)
 		{
-			if (i == pointer)
+		case '1': 
+			mainLoop();
+			break;
+
+		case '2':
+			clearBuffer(0x0F);
+			score();
+			c = '0';
+			c = getch();
+			if ( c = 27 )
 			{
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
-				cout << Menu[i] << endl;
+				menuscreen();
 			}
+
 			else
 			{
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-				cout << Menu[i] << endl;
+				menuscreen();
 			}
-		}
-	
-		while(true)
-		{
-			if (GetAsyncKeyState(VK_UP) != 0)
-			{
-				pointer -= 1;
-				if (pointer == -1)
-				{
-					pointer = 3;
-				}
-				break;
-			}
-			else if (GetAsyncKeyState(VK_DOWN) != 0)
-			{
-				pointer += 1;
-				if (pointer == 4)
-				{
-					pointer = 0;
-				}
-				break;
-			}
-			else if (GetAsyncKeyState(VK_RETURN) != 0)
-			{
-				switch (pointer)
-				{
-					case 0:
-					while(true)
-					{
-						getInput();                         // get keyboard input
-						update(g_timer.getElapsedTime());   // update the game
-						render();
-						g_timer.waitUntil(frameTime); // Frame rate limiter. Limits each frame to a specified time in ms. // render the graphics output to screen
-					}
-					break;
-					
-					case 1:
-					colour(0x0F);
-					cls();
-					mainScreen();
-					score();
-			    	break;
-						
-					case 2:
-					colour(0x0F);
-					cls();
-					mainScreen();
-					instructions();
-					break;
+			break;
 
-					
-					case 3:
-					colour(0x0F);
-					cls();
-					exit ( 0 );
-					break;
-				}
+		case '3':
+			clearBuffer(0x0F);
+			instructions();
+			c = '0';
+			c = getch();
+			if ( c = 27 )
+			{
+				menuscreen();
 			}
+
+			else
+			{
+				menuscreen();
+			}
+			break;
+
+		case '4':
+			clearBuffer(0x0F);
+			g_quitGame = true;
+			break;
+
+		default:
+			clearBuffer(0x0F);
+			menuscreen();
+			break;
+
 		}
-		Sleep(150);
-		}	
-	
 }
 
 
 
 
 
-void menuscreen2()
-{
-	const unsigned char FPS = 10; // FPS of this game
-	const unsigned int frameTime = 1000 / FPS; // time for each frame
-
-	
-	string Menu[4] = {"                                  Resume Game",
-		              "                                  High Scores", 
-					  "                                  Instructions", 
-					  "                                  Exit"};
-	int pointer = 0;
-	
-	while(true)
-	{
-		cls();
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-		pauseScreen();
-		
-		
-		for (int i = 0; i < 4; ++i)
-		{
-			if (i == pointer)
-			{
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
-				cout << Menu[i] << endl;
-			}
-			else
-			{
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-				cout << Menu[i] << endl;
-			}
-		}
-	
-		while(true)
-		{
-			if (GetAsyncKeyState(VK_UP) != 0)
-			{
-				pointer -= 1;
-				if (pointer == -1)
-				{
-					pointer = 3;
-				}
-				break;
-			}
-			else if (GetAsyncKeyState(VK_DOWN) != 0)
-			{
-				pointer += 1;
-				if (pointer == 4)
-				{
-					pointer = 0;
-				}
-				break;
-			}
-			else if (GetAsyncKeyState(VK_RETURN) != 0)
-			{
-				switch (pointer)
-				{
-					case 0:
-					while(true)
-					{
-						getInput();                         // get keyboard input
-						update(g_timer.getElapsedTime());   // update the game
-						render();
-						g_timer.waitUntil(frameTime); // Frame rate limiter. Limits each frame to a specified time in ms. // render the graphics output to screen
-					}
-					break;
-					
-					case 1:
-					colour(0x0F);
-					cls();
-					pauseScreen();
-					score();
-			    	break;
-						
-					case 2:
-					colour(0x0F);
-					cls();
-					pauseScreen();
-					instructions();
-					break;
-
-					
-					case 3:
-					colour(0x0F);
-					cls();
-					exit ( 0 );
-					break;
-				}
-			}
-		}
-		Sleep(150);
-		}	
-	
-}
 
 
 void instructions()
 {
-	std::cout<< "                                ESC: Main Menu\n                                P: In-Game Pause\n                                Space: Shoot\n                                ArrowKeys: Move\n\n";	
+	clearBuffer(0x0F);
+	mainScreen();
+	writeToBuffer(20,14,pongMenu[4],0x03);
+	writeToBuffer(30,18, Instruction[0],0x07);
+	writeToBuffer(30,19, Instruction[1],0x07);
+	writeToBuffer(30,20, Instruction[2],0x07);
+	writeToBuffer(30,21, Instruction[3],0x07);
+	flushBufferToConsole();
 }
 
 void score()
 {
-	std::cout<< "score";
+	clearBuffer(0x0F);
+	mainScreen();
+	writeToBuffer(20,14,pongMenu[4],0x03);
+	writeToBuffer(30,18, Instruction[0],0x07);
+	writeToBuffer(30,19, Instruction[1],0x07);
+	writeToBuffer(30,20, Instruction[2],0x07);
+	writeToBuffer(30,21, Instruction[3],0x07);
+	flushBufferToConsole();
 }
