@@ -50,6 +50,7 @@ struct EnemySettings
 	unsigned int powerupEnemy;
 	std::string stagechecker[256];
 	std::string spawnlevel;
+	int lvltospawn;
 	bool droppowerup;
 };
 struct TerrainSettings

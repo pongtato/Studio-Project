@@ -37,7 +37,7 @@ int statefromtext;
 void loadfromtext(int loadcase)
 {
 	std::stringstream s;
-	s << "GLD/Variables/LEVELS/"<< combined.enemySettings.spawnlevel << combined.globalSettings.lvl << ".txt";
+	s << "GLD/Variables/LEVELS/"<< combined.enemySettings.spawnlevel << combined.enemySettings.lvltospawn << ".txt";
 	std::string result = s.str();
 	int i = 1;
 	std::ifstream indata;
@@ -545,16 +545,19 @@ void levelCheck()
 	{
 		combined.globalSettings.lvl++;
 		combined.enemySettings.spawnlevel = "enemy";
+		combined.enemySettings.lvltospawn = combined.globalSettings.lvl;
 	}
 	else if ( combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "BOSS" )
 	{
 		combined.globalSettings.boss++;
 		combined.enemySettings.spawnlevel = "boss";
+		combined.enemySettings.lvltospawn = combined.globalSettings.boss;
 	}
 	else if (combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "BONUS" )
 	{
 		combined.globalSettings.bonus++;
 		combined.enemySettings.spawnlevel = "bonus";
+		combined.enemySettings.lvltospawn = combined.globalSettings.bonus;
 	}
 }
 

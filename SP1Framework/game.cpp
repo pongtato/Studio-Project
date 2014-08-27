@@ -211,7 +211,6 @@ void render()
 	// Writes the buffer to the console, hence you will see what you have written
     flushBufferToConsole();
 }
-
 void GameVariables()
 {
 	std::ifstream indata;
@@ -231,29 +230,11 @@ void GameVariables()
 // FUNCTIONS COMBINED
 void updateGame()
 {
-	//check if boss stage
-	if (combined.globalSettings.loadlevel < 4)
-	{
 		loadfromtext(combined.globalSettings.loadlevel);
 		enemySpawn();
 		enemyMove();
 		enemyShooting();
-	}
-	else if (combined.globalSettings.loadlevel%4 == 0)
-	{
-		loadbossfromtext(combined.globalSettings.loadlevel);
-		//bossSpawn();
-		//bossMove();
-		//bossShooting();
 
-	}
-   /* else if (loadlevel == 5)
-	{
-		bonusesloadfromtext(loadlevel);
-		bonusSpawn();
-		enemyMove();
-		enemyShooting();
-	}*/
 	FormTerrain();
 	FormTerrainBot();
 	terrainMove();
