@@ -59,6 +59,7 @@ void mainScreen()
 		
 		indata.close();
 	}
+}
 void pauseScreen()
 {
 	ifstream inData;
