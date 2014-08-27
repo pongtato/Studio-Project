@@ -174,8 +174,8 @@ void renderEnemyMissile()
 }
 bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 {
-	if((player.X == enemyBullet.corrdinates.X && player.Y == enemyBullet.corrdinates.Y)
-		|| player.X  == enemyBullet.corrdinates.X+1 && player.Y == enemyBullet.corrdinates.Y)
+	if(((player.X == enemyBullet.corrdinates.X && player.Y == enemyBullet.corrdinates.Y)
+		|| player.X  == enemyBullet.corrdinates.X+1 && player.Y == enemyBullet.corrdinates.Y)&& (enemyBullet.Active))
 	{
 		return true;
 	}
