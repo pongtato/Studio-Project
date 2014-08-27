@@ -13,14 +13,13 @@ void leveldesign()
 	indata.open("GLD/GLD.txt");
 	if (indata.is_open())
 	{
-		for(int i = 0; i < 80;i++)
-		{
+		
 			for(int j = 0; j<25;j++)
 			{
 				getline(indata, data);
-				writeToBuffer(i,j,data);
+				writeToBuffer(0,j,data);
 			}
-		}
+		
 		indata.close();
 	}
 }
