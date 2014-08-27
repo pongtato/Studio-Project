@@ -6,7 +6,8 @@
 #include <string>
 #include "leveldesign.h"
 #include <conio.h>  
-string Instruction[99] = {"ESC: Pause Menu", "Space: Shoot", "ArrowKeys: Move"};
+#include "score.h"
+string Instruction[99] = {"ESC: Pause Menu", "Space: Shoot", "ArrowKeys: Move","High Score"};
 string pongMenu[99] = {"1:","2:","3:", "4:", 
 "StartGame", "HighScores", "Instruction", "Exit",
 "Welcome to the Pongtato Invasion Game!!!"};
@@ -107,9 +108,7 @@ void score()
 	clearBuffer(0x0F);
 	mainScreen();
 	writeToBuffer(20,14,pongMenu[8],0x03);
-	writeToBuffer(30,18, Instruction[0],0x07);
-	writeToBuffer(30,19, Instruction[1],0x07);
-	writeToBuffer(30,20, Instruction[2],0x07);
-	writeToBuffer(30,21, Instruction[3],0x07);
+	writeToBuffer(32, 18, Instruction[3], 0x07);
+	print();
 	flushBufferToConsole();
 }

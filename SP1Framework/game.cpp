@@ -12,6 +12,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include "score.h"
 
 // Console size, width by height
 COORD ConsoleSize = {80, 25};
@@ -171,7 +172,7 @@ void render()
 	
 	
 	leveldesign();
-	
+	Writetohighscore();
 
     // render time taken to calculate this frame
   /*  gotoXY(70, 0);
@@ -186,11 +187,13 @@ void render()
     colour(0x03);
     std::cout << "Score:" << globalscore << std::endl;*/
 	writeToBuffer(50,3,display[0],0x03);
+	normalscore();
 
 	/*gotoXY(50, 4);
     colour(0x03);
     std::cout << "Wave:" << loadlevel << std::endl;*/
 	writeToBuffer(50,4,display[1],0x03);
+	PrintWave();
 
     // render character
 	renderCharacter();

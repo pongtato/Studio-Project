@@ -21,6 +21,8 @@ int scorefromtext;
 int iconfromtext;
 int spawnno;
 std::string patternfromtext;
+using std::ostringstream;
+using std::string;
 
 int statefromtext;
 
@@ -551,4 +553,13 @@ void levelCheck()
 		combined.enemySettings.spawnlevel = "bonus";
 		combined.enemySettings.lvltospawn = combined.globalSettings.bonus;
 	}
+}
+void PrintWave()
+{
+    int b = combined.globalSettings.loadlevel;
+	string result;
+	ostringstream convert;
+	convert << b;
+	result = convert.str();
+	writeToBuffer(57, 4, result, 0x03);
 }

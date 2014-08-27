@@ -51,6 +51,7 @@ void FormTerrainBot();
 void renderTerrain();
 void terrainMove();
 void levelCheck();
+void PrintWave();
 
 
 
