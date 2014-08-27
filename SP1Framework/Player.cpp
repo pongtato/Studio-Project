@@ -85,10 +85,12 @@ void collision()
 		}
 	}
 	// check collision
-	for(int i = 0; i<combined.globalSettings.maxMissile;i++)
+	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
 		if(checkPlayerDeath(charLocation,enemyBullet[i],counter[i]))
 		{
+			counter[i].Active = false;
+			enemyBullet[i].Active = false;
 			system("pause");
 		}
 		if ( combined.globalSettings.loadlevel%4 != 0)

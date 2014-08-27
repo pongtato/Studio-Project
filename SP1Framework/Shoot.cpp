@@ -179,8 +179,8 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 	{
 		return true;
 	}
-	if((player.X == enemySpawn.coordinates.X && player.Y == enemySpawn.coordinates.Y)
-		|| player.X  == enemySpawn.coordinates.X+1 && player.Y == enemySpawn.coordinates.Y)
+	if(((player.X == enemySpawn.coordinates.X && player.Y == enemySpawn.coordinates.Y)
+		|| player.X  == enemySpawn.coordinates.X+1 && player.Y == enemySpawn.coordinates.Y)&& (enemySpawn.Active))
 	{
 		return true;
 	}
