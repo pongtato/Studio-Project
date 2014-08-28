@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include "common.h"
 
 ENEMY counter[999];
 ENEMY powerup[1];

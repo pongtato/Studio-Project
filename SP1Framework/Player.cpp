@@ -4,6 +4,7 @@
 #include "leveldesign.h"
 #include "MainMenu.h"
 #include "SpawnEnemies.h"
+#include "common.h"
 
 PLAYER player;
 int PlayerActivefromtext;

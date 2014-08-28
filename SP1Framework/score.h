@@ -6,6 +6,7 @@
 #include <string>
 #include "game.h"
 #include <sstream>
+#include "common.h"
 
 using std::ifstream;
 using std::ofstream;
@@ -17,6 +18,6 @@ extern GLOBAL combined;
 void normalscore();
 void Writetohighscore();
 void print();
-
+void playerShoot();
 
 #endif // _SCORE_H
