@@ -78,7 +78,7 @@ void moveEnemiesDown()
 
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
-	if ( combined.globalSettings.loadlevel%4 != 0)
+	if(combined.enemySettings.spawnlevel != "BOSS")
 	{
 	counter[currentEnemy].Active = activefromtext;
 	counter[currentEnemy].coordinates.X = modX;
@@ -149,7 +149,7 @@ void moveTerrainBot()
 
 void enemySpawn()
 {
-	if ( combined.globalSettings.loadlevel%4 != 0)
+	if(combined.enemySettings.spawnlevel != "BOSS")
 	{
 		// spawn enemies
 		static double timer_spawn = elapsedTime;
@@ -217,7 +217,7 @@ void renderEnemies()
 		{
 			/*gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
 			std::cout << counter[i].icon;*/
-			if (combined.globalSettings.loadlevel%4 != 0)
+			if (combined.enemySettings.spawnlevel != "BOSS")
 			{
 			writeToBuffer(counter[i].coordinates,counter[i].icon);
 			}
@@ -247,7 +247,7 @@ void enemyMove()
 	{
 		combined.enemySettings.spawnclear = 1;
 	}
-	if (combined.globalSettings.loadlevel%4!=0)
+	if (combined.enemySettings.spawnlevel != "BOSS")
 	{
 		// move enemies
 		if ( combined.enemySettings.spawnclear == 0)
@@ -332,7 +332,7 @@ void enemyShooting()
 {
 	//Enemy shooting
 	static double timer_shoot = elapsedTime;
-	if ( combined.globalSettings.loadlevel%4!=0)
+	if (combined.enemySettings.spawnlevel != "BOSS")
 	{
 		for(int i =0; i<spawnno;i++)
 		{
@@ -524,6 +524,8 @@ void levelCheck()
 {
 	std::ifstream indata2;
 	indata2.open("GLD/Variables/LEVELS/STAGES.txt");
+	if (combined.globalSettings.stage < 1)
+	combined.globalSettings.stage++;
 	for ( int i = 0; indata2.good(); ++i)
 	{
 		getline(indata2, combined.enemySettings.stagechecker[i]);
@@ -536,28 +538,34 @@ void levelCheck()
 	else if (combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "WAVE" )
 	{
 		combined.globalSettings.lvl++;
-		combined.enemySettings.spawnlevel = "enemy";
+		combined.enemySettings.spawnlevel = "WAVE";
 		combined.enemySettings.lvltospawn = combined.globalSettings.lvl;
 	}
 	else if ( combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "BOSS" )
 	{
 		combined.globalSettings.boss++;
-		combined.enemySettings.spawnlevel = "boss";
+		combined.enemySettings.spawnlevel = "BOSS";
 		combined.enemySettings.lvltospawn = combined.globalSettings.boss;
 	}
 	else if (combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "BONUS" )
 	{
 		combined.globalSettings.bonus++;
-		combined.enemySettings.spawnlevel = "bonus";
+		combined.enemySettings.spawnlevel = "BONUS";
 		combined.enemySettings.lvltospawn = combined.globalSettings.bonus;
 	}
 }
 void PrintWave()
 {
-    int b = combined.globalSettings.loadlevel;
-	string result;
-	ostringstream convert;
-	convert << b;
-	result = convert.str();
-	writeToBuffer(57, 4, result, 0x03);
+	std::stringstream temp;
+	temp <<combined.enemySettings.spawnlevel << ": " << combined.enemySettings.lvltospawn;
+	std::string result = temp.str();
+	writeToBuffer(50, 4, result, 0x03);
+}
+
+void PrintStage()
+{
+	std::stringstream stagetemp;
+	stagetemp << "Stage" << ": " << combined.globalSettings.stage;
+	std::string stage = stagetemp.str();
+	writeToBuffer(50, 5, stage, 0x03);
 }

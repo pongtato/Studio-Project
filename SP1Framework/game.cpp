@@ -27,7 +27,7 @@ extern int PowerupIcon;
 extern int spawnno;
 GLOBAL combined;
 
-string display[5] = {"Score:","Wave:"};
+string display[5] = {"Score:"};
 
 StopWatch b_timer; 
 COORD charLocation;
@@ -195,7 +195,7 @@ void render()
     std::cout << "Wave:" << loadlevel << std::endl;*/
 	writeToBuffer(50,4,display[1],0x03);
 	PrintWave();
-
+	PrintStage();
     // render character
 	renderCharacter();
 	// render missiles
