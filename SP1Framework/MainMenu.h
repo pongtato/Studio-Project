@@ -4,13 +4,8 @@
 void menuscreen();
 void instructions();
 void score();
+void selection();
+void mainmenu();
 
-enum MainMenu
-{
-	PLAYGAME,
-	SCORE,
-	INSTRUCTION,
-	EXITGAME
-};
 
 #endif

@@ -55,19 +55,23 @@ void mainScreen()
 	}
 }
 
-/*void pauseScreen()
+void pauseScreen()
 {
-	ifstream inData;
+	ifstream indata;
 	string data;
 
-	inData.open ("GLD/Pause.txt");
+	indata.open ("GLD/Pause.txt");
 
-	while (!inData.eof())
+	if (indata.is_open())
 	{
-		getline (inData, data);
-		writeToBuffer(0,0,data);
+		
+			for(int i = 0; i <23; i++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,i,data,0x06);
+			}
+			
+		
+		indata.close();
 	}
-
-	inData.close ();
 }
-*/

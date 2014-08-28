@@ -7,17 +7,22 @@
 #include "leveldesign.h"
 #include <conio.h>  
 #include "score.h"
+char c;
 string Instruction[99] = {"ESC: Pause Menu", "Space: Shoot", "ArrowKeys: Move","High Score"};
 string pongMenu[99] = {"1:","2:","3:", "4:", 
 "StartGame", "HighScores", "Instruction", "Exit",
-"Welcome to the Pongtato Invasion Game!!!"};
+"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "Resume Game"};
 
-char c;
 
 
 void menuscreen()
 {		
-	
+	mainmenu();
+	selection();
+}
+
+void mainmenu()
+{
 	clearBuffer(0x0F);
 	mainScreen();
 	writeToBuffer(20,14,pongMenu[8],0x03);
@@ -30,8 +35,10 @@ void menuscreen()
 	writeToBuffer(31,21,pongMenu[3],0x06);
 	writeToBuffer(34,21,pongMenu[7],0x07);
 	flushBufferToConsole();
-
-		c = getch();
+}
+void selection()
+{
+	c = getch();
 
 		switch (c)
 		{
@@ -44,6 +51,7 @@ void menuscreen()
 			score();
 			c = '0';
 			c = getch();
+
 			if ( c = 27 )
 			{
 				menuscreen();
@@ -53,6 +61,7 @@ void menuscreen()
 			{
 				menuscreen();
 			}
+			
 			break;
 
 		case '3':
@@ -73,23 +82,15 @@ void menuscreen()
 
 		case '4':
 			clearBuffer(0x0F);
-			g_quitGame = true;
+			exit( 0 );
 			break;
 
 		default:
 			clearBuffer(0x0F);
 			menuscreen();
 			break;
-
 		}
 }
-
-
-
-
-
-
-
 void instructions()
 {
 	clearBuffer(0x0F);
@@ -102,7 +103,6 @@ void instructions()
 	writeToBuffer(30,23, Instruction[3],0x07);
 	flushBufferToConsole();
 }
-
 void score()
 {
 	clearBuffer(0x0F);

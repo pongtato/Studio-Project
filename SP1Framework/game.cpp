@@ -12,6 +12,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <conio.h> 
 #include "score.h"
 
 // Console size, width by height
@@ -154,15 +155,17 @@ void update(double dt)
 		// goes to menu 2 if player hits the escape key ( a way of pause )
 		if (keyPressed[K_ESCAPE])
 		{
-			colour(0x0F);
-			cls();
 			menuscreen();   
 		}
+		
 		if (keyPressed[K_P])
 		{
-			system("PAUSE");
+			clearBuffer(0x0F);
+			pauseScreen();
+			flushBufferToConsole();
+			char c = '0';
+			c = getch();
 		}
-
 
 }
 void render()
