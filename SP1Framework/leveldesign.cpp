@@ -30,7 +30,7 @@ void loseScreen()
 			for(int j = 0; j<13;j++)
 			{
 				getline(indata, data);
-				writeToBuffer(0,j,data);
+				writeToBuffer(0,j,data, 0x06);
 			}
 	}
 		indata.close();
@@ -47,7 +47,7 @@ void mainScreen()
 			for(int i = 0; i <12; i++)
 			{
 				getline(indata, data);
-				writeToBuffer(0,i,data);
+				writeToBuffer(0,i,data, 0x06);
 			}
 			
 		
@@ -66,6 +66,27 @@ void pauseScreen()
 	{
 		
 			for(int i = 0; i <23; i++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,i,data,0x06);
+			}
+			
+		
+		indata.close();
+	}
+}
+
+void exitScreen()
+{
+	ifstream indata;
+	string data;
+
+	indata.open ("GLD/Exit.txt");
+
+	if (indata.is_open())
+	{
+		
+			for(int i = 0; i <18; i++)
 			{
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);

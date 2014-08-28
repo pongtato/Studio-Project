@@ -13,6 +13,7 @@ void leveldesign();
 void loseScreen();
 void pauseScreen();
 void mainScreen();
+void exitScreen();
 
 
 

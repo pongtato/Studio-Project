@@ -69,7 +69,6 @@ void getInput()
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	keyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
-	keyPressed[K_P] = isKeyPressed(0x50);
 }
 void update(double dt)
 {
@@ -155,16 +154,7 @@ void update(double dt)
 		// goes to menu 2 if player hits the escape key ( a way of pause )
 		if (keyPressed[K_ESCAPE])
 		{
-			menuscreen();   
-		}
-		
-		if (keyPressed[K_P])
-		{
-			clearBuffer(0x0F);
-			pauseScreen();
-			flushBufferToConsole();
-			char c = '0';
-			c = getch();
+			pausescreen();   
 		}
 
 }

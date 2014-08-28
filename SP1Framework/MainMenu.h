@@ -6,6 +6,10 @@ void instructions();
 void score();
 void selection();
 void mainmenu();
-
+void pausescreen();
+void pInstructions();
+void pScore();
+void pSelection();
+void pausemenu();
 
 #endif
