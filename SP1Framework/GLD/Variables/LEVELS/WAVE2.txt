@@ -1,4 +1,4 @@
-   ENEMY.1-2  1   1    10        6     0      20 BOSS     
+   ENEMY.1-2  1   1    10        6     0      20 WAVE    
 // NAME     T/F  HP SCORE CHARICON STATE SPAWNNO TYPE
 // Enemy 1
 
