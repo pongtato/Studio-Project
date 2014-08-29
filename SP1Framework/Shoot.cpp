@@ -102,9 +102,9 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 	}
 	else
 	{
-		if(((missile.corrdinates.X == checkEnemy.coordinates.X-1 && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
-			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y-1)//Check above
-			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y+1))//CheckBelow
+		if(((missile.corrdinates.X == checkEnemy.coordinates.X-1 && missile.corrdinates.Y == checkEnemy.coordinates.Y && checkEnemy.midrow != " ")//Check directly infront 
+			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y-1 && checkEnemy.toprow != " ")//Check above
+			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y+1 && checkEnemy.botrow != " "))//CheckBelow
 			&&(checkEnemy.Active && missile.Active))
 		{
 			missile.Active = false;
