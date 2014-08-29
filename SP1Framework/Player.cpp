@@ -27,7 +27,7 @@ extern COORD charLocation;
 void loadPlayerFromText()
 {
 	std::ifstream indata;
-		indata.open("GLD/Variables/Player.txt");
+		indata.open("GLD/Variables/Player2.txt");
 	
 	if ( indata.is_open())
 	{
