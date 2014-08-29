@@ -56,14 +56,11 @@ void renderPowerUp()
 		if ( elapsedTime - timer_powerUp > 0.5 )
 		{
 			timer_powerUp = elapsedTime;
-			//gotoXY(powerUp.corrdinates.X--,powerUp.corrdinates.Y);
-			//std::cout << powerUp.icon << std::endl;
+
 			writeToBuffer(powerUp.corrdinates.X--,powerUp.corrdinates.Y,powerUp.icon,0xA0);
 		}
 		else
 		{
-			/*gotoXY(powerUp.corrdinates.X,powerUp.corrdinates.Y);
-			std::cout << powerUp.icon << std::endl;*/
 			writeToBuffer(powerUp.corrdinates.X,powerUp.corrdinates.Y,powerUp.icon,0xA0);
 		}
 		//Check if out of bound
@@ -134,51 +131,40 @@ void collision()
 		//		}
 		//	}
 	}
-//}
 
 void renderCharacter()
 {
 	// render character
-	/*gotoXY(charLocation);
-	colour(0x0C);
-	std::cout << player.icon;*/
-	writeToBuffer(charLocation,player.icon,0x0C);
 
-	//gotoXY(charLocation.X+1,charLocation.Y);
+	writeToBuffer(charLocation,player.icon,0x0C);
 	if (player.PowerUp == 1 || player.PowerUp >= 3)
 	{
-	//colour(0x0B);
 		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0B);
 	}
 	else if ( player.PowerUp == 2)
 	{
-	//colour (0x0F);
 		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0F);
 	}
 
-	//gotoXY(charLocation.X,charLocation.Y-1);
+
 	if (player.PowerUp >= 2)
 	{
-	//colour(0x0B);
 		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0B);
 	}
 	else
 	{
-	//colour (0x0F);
 		writeToBuffer(charLocation.X,charLocation.Y-1,player.wingIcon,0x0F);
 	}
-	//std::cout << player.wingIcon;
 
-//	gotoXY(charLocation.X,charLocation.Y+1);
 	if (player.PowerUp >= 2)
 	{
-	//colour(0x0B);
+
 		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0B);
 	}
 	else
 	{
-	//colour (0x0F);
+
 		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0F);
 	}
-	//std::cout <<  player.wingIcon;
+
 }

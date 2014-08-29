@@ -1,0 +1,5 @@
+   PONGTATO   1  15   100      197      0      1 BOSS	 |=)
+// NAME     T/F  HP SCORE CHARICON STATE SPAWNNO TYPE PATTERN 
+// Boss1
+
+	

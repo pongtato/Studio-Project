@@ -1,5 +1,5 @@
-     1   1    10        6     0      20      
-// T/F  HP SCORE CHARICON STATE SPAWNNO 
+   WAVE2  1   1    10        6     0      20 BOSS     
+// NAME  T/F  HP SCORE CHARICON STATE SPAWNNO TYPE
 // Enemy 1
 
 	

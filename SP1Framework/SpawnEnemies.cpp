@@ -22,15 +22,16 @@ int scorefromtext;
 int iconfromtext;
 int spawnno;
 std::string patternfromtext;
+std::string typefromtext;
+std::string stagename;
 using std::ostringstream;
-using std::string;
 
 int statefromtext;
 
 void loadfromtext(int loadcase)
 {
 	std::stringstream s;
-	s << "GLD/Variables/LEVELS/"<< combined.enemySettings.spawnlevel << combined.enemySettings.lvltospawn << ".txt";
+	s << "GLD/Variables/LEVELS/"<< combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] << ".txt";
 	std::string result = s.str();
 	int i = 1;
 	std::ifstream indata;
@@ -38,7 +39,7 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 	if ( indata.is_open())
 	{
-		if (indata >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> patternfromtext)
+		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> patternfromtext)
 		{
 		}
 	}
@@ -76,7 +77,6 @@ void moveEnemiesDown()
 		}
 	}
 }
-
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
 	if(combined.enemySettings.spawnlevel != "BOSS")
@@ -103,7 +103,6 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 	}
 	currentEnemy++;
 }
-
 void SpawnTerrain(unsigned int &currentTerrain, int terrainModX, int terrainModY, int terrainChar)
 {
 	generator[currentTerrain].icon = terrainChar;
@@ -113,7 +112,6 @@ void SpawnTerrain(unsigned int &currentTerrain, int terrainModX, int terrainModY
 	generator[currentTerrain].Active = true;
 	currentTerrain++;
 }
-
 void moveTerrain()
 {
 	for ( int i = 0; i  < TERRAIN; ++i)
@@ -125,7 +123,6 @@ void moveTerrain()
 		}
 	}
 }
-
 void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terrainBotModY, int terrainChar)
 {
 	generator2[currentTerrainBot].icon = terrainChar;
@@ -135,7 +132,6 @@ void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terra
 	generator2[currentTerrainBot].Active = true;
 	currentTerrainBot++;
 }
-
 void moveTerrainBot()
 {
 	for ( int i = 0; i  < TERRAIN; ++i)
@@ -147,7 +143,6 @@ void moveTerrainBot()
 		}
 	}
 }
-
 void enemySpawn()
 {
 	if(combined.enemySettings.spawnlevel != "BOSS")
@@ -207,7 +202,6 @@ void enemySpawn()
 		}
 	}
 }
-
 void renderEnemies()
 {
 	// render enemies
@@ -234,7 +228,6 @@ void renderEnemies()
 		}
 	}
 }
-
 void enemyMove()
 {
 	//check if row has spawned
@@ -328,7 +321,6 @@ void enemyMove()
 	}
 
 }
-
 void enemyShooting()
 {
 	//Enemy shooting
@@ -376,7 +368,6 @@ void enemyShooting()
 		}
 	}
 }
-
 // RANDOMLY GENERATED TERRAIN TOP
 void FormTerrain() 
 {
@@ -520,7 +511,6 @@ void terrainMove()
 		}
 	}
 }
-
 void levelCheck()
 {
 	std::ifstream indata2;
@@ -529,40 +519,22 @@ void levelCheck()
 	combined.globalSettings.stage++;
 	for ( int i = 0; indata2.good(); ++i)
 	{
-		getline(indata2, combined.enemySettings.stagechecker[i]);
+		 getline(indata2, combined.enemySettings.stagechecker[i]);
 	}
 
-	if (combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "STAGE")
+	if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "STAGE")
 	{
 		combined.globalSettings.stage++;
-	}
-	else if (combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "WAVE" )
-	{
-		combined.globalSettings.lvl++;
-		combined.enemySettings.spawnlevel = "WAVE";
-		combined.enemySettings.lvltospawn = combined.globalSettings.lvl;
-	}
-	else if ( combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "BOSS" )
-	{
-		combined.globalSettings.boss++;
-		combined.enemySettings.spawnlevel = "BOSS";
-		combined.enemySettings.lvltospawn = combined.globalSettings.boss;
-	}
-	else if (combined.enemySettings.stagechecker[(combined.globalSettings.loadlevel)] == "BONUS" )
-	{
-		combined.globalSettings.bonus++;
-		combined.enemySettings.spawnlevel = "BONUS";
-		combined.enemySettings.lvltospawn = combined.globalSettings.bonus;
+		combined.globalSettings.loadlevel++;
 	}
 }
 void PrintWave()
 {
 	std::stringstream temp;
-	temp <<combined.enemySettings.spawnlevel << ": " << combined.enemySettings.lvltospawn;
+	temp << stagename;
 	std::string result = temp.str();
 	writeToBuffer(50, 4, result, 0x03);
 }
-
 void PrintStage()
 {
 	std::stringstream stagetemp;

@@ -40,7 +40,6 @@ void init()
 
 
     elapsedTime = 0.0;
-
 	loadPlayerFromText();
 	combined.enemySettings.droppowerup = true;
 	GameVariables();
@@ -93,17 +92,15 @@ void update(double dt)
 			charLocation.X++; 
 		}
 
-		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile <combined.globalSettings.maxMissile-4)// && !missleFired1)
+		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile <combined.globalSettings.maxMissile-4)
 		{
- 			playerShoot();
-			
+			playerShoot();
 		}
-		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile>=combined.globalSettings.maxMissile-4)// && !missleFired1)
+		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile>=combined.globalSettings.maxMissile-4)
 		{
 			combined.globalSettings.currentMissile = 0;
 			playerShoot();
 		}
-		// goes to menu 2 if player hits the escape key ( a way of pause )
 		if (keyPressed[K_ESCAPE])
 		{
 			pausescreen();   

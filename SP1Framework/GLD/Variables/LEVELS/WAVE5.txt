@@ -1,4 +1,4 @@
-   WAVE3   1   1    10        2     0      25 WAVE    
+   WAVE5   1   1    10        2     0      25 WAVE    
 // NAME  T/F  HP SCORE CHARICON STATE SPAWNNO TYPE
 // Enemy 1
 
