@@ -149,16 +149,36 @@ void renderEnemyMissile()
 {
 	
 	static double timer_enemyBullet = elapsedTime;
-	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i++)
+	static double timer_enemyBullet2 = elapsedTime;
+	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=2)
 	{
-
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet > 0.05)
+			if( elapsedTime-timer_enemyBullet > 0.02)
 			{
-
+				
 				timer_enemyBullet = elapsedTime;
+				enemyBullet[i].corrdinates.X-=2;
+			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+			//Check if out of bound
+
+			if(enemyBullet[i].corrdinates.X <= 1)
+			{
+				enemyBullet[i].Active = false;
+			}
+		}
+	}
+	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=2)
+	{
+
+		if(enemyBullet[i].Active)
+		{
+			if( elapsedTime-timer_enemyBullet2 > 0.02)
+			{
+				
+				timer_enemyBullet2 = elapsedTime;
 				enemyBullet[i].corrdinates.X-=2;
 			}
 			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
