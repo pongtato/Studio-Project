@@ -69,29 +69,32 @@ void update(double dt)
 
 		// update game
 		updateGame();
-
-		// Updating the location of the character based on the key press
-		if (keyPressed[K_UP] && charLocation.Y > 3)
+		static double timer_movement = elapsedTime;
+		if( elapsedTime-timer_movement > 0.1)
 		{
-			Beep(0, 0);
-			charLocation.Y--; 
+			timer_movement = elapsedTime;
+			// Updating the location of the character based on the key press
+			if (keyPressed[K_UP] && charLocation.Y > 3)
+			{
+				Beep(0, 0);
+				charLocation.Y--; 
+			}
+			if (keyPressed[K_LEFT] && charLocation.X > 3)
+			{
+				Beep(0, 0);
+				charLocation.X--; 
+			}
+			if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 4)
+			{
+				Beep(0, 0);
+				charLocation.Y++; 
+			}
+			if (keyPressed[K_RIGHT] && charLocation.X <46)
+			{
+				Beep(0, 0);
+				charLocation.X++; 
+			}
 		}
-		if (keyPressed[K_LEFT] && charLocation.X > 3)
-		{
-			Beep(0, 0);
-			charLocation.X--; 
-		}
-		if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 4)
-		{
-			Beep(0, 0);
-			charLocation.Y++; 
-		}
-		if (keyPressed[K_RIGHT] && charLocation.X <46)
-		{
-			Beep(0, 0);
-			charLocation.X++; 
-		}
-
 		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile <combined.globalSettings.maxMissile-4)
 		{
 			playerShoot();
@@ -142,12 +145,15 @@ void render()
 	renderCharacter();
 	// render missiles
 	 //colour(0x0B);
+	
 	renderMissile();
+	
 	// render enemies
 	renderEnemies();
 	//render boss
 	//renderBoss();
 	//render enemy bullet
+
 	renderEnemyMissile();
 	// render powerup
 	renderPowerUp();

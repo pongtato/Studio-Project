@@ -5,7 +5,7 @@
 #include "common.h"
 
 extern PLAYER player;
-extern double elapseTime;
+extern double elapsedTime;
 BULLET powerUp;
 BULLET missile[60];
 BULLET enemyBullet[50];
@@ -147,15 +147,23 @@ void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation)
 }
 void renderEnemyMissile()
 {
+	
+	static double timer_enemyBullet = elapsedTime;
 	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i++)
 	{
+
+
 		if(enemyBullet[i].Active)
 		{
-			/*gotoXY(enemyBullet[i].corrdinates.X-=2,enemyBullet[i].corrdinates.Y);
-			std::cout << enemyBullet[i].icon << std::endl;*/
-			enemyBullet[i].corrdinates.X-=2;
+			if( elapsedTime-timer_enemyBullet > 0.05)
+			{
+
+				timer_enemyBullet = elapsedTime;
+				enemyBullet[i].corrdinates.X-=2;
+			}
 			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
+
 			if(enemyBullet[i].corrdinates.X <= 1)
 			{
 				enemyBullet[i].Active = false;
