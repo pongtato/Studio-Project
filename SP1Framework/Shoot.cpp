@@ -150,7 +150,8 @@ void renderEnemyMissile()
 	
 	static double timer_enemyBullet = elapsedTime;
 	static double timer_enemyBullet2 = elapsedTime;
-	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=2)
+	static double timer_enemyBullet3 = elapsedTime;
+	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=3)
 	{
 
 		if(enemyBullet[i].Active)
@@ -170,7 +171,7 @@ void renderEnemyMissile()
 			}
 		}
 	}
-	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=2)
+	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=3)
 	{
 
 		if(enemyBullet[i].Active)
@@ -190,7 +191,26 @@ void renderEnemyMissile()
 			}
 		}
 	}
+	for(int i = 2; i<combined.enemySettings.enemyMaxMissile;i+=3)
+	{
 
+		if(enemyBullet[i].Active)
+		{
+			if( elapsedTime-timer_enemyBullet3 > 0.02)
+			{
+				
+				timer_enemyBullet3 = elapsedTime;
+				enemyBullet[i].corrdinates.X-=2;
+			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+			//Check if out of bound
+
+			if(enemyBullet[i].corrdinates.X <= 1)
+			{
+				enemyBullet[i].Active = false;
+			}
+		}
+	}
 }
 bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 {
