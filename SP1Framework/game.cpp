@@ -95,11 +95,12 @@ void update(double dt)
 
 		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile <combined.globalSettings.maxMissile-4)// && !missleFired1)
 		{
-			playerShoot();
+ 			playerShoot();
 			
 		}
 		if(keyPressed[K_SPACE] && combined.globalSettings.currentMissile>=combined.globalSettings.maxMissile-4)// && !missleFired1)
 		{
+			combined.globalSettings.currentMissile = 0;
 			playerShoot();
 		}
 		// goes to menu 2 if player hits the escape key ( a way of pause )
