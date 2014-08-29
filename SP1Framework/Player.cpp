@@ -78,7 +78,7 @@ void collision()
 	if(powerUpPlayerCollision(charLocation,powerUp))
 	{
 		static double timer_spawn = elapsedTime;
-		if ( elapsedTime - timer_spawn > 0.1 )
+		if ( elapsedTime - timer_spawn > 0.2 )
 		{
 			timer_spawn = elapsedTime;
 			powerUp.Active = false;
@@ -89,10 +89,6 @@ void collision()
 	// check collision
 	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
-
-		
-		/*if ( combined.globalSettings.loadlevel%4 != 0)
-		{*/
 		for(int j = 0; j<spawnno;j++)
 		{
 			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
@@ -114,22 +110,6 @@ void collision()
 
 			}
 		}
-		//		else
-		//		{
-		//			for(int j = 0; j<BOSS_NO;j++)
-		//			{
-		//				if ( BosscheckCollisionBullet(missile[i], Bcounter[j]))
-		//				{
-		//					if ( Bcounter[j].hp <= 0 )
-		//					{
-		//						globalscore += Bcounter[j].score;
-		//						enemieskilled = 25;
-		//					}
-		//				}
-		//
-		//			}
-		//		}
-		//	}
 	}
 
 void renderCharacter()

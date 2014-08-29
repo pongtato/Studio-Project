@@ -10,6 +10,7 @@ BULLET powerUp;
 BULLET missile[60];
 BULLET enemyBullet[50];
 extern GLOBAL combined;
+extern std::string typefromtext;
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
@@ -70,36 +71,59 @@ void renderMissile()
 }
 bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 {
-
-	if(((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
-		|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y))//Check above
-		&&(checkEnemy.Active && missile.Active))//Check below
+	if( typefromtext != "BOSS")
 	{
-		missile.Active = false;
-		checkEnemy.hp--;		
-		missile.icon = ' ';
-		//Enemy death
-		if (checkEnemy.hp <= 0)
+		if(((missile.corrdinates.X+1 == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
+			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y))//Check above
+			&&(checkEnemy.Active && missile.Active))
 		{
-			checkEnemy.Active = false;
-			checkEnemy.icon = ' ';
-
-			//Chance to spawn powerup at enemy death
-			if(rand()%2 == 1 && spawnpowerup == true)
+			missile.Active = false;
+			checkEnemy.hp--;		
+			missile.icon = ' ';
+			//Enemy death
+			if (checkEnemy.hp <= 0)
 			{
-				powerUp.Active = true;
-				powerUp.corrdinates.X = checkEnemy.coordinates.X;
-				powerUp.corrdinates.Y = checkEnemy.coordinates.Y;
+				checkEnemy.Active = false;
+				checkEnemy.icon = ' ';
+				//Chance to spawn powerup at enemy death
+				if(rand()%2 == 1 && spawnpowerup == true)
+				{
+					powerUp.Active = true;
+					powerUp.corrdinates.X = checkEnemy.coordinates.X;
+					powerUp.corrdinates.Y = checkEnemy.coordinates.Y;
+				}
 			}
+			return true;
 		}
-		
-		//increase score
-
-		return true;
+		else
+		{
+			return false;
+		}
 	}
 	else
 	{
-		return false;
+		if(((missile.corrdinates.X == checkEnemy.coordinates.X-1 && missile.corrdinates.Y == checkEnemy.coordinates.Y)//Check directly infront 
+			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y-1)//Check above
+			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y+1))//CheckBelow
+			&&(checkEnemy.Active && missile.Active))
+		{
+			missile.Active = false;
+			checkEnemy.hp--;		
+			missile.icon = ' ';
+			//Enemy death
+			if (checkEnemy.hp <= 0)
+			{
+				checkEnemy.Active = false;
+				checkEnemy.midrow = ' ';
+				checkEnemy.toprow = ' ';
+				checkEnemy.botrow = ' ';
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation)

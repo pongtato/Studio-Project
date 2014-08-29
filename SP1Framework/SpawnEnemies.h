@@ -10,7 +10,9 @@
 struct ENEMY
 {
 	std::string name;
-	std::string row;
+	std::string toprow;
+	std::string midrow;
+	std::string botrow;
 	char icon;
 	COORD coordinates;
 	int Active;

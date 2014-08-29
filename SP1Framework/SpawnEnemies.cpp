@@ -6,9 +6,8 @@
 #include <iostream>
 #include <sstream>
 #include "common.h"
-
-ENEMY counter[999];
 ENEMY powerup[1];
+ENEMY counter[999];
 //top terrain
 WORLD generator[999];
 //bottom terrain
@@ -21,7 +20,9 @@ int hpfromtext;
 int scorefromtext;
 int iconfromtext;
 int spawnno;
-std::string patternfromtext;
+std::string tpatternfromtext;
+std::string mpatternfromtext;
+std::string bpatternfromtext;
 std::string typefromtext;
 std::string stagename;
 using std::ostringstream;
@@ -39,7 +40,7 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 	if ( indata.is_open())
 	{
-		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> patternfromtext)
+		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> tpatternfromtext >> mpatternfromtext >> bpatternfromtext)
 		{
 		}
 	}
@@ -79,7 +80,7 @@ void moveEnemiesDown()
 }
 void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
-	if(combined.enemySettings.spawnlevel != "BOSS")
+	if(typefromtext != "BOSS")
 	{
 	counter[currentEnemy].Active = activefromtext;
 	counter[currentEnemy].coordinates.X = modX;
@@ -97,7 +98,9 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 	counter[currentEnemy].coordinates.Y = modY;
 	counter[currentEnemy].hp= hpfromtext;
 	counter[currentEnemy].score= scorefromtext;
-	counter[currentEnemy].row= patternfromtext;
+	counter[currentEnemy].toprow= tpatternfromtext;
+	counter[currentEnemy].midrow= mpatternfromtext;
+	counter[currentEnemy].botrow= bpatternfromtext;
 	counter[currentEnemy].number = currentEnemy;
 	counter[currentEnemy].state = statefromtext;
 	}
@@ -145,7 +148,7 @@ void moveTerrainBot()
 }
 void enemySpawn()
 {
-	if(combined.enemySettings.spawnlevel != "BOSS")
+	if(typefromtext != "BOSS")
 	{
 		// spawn enemies
 		static double timer_spawn = elapsedTime;
@@ -212,13 +215,15 @@ void renderEnemies()
 		{
 			/*gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y);
 			std::cout << counter[i].icon;*/
-			if (combined.enemySettings.spawnlevel != "BOSS")
+			if (typefromtext != "BOSS")
 			{
 			writeToBuffer(counter[i].coordinates,counter[i].icon);
 			}
 			else
 			{
-			writeToBuffer(counter[i].coordinates,counter[i].row);
+			writeToBuffer(counter[i].coordinates.X,counter[i].coordinates.Y-1,counter[i].toprow);
+			writeToBuffer(counter[i].coordinates,counter[i].midrow);
+			writeToBuffer(counter[i].coordinates.X,counter[i].coordinates.Y+1,counter[i].botrow);
 			}
 		}
 		if(counter[i].coordinates.X <=2)
@@ -241,7 +246,7 @@ void enemyMove()
 	{
 		combined.enemySettings.spawnclear = 1;
 	}
-	if (combined.enemySettings.spawnlevel != "BOSS")
+	if (typefromtext != "BOSS")
 	{
 		// move enemies
 		if ( combined.enemySettings.spawnclear == 0)
@@ -299,7 +304,7 @@ void enemyMove()
 				moveEnemiesUp();
 				combined.enemySettings.moveYUP--;
 				combined.enemySettings.moveYDOWN = combined.enemySettings.moveYUP;
-				if (combined.enemySettings.moveYUP < 6)
+				if (combined.enemySettings.moveYUP < 7)
 				{
 					combined.enemySettings.wew = 0;
 					combined.enemySettings.moveState = 3;
@@ -310,7 +315,7 @@ void enemyMove()
 			{
 				moveEnemiesDown();
 				combined.enemySettings.moveYDOWN++;
-				if (combined.enemySettings.moveYDOWN > 18)
+				if (combined.enemySettings.moveYDOWN > 17)
 				{
 					combined.enemySettings.moveYUP = combined.enemySettings.moveYDOWN;
 					combined.enemySettings.moveState = 2;
@@ -325,7 +330,7 @@ void enemyShooting()
 {
 	//Enemy shooting
 	static double timer_shoot = elapsedTime;
-	if (combined.enemySettings.spawnlevel != "BOSS")
+	if (typefromtext != "BOSS")
 	{
 		for(int i =0; i<spawnno;i++)
 		{
