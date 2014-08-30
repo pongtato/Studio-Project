@@ -13,7 +13,7 @@ BULLET missile[60];
 BULLET enemyBullet[50];
 extern GLOBAL combined;
 extern std::string typefromtext;
-extern SHIELD shield;
+extern SHIELD shield[3];
 
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
@@ -164,7 +164,7 @@ void renderEnemyMissile()
 			{
 				
 				timer_enemyBullet = elapsedTime;
-				enemyBullet[i].corrdinates.X-=2;
+				enemyBullet[i].corrdinates.X--;
 			}
 			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound

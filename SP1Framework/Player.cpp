@@ -8,7 +8,7 @@
 #include <sstream>
 
 PLAYER player;
-SHIELD shield;
+SHIELD shield[3];
 int PlayerActivefromtext;
 int PlayerHpfromtext;
 int PlayerIconfromtext;
@@ -106,10 +106,14 @@ void collision()
 				menuscreen();
 			}
 
-			if(shieldblock(shield.coordinates,enemyBullet[j]))
+			for(int i = 0; i<3;i++)
 			{
-				shield.hp--;
-				enemyBullet[j].icon = ' ';
+				if(shieldblock(shield[i].coordinates,enemyBullet[j]))
+				{
+					shield[i].hp--;
+					enemyBullet[j].Active = false;
+					
+				}
 			}
 
 			if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
@@ -172,17 +176,20 @@ void PrintSpecial()
 
 void renderShield()
 {
-	if ( shield.Active == true )
+	if ( shield[0].Active == true )
 	{
-	writeToBuffer(shield.coordinates.X,shield.coordinates.Y,shield.icon,0x0A);
-	writeToBuffer(shield.coordinates.X,shield.coordinates.Y+1,shield.icon,0x0A);
-	writeToBuffer(shield.coordinates.X,shield.coordinates.Y+2,shield.icon,0x0A);
+		
+		writeToBuffer(shield[0].coordinates,shield[0].icon,0x0A);
+		writeToBuffer(shield[1].coordinates,shield[1].icon,0x0A);
+		writeToBuffer(shield[2].coordinates,shield[2].icon,0x0A);
 	}
 	static double timer_shieldfade = elapsedTime;
 	if( elapsedTime-timer_shieldfade > 5)
 	{
 		timer_shieldfade = elapsedTime;
-		shield.Active = false;
+		shield[0].Active = false;
+		shield[1].Active = false;
+		shield[2].Active = false;
 	}
 }
 
@@ -196,20 +203,30 @@ void initshieldVar()
 		{
 		}
 	}
-
-	shield.icon = shieldfromtext;
-	shield.hp = shieldhpfromtext;
-	shield.Active = false;
+	for(int i = 0; i<3;i++)
+	{
+	shield[i].icon = shieldfromtext;
+	shield[i].hp = shieldhpfromtext;
+	shield[i].Active = false;
+	
+	}
 	player.Special = 2;
 }
 
 void useSpecial()
 {	
-	if ( player.Special > 0 && shield.Active == false)
+	if ( player.Special > 0 && shield[0].Active == false)
 	{
-		shield.coordinates.X = charLocation.X + 3;
-		shield.coordinates.Y = charLocation.Y-1;
+		
+		shield[0].coordinates.X = charLocation.X + 3;
+		shield[0].coordinates.Y = charLocation.Y;
+		shield[1].coordinates.X = charLocation.X + 3;
+		shield[1].coordinates.Y = charLocation.Y-1;
+		shield[2].coordinates.X = charLocation.X + 3;
+		shield[2].coordinates.Y = charLocation.Y+1;
 		player.Special--;
-		shield.Active = true;
+		shield[0].Active = true;
+		shield[1].Active = true;
+		shield[2].Active = true;
 	}
 }
