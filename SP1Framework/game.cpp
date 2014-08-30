@@ -43,6 +43,7 @@ void init()
 	loadPlayerFromText();
 	combined.enemySettings.droppowerup = true;
 	GameVariables();
+	initshieldVar();
 	levelCheck();
 }
 void shutdown()
@@ -60,6 +61,7 @@ void getInput()
     keyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
     keyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	keyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
+	keyPressed[K_B] = isKeyPressed(VK_B);
 }
 void update(double dt)
 {
@@ -108,6 +110,10 @@ void update(double dt)
 		{
 			pausescreen();   
 		}
+		if (keyPressed[K_B])
+		{
+			useSpecial();
+		}
 
 }
 void render()
@@ -129,18 +135,16 @@ void render()
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;*/
 
-	/*gotoXY(50, 3);
-    colour(0x03);
-    std::cout << "Score:" << globalscore << std::endl;*/
+	
 	writeToBuffer(50,3,display[0],0x03);
 	normalscore();
 
-	/*gotoXY(50, 4);
-    colour(0x03);
-    std::cout << "Wave:" << loadlevel << std::endl;*/
+
 	writeToBuffer(50,4,display[1],0x03);
 	PrintWave();
 	PrintStage();
+	PrintSpecial();
+
     // render character
 	renderCharacter();
 	// render missiles
@@ -159,6 +163,8 @@ void render()
 	renderPowerUp();
 	// randomly generate terrain
 	renderTerrain();
+	//render shields
+	renderShield();
 
 	// Writes the buffer to the console, hence you will see what you have written
     flushBufferToConsole();

@@ -21,6 +21,7 @@ GLOBAL combined;
 extern COORD charLocation;
 extern double elapsedTime;
 
+
 void GameVariables()
 {
 	powerUp.icon = PowerupIcon;
@@ -69,6 +70,7 @@ void stageclear()
 		combined.enemySettings.wew = 1;
 		combined.enemySettings.spawnclear = 1;
 		levelCheck();
+		player.Special++;
 	}
 }
 
@@ -95,3 +97,4 @@ void playerShoot()
 		}
 	}
 }
+

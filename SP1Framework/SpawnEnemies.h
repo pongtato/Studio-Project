@@ -21,11 +21,6 @@ struct ENEMY
 	int number;
 	int state;
 };
-
-void moveBoss();
-void moveBossUp();
-void moveBossDown();
-
 struct WORLD
 {
 	char icon;
@@ -33,6 +28,12 @@ struct WORLD
 	COORD coordinates;
 	int Active;
 };
+
+void moveBoss();
+void moveBossUp();
+void moveBossDown();
+
+
 
 void moveEnemies();
 void moveEnemiesUp();

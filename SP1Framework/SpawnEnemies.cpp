@@ -40,7 +40,7 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 	if ( indata.is_open())
 	{
-		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> tpatternfromtext >> mpatternfromtext >> bpatternfromtext)
+		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext)
 		{
 		}
 	}
@@ -538,12 +538,12 @@ void PrintWave()
 	std::stringstream temp;
 	temp << stagename;
 	std::string result = temp.str();
-	writeToBuffer(50, 4, result, 0x03);
+	writeToBuffer(50, 5, result, 0x0C);
 }
 void PrintStage()
 {
 	std::stringstream stagetemp;
 	stagetemp << "Stage" << ": " << combined.globalSettings.stage;
 	std::string stage = stagetemp.str();
-	writeToBuffer(50, 5, stage, 0x03);
+	writeToBuffer(50, 4, stage, 0x03);
 }

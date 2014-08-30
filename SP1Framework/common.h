@@ -6,6 +6,7 @@
 #include <string>
 
 #define TERRAIN 999
+#define VK_B 0x42
 
 struct EnemySettings
 {
@@ -58,6 +59,8 @@ struct GeneralSettings
 	int stage;
 	int lvl;
 	unsigned int currentMissile;
+	unsigned int currentShield;
+	unsigned int shieldSize;
 	unsigned int maxMissile;
 	unsigned int playingField;
 	bool nextstage;

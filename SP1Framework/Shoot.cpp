@@ -3,6 +3,8 @@
 #include "Framework\console.h"
 #include <iostream>
 #include "common.h"
+#include <fstream>
+#include <iostream>
 
 extern PLAYER player;
 extern double elapsedTime;
@@ -11,6 +13,8 @@ BULLET missile[60];
 BULLET enemyBullet[50];
 extern GLOBAL combined;
 extern std::string typefromtext;
+extern SHIELD shield;
+
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
@@ -220,6 +224,7 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 		enemySpawn.Active = false;
 		return true;
 	}
+
 	if(((player.X == enemySpawn.coordinates.X && player.Y == enemySpawn.coordinates.Y)
 		|| player.X  == enemySpawn.coordinates.X+1 && player.Y == enemySpawn.coordinates.Y)&& (enemySpawn.Active))
 	{
@@ -235,6 +240,19 @@ bool powerUpPlayerCollision(COORD player, BULLET powerPlayer)
 {
 	if((player.X == powerPlayer.corrdinates.X && player.Y == powerPlayer.corrdinates.Y)
 		&&powerPlayer.Active)//Check below
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool shieldblock(COORD shield,BULLET enemyBullet)
+{
+	if(((shield.X == enemyBullet.corrdinates.X && shield.Y == enemyBullet.corrdinates.Y)
+		|| shield.X == enemyBullet.corrdinates.X && shield.Y+1 == enemyBullet.corrdinates.Y 
+		|| shield.X == enemyBullet.corrdinates.X && shield.Y+2 == enemyBullet.corrdinates.Y) && (enemyBullet.Active))
 	{
 		return true;
 	}

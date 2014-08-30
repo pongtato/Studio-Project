@@ -5,8 +5,10 @@
 #include "MainMenu.h"
 #include "SpawnEnemies.h"
 #include "common.h"
+#include <sstream>
 
 PLAYER player;
+SHIELD shield;
 int PlayerActivefromtext;
 int PlayerHpfromtext;
 int PlayerIconfromtext;
@@ -21,6 +23,10 @@ extern ENEMY counter[999];
 extern BULLET enemyBullet[50];
 extern BULLET missile[50];
 extern int spawnno;
+
+int shieldfromtext;
+int shieldhpfromtext;
+int shieldSize;
 
 extern COORD charLocation;
 
@@ -99,18 +105,25 @@ void collision()
 				system("pause");
 				menuscreen();
 			}
-				if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
-				{
-					if ( counter[j].hp <= 0 )
-					{
-						combined.globalSettings.globalscore += counter[j].score;
-						combined.enemySettings.enemieskilled++;
-					}
-				}
 
+			if(shieldblock(shield.coordinates,enemyBullet[j]))
+			{
+				shield.hp--;
+				enemyBullet[j].icon = ' ';
 			}
+
+			if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
+			{
+				if ( counter[j].hp <= 0 )
+				{
+					combined.globalSettings.globalscore += counter[j].score;
+					combined.enemySettings.enemieskilled++;
+				}
+			}
+
 		}
 	}
+}
 
 void renderCharacter()
 {
@@ -147,4 +160,56 @@ void renderCharacter()
 		writeToBuffer(charLocation.X,charLocation.Y+1,player.wingIcon,0x0F);
 	}
 
+}
+
+void PrintSpecial()
+{
+	std::stringstream Specialtemp;
+	Specialtemp << "SPECIAL" << ": " << player.Special;
+	std::string stage = Specialtemp.str();
+	writeToBuffer(50, 6, stage, 0x0E);
+}
+
+void renderShield()
+{
+	if ( shield.Active == true )
+	{
+	writeToBuffer(shield.coordinates.X,shield.coordinates.Y,shield.icon,0x0A);
+	writeToBuffer(shield.coordinates.X,shield.coordinates.Y+1,shield.icon,0x0A);
+	writeToBuffer(shield.coordinates.X,shield.coordinates.Y+2,shield.icon,0x0A);
+	}
+	static double timer_shieldfade = elapsedTime;
+	if( elapsedTime-timer_shieldfade > 5)
+	{
+		timer_shieldfade = elapsedTime;
+		shield.Active = false;
+	}
+}
+
+void initshieldVar()
+{
+	std::ifstream indata;
+	indata.open("GLD/Variables/Special(Shield).txt");
+	if ( indata.is_open())
+	{
+		if (indata >> shieldhpfromtext >> shieldfromtext >> shieldSize )
+		{
+		}
+	}
+
+	shield.icon = shieldfromtext;
+	shield.hp = shieldhpfromtext;
+	shield.Active = false;
+	player.Special = 2;
+}
+
+void useSpecial()
+{	
+	if ( player.Special > 0 && shield.Active == false)
+	{
+		shield.coordinates.X = charLocation.X + 3;
+		shield.coordinates.Y = charLocation.Y-1;
+		player.Special--;
+		shield.Active = true;
+	}
 }
