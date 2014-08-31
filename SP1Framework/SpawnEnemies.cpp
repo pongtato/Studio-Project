@@ -367,7 +367,7 @@ void enemyShooting()
 	}
 	else
 	{
-		for(int i =0; i<spawnno;i++)
+		for(int i=0; i<1;i++)
 		{
 			if(counter[i].Active)
 			{

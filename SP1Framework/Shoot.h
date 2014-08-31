@@ -19,11 +19,8 @@ struct BULLET
 void renderMissile();		// renders missiles in the game
 void shootMissile1(unsigned int &currentMissile, COORD charLocation);
 void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLocationY);
-void shootMissile2(unsigned int &currentMissile, COORD charLocation);
-void shootMissile2(unsigned int &currentMissile,  int charLocationX, int charLocationY);
 bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy,bool spawnpowerup);
 void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation);
-void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation);
 void renderEnemyMissile();
 bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn);
 bool powerUpPlayerCollision(COORD player, BULLET powerPlayer);

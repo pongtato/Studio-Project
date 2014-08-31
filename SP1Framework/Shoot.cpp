@@ -18,9 +18,6 @@ extern std::string tpatternfromtext;
 extern std::string mpatternfromtext;
 extern std::string bpatternfromtext;
 
-
-
-
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
 		missile[currentMissile].Active = true;
@@ -38,25 +35,6 @@ void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLoca
 		missile[currentMissile].corrdinates.Y = charLocationY;
 		missile[currentMissile].number = currentMissile;
 		currentMissile++;
-}
-void shootMissile2(unsigned int &currentMissile, COORD charLocation)
-{
-	missile[currentMissile].Active = true;
-	missile[currentMissile].icon = player.playerMissleIcon;
-	missile[currentMissile].corrdinates.X = charLocation.X+1;
-	missile[currentMissile].corrdinates.Y = charLocation.Y;
-	missile[currentMissile].number = currentMissile;
-	currentMissile++;
-}
-void shootMissile2(unsigned int &currentMissile,  int charLocationX, int charLocationY)
-{
-	
-	missile[currentMissile].Active = true;
-	missile[currentMissile].icon = player.playerMissleIcon;
-	missile[currentMissile].corrdinates.X = charLocationX+1;
-	missile[currentMissile].corrdinates.Y = charLocationY;
-	missile[currentMissile].number = currentMissile;
-	currentMissile++;
 }
 void renderMissile()
 {
@@ -147,43 +125,20 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation)
 {
 	enemyBullet[bulletCount].Active = true;
-	enemyBullet[bulletCount].icon = '~';
+	enemyBullet[bulletCount].icon = '<';
 	enemyBullet[bulletCount].corrdinates.X = enemyLocation.X--;
 	enemyBullet[bulletCount].corrdinates.Y = enemyLocation.Y;
 	enemyBullet[bulletCount].number = bulletCount;
 	bulletCount++;
 }
-void enemyShootBullet2(unsigned int &bulletCount, COORD enemyLocation)
-{
-	bulletCount=0;
-	enemyBullet[bulletCount].Active = true;
-	enemyBullet[bulletCount].icon = '~';
-	enemyBullet[bulletCount].corrdinates.X = enemyLocation.X--;
-	enemyBullet[bulletCount].corrdinates.Y = enemyLocation.Y;
-	enemyBullet[bulletCount].number = bulletCount;
-	
-}
 void renderEnemyMissile()
 {
-	
-	static double timer_enemyBullet = elapsedTime;
-	static double timer_enemyBullet2 = elapsedTime;
-	static double timer_enemyBullet3 = elapsedTime;
-	static double timer_enemyBullet4 = elapsedTime;
-	static double timer_enemyBullet5 = elapsedTime;
-	static double timer_enemyBullet6 = elapsedTime;
-	static double timer_enemyBullet7 = elapsedTime;
 	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=7)
 	{
-
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet > 0.02)
-			{
-				
-				timer_enemyBullet = elapsedTime;
 				enemyBullet[i].corrdinates.X--;
-			}
+				writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
 
 			if(enemyBullet[i].corrdinates.X <= 1)
@@ -191,131 +146,6 @@ void renderEnemyMissile()
 				enemyBullet[i].Active = false;
 
 			}
-			
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-		}
-	}
-	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=7)
-	{
-
-		if(enemyBullet[i].Active)
-		{
-			if( elapsedTime-timer_enemyBullet2 > 0.02)
-			{
-				
-				timer_enemyBullet2 = elapsedTime;
-				enemyBullet[i].corrdinates.X--;
-			}
-			//Check if out of bound
-
-			if(enemyBullet[i].corrdinates.X <= 1)
-			{
-				enemyBullet[i].Active = false;
-			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-
-		}
-	}
-	for(int i = 2; i<combined.enemySettings.enemyMaxMissile;i+=7)
-	{
-
-		if(enemyBullet[i].Active)
-		{
-			if( elapsedTime-timer_enemyBullet3 > 0.02)
-			{
-				
-				timer_enemyBullet3 = elapsedTime;
-				enemyBullet[i].corrdinates.X--;
-			}
-			//Check if out of bound
-
-			if(enemyBullet[i].corrdinates.X <= 1)
-			{
-				enemyBullet[i].Active = false;
-			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-
-		}
-	}
-	for(int i = 3; i<combined.enemySettings.enemyMaxMissile;i+=7)
-	{
-
-		if(enemyBullet[i].Active)
-		{
-			if( elapsedTime-timer_enemyBullet4 > 0.02)
-			{
-				
-				timer_enemyBullet4  = elapsedTime;
-				enemyBullet[i].corrdinates.X--;
-			}
-			//Check if out of bound
-
-			if(enemyBullet[i].corrdinates.X <= 1)
-			{
-				enemyBullet[i].Active = false;
-			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-
-		}
-	}
-	for(int i = 4; i<combined.enemySettings.enemyMaxMissile;i+=7)
-	{
-		if(enemyBullet[i].Active)
-		{
-			if( elapsedTime-timer_enemyBullet5 > 0.02)
-			{
-				
-				timer_enemyBullet5  = elapsedTime;
-				enemyBullet[i].corrdinates.X--;
-			}
-			//Check if out of bound
-
-			if(enemyBullet[i].corrdinates.X <= 1)
-			{
-				enemyBullet[i].Active = false;
-			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-
-		}
-	}
-	for(int i = 5; i<combined.enemySettings.enemyMaxMissile;i+=7)
-	{
-		if(enemyBullet[i].Active)
-		{
-			if( elapsedTime-timer_enemyBullet6 > 0.02)
-			{
-				
-				timer_enemyBullet6  = elapsedTime;
-				enemyBullet[i].corrdinates.X--;
-			}
-			//Check if out of bound
-
-			if(enemyBullet[i].corrdinates.X <= 1)
-			{
-				enemyBullet[i].Active = false;
-			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-
-		}
-	}
-	for(int i = 6; i<combined.enemySettings.enemyMaxMissile;i+=7)
-	{
-		if(enemyBullet[i].Active)
-		{
-			if( elapsedTime-timer_enemyBullet7 > 0.02)
-			{
-				
-				timer_enemyBullet6  = elapsedTime;
-				enemyBullet[i].corrdinates.X--;
-			}
-			//Check if out of bound
-
-			if(enemyBullet[i].corrdinates.X <= 1)
-			{
-				enemyBullet[i].Active = false;
-			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-
 		}
 	}
 }
@@ -325,13 +155,6 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 		|| player.X  == enemyBullet.corrdinates.X+1 && player.Y == enemyBullet.corrdinates.Y)&& (enemyBullet.Active))
 	{
 		enemySpawn.Active = false;
-		return true;
-	}
-
-	if(((player.X == enemySpawn.coordinates.X && player.Y == enemySpawn.coordinates.Y)
-		|| player.X  == enemySpawn.coordinates.X+1 && player.Y == enemySpawn.coordinates.Y)&& (enemySpawn.Active))
-	{
-		enemyBullet.Active = false;
 		return true;
 	}
 	else
