@@ -158,12 +158,13 @@ void renderEnemyMissile()
 	static double timer_enemyBullet = elapsedTime;
 	static double timer_enemyBullet2 = elapsedTime;
 	static double timer_enemyBullet3 = elapsedTime;
-	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=3)
+	static double timer_enemyBullet4 = elapsedTime;
+	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=4)
 	{
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet > 0.02)
+			if( elapsedTime-timer_enemyBullet > 0.01)
 			{
 				
 				timer_enemyBullet = elapsedTime;
@@ -178,16 +179,16 @@ void renderEnemyMissile()
 			}
 		}
 	}
-	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=3)
+	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=4)
 	{
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet2 > 0.02)
+			if( elapsedTime-timer_enemyBullet2 > 0.01)
 			{
 				
 				timer_enemyBullet2 = elapsedTime;
-				enemyBullet[i].corrdinates.X-=2;
+				enemyBullet[i].corrdinates.X--;
 			}
 			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
@@ -198,16 +199,36 @@ void renderEnemyMissile()
 			}
 		}
 	}
-	for(int i = 2; i<combined.enemySettings.enemyMaxMissile;i+=3)
+	for(int i = 2; i<combined.enemySettings.enemyMaxMissile;i+=4)
 	{
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet3 > 0.02)
+			if( elapsedTime-timer_enemyBullet3 > 0.01)
 			{
 				
 				timer_enemyBullet3 = elapsedTime;
-				enemyBullet[i].corrdinates.X-=2;
+				enemyBullet[i].corrdinates.X--;
+			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+			//Check if out of bound
+
+			if(enemyBullet[i].corrdinates.X <= 1)
+			{
+				enemyBullet[i].Active = false;
+			}
+		}
+	}
+	for(int i = 3; i<combined.enemySettings.enemyMaxMissile;i+=4)
+	{
+
+		if(enemyBullet[i].Active)
+		{
+			if( elapsedTime-timer_enemyBullet4 > 0.01)
+			{
+				
+				timer_enemyBullet4  = elapsedTime;
+				enemyBullet[i].corrdinates.X--;
 			}
 			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
