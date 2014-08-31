@@ -18,7 +18,7 @@ const unsigned int frameTime = 1000 / FPS; // time for each frame
 int main()
 {
 	init();      // initialize your variables
-    menuscreen();
+    introscreen();
     shutdown();  // do clean up, if any. free memory.
 
 	return 0;

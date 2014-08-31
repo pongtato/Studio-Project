@@ -2,6 +2,8 @@
 #include "Framework\console.h"
 #include "leveldesign.h"
 #include <iostream>
+#include "SpawnEnemies.h"
+
 
 void leveldesign()
 {
@@ -34,6 +36,68 @@ void loseScreen()
 			}
 	}
 		indata.close();
+}
+
+void mainScreenIntro()
+{
+	string bullet = " - ";
+
+	string pongtato1 = "   ___   ___  _   _  ____ _____  _  _____ ___";
+	string pongtato2 = " |  _ \\ / _ \\| \\ | |/ ___|_   _|/ \\|_   _/ _ \\  ";          
+    string pongtato3 = " | |_) | | | |  \\| | |  _  | | / _ \\ | || | | |";         
+    string pongtato4 = " |  __/| |_| | |\\  | |_| | | |/ ___ \\| || |_| |";         
+    string pongtato5 = " |_|    \\___/|_| \\_|\\____| |_/_/   \\_|_| \\___/";         
+                
+    string invasion1 = "  ___ _   ___     ___    ____ ___ ___  _   _";                                                        
+    string invasion2 = " |_ _| \\ | \\ \\   / / \\  / ___|_ _/ _ \\| \\ | |";            
+    string invasion3 = "  | ||  \\| |\\ \\ / / _ \\ \\___ \\| | | | |  \\| |";             
+    string invasion4 = "  | || |\\  | \\ V / ___ \\ ___) | | |_| | |\\  |";              
+    string invasion5 = " |___|_| \\_|  \\_/_/   \\_|____|___\\___/|_| \\_|";
+
+
+
+	writeToBuffer(16,1,pongtato1,0x06);
+	flushBufferToConsole(); Sleep(100);
+	writeToBuffer(16,1,bullet,0x0F);
+	writeToBuffer(16,1,pongtato1,0x03);
+	flushBufferToConsole(); Sleep(200);
+	
+	writeToBuffer(16,2,pongtato2,0x06);
+	flushBufferToConsole(); Sleep(75);
+	writeToBuffer(16,2,pongtato2,0x03);
+	flushBufferToConsole(); Sleep(200);
+
+	writeToBuffer(16,3,pongtato3,0x06);
+	flushBufferToConsole(); Sleep(75);
+	writeToBuffer(16,3,pongtato3,0x03);
+	flushBufferToConsole(); Sleep(200);
+
+	writeToBuffer(16,4,pongtato4,0x06);
+	flushBufferToConsole(); Sleep(75);
+	writeToBuffer(16,4,pongtato4,0x03);
+	flushBufferToConsole(); Sleep(200);
+
+	writeToBuffer(16,5,pongtato5,0x06);
+	flushBufferToConsole(); Sleep(75);
+	writeToBuffer(16,5,pongtato5,0x03);
+	flushBufferToConsole(); Sleep(400);
+
+	writeToBuffer(16,1,pongtato1,0x06);
+	writeToBuffer(16,2,pongtato2,0x06);
+	writeToBuffer(16,3,pongtato3,0x06);
+	writeToBuffer(16,4,pongtato4,0x06);
+	writeToBuffer(16,5,pongtato5,0x06);
+	flushBufferToConsole(); Sleep(1000);
+
+	writeToBuffer(17,6,invasion1,0x06);
+	writeToBuffer(17,7,invasion2,0x06);
+	writeToBuffer(17,8,invasion3,0x06);
+	writeToBuffer(17,9,invasion4,0x06);
+	writeToBuffer(17,10,invasion5,0x06);
+	flushBufferToConsole();
+	
+	Sleep(1000);
+                 
 }
 
 void mainScreen()
@@ -96,3 +160,4 @@ void exitScreen()
 		indata.close();
 	}
 }
+

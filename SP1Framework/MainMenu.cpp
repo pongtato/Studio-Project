@@ -13,7 +13,27 @@ string pongMenu[99] = {"1:","2:","3:", "4:",
 "StartGame", "HighScores", "Instruction", "Exit",
 "Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "Resume Game"};
 
+void introscreen()
+{
+	intro();
+	selection();
+}
+void intro()
+{
+	clearBuffer(0x0F);
+	mainScreenIntro();
+	writeToBuffer(20,14,pongMenu[8],0x03);
+	writeToBuffer(31,18,pongMenu[0],0x06);
+	writeToBuffer(34,18,pongMenu[4],0x07);
+	writeToBuffer(31,19,pongMenu[1],0x06);
+	writeToBuffer(34,19,pongMenu[5],0x07);
+	writeToBuffer(31,20,pongMenu[2],0x06);
+	writeToBuffer(34,20,pongMenu[6],0x07);
+	writeToBuffer(31,21,pongMenu[3],0x06);
+	writeToBuffer(34,21,pongMenu[7],0x07);
+	flushBufferToConsole();
 
+}
 
 void menuscreen()
 {
