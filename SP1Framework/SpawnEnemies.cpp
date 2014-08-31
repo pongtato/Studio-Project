@@ -14,6 +14,7 @@ WORLD generator[999];
 WORLD generator2[999];
 extern GLOBAL combined;
 extern double elapsedTime;
+extern ENEMY currentEnemy;
 int enemycounter;
 int activefromtext;
 int hpfromtext;
@@ -546,4 +547,16 @@ void PrintStage()
 	stagetemp << "Stage" << ": " << combined.globalSettings.stage;
 	std::string stage = stagetemp.str();
 	writeToBuffer(50, 4, stage, 0x03);
+}
+void bossPattern()
+{
+	std::ifstream indata3;
+	indata3.open("GLD/Variables/LEVELS/BOSS1PATTERN.txt");
+	for ( int i = 0; indata3.good(); ++i)
+	{
+		 getline(indata3, combined.enemySettings.bosschecker[i]);
+	}
+	tpatternfromtext = combined.enemySettings.bosschecker[0];
+	mpatternfromtext = combined.enemySettings.bosschecker[1];
+	bpatternfromtext = combined.enemySettings.bosschecker[2];	
 }

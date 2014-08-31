@@ -31,6 +31,7 @@ struct EnemySettings
 	unsigned int enemyMaxMissile;
 	unsigned int powerupEnemy;
 	std::string stagechecker[256];
+	std::string bosschecker[256];
 	std::string spawnlevel;
 	int lvltospawn;
 	bool droppowerup;

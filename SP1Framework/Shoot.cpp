@@ -14,6 +14,9 @@ BULLET enemyBullet[50];
 extern GLOBAL combined;
 extern std::string typefromtext;
 extern SHIELD shield[3];
+extern std::string tpatternfromtext;
+extern std::string mpatternfromtext;
+extern std::string bpatternfromtext;
 
 
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
@@ -106,9 +109,9 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 	}
 	else
 	{
-		if(((missile.corrdinates.X == checkEnemy.coordinates.X-1 && missile.corrdinates.Y == checkEnemy.coordinates.Y && checkEnemy.midrow != " ")//Check directly infront 
-			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y-1 && checkEnemy.toprow != " ")//Check above
-			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y+1 && checkEnemy.botrow != " "))//CheckBelow
+		if(((missile.corrdinates.X == checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y && tpatternfromtext != "")//Check directly infront 
+			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y-1 && mpatternfromtext != "")//Check above
+			|| (missile.corrdinates.X ==  checkEnemy.coordinates.X && missile.corrdinates.Y == checkEnemy.coordinates.Y+1 && bpatternfromtext != ""))//CheckBelow
 			&&(checkEnemy.Active && missile.Active))
 		{
 			missile.Active = false;

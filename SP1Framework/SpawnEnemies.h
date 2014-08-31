@@ -56,6 +56,9 @@ void terrainMove();
 void levelCheck();
 void PrintWave();
 void PrintStage();
+void bossPattern();
+
+
 
 
 
