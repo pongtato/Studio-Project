@@ -29,6 +29,7 @@ std::string typefromtext;
 std::string stagename;
 std::string idfromtext;
 using std::ostringstream;
+int terrainfromtext = 100;
 
 
 int statefromtext;
@@ -129,7 +130,7 @@ void SpawnTerrain(unsigned int &currentTerrain, int terrainModX, int terrainModY
 }
 void moveTerrain()
 {
-	for ( int i = 0; i  < TERRAIN; ++i)
+	for ( int i = 0; i  < terrainfromtext; ++i)
 	{
 		//is enemy alive
 		if(generator[i].Active == true)
@@ -149,7 +150,7 @@ void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terra
 }
 void moveTerrainBot()
 {
-	for ( int i = 0; i  < TERRAIN; ++i)
+	for ( int i = 0; i  < terrainfromtext; ++i)
 	{
 		//is enemy alive
 		if(generator2[i].Active == true)
@@ -392,7 +393,7 @@ void FormTerrain()
 	if ( elapsedTime - timer_spawn > 0.2 )
 	{
 		timer_spawn = elapsedTime;
-		if ( combined.terrainSettings.currentTerrain < TERRAIN )
+		if ( combined.terrainSettings.currentTerrain < terrainfromtext )
 		{
 			SpawnTerrain(combined.terrainSettings.currentTerrain,combined.terrainSettings.terrainModX,combined.terrainSettings.terrainModY, combined.terrainSettings.terrainicon);
 			if ( combined.terrainSettings.terrainModY < 3)
@@ -421,6 +422,10 @@ void FormTerrain()
 				}
 			}
 		}
+		else 
+		{
+			combined.terrainSettings.currentTerrain = 0;
+		}
 	}	
 
 }
@@ -431,7 +436,7 @@ void FormTerrainBot()
 	if ( elapsedTime - timer_spawn > 0.2 )
 	{
 		timer_spawn = elapsedTime;
-		if ( combined.terrainSettings.currentTerrain < TERRAIN )
+		if ( combined.terrainSettings.currentTerrain < terrainfromtext )
 		{
 			SpawnTerrainBot(combined.terrainSettings.currentTerrain,combined.terrainSettings.terrainModX, combined.terrainSettings.terrainBotModY, combined.terrainSettings.terrainicon);
 			if ( combined.terrainSettings.terrainBotModY > 21)
@@ -467,13 +472,11 @@ void FormTerrainBot()
 void renderTerrain()
 {
 	// render top terrain
-	for ( int i = combined.terrainSettings.terraingo; i < TERRAIN; ++i)
+	for ( int i = combined.terrainSettings.terraingo; i < terrainfromtext; ++i)
 	{
 		//is terrain active?
 		if(generator[i].Active)
 		{
-			/*gotoXY(generator[i].coordinates.X,generator[i].coordinates.Y);
-			std::cout << generator[i].icon;*/
 			writeToBuffer(generator[i].coordinates,generator[i].icon,0x0F);
 		}
 		if(generator[i].coordinates.X <=1)
@@ -485,7 +488,7 @@ void renderTerrain()
 	}
 
 	// render bot terrain
-	for ( int i = combined.terrainSettings.terraingobot; i < TERRAIN; ++i)
+	for ( int i = combined.terrainSettings.terraingobot; i < terrainfromtext; ++i)
 	{
 		//is terrain bot active?
 		if(generator2[i].Active)
@@ -549,10 +552,25 @@ void levelCheck()
 // PRINT WAVE STATS TO THE GAME
 void PrintWave()
 {
+	std::stringstream tempz;
+	tempz << "ENEMY INFO";
+	std::string resultz = tempz.str();
+	writeToBuffer(50, 15, resultz, 0x0C);
+
 	std::stringstream temp;
 	temp << stagename;
 	std::string result = temp.str();
-	writeToBuffer(50, 5, result, 0x0C);
+	writeToBuffer(50, 17, result, 0x0C);
+
+	std::stringstream temp2;
+	temp2 << "HP: " << hpfromtext;
+	std::string result2 = temp2.str();
+	writeToBuffer(50, 19, result2, 0x0C);
+
+	std::stringstream temp3;
+	temp3 << "WORTH: " << scorefromtext;
+	std::string result3 = temp3.str();
+	writeToBuffer(50, 21, result3, 0x0C);
 }
 // PRINT STAGE STATS TO THE GAME
 void PrintStage()

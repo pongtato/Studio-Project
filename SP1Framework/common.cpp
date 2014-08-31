@@ -140,12 +140,44 @@ void PrintStats()
 	std::stringstream combo1;
 	combo1 << "COMBO: ";
 	std::string resultcombo = combo1.str();
-	writeToBuffer(50, 10, resultcombo, 0x0F);
+	writeToBuffer(50, 11, resultcombo, 0x0F);
 
 	std::stringstream combo2;
 	combo2 << combined.stats.combo;
 	std::string resultcombo2 = combo2.str();
-	writeToBuffer(56, 10, resultcombo2, 0x0C);
+	writeToBuffer(56, 11, resultcombo2, 0x0C);
+
+	std::stringstream wew;
+	wew << char(219) << " ";
+	std::string tests = wew.str();
+	writeToBuffer(50, 12, tests, 0x08);
+
+	std::stringstream testing;
+	testing << char(219) << " "<< char(219) << " "<< char(219);
+	std::string test = testing.str();
+	writeToBuffer(52, 12, test, 0x0F);
+
+	if ( combined.stats.timer == 1 )
+	{
+	std::stringstream combotimer;
+	 combotimer << char(219);
+	std::string  combotimertest =  combotimer.str();
+	writeToBuffer(52, 12, combotimertest, 0x0C);
+	}
+	else if ( combined.stats.timer == 2 )
+	{
+	std::stringstream combotimer;
+	combotimer << char(219);
+	std::string  combotimertest =  combotimer.str();
+	writeToBuffer(54, 12, combotimertest, 0x0C);
+	}
+	else if ( combined.stats.timer == 3 )
+	{
+	std::stringstream combotimer;
+	 combotimer << char(219);
+	std::string  combotimertest =  combotimer.str();
+	writeToBuffer(56, 12, combotimertest, 0x0C);
+	}
 }
 
 void comboBreaker()

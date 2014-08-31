@@ -5,7 +5,6 @@
 #include <fstream>
 #include <string>
 
-#define TERRAIN 999
 #define VK_B 0x42
 
 struct EnemySettings
