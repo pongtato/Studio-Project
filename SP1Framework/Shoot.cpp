@@ -20,6 +20,7 @@ extern std::string bpatternfromtext;
 
 
 
+
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
 		missile[currentMissile].Active = true;
@@ -72,6 +73,7 @@ void renderMissile()
 			if(missile[i].corrdinates.X >46)
 			{
 				missile[i].Active = false;
+				combined.stats.bulletsmissed++;
 			}
 		}
 	}
@@ -88,9 +90,13 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 			missile.Active = false;
 			checkEnemy.hp--;		
 			missile.icon = ' ';
+			combined.stats.shotshit++;
 			//Enemy death
 			if (checkEnemy.hp <= 0)
 			{
+				combined.stats.timer = 3;
+				combined.stats.timeCD = true;
+				combined.stats.combo++;
 				checkEnemy.Active = false;
 				checkEnemy.icon = ' ';
 				//Chance to spawn powerup at enemy death
@@ -118,9 +124,13 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 			missile.Active = false;
 			checkEnemy.hp--;		
 			missile.icon = ' ';
+			combined.stats.shotshit++;
 			//Enemy death
 			if (checkEnemy.hp <= 0)
 			{
+				combined.stats.timer = 3;
+				combined.stats.timeCD = true;
+				combined.stats.combo++;
 				checkEnemy.Active = false;
 				checkEnemy.midrow = ' ';
 				checkEnemy.toprow = ' ';

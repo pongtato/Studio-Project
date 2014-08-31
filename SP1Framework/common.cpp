@@ -22,8 +22,10 @@ extern COORD charLocation;
 extern double elapsedTime;
 
 
+
 void GameVariables()
 {
+	combined.stats.accuracy = 100;
 	powerUp.icon = PowerupIcon;
 	powerUp.Active = false;
 	std::ifstream indata;
@@ -53,6 +55,7 @@ void updateGame()
 	terrainMove();
 	collision();
 	stageclear();
+	comboBreaker();
 }
 // IS STAGE CLEAR?
 void stageclear()
@@ -85,16 +88,82 @@ void playerShoot()
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X+2,charLocation.Y);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
+			combined.stats.bulletsfired+=3;
 		}
 		else if(player.PowerUp == 2)
 		{
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
+			combined.stats.bulletsfired+=2;
 		}
 		else  if(player.PowerUp == 1)
 		{
 			shootMissile1(combined.globalSettings.currentMissile,charLocation);
+			combined.stats.bulletsfired++;
 		}
 	}
 }
+//PRINT STATS
+void PrintStats()
+{
+	std::stringstream temp;
+	temp << "SHOTS FIRED: ";
+	std::string result = temp.str();
+	writeToBuffer(50, 7, result, 0x0F);
+	std::stringstream temp4;
+	temp4 << combined.stats.bulletsfired;
+	std::string result4 = temp4.str();
+	writeToBuffer(62, 7, result4, 0x0C);
+	std::stringstream temp2;
+	temp2 << "SHOTS MISSED: ";
+	std::string result2 = temp2.str();
+	writeToBuffer(50, 8, result2, 0x0F);
+	std::stringstream temp3;
+	temp3 << combined.stats.bulletsmissed;
+	std::string result3 = temp3.str();
+	writeToBuffer(63, 8, result3, 0x0C);
+
+	if ( combined.stats.bulletsfired != 0 && combined.stats.bulletsmissed !=0)
+	{
+		combined.stats.accuracy = ((combined.stats.shotshit/(combined.stats.shotshit+combined.stats.bulletsmissed)) * 100);
+	}
+	std::stringstream temp5;
+	temp5 << "ACCURACY: ";
+	std::string result5 = temp5.str();
+	writeToBuffer(50, 9, result5, 0x0F);
+
+	std::stringstream temp6;
+	temp6 << combined.stats.accuracy << "%";
+	std::string result6 = temp6.str();
+	writeToBuffer(59, 9, result6, 0x0C);
+
+	std::stringstream combo1;
+	combo1 << "COMBO: ";
+	std::string resultcombo = combo1.str();
+	writeToBuffer(50, 10, resultcombo, 0x0F);
+
+	std::stringstream combo2;
+	combo2 << combined.stats.combo;
+	std::string resultcombo2 = combo2.str();
+	writeToBuffer(56, 10, resultcombo2, 0x0C);
+}
+
+void comboBreaker()
+{
+	if ( combined.stats.timeCD == true )
+	{
+	static double timer_combo = elapsedTime;
+		if ( elapsedTime - timer_combo > 1)
+		{
+			timer_combo = elapsedTime;
+			combined.stats.timer--;
+			if ( combined.stats.timer == 0)
+			{
+			combined.stats.combo = 1;
+			combined.stats.timeCD = false;
+			}
+		}
+	}
+}
+
 

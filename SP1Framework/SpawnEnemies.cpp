@@ -32,7 +32,7 @@ using std::ostringstream;
 
 
 int statefromtext;
-
+// CHOOSES AND READS FROM REQUIRED FILE
 void loadfromtext(int loadcase)
 {
 	std::stringstream s;
@@ -528,6 +528,7 @@ void terrainMove()
 		}
 	}
 }
+// GETS WHICH LEVEL TO LOAD FROM TEXT
 void levelCheck()
 {
 	std::ifstream indata2;
@@ -545,6 +546,7 @@ void levelCheck()
 		combined.globalSettings.loadlevel++;
 	}
 }
+// PRINT WAVE STATS TO THE GAME
 void PrintWave()
 {
 	std::stringstream temp;
@@ -552,6 +554,7 @@ void PrintWave()
 	std::string result = temp.str();
 	writeToBuffer(50, 5, result, 0x0C);
 }
+// PRINT STAGE STATS TO THE GAME
 void PrintStage()
 {
 	std::stringstream stagetemp;
@@ -559,6 +562,7 @@ void PrintStage()
 	std::string stage = stagetemp.str();
 	writeToBuffer(50, 4, stage, 0x03);
 }
+// READ BOSS PATTERN FROM TEXT
 void bossPattern(std::string input)
 {
 	std::ifstream indata3;

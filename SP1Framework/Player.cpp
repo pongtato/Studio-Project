@@ -120,7 +120,7 @@ void collision()
 			{
 				if ( counter[j].hp <= 0 )
 				{
-					combined.globalSettings.globalscore += counter[j].score;
+					combined.globalSettings.globalscore += (counter[j].score * combined.stats.combo);
 					combined.enemySettings.enemieskilled++;
 				}
 			}
@@ -169,7 +169,7 @@ void renderCharacter()
 void PrintSpecial()
 {
 	std::stringstream Specialtemp;
-	Specialtemp << "SPECIAL" << ": " << player.Special;
+	Specialtemp << "SPECIAL:" << player.Special;
 	std::string stage = Specialtemp.str();
 	writeToBuffer(50, 6, stage, 0x0E);
 }

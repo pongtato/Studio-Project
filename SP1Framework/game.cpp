@@ -120,12 +120,8 @@ void render()
 {
     // Clears the buffer with this colour attribute
     clearBuffer(0x0F);
-	
-	
-	
 	leveldesign();
 	Writetohighscore();
-
     // render time taken to calculate this frame
   /*  gotoXY(70, 0);
     colour(0x1A);
@@ -134,30 +130,21 @@ void render()
     gotoXY(0, 0);
     colour(0x59);
     std::cout << elapsedTime << "secs" << std::endl;*/
-
-	
 	writeToBuffer(50,3,display[0],0x03);
 	normalscore();
-
-
 	writeToBuffer(50,4,display[1],0x03);
 	PrintWave();
 	PrintStage();
 	PrintSpecial();
+	PrintStats();
 
     // render character
 	renderCharacter();
-	// render missiles
-	 //colour(0x0B);
-	
+	// render missile
 	renderMissile();
-	
 	// render enemies
 	renderEnemies();
-	//render boss
-	//renderBoss();
 	//render enemy bullet
-
 	renderEnemyMissile();
 	// render powerup
 	renderPowerUp();
@@ -165,7 +152,6 @@ void render()
 	renderTerrain();
 	//render shields
 	renderShield();
-
 	// Writes the buffer to the console, hence you will see what you have written
     flushBufferToConsole();
 }

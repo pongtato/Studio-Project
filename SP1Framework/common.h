@@ -66,12 +66,24 @@ struct GeneralSettings
 	unsigned int playingField;
 	bool nextstage;
 };
+struct StatTrak
+{
+	double bulletsfired;
+	double shotshit;
+	double bulletsmissed;
+	double accuracy;
+	int combo;
+	double timer;
+	bool timeCD;
+};
 struct GLOBAL
 {
 	EnemySettings enemySettings;
 	TerrainSettings terrainSettings;
 	GeneralSettings globalSettings;
+	StatTrak stats;
 }; 
 
-
+void PrintStats();
+void comboBreaker();
 #endif // _COMMON_H
