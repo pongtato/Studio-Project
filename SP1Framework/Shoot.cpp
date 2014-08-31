@@ -170,84 +170,152 @@ void renderEnemyMissile()
 	static double timer_enemyBullet2 = elapsedTime;
 	static double timer_enemyBullet3 = elapsedTime;
 	static double timer_enemyBullet4 = elapsedTime;
-	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=4)
+	static double timer_enemyBullet5 = elapsedTime;
+	static double timer_enemyBullet6 = elapsedTime;
+	static double timer_enemyBullet7 = elapsedTime;
+	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=7)
 	{
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet > 0.01)
+			if( elapsedTime-timer_enemyBullet > 0.02)
 			{
 				
 				timer_enemyBullet = elapsedTime;
 				enemyBullet[i].corrdinates.X--;
 			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
 
 			if(enemyBullet[i].corrdinates.X <= 1)
 			{
 				enemyBullet[i].Active = false;
+
 			}
+			
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 		}
 	}
-	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=4)
+	for(int i = 1; i<combined.enemySettings.enemyMaxMissile;i+=7)
 	{
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet2 > 0.01)
+			if( elapsedTime-timer_enemyBullet2 > 0.02)
 			{
 				
 				timer_enemyBullet2 = elapsedTime;
 				enemyBullet[i].corrdinates.X--;
 			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
 
 			if(enemyBullet[i].corrdinates.X <= 1)
 			{
 				enemyBullet[i].Active = false;
 			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+
 		}
 	}
-	for(int i = 2; i<combined.enemySettings.enemyMaxMissile;i+=4)
+	for(int i = 2; i<combined.enemySettings.enemyMaxMissile;i+=7)
 	{
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet3 > 0.01)
+			if( elapsedTime-timer_enemyBullet3 > 0.02)
 			{
 				
 				timer_enemyBullet3 = elapsedTime;
 				enemyBullet[i].corrdinates.X--;
 			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
 
 			if(enemyBullet[i].corrdinates.X <= 1)
 			{
 				enemyBullet[i].Active = false;
 			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+
 		}
 	}
-	for(int i = 3; i<combined.enemySettings.enemyMaxMissile;i+=4)
+	for(int i = 3; i<combined.enemySettings.enemyMaxMissile;i+=7)
 	{
 
 		if(enemyBullet[i].Active)
 		{
-			if( elapsedTime-timer_enemyBullet4 > 0.01)
+			if( elapsedTime-timer_enemyBullet4 > 0.02)
 			{
 				
 				timer_enemyBullet4  = elapsedTime;
 				enemyBullet[i].corrdinates.X--;
 			}
-			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 			//Check if out of bound
 
 			if(enemyBullet[i].corrdinates.X <= 1)
 			{
 				enemyBullet[i].Active = false;
 			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+
+		}
+	}
+	for(int i = 4; i<combined.enemySettings.enemyMaxMissile;i+=7)
+	{
+		if(enemyBullet[i].Active)
+		{
+			if( elapsedTime-timer_enemyBullet5 > 0.02)
+			{
+				
+				timer_enemyBullet5  = elapsedTime;
+				enemyBullet[i].corrdinates.X--;
+			}
+			//Check if out of bound
+
+			if(enemyBullet[i].corrdinates.X <= 1)
+			{
+				enemyBullet[i].Active = false;
+			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+
+		}
+	}
+	for(int i = 5; i<combined.enemySettings.enemyMaxMissile;i+=7)
+	{
+		if(enemyBullet[i].Active)
+		{
+			if( elapsedTime-timer_enemyBullet6 > 0.02)
+			{
+				
+				timer_enemyBullet6  = elapsedTime;
+				enemyBullet[i].corrdinates.X--;
+			}
+			//Check if out of bound
+
+			if(enemyBullet[i].corrdinates.X <= 1)
+			{
+				enemyBullet[i].Active = false;
+			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+
+		}
+	}
+	for(int i = 6; i<combined.enemySettings.enemyMaxMissile;i+=7)
+	{
+		if(enemyBullet[i].Active)
+		{
+			if( elapsedTime-timer_enemyBullet7 > 0.02)
+			{
+				
+				timer_enemyBullet6  = elapsedTime;
+				enemyBullet[i].corrdinates.X--;
+			}
+			//Check if out of bound
+
+			if(enemyBullet[i].corrdinates.X <= 1)
+			{
+				enemyBullet[i].Active = false;
+			}
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
+
 		}
 	}
 }

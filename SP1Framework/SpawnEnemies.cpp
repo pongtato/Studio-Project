@@ -352,13 +352,14 @@ void enemyShooting()
 				if ( elapsedTime - timer_shoot >rand()%combined.enemySettings.enemyshootspeedrange1 + combined.enemySettings.enemyshootspeedrange2 )
 				{
 					timer_shoot = elapsedTime;
-					if(combined.enemySettings.enemyCurrentMissile < 50)
+					if(combined.enemySettings.enemyCurrentMissile < 21)
 					{
 						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
 					}
 					else
 					{
-						enemyShootBullet2(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+						combined.enemySettings.enemyCurrentMissile = 0;
+						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
 					}
 				}
 			}
@@ -373,13 +374,14 @@ void enemyShooting()
 				if ( elapsedTime - timer_shoot >combined.enemySettings.bossshootspeed)
 				{
 					timer_shoot = elapsedTime;
-					if(combined.enemySettings.enemyCurrentMissile < 50)
+					if(combined.enemySettings.enemyCurrentMissile < 21)
 					{
 						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
 					}
 					else
 					{
-						enemyShootBullet2(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
+						combined.enemySettings.enemyCurrentMissile = 0;
+						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
 					}
 				}
 			}
