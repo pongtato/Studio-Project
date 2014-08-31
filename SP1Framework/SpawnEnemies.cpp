@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include "common.h"
+#include <string>
 ENEMY powerup[1];
 ENEMY counter[999];
 //top terrain
@@ -26,7 +27,9 @@ std::string mpatternfromtext;
 std::string bpatternfromtext;
 std::string typefromtext;
 std::string stagename;
+std::string idfromtext;
 using std::ostringstream;
+
 
 int statefromtext;
 
@@ -41,9 +44,17 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 	if ( indata.is_open())
 	{
-		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext)
+		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> idfromtext)
 		{
 		}
+	}
+
+	if (typefromtext == "BOSS")
+	{
+		std::stringstream bosstemp;
+		bosstemp << "GLD/Variables/LEVELS/" << idfromtext << "PATTERN.txt";
+		std::string final = bosstemp.str();
+		bossPattern(final);
 	}
 }
 void moveEnemies()
@@ -548,10 +559,10 @@ void PrintStage()
 	std::string stage = stagetemp.str();
 	writeToBuffer(50, 4, stage, 0x03);
 }
-void bossPattern()
+void bossPattern(std::string input)
 {
 	std::ifstream indata3;
-	indata3.open("GLD/Variables/LEVELS/BOSS1PATTERN.txt");
+	indata3.open(input);
 	for ( int i = 0; indata3.good(); ++i)
 	{
 		 getline(indata3, combined.enemySettings.bosschecker[i]);

@@ -45,7 +45,6 @@ void init()
 	GameVariables();
 	initshieldVar();
 	levelCheck();
-	bossPattern();
 }
 void shutdown()
 {

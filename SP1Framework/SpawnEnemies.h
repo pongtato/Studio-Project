@@ -56,7 +56,7 @@ void terrainMove();
 void levelCheck();
 void PrintWave();
 void PrintStage();
-void bossPattern();
+void bossPattern(std::string input);
 
 
 

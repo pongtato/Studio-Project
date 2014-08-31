@@ -19,6 +19,7 @@ extern std::string mpatternfromtext;
 extern std::string bpatternfromtext;
 
 
+
 void shootMissile1(unsigned int &currentMissile, COORD charLocation)
 {
 		missile[currentMissile].Active = true;
