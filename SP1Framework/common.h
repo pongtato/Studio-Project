@@ -85,4 +85,10 @@ struct GLOBAL
 
 void PrintStats();
 void comboBreaker();
+void restartBullet();
+void restartTerrainTop();
+void restartTerrainBottom();
+void restartEnemies();
+void restartStats();
+
 #endif // _COMMON_H

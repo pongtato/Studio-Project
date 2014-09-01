@@ -17,7 +17,6 @@
 
 // Console size, width by height
 COORD ConsoleSize = {80, 25};
-
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
@@ -154,4 +153,26 @@ void render()
 	renderShield();
 	// Writes the buffer to the console, hence you will see what you have written
     flushBufferToConsole();
+}
+void restartGame()
+{
+	charLocation.X = 3;
+    charLocation.Y = ConsoleSize.Y/2;
+	
+
+    elapsedTime = 0.0;
+	loadPlayerFromText();
+	combined.enemySettings.droppowerup = true;
+	GameVariables();
+	initshieldVar();
+	levelCheck();
+	
+	
+	
+	restartBullet();
+	restartTerrainTop();
+	restartTerrainBottom();
+	restartEnemies();
+	restartStats();
+	
 }

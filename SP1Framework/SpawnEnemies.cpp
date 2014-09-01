@@ -95,27 +95,27 @@ void SpawnEnemy(unsigned int &currentEnemy, int modX, int modY)
 {
 	if(typefromtext != "BOSS")
 	{
-	counter[currentEnemy].Active = activefromtext;
-	counter[currentEnemy].coordinates.X = modX;
-	counter[currentEnemy].coordinates.Y = modY;
-	counter[currentEnemy].hp= hpfromtext;
-	counter[currentEnemy].score= scorefromtext;
-	counter[currentEnemy].icon= (char)(iconfromtext);
-	counter[currentEnemy].number = currentEnemy;
-	counter[currentEnemy].state = statefromtext;
+		counter[currentEnemy].Active = activefromtext;
+		counter[currentEnemy].coordinates.X = modX;
+		counter[currentEnemy].coordinates.Y = modY;
+		counter[currentEnemy].hp= hpfromtext;
+		counter[currentEnemy].score= scorefromtext;
+		counter[currentEnemy].icon= (char)(iconfromtext);
+		counter[currentEnemy].number = currentEnemy;
+		counter[currentEnemy].state = statefromtext;
 	}
 	else
 	{
-	counter[currentEnemy].Active = activefromtext;
-	counter[currentEnemy].coordinates.X = modX;
-	counter[currentEnemy].coordinates.Y = modY;
-	counter[currentEnemy].hp= hpfromtext;
-	counter[currentEnemy].score= scorefromtext;
-	counter[currentEnemy].toprow= tpatternfromtext;
-	counter[currentEnemy].midrow= mpatternfromtext;
-	counter[currentEnemy].botrow= bpatternfromtext;
-	counter[currentEnemy].number = currentEnemy;
-	counter[currentEnemy].state = statefromtext;
+		counter[currentEnemy].Active = activefromtext;
+		counter[currentEnemy].coordinates.X = modX;
+		counter[currentEnemy].coordinates.Y = modY;
+		counter[currentEnemy].hp= hpfromtext;
+		counter[currentEnemy].score= scorefromtext;
+		counter[currentEnemy].toprow= tpatternfromtext;
+		counter[currentEnemy].midrow= mpatternfromtext;
+		counter[currentEnemy].botrow= bpatternfromtext;
+		counter[currentEnemy].number = currentEnemy;
+		counter[currentEnemy].state = statefromtext;
 	}
 	currentEnemy++;
 }

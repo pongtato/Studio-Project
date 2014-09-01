@@ -48,6 +48,7 @@ void FormTerrain();			//load terrain data
 void renderTerrain();
 void terrainMove(); 
 void FormTerrainBot();
+void restartGame();
 
 
 #endif // _GAME_H

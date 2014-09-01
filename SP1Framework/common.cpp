@@ -14,6 +14,11 @@
 #include "common.h"
 
 extern BULLET powerUp;
+extern BULLET missile[60];
+extern ENEMY counter[999];
+extern BULLET enemyBullet[50];
+extern WORLD generator[999];
+extern WORLD generator2[999];
 extern PLAYER player;
 extern int PowerupIcon;
 extern int spawnno;
@@ -198,4 +203,44 @@ void comboBreaker()
 	}
 }
 
+void restartBullet()
+{
+	for(int i = 0; i< combined.enemySettings.enemyMaxMissile;i++)
+	{
+		enemyBullet[i].Active = false;
+		
+	}
+	for(int i = 0; i<combined.globalSettings.maxMissile;i++)
+	{
+		missile[i].Active = false;
+	}
+}
 
+void restartTerrainTop()
+{
+	for(int i = 0; i< 999; i++)
+	{
+		generator[i].Active = false;
+	}
+}
+void restartTerrainBottom()
+{
+	for(int i = 0; i< 999; i++)
+	{
+		generator2[i].Active = false;
+	}
+}
+void restartEnemies()
+{
+	for(int i = 0; i< 999; i++)
+	{
+		counter[i].Active = false;
+	}
+	updateGame();
+}
+void restartStats()
+{
+	combined.stats.bulletsfired = 0;
+	combined.stats.bulletsmissed = 0;
+	combined.stats.combo = 0;
+}

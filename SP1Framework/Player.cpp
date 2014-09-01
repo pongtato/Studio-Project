@@ -80,6 +80,17 @@ void renderPowerUp()
 
 void collision()
 {
+	if(player.Active != true)
+	{
+
+		clearBuffer(0x0F);
+		loseScreen();
+		flushBufferToConsole();
+		restartGame();
+		system("pause");
+		introscreen();
+
+	}
 	//Check Powerup collide
 	if(powerUpPlayerCollision(charLocation,powerUp))
 	{
@@ -99,12 +110,9 @@ void collision()
 		{
 			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
 			{
-				clearBuffer(0x0F);
-				loseScreen();
-				flushBufferToConsole();
-				system("pause");
-				introscreen();
+				player.Active = false;
 			}
+			
 
 			for(int i = 0; i<3;i++)
 			{
