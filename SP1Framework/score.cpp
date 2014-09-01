@@ -22,7 +22,7 @@ void Writetohighscore(){
 	ifstream indata;
 	string data;
 	ofstream scoree;
-	int a, b, highscoree;
+	int a, b;
 	a = combined.globalSettings.globalscore;
 
 	indata.open("GLD/Variables/Highscore.txt");
@@ -108,7 +108,7 @@ void Acctrophy()
 {
 	ifstream indata;
 	string data;
-	float a;
+	double a;
 	a = combined.stats.accuracy;
 	indata.open("GLD/Variables/Trophies/Accuracytrophy.txt");
 	if (a <= 70 && a >  50)

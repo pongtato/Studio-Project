@@ -66,7 +66,7 @@ void mainmenu()
 }
 void selection()
 {
-	c = getch();
+	c = _getch();
 
 	switch (c)
 	{
@@ -84,7 +84,7 @@ void selection()
 		clearBuffer(0x0F);
 		score();
 		c = '0';
-		c = getch();
+		c = _getch();
 
 		if ( c = 27 )
 		{
@@ -102,7 +102,7 @@ void selection()
 		clearBuffer(0x0F);
 		instructions();
 		c = '0';
-		c = getch();
+		c = _getch();
 		if ( c = 27 )
 		{
 			menuscreen();
@@ -155,7 +155,7 @@ void planeselection()
 	planeScreen();
 	flushBufferToConsole();
 
-	c = getch();
+	c = _getch();
 
 	switch (c)
 	{
@@ -198,7 +198,7 @@ void pausemenu()
 }
 void pSelection()
 {
-	c = getch();
+	c = _getch();
 
 	switch (c)
 	{
@@ -218,7 +218,7 @@ void pSelection()
 		clearBuffer(0x0F);
 		pScore();
 		c = '0';
-		c = getch();
+		c = _getch();
 
 		if ( c = 27 )
 		{
@@ -236,7 +236,7 @@ void pSelection()
 		clearBuffer(0x0F);
 		pInstructions();
 		c = '0';
-		c = getch();
+		c = _getch();
 		if ( c = 27 )
 		{
 			pausescreen();
@@ -285,7 +285,7 @@ void pScore()
 
 void stageselection()
 {
-	c = getch();
+	c = _getch();
 
 	switch (c)
 	{

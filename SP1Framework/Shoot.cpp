@@ -38,7 +38,7 @@ void shootMissile1(unsigned int &currentMissile, int charLocationX, int charLoca
 }
 void renderMissile()
 {
-	for(int i = 0; i<combined.globalSettings.maxMissile;i++)
+	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
 
 		if(missile[i].Active)
@@ -133,7 +133,7 @@ void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation)
 }
 void renderEnemyMissile()
 {
-	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i++)
+	for(unsigned int i = 0; i<combined.enemySettings.enemyMaxMissile;i++)
 	{
 		if(enemyBullet[i].Active)
 		{

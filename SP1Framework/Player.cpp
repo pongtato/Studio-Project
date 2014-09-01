@@ -108,7 +108,7 @@ void collision()
 		}
 	}
 	
-	if(player.Active != true && player.Lives <= 0)
+	if(!player.Active && player.Lives <= 0)
 	{
 		clearBuffer(0x0F);
 		loseScreen();
@@ -175,7 +175,7 @@ void collision()
 	// check collision
 	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
-		for(int j = 0; j<combined.enemySettings.enemyMaxMissile;j++)
+		for(unsigned int j = 0; j<combined.enemySettings.enemyMaxMissile;j++)
 		{
 			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
 			{
@@ -195,9 +195,9 @@ void collision()
 			}
 			
 
-			for(int i = 0; i<3;i++)
+			for(int k = 0; k<3;k++)
 			{
-				if(shieldblock(shield[i],enemyBullet[j]))
+				if(shieldblock(shield[k],enemyBullet[j]))
 				{
 					//shield[i].hp--;
 					enemyBullet[j].Active = false;

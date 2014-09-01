@@ -17,8 +17,8 @@ enum Keys
     K_RIGHT,
     K_ESCAPE,
 	K_SPACE,
-    K_COUNT,
-	K_B
+	K_B,
+    K_COUNT
 };
 enum SoundType
 {
