@@ -135,6 +135,8 @@ void render()
 	PrintStage();
 	PrintSpecial();
 	PrintStats();
+	printLives();
+	printHearts();
 
     // render character
 	renderCharacter();

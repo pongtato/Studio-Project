@@ -39,7 +39,7 @@ void loadPlayerFromText()
 	
 	if ( indata.is_open())
 	{
-		if (indata >> PlayerActivefromtext >> PlayerHpfromtext >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon)
+		if (indata >> PlayerActivefromtext >> PlayerHpfromtext >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon >> player.Lives)
 		{
 			
 		}
@@ -51,7 +51,6 @@ void loadPlayerFromText()
 	player.wingIcon = PlayerWingIcon;
 	player.playerMissleIcon = PlayerMissileIcon;
 }
-
 
 void loadPlayer2FromText()
 {
@@ -103,13 +102,22 @@ void collision()
 {
 	if(player.Active != true)
 	{
-
+		if ( player.Lives != 0)
+		{
+		player.Lives--;
+		player.Active = true;
+		player.coordinates.X = 3;
+		player.coordinates.Y = 10;
+		}
+		else if ( player.Lives <=0)
+		{
 		clearBuffer(0x0F);
 		loseScreen();
 		flushBufferToConsole();
 		restartGame();
 		system("pause");
 		introscreen();
+		}
 
 	}
 	//Check Powerup collide
@@ -284,5 +292,24 @@ void useSpecial()
 		shield[0].Active = true;
 		shield[1].Active = true;
 		shield[2].Active = true;
+	}
+}
+
+void printLives()
+{
+	std::stringstream livestemp;
+	livestemp << "Lives" << ": ";
+	std::string live = livestemp.str();
+	writeToBuffer(50, 2, live, 0x0F);
+}
+
+void printHearts()
+{
+	for (int i = 0; i < player.Lives; i++)
+	{
+	std::stringstream livestemp;
+	livestemp << char(3);
+	std::string live = livestemp.str();
+	writeToBuffer(55+(i+1), 2, live, 0x0C);
 	}
 }

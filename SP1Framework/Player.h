@@ -14,6 +14,7 @@ struct PLAYER
 	int Active;
 	int PowerUp;
 	int Special;
+	int Lives;
 };
 
 struct SHIELD
@@ -31,5 +32,7 @@ void PrintSpecial();
 void renderShield();
 void initshieldVar();
 void useSpecial();
+void printLives();
+void printHearts();
 
 #endif // _PLAYER_H
