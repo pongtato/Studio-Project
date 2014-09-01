@@ -249,10 +249,11 @@ void pScore()
 
 void restart()
 {
-	init(); 
-	combined.globalSettings.lvl = 0;
-	combined.globalSettings.bonus = 0;
-	combined.globalSettings.boss = 0;
+	restartBullet();
+	restartTerrainTop();
+	restartTerrainBottom();
+	restartEnemies();
+	restartStats();
 }
 
 void planeselection()
