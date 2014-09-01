@@ -4,6 +4,7 @@
 #include "Framework\timer.h"
 #include <fstream>
 #include <string>
+#include "score.h"
 
 using std::ifstream;
 using std::string;

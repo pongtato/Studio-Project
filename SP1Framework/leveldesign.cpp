@@ -35,7 +35,10 @@ void loseScreen()
 				writeToBuffer(0,j,data, 0x06);
 			}
 	}
-		indata.close();
+	Combotrophy();
+	Acctrophy();
+	trophyatlose();
+	indata.close();
 }
 
 void mainScreenIntro()

@@ -19,5 +19,8 @@ void normalscore();
 void Writetohighscore();
 void print();
 void playerShoot();
+void trophyatlose();
+void Acctrophy();
+void Combotrophy();
 
 #endif // _SCORE_H
