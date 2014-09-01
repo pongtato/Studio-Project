@@ -108,7 +108,7 @@ void collision()
 
 			for(int i = 0; i<3;i++)
 			{
-				if(shieldblock(shield[i].coordinates,enemyBullet[j]))
+				if(shieldblock(shield[i],enemyBullet[j]))
 				{
 					shield[i].hp--;
 					enemyBullet[j].Active = false;

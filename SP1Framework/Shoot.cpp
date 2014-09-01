@@ -174,11 +174,9 @@ bool powerUpPlayerCollision(COORD player, BULLET powerPlayer)
 		return false;
 	}
 }
-bool shieldblock(COORD shield,BULLET enemyBullet)
+bool shieldblock(SHIELD shield,BULLET enemyBullet)
 {
-	if(((shield.X == enemyBullet.corrdinates.X && shield.Y == enemyBullet.corrdinates.Y)
-		|| shield.X == enemyBullet.corrdinates.X && shield.Y+1 == enemyBullet.corrdinates.Y 
-		|| shield.X == enemyBullet.corrdinates.X && shield.Y+2 == enemyBullet.corrdinates.Y) && (enemyBullet.Active))
+	if((shield.coordinates.X == enemyBullet.corrdinates.X && shield.coordinates.Y == enemyBullet.corrdinates.Y) && (enemyBullet.Active && shield.Active))
 	{
 		return true;
 	}
