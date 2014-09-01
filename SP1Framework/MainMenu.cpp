@@ -10,10 +10,12 @@
 #include "Player.h"
 char c;
 string Instruction[99] = {"ESC: Pause Screen", "Space: Shoot", "ArrowKeys: Move"};
-string pongMenu[99] = {"1:","2:","3:", "4:", 
-"StartGame", "HighScores", "Instruction", "Exit",
-"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "Resume Game", "Restart Game",
-"5:"};
+string pongMenu[99] = {"1:","2:","3:", "4:",  /// 0 1 2 3
+	"StartGame", "HighScores", "Instruction", "Exit",  // 4 5 6 7
+	"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "Resume Game", "Restart Game", //8 9 10 11
+	"5:", "Stages"}; //12 13
+string SelectStage[99] = {"0", "1:", "2:", "3:", "4:", "5:", "6:", "7","8","9","10","11","12","13"};
+string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2", "Bonus2"}; 
 
 void introscreen()
 {
@@ -29,11 +31,13 @@ void intro()
 	writeToBuffer(31,18,pongMenu[0],0x06);
 	writeToBuffer(34,18,pongMenu[4],0x07);
 	writeToBuffer(31,19,pongMenu[1],0x06);
-	writeToBuffer(34,19,pongMenu[5],0x07);
+	writeToBuffer(34,19,pongMenu[13],0x07);
 	writeToBuffer(31,20,pongMenu[2],0x06);
-	writeToBuffer(34,20,pongMenu[6],0x07);
+	writeToBuffer(34,20,pongMenu[5],0x07);
 	writeToBuffer(31,21,pongMenu[3],0x06);
-	writeToBuffer(34,21,pongMenu[7],0x07);
+	writeToBuffer(34,21,pongMenu[6],0x07);
+	writeToBuffer(31,22,pongMenu[12],0x06);
+	writeToBuffer(34,22,pongMenu[7],0x07);
 	flushBufferToConsole();
 
 }
@@ -51,72 +55,80 @@ void mainmenu()
 	writeToBuffer(31,18,pongMenu[0],0x06);
 	writeToBuffer(34,18,pongMenu[4],0x07);
 	writeToBuffer(31,19,pongMenu[1],0x06);
-	writeToBuffer(34,19,pongMenu[5],0x07);
+	writeToBuffer(34,19,pongMenu[13],0x07);
 	writeToBuffer(31,20,pongMenu[2],0x06);
-	writeToBuffer(34,20,pongMenu[6],0x07);
+	writeToBuffer(34,20,pongMenu[5],0x07);
 	writeToBuffer(31,21,pongMenu[3],0x06);
-	writeToBuffer(34,21,pongMenu[7],0x07);
+	writeToBuffer(34,21,pongMenu[6],0x07);
+	writeToBuffer(31,22,pongMenu[12],0x06);
+	writeToBuffer(34,22,pongMenu[7],0x07);
 	flushBufferToConsole();
 }
 void selection()
 {
 	c = getch();
 
-		switch (c)
+	switch (c)
+	{
+	case '1': 
+		planeselection();
+		mainLoop();
+		break;
+
+	case '2':
+		stagemenu();
+		stageselection();
+		break;
+
+	case '3':
+		clearBuffer(0x0F);
+		score();
+		c = '0';
+		c = getch();
+
+		if ( c = 27 )
 		{
-		case '1': 
-			planeselection();
-			mainLoop();
-			break;
-
-		case '2':
-			clearBuffer(0x0F);
-			score();
-			c = '0';
-			c = getch();
-
-			if ( c = 27 )
-			{
-				menuscreen();
-			}
-
-			else
-			{
-				menuscreen();
-			}
-			
-			break;
-
-		case '3':
-			clearBuffer(0x0F);
-			instructions();
-			c = '0';
-			c = getch();
-			if ( c = 27 )
-			{
-				menuscreen();
-			}
-
-			else
-			{
-				menuscreen();
-			}
-			break;
-
-		case '4':
-			clearBuffer(0x0F);
-			exitScreen();
-			flushBufferToConsole();	
-			Sleep(1200);
-			exit( 0 );
-			break;
-
-		default:
-			clearBuffer(0x0F);
 			menuscreen();
-			break;
 		}
+
+		else
+		{
+			menuscreen();
+		}
+
+		break;
+
+	case '4':
+		clearBuffer(0x0F);
+		instructions();
+		c = '0';
+		c = getch();
+		if ( c = 27 )
+		{
+			menuscreen();
+		}
+
+		else
+		{
+			menuscreen();
+		}
+		break;
+
+	case '5':
+		clearBuffer(0x0F);
+		exitScreen();
+		flushBufferToConsole();	
+		Sleep(1200);
+		exit( 0 );
+		break;
+
+	default:
+		clearBuffer(0x0F);
+		menuscreen();
+		break;
+	}
 }
+
 void instructions()
 {
 	clearBuffer(0x0F);
@@ -137,6 +149,30 @@ void score()
 	print();
 	flushBufferToConsole();
 }
+void planeselection()
+{
+	clearBuffer(0x0F);
+	planeScreen();
+	flushBufferToConsole();
+
+	c = getch();
+
+	switch (c)
+	{
+	case '1':
+		loadPlayerFromText();  
+		break;
+
+	case '2': 
+		loadPlayer2FromText();  
+		break;
+
+	default: 
+		menuscreen();
+		break;
+	}
+}
+
 
 void pausescreen()
 {
@@ -164,67 +200,67 @@ void pSelection()
 {
 	c = getch();
 
-		switch (c)
+	switch (c)
+	{
+	case '1':
+		restartGame();
+		clearBuffer(0x0F);
+		mainLoop();
+		break;
+
+
+
+	case '2': 
+		mainLoop();
+		break;
+
+	case '3':
+		clearBuffer(0x0F);
+		pScore();
+		c = '0';
+		c = getch();
+
+		if ( c = 27 )
 		{
-		case '1':
-			restartGame();
-			clearBuffer(0x0F);
-			mainLoop();
-			break;
-
-
-
-		case '2': 
-			mainLoop();
-			break;
-
-		case '3':
-			clearBuffer(0x0F);
-			pScore();
-			c = '0';
-			c = getch();
-
-			if ( c = 27 )
-			{
-				pausescreen();
-			}
-
-			else
-			{
-				pausescreen();
-			}
-			
-			break;
-
-		case '4':
-			clearBuffer(0x0F);
-			pInstructions();
-			c = '0';
-			c = getch();
-			if ( c = 27 )
-			{
-				pausescreen();
-			}
-
-			else
-			{
-				pausescreen();
-			}
-			break;
-
-		case '5':
-			clearBuffer(0x0F);
-			exitScreen();
-			flushBufferToConsole();	
-			Sleep(1200);
-			exit( 0 );
-			break;
-
-		default:
-			clearBuffer(0x0F);
 			pausescreen();
-			break;
 		}
+
+		else
+		{
+			pausescreen();
+		}
+
+		break;
+
+	case '4':
+		clearBuffer(0x0F);
+		pInstructions();
+		c = '0';
+		c = getch();
+		if ( c = 27 )
+		{
+			pausescreen();
+		}
+
+		else
+		{
+			pausescreen();
+		}
+		break;
+
+	case '5':
+		clearBuffer(0x0F);
+		exitScreen();
+		flushBufferToConsole();	
+		Sleep(1200);
+		exit( 0 );
+		break;
+
+	default:
+		clearBuffer(0x0F);
+		pausescreen();
+		break;
+	}
 }
 void pInstructions()
 {
@@ -246,26 +282,72 @@ void pScore()
 	print();
 	flushBufferToConsole();
 }
-void planeselection()
+
+void stageselection()
 {
-	clearBuffer(0x0F);
-	planeScreen();
-	flushBufferToConsole();
+	c = getch();
 
-		c = getch();
+	switch (c)
+	{
+	case '1': 
+		planeselection();
+		combined.globalSettings.loadlevel = 1;
+		mainLoop();
+		break;
 
-		switch (c)
-		{
-		case '1':
-			loadPlayerFromText();  
-			break;
+	case '2':
+		planeselection();
+		combined.globalSettings.loadlevel = 4;
+		mainLoop();
+		break;
 
-		case '2': 
-			loadPlayer2FromText();  
-			break;
+	case '3':
+		planeselection();
+		combined.globalSettings.loadlevel = 5;
+		mainLoop();
+		break;
 
-		default: 
-			planeselection();
-			break;
-		}
+	case '4':
+		planeselection();
+		combined.globalSettings.loadlevel = 6;
+		mainLoop();
+		break;
+
+	case '5':
+		planeselection();
+		combined.globalSettings.loadlevel = 9;
+		mainLoop();
+		break;
+
+	case '6':
+		planeselection();
+		combined.globalSettings.loadlevel = 10;
+		mainLoop();
+		break;
+
+	default:
+		clearBuffer(0x0F);
+		menuscreen();
+		break;
+	}
 }
+void stagemenu()
+	{
+		clearBuffer(0x0F);
+		stagesScreen();	
+		writeToBuffer(11,8,SelectStage[1],0x06);
+		writeToBuffer(13,8,StageInfo[1],0x07);
+		writeToBuffer(11,9,SelectStage[2],0x06);
+		writeToBuffer(13,9,StageInfo[2],0x07);
+		writeToBuffer(11,10,SelectStage[3],0x06);
+		writeToBuffer(13,10,StageInfo[3],0x07);
+		writeToBuffer(11,11,SelectStage[4],0x06);
+		writeToBuffer(13,11,StageInfo[4],0x07);
+		writeToBuffer(11,12,SelectStage[5],0x06);
+		writeToBuffer(13,12,StageInfo[5],0x07);
+		writeToBuffer(11,13,SelectStage[6],0x06);
+		writeToBuffer(13,13,StageInfo[6],0x07);
+
+	
+		flushBufferToConsole();
+	}

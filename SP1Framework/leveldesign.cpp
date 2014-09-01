@@ -21,7 +21,6 @@ void leveldesign()
 		indata.close();
 	}
 }
-
 void loseScreen()
 {
 	ifstream indata;
@@ -40,7 +39,6 @@ void loseScreen()
 	trophyatlose();
 	indata.close();
 }
-
 void mainScreenIntro()
 {
 	string bullet = " - ";
@@ -101,7 +99,6 @@ void mainScreenIntro()
 	Sleep(1000);
                  
 }
-
 void mainScreen()
 {
 	ifstream indata;
@@ -120,7 +117,6 @@ void mainScreen()
 		indata.close();
 	}
 }
-
 void pauseScreen()
 {
 	ifstream indata;
@@ -141,7 +137,6 @@ void pauseScreen()
 		indata.close();
 	}
 }
-
 void exitScreen()
 {
 	ifstream indata;
@@ -162,7 +157,6 @@ void exitScreen()
 		indata.close();
 	}
 }
-
 void planeScreen()
 {
 	ifstream indata;
@@ -183,6 +177,44 @@ void planeScreen()
 		indata.close();
 	}
 
+	ifstream indata2;
+	string data2;
+
+	indata2.open ("GLD/Planeimage.txt");
+
+	if (indata2.is_open())
+	{
+		
+			for(int i = 0; i <25; i++)
+			{
+				getline(indata2, data2);
+				writeToBuffer(0,i,data2,0x08);
+			}
+			
+		
+		indata2.close();
+	}
+
+
 
 }
+void stagesScreen()
+{
+	ifstream indata;
+	string data;
 
+	indata.open ("GLD/Stages.txt");
+
+	if (indata.is_open())
+	{
+		
+			for(int i = 0; i <20; i++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,i,data,0x06);
+			}
+			
+		
+		indata.close();
+	}
+}

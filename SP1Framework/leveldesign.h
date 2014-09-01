@@ -17,6 +17,7 @@ void mainScreen();
 void mainScreenIntro();
 void exitScreen();
 void planeScreen();
+void stagesScreen();
 
 
 

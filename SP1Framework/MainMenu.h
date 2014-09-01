@@ -14,5 +14,9 @@ void pScore();
 void pSelection();
 void pausemenu();
 void planeselection();
+void stagemenu();
+void stageselection();
 
 #endif
+
+ 
