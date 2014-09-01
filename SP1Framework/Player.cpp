@@ -109,13 +109,18 @@ void collision()
 	//Check Terrain collide
 	for(int i = 0; i<100;i++)
 	{
-		if(deathByTerrain(charLocation,generator[i],generator2[i]))
+		if(deathByTerrain(charLocation,generator[i]))
 		{
-			clearBuffer(0x0F);
-			loseScreen();
-			flushBufferToConsole();
-			system("pause");
-			introscreen();
+			player.Active = false;
+		}
+	}
+
+	//Check Terrain collide
+	for(int i = 0; i<100;i++)
+	{
+		if(deathByTerrain(charLocation,generator2[i]))
+		{
+			player.Active = false;
 		}
 	}
 	// check collision

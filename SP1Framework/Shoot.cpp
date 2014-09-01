@@ -187,9 +187,20 @@ bool shieldblock(SHIELD shield,BULLET enemyBullet)
 		return false;
 	}
 }
-bool deathByTerrain(COORD player,WORLD generator, WORLD generator2)
+bool deathByTerrain(COORD player,WORLD generator)
 {
-	if (player.X == generator.coordinates.X && player.Y == generator.coordinates.Y || player.X == generator2.coordinates.X && player.Y == generator2.coordinates.Y && (generator.Active) && (generator2.Active))
+	if (player.X == generator.coordinates.X && player.Y == generator.coordinates.Y && (generator.Active))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool deathByTerrainBot(COORD player, WORLD generator2)
+{
+	if (player.X == generator2.coordinates.X && player.Y == generator2.coordinates.Y && (generator2.Active))
 	{
 		return true;
 	}

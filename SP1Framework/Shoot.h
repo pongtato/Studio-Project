@@ -25,7 +25,8 @@ void renderEnemyMissile();
 bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn);
 bool powerUpPlayerCollision(COORD player, BULLET powerPlayer);
 bool shieldblock(SHIELD shield,BULLET enemyBullet);
-bool deathByTerrain(COORD player,WORLD generator, WORLD generator2);
+bool deathByTerrain(COORD player,WORLD generator);
+bool deathByTerrainBot(COORD player, WORLD generator2);
 
 
 #endif // _SHOOT_H
