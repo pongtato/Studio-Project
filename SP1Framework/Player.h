@@ -22,6 +22,7 @@ struct SHIELD
 	int hp;
 	bool Active;
 	COORD coordinates;
+	int shieldTick;
 };
 
 void loadPlayerFromText();

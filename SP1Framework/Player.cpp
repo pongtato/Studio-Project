@@ -23,6 +23,8 @@ extern ENEMY counter[999];
 extern BULLET enemyBullet[50];
 extern BULLET missile[50];
 extern int spawnno;
+extern WORLD generator[999];
+extern WORLD generator2[999];
 
 int shieldfromtext;
 int shieldhpfromtext;
@@ -103,6 +105,19 @@ void collision()
 			combined.enemySettings.droppowerup = true;
 		}
 	}
+
+	//Check Terrain collide
+	for(int i = 0; i<100;i++)
+	{
+		if(deathByTerrain(charLocation,generator[i],generator2[i]))
+		{
+			clearBuffer(0x0F);
+			loseScreen();
+			flushBufferToConsole();
+			system("pause");
+			introscreen();
+		}
+	}
 	// check collision
 	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
@@ -118,7 +133,7 @@ void collision()
 			{
 				if(shieldblock(shield[i],enemyBullet[j]))
 				{
-					shield[i].hp--;
+					//shield[i].hp--;
 					enemyBullet[j].Active = false;
 					
 				}
@@ -191,13 +206,23 @@ void renderShield()
 		writeToBuffer(shield[1].coordinates,shield[1].icon,0x0A);
 		writeToBuffer(shield[2].coordinates,shield[2].icon,0x0A);
 	}
+	
 	static double timer_shieldfade = elapsedTime;
-	if( elapsedTime-timer_shieldfade > 5)
+	if( elapsedTime-timer_shieldfade > 1)
 	{
+		shield[0].shieldTick--;
+		shield[1].shieldTick--;
+		shield[2].shieldTick--;
 		timer_shieldfade = elapsedTime;
+		if ( shield[0].shieldTick <= 0 || shield[1].shieldTick <= 0 || shield[2].shieldTick <= 0)
+		{
 		shield[0].Active = false;
 		shield[1].Active = false;
 		shield[2].Active = false;
+		shield[0].shieldTick = 5;	
+		shield[1].shieldTick = 5;	
+		shield[2].shieldTick = 5;			
+		}
 	}
 }
 
@@ -216,7 +241,6 @@ void initshieldVar()
 	shield[i].icon = shieldfromtext;
 	shield[i].hp = shieldhpfromtext;
 	shield[i].Active = false;
-	
 	}
 	player.Special = 2;
 }

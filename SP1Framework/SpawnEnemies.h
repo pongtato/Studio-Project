@@ -27,6 +27,7 @@ struct WORLD
 	int level;
 	COORD coordinates;
 	int Active;
+	int count;
 };
 
 void moveBoss();

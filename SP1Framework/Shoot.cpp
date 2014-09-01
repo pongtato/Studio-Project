@@ -161,6 +161,8 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 	{
 		return false;
 	}
+
+
 }
 bool powerUpPlayerCollision(COORD player, BULLET powerPlayer)
 {
@@ -185,3 +187,15 @@ bool shieldblock(SHIELD shield,BULLET enemyBullet)
 		return false;
 	}
 }
+bool deathByTerrain(COORD player,WORLD generator, WORLD generator2)
+{
+	if (player.X == generator.coordinates.X && player.Y == generator.coordinates.Y || player.X == generator2.coordinates.X && player.Y == generator2.coordinates.Y && (generator.Active) && (generator2.Active))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
