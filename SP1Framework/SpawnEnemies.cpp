@@ -352,7 +352,7 @@ void enemyShooting()
 				if ( elapsedTime - timer_shoot >rand()%combined.enemySettings.enemyshootspeedrange1 + combined.enemySettings.enemyshootspeedrange2 )
 				{
 					timer_shoot = elapsedTime;
-					if(combined.enemySettings.enemyCurrentMissile < 21)
+					if(combined.enemySettings.enemyCurrentMissile < combined.enemySettings.enemyMaxMissile)
 					{
 						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
 					}
@@ -374,7 +374,7 @@ void enemyShooting()
 				if ( elapsedTime - timer_shoot >combined.enemySettings.bossshootspeed)
 				{
 					timer_shoot = elapsedTime;
-					if(combined.enemySettings.enemyCurrentMissile < 21)
+					if(combined.enemySettings.enemyCurrentMissile <combined.enemySettings.enemyMaxMissile)
 					{
 						enemyShootBullet1(combined.enemySettings.enemyCurrentMissile,counter[i].coordinates);
 					}

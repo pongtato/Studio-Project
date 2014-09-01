@@ -93,9 +93,9 @@ void collision()
 		}
 	}
 	// check collision
-	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
+	for(unsigned int i = 0; i<spawnno;i++)
 	{
-		for(int j = 0; j<spawnno;j++)
+		for(int j = 0; j<combined.enemySettings.enemyMaxMissile;j++)
 		{
 			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
 			{

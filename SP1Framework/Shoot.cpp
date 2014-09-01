@@ -133,19 +133,19 @@ void enemyShootBullet1(unsigned int &bulletCount, COORD enemyLocation)
 }
 void renderEnemyMissile()
 {
-	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i+=7)
+	for(int i = 0; i<combined.enemySettings.enemyMaxMissile;i++)
 	{
 		if(enemyBullet[i].Active)
 		{
-				enemyBullet[i].corrdinates.X--;
-				writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-			//Check if out of bound
+			enemyBullet[i].corrdinates.X--;
+			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
 
-			if(enemyBullet[i].corrdinates.X <= 1)
-			{
-				enemyBullet[i].Active = false;
+		}
+		//Check if out of bound
+		if(enemyBullet[i].corrdinates.X <= 1)
+		{
+			enemyBullet[i].Active = false;
 
-			}
 		}
 	}
 }
