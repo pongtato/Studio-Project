@@ -25,6 +25,7 @@ struct SHIELD
 	int shieldTick;
 };
 
+void loadPlayer2FromText();
 void loadPlayerFromText();
 void PrintSpecial();
 void renderShield();

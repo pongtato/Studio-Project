@@ -13,5 +13,7 @@ void pInstructions();
 void pScore();
 void pSelection();
 void pausemenu();
+void restart();
+void planeselection();
 
 #endif

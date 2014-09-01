@@ -35,6 +35,27 @@ extern COORD charLocation;
 void loadPlayerFromText()
 {
 	std::ifstream indata;
+		indata.open("GLD/Variables/Player.txt");
+	
+	if ( indata.is_open())
+	{
+		if (indata >> PlayerActivefromtext >> PlayerHpfromtext >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon)
+		{
+			
+		}
+	}
+	player.Active = PlayerActivefromtext;
+	player.PowerUp = PlayerHpfromtext;
+	player.icon = PlayerIconfromtext;
+	player.headIcon = PlayerHeadIcon;
+	player.wingIcon = PlayerWingIcon;
+	player.playerMissleIcon = PlayerMissileIcon;
+}
+
+
+void loadPlayer2FromText()
+{
+	std::ifstream indata;
 		indata.open("GLD/Variables/Player2.txt");
 	
 	if ( indata.is_open())
@@ -50,8 +71,6 @@ void loadPlayerFromText()
 	player.headIcon = PlayerHeadIcon;
 	player.wingIcon = PlayerWingIcon;
 	player.playerMissleIcon = PlayerMissileIcon;
-	
-
 }
 
 void renderPowerUp()

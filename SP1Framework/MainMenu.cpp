@@ -7,11 +7,13 @@
 #include "leveldesign.h"
 #include <conio.h>  
 #include "score.h"
+#include "Player.h"
 char c;
 string Instruction[99] = {"ESC: Pause Screen", "Space: Shoot", "ArrowKeys: Move"};
 string pongMenu[99] = {"1:","2:","3:", "4:", 
 "StartGame", "HighScores", "Instruction", "Exit",
-"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "Resume Game"};
+"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "Resume Game", "Restart Game",
+"5:"};
 
 void introscreen()
 {
@@ -23,6 +25,7 @@ void intro()
 	clearBuffer(0x0F);
 	mainScreenIntro();
 	writeToBuffer(20,14,pongMenu[8],0x03);
+	flushBufferToConsole(); Sleep(50);
 	writeToBuffer(31,18,pongMenu[0],0x06);
 	writeToBuffer(34,18,pongMenu[4],0x07);
 	writeToBuffer(31,19,pongMenu[1],0x06);
@@ -62,6 +65,7 @@ void selection()
 		switch (c)
 		{
 		case '1': 
+			planeselection();
 			mainLoop();
 			break;
 
@@ -145,13 +149,15 @@ void pausemenu()
 	pauseScreen();
 	writeToBuffer(20,14,pongMenu[9],0x03);
 	writeToBuffer(31,18,pongMenu[0],0x06);
-	writeToBuffer(34,18,pongMenu[10],0x07);
+	writeToBuffer(34,18,pongMenu[11],0x07);
 	writeToBuffer(31,19,pongMenu[1],0x06);
-	writeToBuffer(34,19,pongMenu[5],0x07);
+	writeToBuffer(34,19,pongMenu[10],0x07);
 	writeToBuffer(31,20,pongMenu[2],0x06);
-	writeToBuffer(34,20,pongMenu[6],0x07);
+	writeToBuffer(34,20,pongMenu[5],0x07);
 	writeToBuffer(31,21,pongMenu[3],0x06);
-	writeToBuffer(34,21,pongMenu[7],0x07);
+	writeToBuffer(34,21,pongMenu[6],0x07);
+	writeToBuffer(31,22,pongMenu[12],0x06);
+	writeToBuffer(34,22,pongMenu[7],0x07);
 	flushBufferToConsole();
 }
 void pSelection()
@@ -160,11 +166,19 @@ void pSelection()
 
 		switch (c)
 		{
-		case '1': 
+		case '1':
+			restart();
+			clearBuffer(0x0F);
 			mainLoop();
 			break;
 
-		case '2':
+
+
+		case '2': 
+			mainLoop();
+			break;
+
+		case '3':
 			clearBuffer(0x0F);
 			pScore();
 			c = '0';
@@ -182,7 +196,7 @@ void pSelection()
 			
 			break;
 
-		case '3':
+		case '4':
 			clearBuffer(0x0F);
 			pInstructions();
 			c = '0';
@@ -198,7 +212,7 @@ void pSelection()
 			}
 			break;
 
-		case '4':
+		case '5':
 			clearBuffer(0x0F);
 			exitScreen();
 			flushBufferToConsole();	
@@ -231,4 +245,36 @@ void pScore()
 	writeToBuffer(32, 18, pongMenu[5], 0x07);
 	print();
 	flushBufferToConsole();
+}
+
+void restart()
+{
+	init(); 
+	combined.globalSettings.lvl = 0;
+	combined.globalSettings.bonus = 0;
+	combined.globalSettings.boss = 0;
+}
+
+void planeselection()
+{
+	clearBuffer(0x0F);
+	planeScreen();
+	flushBufferToConsole();
+
+		c = getch();
+
+		switch (c)
+		{
+		case '1':
+			loadPlayerFromText();  
+			break;
+
+		case '2': 
+			loadPlayer2FromText();  
+			break;
+
+		default: 
+			planeselection();
+			break;
+		}
 }

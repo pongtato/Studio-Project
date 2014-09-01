@@ -536,11 +536,12 @@ void terrainMove()
 // GETS WHICH LEVEL TO LOAD FROM TEXT
 void levelCheck()
 {
+	int i = 0;
 	std::ifstream indata2;
 	indata2.open("GLD/Variables/LEVELS/STAGES.txt");
 	if (combined.globalSettings.stage < 1)
 	combined.globalSettings.stage++;
-	for ( int i = 0; indata2.good(); ++i)
+	for (i; indata2.good(); ++i)
 	{
 		 getline(indata2, combined.enemySettings.stagechecker[i]);
 	}

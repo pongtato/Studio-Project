@@ -39,7 +39,6 @@ void init()
 
 
     elapsedTime = 0.0;
-	loadPlayerFromText();
 	combined.enemySettings.droppowerup = true;
 	GameVariables();
 	initshieldVar();

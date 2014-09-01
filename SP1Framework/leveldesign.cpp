@@ -2,7 +2,7 @@
 #include "Framework\console.h"
 #include "leveldesign.h"
 #include <iostream>
-#include "SpawnEnemies.h"
+#include "Player.h"
 
 
 void leveldesign()
@@ -95,7 +95,6 @@ void mainScreenIntro()
 	writeToBuffer(17,9,invasion4,0x06);
 	writeToBuffer(17,10,invasion5,0x06);
 	flushBufferToConsole();
-	
 	Sleep(1000);
                  
 }
@@ -159,5 +158,28 @@ void exitScreen()
 		
 		indata.close();
 	}
+}
+
+void planeScreen()
+{
+	ifstream indata;
+	string data;
+
+	indata.open ("GLD/Plane.txt");
+
+	if (indata.is_open())
+	{
+		
+			for(int i = 0; i <18; i++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,i,data,0x06);
+			}
+			
+		
+		indata.close();
+	}
+
+
 }
 
