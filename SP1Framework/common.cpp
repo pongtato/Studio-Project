@@ -80,6 +80,7 @@ void stageclear()
 		combined.enemySettings.spawnclear = 1;
 		levelCheck();
 		player.Special++;
+		stageclearscreen();
 	}
 }
 

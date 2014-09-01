@@ -3,6 +3,9 @@
 #include "leveldesign.h"
 #include <iostream>
 #include "Player.h"
+#include "common.h"
+#include "Shoot.h"
+#include "MainMenu.h"
 
 
 void leveldesign()
@@ -217,4 +220,70 @@ void stagesScreen()
 		
 		indata.close();
 	}
+}
+void stageclearscreen()
+{
+	clearBuffer(0x0F);
+	ifstream indata;
+	string data;
+
+	indata.open ("GLD/stageclear.txt");
+
+	if (indata.is_open())
+	{
+		
+			for(int i = 0; i <6; i++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,i,data,0x06);
+			}
+			
+		
+		indata.close();
+	}
+
+	
+	std::stringstream temp;
+	temp << "SHOTS FIRED: ";
+	std::string result = temp.str();
+	writeToBuffer(24, 7, result, 0x0F);
+	std::stringstream temp4;
+	temp4 << combined.stats.bulletsfired;
+	std::string result4 = temp4.str();
+	writeToBuffer(36, 7, result4, 0x0C);
+	std::stringstream temp2;
+	temp2 << "SHOTS MISSED: ";
+	std::string result2 = temp2.str();
+	writeToBuffer(38, 7, result2, 0x0F);
+	std::stringstream temp3;
+	temp3 << combined.stats.bulletsmissed;
+	std::string result3 = temp3.str();
+	writeToBuffer(51, 7, result3, 0x0C);
+
+	if ( combined.stats.bulletsfired != 0 && combined.stats.bulletsmissed !=0)
+	{
+		combined.stats.accuracy = ((combined.stats.shotshit/(combined.stats.shotshit+combined.stats.bulletsmissed)) * 100);
+	}
+	std::stringstream temp5;
+	temp5 << "ACCURACY: ";
+	std::string result5 = temp5.str();
+	writeToBuffer(33, 9, result5, 0x0F);
+
+	std::stringstream temp6;
+	temp6 << combined.stats.accuracy << "%";
+	std::string result6 = temp6.str();
+	writeToBuffer(41, 9, result6, 0x0C);
+
+	std::stringstream combo1;
+	combo1 << "COMBO: ";
+	std::string resultcombo = combo1.str();
+	writeToBuffer(34, 11, resultcombo, 0x0F);
+
+	std::stringstream combo2;
+	combo2 << combined.stats.combo;
+	std::string resultcombo2 = combo2.str();
+	writeToBuffer(41, 11, resultcombo2, 0x0C);
+
+	flushBufferToConsole();
+	Sleep(5000);
 }
