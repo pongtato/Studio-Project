@@ -26,6 +26,7 @@ extern unsigned int spawnno;
 GLOBAL combined;
 extern COORD charLocation;
 extern double elapsedTime;
+extern std::string typefromtext;
 
 
 
@@ -62,6 +63,7 @@ void updateGame()
 	collision();
 	stageclear();
 	comboBreaker();
+	powerUp.icon = PowerupIcon;
 }
 // IS STAGE CLEAR?
 void stageclear()
@@ -69,6 +71,10 @@ void stageclear()
 		//if stage is clear, proceed
 	if (combined.enemySettings.enemieskilled >= spawnno)
 	{
+		if (typefromtext == "BOSS")
+		{
+			stageclearscreen();
+		}
 		combined.globalSettings.loadlevel++;
 		combined.enemySettings.currentEnemy =0;
 		combined.enemySettings.enemieskilled =0;
@@ -80,7 +86,6 @@ void stageclear()
 		combined.enemySettings.spawnclear = 1;
 		levelCheck();
 		player.Special++;
-		stageclearscreen();
 	}
 }
 

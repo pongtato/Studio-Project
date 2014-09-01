@@ -246,19 +246,19 @@ void stageclearscreen()
 	std::stringstream temp;
 	temp << "SHOTS FIRED: ";
 	std::string result = temp.str();
-	writeToBuffer(24, 7, result, 0x0F);
+	writeToBuffer(21, 7, result, 0x0F);
 	std::stringstream temp4;
 	temp4 << combined.stats.bulletsfired;
 	std::string result4 = temp4.str();
-	writeToBuffer(36, 7, result4, 0x0C);
+	writeToBuffer(33, 7, result4, 0x0C);
 	std::stringstream temp2;
 	temp2 << "SHOTS MISSED: ";
 	std::string result2 = temp2.str();
-	writeToBuffer(38, 7, result2, 0x0F);
+	writeToBuffer(44, 7, result2, 0x0F);
 	std::stringstream temp3;
 	temp3 << combined.stats.bulletsmissed;
 	std::string result3 = temp3.str();
-	writeToBuffer(51, 7, result3, 0x0C);
+	writeToBuffer(57, 7, result3, 0x0C);
 
 	if ( combined.stats.bulletsfired != 0 && combined.stats.bulletsmissed !=0)
 	{
