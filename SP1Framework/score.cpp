@@ -63,7 +63,7 @@ void trophyatlose()
 	int a;
 	a=combined.globalSettings.globalscore;
 	indata.open("GLD/Variables/Trophies/Scoretrophy.txt");
-	if (a > 10000 && a <= 2000 )
+	if (a > 10000 && a <= 20000 )
 	{
 		if (indata.is_open())
 		{
