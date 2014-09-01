@@ -22,7 +22,7 @@ extern WORLD generator[999];
 extern WORLD generator2[999];
 extern PLAYER player;
 extern int PowerupIcon;
-extern int spawnno;
+extern unsigned int spawnno;
 GLOBAL combined;
 extern COORD charLocation;
 extern double elapsedTime;
@@ -211,12 +211,12 @@ void comboBreaker()
 
 void restartBullet()
 {
-	for(int i = 0; i< combined.enemySettings.enemyMaxMissile;i++)
+	for(unsigned int i = 0; i< combined.enemySettings.enemyMaxMissile;i++)
 	{
 		enemyBullet[i].Active = false;
 		
 	}
-	for(int i = 0; i<combined.globalSettings.maxMissile;i++)
+	for(unsigned int i = 0; i<combined.globalSettings.maxMissile;i++)
 	{
 		missile[i].Active = false;
 	}

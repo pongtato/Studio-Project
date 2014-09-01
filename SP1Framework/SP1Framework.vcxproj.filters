@@ -93,4 +93,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Sounds\Hit1.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Sounds\Shoot3.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Sounds\Powerup.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Sounds\Shoot1.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Sounds\Shoot2.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

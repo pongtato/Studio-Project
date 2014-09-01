@@ -16,7 +16,7 @@ struct EnemySettings
 	int upordown;
 	int moveState;
 	int wew;
-	int enemieskilled;
+	unsigned int enemieskilled;
 	int spawncounter;
 	int spawnclear;
 	int enemyshootspeedrange1;

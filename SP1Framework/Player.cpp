@@ -22,7 +22,7 @@ extern double elapsedTime;
 extern ENEMY counter[999];
 extern BULLET enemyBullet[50];
 extern BULLET missile[50];
-extern int spawnno;
+extern unsigned int spawnno;
 extern WORLD generator[999];
 extern WORLD generator2[999];
 

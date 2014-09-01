@@ -102,6 +102,13 @@
     <ClInclude Include="Shoot.h" />
     <ClInclude Include="SpawnEnemies.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Sounds\Hit1.wav" />
+    <None Include="Sounds\Powerup.wav" />
+    <None Include="Sounds\Shoot1.wav" />
+    <None Include="Sounds\Shoot2.wav" />
+    <None Include="Sounds\Shoot3.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

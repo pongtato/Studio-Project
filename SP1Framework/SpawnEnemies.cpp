@@ -21,7 +21,7 @@ int activefromtext;
 int hpfromtext;
 int scorefromtext;
 int iconfromtext;
-int spawnno;
+unsigned int spawnno;
 std::string tpatternfromtext;
 std::string mpatternfromtext;
 std::string bpatternfromtext;
@@ -29,7 +29,7 @@ std::string typefromtext;
 std::string stagename;
 std::string idfromtext;
 using std::ostringstream;
-int terrainfromtext = 100;
+unsigned int terrainfromtext = 100;
 
 
 int statefromtext;
@@ -60,10 +60,10 @@ void loadfromtext(int loadcase)
 }
 void moveEnemies()
 {
-	for ( int i = 0; i  < spawnno; ++i)
+	for (unsigned int i = 0; i  < spawnno; ++i)
 	{
 		//is enemy alive
-		if(counter[i].Active == true)
+		if(counter[i].Active)
 		{
 			gotoXY(counter[i].coordinates.X--,counter[i].coordinates.Y);
 		}
@@ -71,10 +71,10 @@ void moveEnemies()
 }
 void moveEnemiesUp()
 {
-	for ( int i = 0; i  < spawnno; ++i)
+	for (unsigned int i = 0; i  < spawnno; ++i)
 	{
 		//is enemy alive
-		if(counter[i].Active == true)
+		if(counter[i].Active)
 		{
 			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y--);
 		}
@@ -82,10 +82,10 @@ void moveEnemiesUp()
 }
 void moveEnemiesDown()
 {
-	for ( int i = 0; i  < spawnno; ++i)
+	for (unsigned int i = 0; i  < spawnno; ++i)
 	{
 		//is enemy alive
-		if(counter[i].Active == true)
+		if(counter[i].Active)
 		{
 			gotoXY(counter[i].coordinates.X,counter[i].coordinates.Y++);
 		}
@@ -130,10 +130,10 @@ void SpawnTerrain(unsigned int &currentTerrain, int terrainModX, int terrainModY
 }
 void moveTerrain()
 {
-	for ( int i = 0; i  < terrainfromtext; ++i)
+	for (unsigned int i = 0; i  < terrainfromtext; ++i)
 	{
 		//is enemy alive
-		if(generator[i].Active == true)
+		if(generator[i].Active)
 		{
 			gotoXY(generator[i].coordinates.X--,generator[i].coordinates.Y);
 		}
@@ -150,10 +150,10 @@ void SpawnTerrainBot(unsigned int &currentTerrainBot, int terrainModX, int terra
 }
 void moveTerrainBot()
 {
-	for ( int i = 0; i  < terrainfromtext; ++i)
+	for (unsigned int i = 0; i  < terrainfromtext; ++i)
 	{
 		//is enemy alive
-		if(generator2[i].Active == true)
+		if(generator2[i].Active)
 		{
 			gotoXY(generator2[i].coordinates.X--,generator2[i].coordinates.Y);
 		}
@@ -221,7 +221,7 @@ void enemySpawn()
 void renderEnemies()
 {
 	// render enemies
-	for ( int i = 0; i < spawnno; ++i)
+	for (unsigned int i = 0; i < spawnno; ++i)
 	{
 		//is enemy alive
 		if(counter[i].Active)
@@ -345,7 +345,7 @@ void enemyShooting()
 	static double timer_shoot = elapsedTime;
 	if (typefromtext != "BOSS")
 	{
-		for(int i =0; i<spawnno;i++)
+		for(unsigned int i =0; i<spawnno;i++)
 		{
 			if(counter[i].Active)
 			{
@@ -474,7 +474,7 @@ void FormTerrainBot()
 void renderTerrain()
 {
 	// render top terrain
-	for ( int i = combined.terrainSettings.terraingo; i < terrainfromtext; ++i)
+	for (unsigned int i = combined.terrainSettings.terraingo; i < terrainfromtext; ++i)
 	{
 		//is terrain active?
 		if(generator[i].Active)
@@ -490,7 +490,7 @@ void renderTerrain()
 	}
 
 	// render bot terrain
-	for ( int i = combined.terrainSettings.terraingobot; i < terrainfromtext; ++i)
+	for (unsigned int i = combined.terrainSettings.terraingobot; i < terrainfromtext; ++i)
 	{
 		//is terrain bot active?
 		if(generator2[i].Active)
