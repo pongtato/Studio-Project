@@ -167,7 +167,7 @@ void pSelection()
 		switch (c)
 		{
 		case '1':
-			restart();
+			restartGame();
 			clearBuffer(0x0F);
 			mainLoop();
 			break;
@@ -246,16 +246,6 @@ void pScore()
 	print();
 	flushBufferToConsole();
 }
-
-void restart()
-{
-	restartBullet();
-	restartTerrainTop();
-	restartTerrainBottom();
-	restartEnemies();
-	restartStats();
-}
-
 void planeselection()
 {
 	clearBuffer(0x0F);
