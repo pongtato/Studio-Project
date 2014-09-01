@@ -99,27 +99,28 @@ void renderPowerUp()
 }
 
 void collision()
-{
-	if(player.Active != true)
+{	
+	static double timer_spawn = elapsedTime;
+	if ( elapsedTime - timer_spawn > 1 )
 	{
-		if ( player.Lives != 0)
+		timer_spawn = elapsedTime;
+		player.Invultimer--;
+		if ( player.Invultimer <= 0)
 		{
-		player.Lives--;
-		player.Active = true;
-		player.coordinates.X = 3;
-		player.coordinates.Y = 10;
+		player.Invul = 0;
 		}
-		else if ( player.Lives <=0)
-		{
+	}
+	
+	if(player.Active != true && player.Lives <= 0)
+	{
 		clearBuffer(0x0F);
 		loseScreen();
 		flushBufferToConsole();
 		restartGame();
 		system("pause");
 		introscreen();
-		}
-
 	}
+
 	//Check Powerup collide
 	if(powerUpPlayerCollision(charLocation,powerUp))
 	{
@@ -138,7 +139,18 @@ void collision()
 	{
 		if(deathByTerrain(charLocation,generator[i]))
 		{
-			player.Active = false;
+			if ( player.Lives != 0 && player.Invul != 1)
+			{
+				player.Lives--;
+				player.Invul = 1;
+				player.coordinates.X = 3;
+				player.coordinates.Y = 10;
+				player.Invultimer = 3;
+			}
+			else
+			{
+				player.Active = false;
+			}
 		}
 	}
 
@@ -147,7 +159,18 @@ void collision()
 	{
 		if(deathByTerrain(charLocation,generator2[i]))
 		{
-			player.Active = false;
+			if ( player.Lives != 0 && player.Invul != 1)
+			{
+				player.Lives--;
+				player.Invul = 1;
+				player.coordinates.X = 3;
+				player.coordinates.Y = 10;
+				player.Invultimer = 3;
+			}
+			else
+			{
+				player.Active = false;
+			}
 		}
 	}
 	// check collision
@@ -157,7 +180,18 @@ void collision()
 		{
 			if(checkPlayerDeath(charLocation,enemyBullet[j],counter[i]))
 			{
-				player.Active = false;
+				if ( player.Lives != 0 && player.Invul != 1)
+				{
+					player.Lives--;
+					player.Invul = 1;
+					player.coordinates.X = 3;
+					player.coordinates.Y = 10;
+					player.Invultimer = 3;
+				}
+				else
+				{
+					player.Active = false;
+				}
 			}
 			
 
@@ -186,9 +220,16 @@ void collision()
 
 void renderCharacter()
 {
+	if ( player.Invul != 1)
+	{
+		writeToBuffer(charLocation,player.icon,0x0C);
+	}
+	else
+	{
+		writeToBuffer(charLocation,player.icon,0x0E);
+	}
+	
 	// render character
-
-	writeToBuffer(charLocation,player.icon,0x0C);
 	if (player.PowerUp == 1 || player.PowerUp >= 3)
 	{
 		writeToBuffer(charLocation.X+1,charLocation.Y,player.headIcon,0x0B);

@@ -155,6 +155,7 @@ bool checkPlayerDeath(COORD player, BULLET enemyBullet, ENEMY enemySpawn)
 		|| player.X  == enemyBullet.corrdinates.X+1 && player.Y == enemyBullet.corrdinates.Y)&& (enemyBullet.Active))
 	{
 		enemySpawn.Active = false;
+		enemyBullet.Active = false;
 		return true;
 	}
 	else

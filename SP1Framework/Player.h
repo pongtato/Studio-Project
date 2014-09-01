@@ -15,6 +15,8 @@ struct PLAYER
 	int PowerUp;
 	int Special;
 	int Lives;
+	int Invul;
+	int Invultimer;
 };
 
 struct SHIELD
