@@ -85,12 +85,15 @@ void stageclear()
 
 void playerShoot()
 {
+	
 	static double timer_player = elapsedTime;
 	if ( elapsedTime - timer_player > 0.5)
 	{
 		timer_player = elapsedTime;
+		
 		if(player.PowerUp >= 3)
 		{
+			playGameSound(S_SHOOT3);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X+2,charLocation.Y);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
@@ -98,12 +101,14 @@ void playerShoot()
 		}
 		else if(player.PowerUp == 2)
 		{
+			playGameSound(S_SHOOT2);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y+1);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation.X,charLocation.Y-1);
 			combined.stats.bulletsfired+=2;
 		}
 		else  if(player.PowerUp == 1)
 		{
+			playGameSound(S_SHOOT1);
 			shootMissile1(combined.globalSettings.currentMissile,charLocation);
 			combined.stats.bulletsfired++;
 		}

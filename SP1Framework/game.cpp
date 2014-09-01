@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "leveldesign.h"
 #include "Framework\console.h"
+#include "Framework\sound.h"
 #include "MainMenu.h"
 #include <iostream>
 #include <iomanip>
@@ -17,6 +18,7 @@
 
 // Console size, width by height
 COORD ConsoleSize = {80, 25};
+Sound sound;
 double elapsedTime;
 double deltaTime;
 bool keyPressed[K_COUNT];
@@ -26,6 +28,23 @@ string display[5] = {"Score:"};
 StopWatch b_timer; 
 COORD charLocation;
 COORD consoleSize;
+
+void playGameSound(SoundType snd)
+{
+	switch (snd)
+	{
+	case S_HIT: sound.playSound("hit1");    
+		break;
+	case S_SHOOT1: sound.playSound("shoot1");
+		break;
+	case S_SHOOT2: sound.playSound("shoot2");
+		break;
+	case S_SHOOT3: sound.playSound("shoot3");
+		break;
+	case S_POWERUP: sound.playSound("powerup");
+		break;
+	}
+}
 
 void init()
 {
@@ -43,6 +62,13 @@ void init()
 	GameVariables();
 	initshieldVar();
 	levelCheck();
+
+	//Load sounds into .exe
+	sound.loadWave("hit1", "Sounds/Hit1.wav");
+	sound.loadWave("shoot1", "Sounds/Shoot1.wav");
+	sound.loadWave("shoot2", "Sounds/Shoot2.wav");
+	sound.loadWave("shoot3", "Sounds/Shoot3.wav");
+	sound.loadWave("powerup", "Sounds/Powerup.wav");
 }
 void shutdown()
 {
@@ -76,22 +102,18 @@ void update(double dt)
 			// Updating the location of the character based on the key press
 			if (keyPressed[K_UP] && charLocation.Y > 3)
 			{
-				Beep(0, 0);
 				charLocation.Y--; 
 			}
 			if (keyPressed[K_LEFT] && charLocation.X > 3)
 			{
-				Beep(0, 0);
 				charLocation.X--; 
 			}
 			if (keyPressed[K_DOWN] && charLocation.Y < ConsoleSize.Y - 4)
 			{
-				Beep(0, 0);
 				charLocation.Y++; 
 			}
 			if (keyPressed[K_RIGHT] && charLocation.X <46)
 			{
-				Beep(0, 0);
 				charLocation.X++; 
 			}
 		}

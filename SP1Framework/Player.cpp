@@ -124,6 +124,7 @@ void collision()
 		static double timer_spawn = elapsedTime;
 		if ( elapsedTime - timer_spawn > 0.2 )
 		{
+			playGameSound(S_POWERUP);
 			timer_spawn = elapsedTime;
 			powerUp.Active = false;
 			player.PowerUp++;
@@ -206,6 +207,7 @@ void collision()
 
 			if ( checkCollisionBullet(missile[i], counter[j],combined.enemySettings.droppowerup))
 			{
+				playGameSound(S_HIT);
 				if ( counter[j].hp <= 0 )
 				{
 					combined.globalSettings.globalscore += (counter[j].score * combined.stats.combo);

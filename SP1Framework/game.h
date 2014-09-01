@@ -20,6 +20,15 @@ enum Keys
     K_COUNT,
 	K_B
 };
+enum SoundType
+{
+    S_HIT,
+    S_SHOOT1,
+	S_SHOOT2,
+	S_SHOOT3,
+	S_POWERUP,
+    S_COUNT
+};
 
 
 void init();                // initialize your variables, allocate memory, etc
@@ -28,6 +37,7 @@ void mainLoop();
 void update(double dt);     // update the game and the state of the game
 void render();              // renders the current state of the game to the console
 void shutdown();            // do clean up, free memory
+void playGameSound(SoundType sound);
 
 void renderCharacter();		// renders player character
 void renderEnemies();		// reneder enemies
