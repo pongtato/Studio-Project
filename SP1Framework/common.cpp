@@ -245,6 +245,7 @@ void restartEnemies()
 		combined.enemySettings.moveYDOWN = 0;
 		combined.enemySettings.wew = 1;
 		combined.enemySettings.spawnclear = 1;
+		combined.globalSettings.loadlevel =1;
 		levelCheck();
 }
 void restartStats()
