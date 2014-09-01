@@ -39,17 +39,12 @@ void loadPlayerFromText()
 	
 	if ( indata.is_open())
 	{
-		if (indata >> PlayerActivefromtext >> PlayerHpfromtext >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon >> player.Lives)
+		if (indata >> player.Active >> player.PowerUp >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon >> player.Lives >> player.Special)
 		{
 			
 		}
 	}
-	player.Active = PlayerActivefromtext;
-	player.PowerUp = PlayerHpfromtext;
-	player.icon = PlayerIconfromtext;
-	player.headIcon = PlayerHeadIcon;
-	player.wingIcon = PlayerWingIcon;
-	player.playerMissleIcon = PlayerMissileIcon;
+	assignText();
 }
 
 void loadPlayer2FromText()
@@ -59,13 +54,15 @@ void loadPlayer2FromText()
 	
 	if ( indata.is_open())
 	{
-		if (indata >> PlayerActivefromtext >> PlayerHpfromtext >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon)
+		if (indata >> player.Active >> player.PowerUp >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon>> player.Lives >> player.Special)
 		{
 			
 		}
 	}
-	player.Active = PlayerActivefromtext;
-	player.PowerUp = PlayerHpfromtext;
+	assignText();
+}
+void assignText()
+{
 	player.icon = PlayerIconfromtext;
 	player.headIcon = PlayerHeadIcon;
 	player.wingIcon = PlayerWingIcon;
@@ -150,6 +147,7 @@ void collision()
 			else
 			{
 				player.Active = false;
+
 			}
 		}
 	}
@@ -191,6 +189,7 @@ void collision()
 				else
 				{
 					player.Active = false;
+
 				}
 			}
 			

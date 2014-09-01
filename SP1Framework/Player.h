@@ -36,5 +36,6 @@ void initshieldVar();
 void useSpecial();
 void printLives();
 void printHearts();
+void assignText();
 
 #endif // _PLAYER_H

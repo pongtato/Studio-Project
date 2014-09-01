@@ -160,20 +160,10 @@ void restartGame()
 	charLocation.X = 3;
     charLocation.Y = ConsoleSize.Y/2;
 	
-
-    elapsedTime = 0.0;
-	loadPlayerFromText();
 	combined.enemySettings.droppowerup = true;
-	GameVariables();
-	initshieldVar();
-	levelCheck();
-	
 	
 	
 	restartBullet();
-	restartTerrainTop();
-	restartTerrainBottom();
 	restartEnemies();
 	restartStats();
-	
 }

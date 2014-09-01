@@ -15,6 +15,7 @@
 
 extern BULLET powerUp;
 extern BULLET missile[60];
+extern SHIELD shield[3];
 extern ENEMY counter[999];
 extern BULLET enemyBullet[50];
 extern WORLD generator[999];
@@ -216,41 +217,36 @@ void restartBullet()
 	}
 }
 
-void restartTerrainTop()
-{
-	for(int i = 0; i< 999; i++)
-	{
-		generator[i].Active = false;
-	}
-}
-void restartTerrainBottom()
-{
-	for(int i = 0; i< 999; i++)
-	{
-		generator2[i].Active = false;
-	}
-}
 void restartEnemies()
 {
 	for(int i = 0; i< 999; i++)
 	{
 		counter[i].Active = false;
+		generator[i].Active = false;
+		generator2[i].Active = false;
 	}
-	updateGame();
-		combined.enemySettings.currentEnemy =0;
-		combined.enemySettings.enemieskilled =0;
-		combined.enemySettings.modifyX = 38;
-		combined.enemySettings.modifyY = 6;
-		combined.enemySettings.moveYUP = combined.enemySettings.modifyY;
-		combined.enemySettings.moveYDOWN = 0;
-		combined.enemySettings.wew = 1;
-		combined.enemySettings.spawnclear = 1;
-		combined.globalSettings.loadlevel =1;
-		levelCheck();
+	combined.enemySettings.currentEnemy =0;
+	combined.enemySettings.enemieskilled =0;
+	combined.enemySettings.modifyX = 38;
+	combined.enemySettings.modifyY = 6;
+	combined.enemySettings.moveYUP = combined.enemySettings.modifyY;
+	combined.enemySettings.moveYDOWN = 0;
+	combined.enemySettings.wew = 1;
+	combined.enemySettings.spawnclear = 1;
+	combined.globalSettings.loadlevel =1;
+	levelCheck();
 }
 void restartStats()
 {
+	
 	combined.stats.bulletsfired = 0;
 	combined.stats.bulletsmissed = 0;
 	combined.stats.combo = 0;
+	combined.stats.accuracy = 100;
+	powerUp.Active = false;
+	player.Invul = 0;
+	for(int i = 0; i<3;i++)
+	{
+		shield[i].Active = false;
+	}
 }
