@@ -237,6 +237,15 @@ void restartEnemies()
 		counter[i].Active = false;
 	}
 	updateGame();
+		combined.enemySettings.currentEnemy =0;
+		combined.enemySettings.enemieskilled =0;
+		combined.enemySettings.modifyX = 38;
+		combined.enemySettings.modifyY = 6;
+		combined.enemySettings.moveYUP = combined.enemySettings.modifyY;
+		combined.enemySettings.moveYDOWN = 0;
+		combined.enemySettings.wew = 1;
+		combined.enemySettings.spawnclear = 1;
+		levelCheck();
 }
 void restartStats()
 {
