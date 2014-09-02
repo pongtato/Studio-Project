@@ -42,7 +42,7 @@ void loseScreen()
 	gameoverscore();
 	Combotrophy();
 	Acctrophy();
-	trophyatlose();
+	Scoretrophy();
 	indata.close();
 }
 void mainScreenIntro()
@@ -307,10 +307,9 @@ void stageclearscreen()
 	std::string resultcombo2 = combo2.str();
 	writeToBuffer(41, 11, resultcombo2, 0x0C);
 
-	trophyatlose();
-	Acctrophy();
 	Combotrophy();
-
+	Acctrophy();
+	Scoretrophy();
 	flushBufferToConsole();
 	Sleep(3000);
 }

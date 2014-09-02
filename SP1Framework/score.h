@@ -20,7 +20,7 @@ void gameoverscore();
 void Writetohighscore();
 void print();
 void playerShoot();
-void trophyatlose();
+void Scoretrophy();
 void Acctrophy();
 void Combotrophy();
 
