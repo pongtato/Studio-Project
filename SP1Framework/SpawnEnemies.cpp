@@ -234,9 +234,9 @@ void renderEnemies()
 			}
 			else
 			{
-			writeToBuffer(counter[i].coordinates.X,counter[i].coordinates.Y-1,counter[i].toprow);
-			writeToBuffer(counter[i].coordinates,counter[i].midrow);
-			writeToBuffer(counter[i].coordinates.X,counter[i].coordinates.Y+1,counter[i].botrow);
+			writeToBuffer(counter[i].coordinates.X,counter[i].coordinates.Y-1,counter[i].toprow, 0x0D);
+			writeToBuffer(counter[i].coordinates,counter[i].midrow, 0x0C);
+			writeToBuffer(counter[i].coordinates.X,counter[i].coordinates.Y+1,counter[i].botrow, 0x0D);
 			}
 		}
 		if(counter[i].coordinates.X <=2)

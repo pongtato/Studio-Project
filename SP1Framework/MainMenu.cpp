@@ -309,19 +309,19 @@ void stageselection()
 
 	case '4':
 		planeselection();
-		combined.globalSettings.loadlevel = 6;
+		combined.globalSettings.loadlevel = 7;
 		mainLoop();
 		break;
 
 	case '5':
 		planeselection();
-		combined.globalSettings.loadlevel = 9;
+		combined.globalSettings.loadlevel = 10;
 		mainLoop();
 		break;
 
 	case '6':
 		planeselection();
-		combined.globalSettings.loadlevel = 10;
+		combined.globalSettings.loadlevel = 11;
 		mainLoop();
 		break;
 
