@@ -32,7 +32,7 @@ extern std::string typefromtext;
 
 void GameVariables()
 {
-	combined.stats.accuracy = 100;
+	combined.stats.accuracy = 0;
 	powerUp.icon = PowerupIcon;
 	powerUp.Active = false;
 	std::ifstream indata;
@@ -253,7 +253,7 @@ void restartStats()
 	combined.stats.bulletsfired = 0;
 	combined.stats.bulletsmissed = 0;
 	combined.stats.combo = 0;
-	combined.stats.accuracy = 100;
+	combined.stats.accuracy = 0;
 	powerUp.Active = false;
 	player.Invul = 0;
 	for(int i = 0; i<3;i++)

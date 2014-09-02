@@ -139,7 +139,6 @@ void renderEnemyMissile()
 		{
 			enemyBullet[i].corrdinates.X--;
 			writeToBuffer(enemyBullet[i].corrdinates,enemyBullet[i].icon);
-
 		}
 		//Check if out of bound
 		if(enemyBullet[i].corrdinates.X <= 1)

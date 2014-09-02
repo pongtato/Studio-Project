@@ -61,6 +61,7 @@ void loadPlayer2FromText()
 	}
 	assignText();
 }
+
 void assignText()
 {
 	player.icon = PlayerIconfromtext;
