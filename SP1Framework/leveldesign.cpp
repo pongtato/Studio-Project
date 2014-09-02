@@ -198,13 +198,13 @@ void planeScreen()
 		indata2.close();
 
 		 
-		COORD c = {22, 18};
-		writeToBuffer(c.X,c.Y, (char)15,0x0C);
-		writeToBuffer(c.X+1,c.Y,(char)16,0x0B);
-		writeToBuffer(c.X,c.Y+1,(char)4,0x0B);
-		writeToBuffer(c.X,c.Y-1,(char)4,0x0B);
+		COORD c = {24, 17};
+		writeToBuffer(c.X,c.Y, (char)15,0x0C); // icon
+		writeToBuffer(c.X+1,c.Y,(char)16,0x0B); //head
+		writeToBuffer(c.X,c.Y+1,(char)4,0x0B); //wings
+		writeToBuffer(c.X,c.Y-1,(char)4,0x0B);  //wings
 
-		COORD d = {53,17};
+		COORD d = {52,17};
 		writeToBuffer(d.X,d.Y, (char)10,0x0C);
 		writeToBuffer(d.X+1,d.Y,(char)228,0x0B);
 		writeToBuffer(d.X,d.Y+1,(char)204,0x0F);

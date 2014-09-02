@@ -11,9 +11,9 @@
 char c;
 string Instruction[99] = {"ESC: Pause Screen", "Space: Shoot", "ArrowKeys: Move"};
 string pongMenu[99] = {"1:","2:","3:", "4:",  /// 0 1 2 3
-	"StartGame", "HighScores", "Instruction", "Exit",  // 4 5 6 7
-	"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "ResumeGame", "RestartGame", //8 9 10 11
-	"5:", "Stages", "Exit(Menu)"}; //12 13 14
+	                   "StartGame", "HighScores", "Instruction", "Exit",  // 4 5 6 7
+	                   "Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "ResumeGame", "RestartGame", //8 9 10 11
+                       "5:", "Stages", "Exit(Menu)"}; //12 13 14
 string SelectStage[99] = {"0", "1:", "2:", "3:", "4:", "5:", "6:", "7","8","9","10","11","12","13"};
 string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2", "Bonus2"}; 
 
