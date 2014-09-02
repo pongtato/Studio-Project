@@ -9,6 +9,7 @@
 #include <conio.h> 
 string n[99] = { "Please Press 'n' to continue..."};
 string Score[99] = { "Score :"};
+string planestats[99] = {"0","1","2","3","4","MaxBullets:","Lives:",};
 
 void leveldesign()
 {
@@ -45,7 +46,7 @@ void winScreen()
 	Acctrophy();
 	trophyatlose();
 	indata.close();
-	writeToBuffer(23,23,n[0],0x07);
+	writeToBuffer(23,24,n[0],0x07);
 	flushBufferToConsole();
 
 	char c = _getch();
@@ -78,7 +79,7 @@ void loseScreen()
 	Acctrophy();
 	Scoretrophy();
 	indata.close();
-	writeToBuffer(23,23,n[0],0x07);
+	writeToBuffer(23,24,n[0],0x07);
 	flushBufferToConsole();
 
 	char c = _getch();
@@ -252,17 +253,29 @@ void planeScreen()
 		indata2.close();
 
 		 
-		COORD c = {24, 17};
+		COORD c = {16, 17};
 		writeToBuffer(c.X,c.Y, (char)15,0x0C); // icon
 		writeToBuffer(c.X+1,c.Y,(char)16,0x0B); //head
 		writeToBuffer(c.X,c.Y+1,(char)4,0x0B); //wings
 		writeToBuffer(c.X,c.Y-1,(char)4,0x0B);  //wings
 
-		COORD d = {52,17};
+		COORD d = {44,17};
 		writeToBuffer(d.X,d.Y, (char)10,0x0C);
 		writeToBuffer(d.X+1,d.Y,(char)228,0x0B);
 		writeToBuffer(d.X,d.Y+1,(char)204,0x0F);
 		writeToBuffer(d.X,d.Y-1,(char)204,0x0F);
+
+		COORD e = {21,17};
+		writeToBuffer(e.X,e.Y-1,planestats[5],0x0F);
+		writeToBuffer(e.X+11,e.Y-1,planestats[3],0x0C);
+		writeToBuffer(e.X,e.Y,planestats[6],0x0F);
+		writeToBuffer(e.X+6,e.Y,planestats[3],0x0C);
+
+		COORD f = {49,17};
+		writeToBuffer(f.X,f.Y-1,planestats[5],0x0F);
+		writeToBuffer(f.X+11,f.Y-1,planestats[2],0x0C);
+		writeToBuffer(f.X,f.Y,planestats[6],0x0F);
+		writeToBuffer(f.X+6,f.Y,planestats[4],0x0C);
 
 	}
 
@@ -355,10 +368,14 @@ void stageclearscreen()
 
 	Combotrophy();
 
+
 	Acctrophy();
 	Scoretrophy();
 
 	writeToBuffer(23,23,n[0],0x07);
+
+
+	writeToBuffer(23,24,n[0],0x07);
 
 	flushBufferToConsole();
 
