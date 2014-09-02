@@ -111,6 +111,7 @@ void collision()
 	
 	if(!player.Active && player.Lives <= 0)
 	{
+		
 		clearBuffer(0x0F);
 		loseScreen();
 		flushBufferToConsole();
@@ -140,6 +141,8 @@ void collision()
 		{
 			if ( player.Lives != 0 && player.Invul != 1)
 			{
+				
+				playGameSound(S_HURT);
 				player.Lives--;
 				player.Invul = 1;
 				player.coordinates.X = 3;
@@ -161,6 +164,7 @@ void collision()
 		{
 			if ( player.Lives != 0 && player.Invul != 1)
 			{
+				playGameSound(S_HURT);
 				player.Lives--;
 				player.Invul = 1;
 				player.coordinates.X = 3;
