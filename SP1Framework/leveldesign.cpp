@@ -47,6 +47,7 @@ void loseScreen()
 }
 void mainScreenIntro()
 {
+	
 	string bullet = " - ";
 
 	string pongtato1 = "   ___   ___  _   _  ____ _____  _  _____ ___";
@@ -104,7 +105,8 @@ void mainScreenIntro()
 	flushBufferToConsole();
 
 	Sleep(1000);
-                 
+	
+	playGameSound(S_MUSIC);
 }
 void mainScreen()
 {
@@ -123,6 +125,8 @@ void mainScreen()
 		
 		indata.close();
 	}
+	playGameSound(S_MUSIC);
+
 }
 void pauseScreen()
 {

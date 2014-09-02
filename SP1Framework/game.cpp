@@ -54,6 +54,7 @@ void playGameSound(SoundType snd)
 
 void init()
 {
+	
     // Set precision for floating point output
     initConsole(ConsoleSize, "SP1 Framework");
 

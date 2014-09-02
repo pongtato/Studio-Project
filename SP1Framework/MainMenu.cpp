@@ -20,7 +20,6 @@ string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2",
 void introscreen()
 {
 	
-	playGameSound(S_MUSIC);
 	intro();
 	selection();
 }
