@@ -19,6 +19,7 @@ void exitScreen();
 void planeScreen();
 void stagesScreen();
 void stageclearscreen();
+void returntomenu();
 
 
 #endif // _LEVELDESIGN_H

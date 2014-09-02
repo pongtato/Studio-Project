@@ -207,8 +207,8 @@ void planeScreen()
 		COORD d = {53,17};
 		writeToBuffer(d.X,d.Y, (char)10,0x0C);
 		writeToBuffer(d.X+1,d.Y,(char)228,0x0B);
-		writeToBuffer(d.X,d.Y+1,(char)204,0x0B);
-		writeToBuffer(d.X,d.Y-1,(char)204,0x0B);
+		writeToBuffer(d.X,d.Y+1,(char)204,0x0F);
+		writeToBuffer(d.X,d.Y-1,(char)204,0x0F);
 
 	}
 
@@ -300,4 +300,24 @@ void stageclearscreen()
 
 	flushBufferToConsole();
 	Sleep(5000);
+}
+void returntomenu()
+{
+	ifstream indata;
+	string data;
+
+	indata.open ("GLD/Returnmenu.txt");
+
+	if (indata.is_open())
+	{
+		
+			for(int i = 0; i <35; i++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,i,data,0x06);
+			}
+			
+		
+		indata.close();
+	}
 }

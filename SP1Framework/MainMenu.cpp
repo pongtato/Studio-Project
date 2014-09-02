@@ -12,8 +12,8 @@ char c;
 string Instruction[99] = {"ESC: Pause Screen", "Space: Shoot", "ArrowKeys: Move"};
 string pongMenu[99] = {"1:","2:","3:", "4:",  /// 0 1 2 3
 	"StartGame", "HighScores", "Instruction", "Exit",  // 4 5 6 7
-	"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "Resume Game", "Restart Game", //8 9 10 11
-	"5:", "Stages"}; //12 13
+	"Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "ResumeGame", "RestartGame", //8 9 10 11
+	"5:", "Stages", "Exit(Menu)"}; //12 13 14
 string SelectStage[99] = {"0", "1:", "2:", "3:", "4:", "5:", "6:", "7","8","9","10","11","12","13"};
 string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2", "Bonus2"}; 
 
@@ -193,7 +193,7 @@ void pausemenu()
 	writeToBuffer(31,21,pongMenu[3],0x06);
 	writeToBuffer(34,21,pongMenu[6],0x07);
 	writeToBuffer(31,22,pongMenu[12],0x06);
-	writeToBuffer(34,22,pongMenu[7],0x07);
+	writeToBuffer(34,22,pongMenu[14],0x07);
 	flushBufferToConsole();
 }
 void pSelection()
@@ -250,10 +250,11 @@ void pSelection()
 
 	case '5':
 		clearBuffer(0x0F);
-		exitScreen();
+		returntomenu();
 		flushBufferToConsole();	
-		Sleep(1200);
-		exit( 0 );
+		Sleep(1000);
+		menuscreen();
+		flushBufferToConsole();	
 		break;
 
 	default:
