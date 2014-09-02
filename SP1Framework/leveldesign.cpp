@@ -311,7 +311,7 @@ void returntomenu()
 	if (indata.is_open())
 	{
 		
-			for(int i = 0; i <35; i++)
+			for(int i = 0; i <20; i++)
 			{
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);

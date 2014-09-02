@@ -254,7 +254,6 @@ void pSelection()
 		flushBufferToConsole();	
 		Sleep(1000);
 		menuscreen();
-		flushBufferToConsole();	
 		break;
 
 	default:
