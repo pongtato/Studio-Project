@@ -271,7 +271,7 @@ void pSelection()
 		clearBuffer(0x0F);
 		returntomenu();
 		flushBufferToConsole();	
-		Sleep(1000);
+		Sleep(1200);
 		introscreen();
 		break;
 

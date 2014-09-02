@@ -6,6 +6,7 @@
 #include "common.h"
 #include "Shoot.h"
 #include "MainMenu.h"
+#include <conio.h> 
 
 string Score[99] = { "Score :"};
 
@@ -332,7 +333,17 @@ void stageclearscreen()
 	Acctrophy();
 	Scoretrophy();
 	flushBufferToConsole();
-	Sleep(3000);
+
+	char c = _getch();
+	switch (c)
+	{
+	case 'n':
+	break;
+	default:
+	stageclearscreen();
+	break;
+	}
+			
 }
 void returntomenu()
 {
