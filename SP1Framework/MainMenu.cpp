@@ -296,36 +296,42 @@ void stageselection()
 	switch (c)
 	{
 	case '1': 
+		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 1;
 		mainLoop();
 		break;
 
 	case '2':
+		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 4;
 		mainLoop();
 		break;
 
 	case '3':
+		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 5;
 		mainLoop();
 		break;
 
 	case '4':
+		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 7;
 		mainLoop();
 		break;
 
 	case '5':
+		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 10;
 		mainLoop();
 		break;
 
 	case '6':
+		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 11;
 		mainLoop();
