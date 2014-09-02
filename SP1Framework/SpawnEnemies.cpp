@@ -47,25 +47,14 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 		if ( indata.is_open())
 		{
-			if (typefromtext != "BOSS")
+			if(indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >>
+				statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >>
+				combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2 >>
+				combined.enemySettings.bossmovespeed >> combined.enemySettings.bossshootspeed >> idfromtext)
 			{
-				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2)
-				{
-				}
-			}
-			else if (typefromtext != "BONUS")
-			{
-				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
-				{
-				}
-			}
-			else
-			{
-				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
-				{
-				}
 			}
 		}
+
 
 	if (typefromtext == "BOSS")
 	{
