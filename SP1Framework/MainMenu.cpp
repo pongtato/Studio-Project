@@ -337,7 +337,7 @@ void stageselection()
 		restartGame();
 		planeselection();
 		combined.globalSettings.stage = 2;
-		combined.globalSettings.loadlevel = 7;
+		combined.globalSettings.loadlevel = 8;
 		mainLoop();
 		break;
 
@@ -346,7 +346,7 @@ void stageselection()
 		restartGame();
 		planeselection();
 		combined.globalSettings.stage = 2;
-		combined.globalSettings.loadlevel = 10;
+		combined.globalSettings.loadlevel = 11;
 		mainLoop();
 		break;
 
@@ -355,7 +355,7 @@ void stageselection()
 		restartGame();
 		planeselection();
 		combined.globalSettings.stage = 2;
-		combined.globalSettings.loadlevel = 11;
+		combined.globalSettings.loadlevel = 12;
 		mainLoop();
 		break;
 

@@ -39,7 +39,7 @@ void loadPlayerFromText()
 	
 	if ( indata.is_open())
 	{
-		if (indata >> player.Active >> player.PowerUp >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon >> player.Lives >> player.Special)
+		if (indata >> player.Active >> player.PowerUp >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon >> player.Lives >> player.Special >> player.cap)
 		{
 			
 		}
@@ -54,7 +54,7 @@ void loadPlayer2FromText()
 	
 	if ( indata.is_open())
 	{
-		if (indata >> player.Active >> player.PowerUp >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon>> player.Lives >> player.Special)
+		if (indata >> player.Active >> player.PowerUp >> PlayerIconfromtext >> PlayerWingIcon >> PlayerHeadIcon>>PlayerMissileIcon >> PowerupIcon>> player.Lives >> player.Special >> player.cap)
 		{
 			
 		}
@@ -129,7 +129,14 @@ void collision()
 			playGameSound(S_POWERUP);
 			timer_spawn = elapsedTime;
 			powerUp.Active = false;
+			if(player.PowerUp >= player.cap)
+			{
+				combined.globalSettings.globalscore += 1000;
+			}
+			else
+			{
 			player.PowerUp++;
+			}
 			combined.enemySettings.droppowerup = true;
 		}
 	}
@@ -143,10 +150,12 @@ void collision()
 			{
 				
 				playGameSound(S_HURT);
+				if(player.PowerUp > 1)
+				{
+				player.PowerUp--;
+				}
 				player.Lives--;
 				player.Invul = 1;
-				player.coordinates.X = 3;
-				player.coordinates.Y = 10;
 				player.Invultimer = 3;
 			}
 			else
@@ -165,6 +174,10 @@ void collision()
 			if ( player.Lives != 0 && player.Invul != 1)
 			{
 				playGameSound(S_HURT);
+					if(player.PowerUp > 1)
+				{
+				player.PowerUp--;
+				}
 				player.Lives--;
 				player.Invul = 1;
 				player.coordinates.X = 3;
@@ -187,6 +200,10 @@ void collision()
 				if ( player.Lives != 0 && player.Invul != 1)
 				{
 					playGameSound(S_HURT);
+					if(player.PowerUp > 1)
+					{
+						player.PowerUp--;
+					}
 					player.Lives--;
 					player.Invul = 1;
 					player.coordinates.X = 3;

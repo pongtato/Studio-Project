@@ -1,4 +1,4 @@
-     1   1     10	204	228	-	80      3	2
-// T/F  HP CHARICON	Wings	Head	Missile	Powerup Lives Specials
+     1   1     10	204	228	-	80      4	2        2
+// T/F  POWERUP CHARICON	Wings	Head	Missile	Powerup Lives Specials Cap
 // Player
 	

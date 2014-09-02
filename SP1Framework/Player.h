@@ -17,6 +17,7 @@ struct PLAYER
 	int Lives;
 	int Invul;
 	int Invultimer;
+	int cap;
 };
 
 struct SHIELD

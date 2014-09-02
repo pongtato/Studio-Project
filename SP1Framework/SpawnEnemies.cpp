@@ -46,18 +46,10 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 		if ( indata.is_open())
 		{
-			if (typefromtext != "BOSS")
+			if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2 >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
 			{
-				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2)
-				{
-				}
 			}
-			else
-			{
-				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
-				{
-				}
-			}
+
 		}
 
 	if (typefromtext == "BOSS")
@@ -368,7 +360,7 @@ void enemyShooting()
 {
 	//Enemy shooting
 	static double timer_shoot = elapsedTime;
-	if (typefromtext != "BOSS")
+	if (typefromtext == "BONUS" || typefromtext == "WAVE")
 	{
 		for(unsigned int i =0; i<spawnno;i++)
 		{
@@ -390,7 +382,7 @@ void enemyShooting()
 			}
 		}
 	}
-	else
+	else if (typefromtext == "BOSS")
 	{
 		for(int i=0; i<1;i++)
 		{
@@ -579,6 +571,7 @@ void levelCheck()
 	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "STAGEEND")
 	{
 		stageclearscreen();
+		combined.globalSettings.loadlevel++;
 	}
 	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "END")
 	{
