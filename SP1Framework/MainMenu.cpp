@@ -19,6 +19,7 @@ string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2",
 
 void introscreen()
 {
+	
 	playGameSound(S_MUSIC);
 	intro();
 	selection();
@@ -45,7 +46,6 @@ void intro()
 
 void menuscreen()
 {
-	playGameSound(S_MUSIC);
 	mainmenu();
 	selection();
 }
@@ -73,11 +73,13 @@ void selection()
 	switch (c)
 	{
 	case '1': 
+		combined.globalSettings.selection = '1';
 		planeselection();
 		mainLoop();
 		break;
 
 	case '2':
+		combined.globalSettings.selection = '2';
 		stagemenu();
 		stageselection();
 		break;
@@ -257,7 +259,7 @@ void pSelection()
 		returntomenu();
 		flushBufferToConsole();	
 		Sleep(1000);
-		menuscreen();
+		introscreen();
 		break;
 
 	default:

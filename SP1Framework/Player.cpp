@@ -116,7 +116,7 @@ void collision()
 		loseScreen();
 		flushBufferToConsole();
 		restartGame();
-		system("pause");
+		Sleep(5000);
 		introscreen();
 	}
 

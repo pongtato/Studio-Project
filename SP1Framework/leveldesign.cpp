@@ -99,6 +99,7 @@ void mainScreenIntro()
 	writeToBuffer(17,9,invasion4,0x06);
 	writeToBuffer(17,10,invasion5,0x06);
 	flushBufferToConsole();
+
 	Sleep(1000);
                  
 }
@@ -255,7 +256,8 @@ void stageclearscreen()
 		
 		indata.close();
 	}
-
+	//Clear existing Bullets on screen
+	restartBullet();
 	
 	std::stringstream temp;
 	temp << "SHOTS FIRED: ";

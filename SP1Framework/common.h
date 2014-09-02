@@ -64,6 +64,7 @@ struct GeneralSettings
 	unsigned int maxMissile;
 	unsigned int playingField;
 	bool nextstage;
+	char selection;
 };
 struct StatTrak
 {

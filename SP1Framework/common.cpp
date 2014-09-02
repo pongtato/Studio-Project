@@ -29,7 +29,6 @@ extern double elapsedTime;
 extern std::string typefromtext;
 
 
-
 void GameVariables()
 {
 	combined.stats.accuracy = 0;
@@ -226,6 +225,10 @@ void restartBullet()
 	{
 		missile[i].Active = false;
 	}
+	for(int i = 0; i<3;i++)
+	{
+		shield[i].Active = false;
+	}
 }
 
 void restartEnemies()
@@ -256,8 +259,14 @@ void restartStats()
 	combined.stats.accuracy = 0;
 	powerUp.Active = false;
 	player.Invul = 0;
-	for(int i = 0; i<3;i++)
+	combined.globalSettings.globalscore = 0;
+	
+	if(combined.globalSettings.selection == '1')
 	{
-		shield[i].Active = false;
+		loadPlayerFromText();
+	}
+	else
+	{
+		loadPlayer2FromText();
 	}
 }
