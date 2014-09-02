@@ -19,6 +19,7 @@ string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2",
 
 void introscreen()
 {
+	playGameSound(S_MUSIC);
 	intro();
 	selection();
 }
@@ -44,6 +45,7 @@ void intro()
 
 void menuscreen()
 {
+	playGameSound(S_MUSIC);
 	mainmenu();
 	selection();
 }
@@ -67,7 +69,7 @@ void mainmenu()
 void selection()
 {
 	c = _getch();
-
+	playGameSound(S_SELECT);
 	switch (c)
 	{
 	case '1': 
@@ -151,12 +153,14 @@ void score()
 }
 void planeselection()
 {
+	
+	
 	clearBuffer(0x0F);
 	planeScreen();
 	flushBufferToConsole();
 
 	c = _getch();
-
+	playGameSound(S_SELECT);
 	switch (c)
 	{
 	case '1':
@@ -199,7 +203,7 @@ void pausemenu()
 void pSelection()
 {
 	c = _getch();
-
+	playGameSound(S_SELECT);
 	switch (c)
 	{
 	case '1':
@@ -286,7 +290,7 @@ void pScore()
 void stageselection()
 {
 	c = _getch();
-
+	playGameSound(S_SELECT);
 	switch (c)
 	{
 	case '1': 

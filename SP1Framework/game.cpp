@@ -47,6 +47,8 @@ void playGameSound(SoundType snd)
 		break;
 	case S_HURT: sound.playSound("hurt");
 		break;
+	case S_MUSIC: sound.playSound("music");
+		break;
 	}
 }
 
@@ -68,6 +70,7 @@ void init()
 	levelCheck();
 
 	//Load sounds into .exe
+	//Sound effects from Online Website provided by Mr Sim
 	sound.loadWave("hit1", "Sounds/Hit1.wav");
 	sound.loadWave("shoot1", "Sounds/Shoot1.wav");
 	sound.loadWave("shoot2", "Sounds/Shoot2.wav");
@@ -75,6 +78,10 @@ void init()
 	sound.loadWave("powerup", "Sounds/Powerup.wav");
 	sound.loadWave("select", "Sounds/Select.wav");
 	sound.loadWave("hurt", "Sounds/Hurt.wav");
+
+	//Royalty Free Music from TeknoAXE
+	//https://www.youtube.com/watch?v=UwEPn5LZlDY
+	sound.loadWave("music", "Sounds/Music.wav");
 }
 void shutdown()
 {

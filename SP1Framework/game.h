@@ -29,6 +29,7 @@ enum SoundType
 	S_POWERUP,
 	S_SELECT,
 	S_HURT,
+	S_MUSIC,
     S_COUNT
 };
 
