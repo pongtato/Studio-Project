@@ -16,6 +16,7 @@ string pongMenu[99] = {"1:","2:","3:", "4:",  /// 0 1 2 3
                        "5:", "Stages", "Exit(Menu)"}; //12 13 14
 string SelectStage[99] = {"0", "1:", "2:", "3:", "4:", "5:", "6:", "7","8","9","10","11","12","13"};
 string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2", "Bonus2"}; 
+extern GLOBAL combined;
 
 void introscreen()
 {
@@ -335,6 +336,7 @@ void stageselection()
 		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
+		combined.globalSettings.stage = 2;
 		combined.globalSettings.loadlevel = 7;
 		mainLoop();
 		break;
@@ -343,6 +345,7 @@ void stageselection()
 		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
+		combined.globalSettings.stage = 2;
 		combined.globalSettings.loadlevel = 10;
 		mainLoop();
 		break;
@@ -351,6 +354,7 @@ void stageselection()
 		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
+		combined.globalSettings.stage = 2;
 		combined.globalSettings.loadlevel = 11;
 		mainLoop();
 		break;
