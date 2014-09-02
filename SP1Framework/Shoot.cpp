@@ -78,7 +78,7 @@ bool checkCollisionBullet(BULLET &missile, ENEMY &checkEnemy, bool spawnpowerup)
 				checkEnemy.Active = false;
 				checkEnemy.icon = ' ';
 				//Chance to spawn powerup at enemy death
-				if(rand()%2 == 1 && spawnpowerup == true)
+				if(rand()%20 == 1 && spawnpowerup == true)
 				{
 					powerUp.Active = true;
 					powerUp.corrdinates.X = checkEnemy.coordinates.X;

@@ -125,7 +125,7 @@ void mainScreen()
 		
 		indata.close();
 	}
-	playGameSound(S_MUSIC);
+	//playGameSound(S_MUSIC);
 
 }
 void pauseScreen()

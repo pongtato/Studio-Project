@@ -142,6 +142,7 @@ void update(double dt)
 		}
 		if (keyPressed[K_ESCAPE])
 		{
+			playGameSound(S_SELECT);
 			pausescreen();   
 		}
 		if (keyPressed[K_B])
