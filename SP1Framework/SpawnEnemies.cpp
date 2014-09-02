@@ -579,8 +579,6 @@ void levelCheck()
 	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "END")
 	{
 		winScreen();
-		flushBufferToConsole();
-		Sleep(2000);
 		menuscreen();
 	}
 }

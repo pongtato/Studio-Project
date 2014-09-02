@@ -7,7 +7,7 @@
 #include "Shoot.h"
 #include "MainMenu.h"
 #include <conio.h> 
-
+string n[99] = { "Please Press 'n' to continue..."};
 string Score[99] = { "Score :"};
 
 void leveldesign()
@@ -45,6 +45,18 @@ void winScreen()
 	Acctrophy();
 	trophyatlose();
 	indata.close();
+	writeToBuffer(23,23,n[0],0x07);
+	flushBufferToConsole();
+
+	char c = _getch();
+		switch (c)
+		{
+		case 'n':
+		break;
+		default:
+		winScreen();
+		break;
+		}
 }
 
 void loseScreen()
@@ -66,6 +78,7 @@ void loseScreen()
 	Acctrophy();
 	Scoretrophy();
 	indata.close();
+	writeToBuffer(23,23,n[0],0x07);
 	flushBufferToConsole();
 
 	char c = _getch();
@@ -341,8 +354,12 @@ void stageclearscreen()
 	writeToBuffer(49, 9, resultcombo2, 0x0C);
 
 	Combotrophy();
+
 	Acctrophy();
 	Scoretrophy();
+
+	writeToBuffer(23,23,n[0],0x07);
+
 	flushBufferToConsole();
 
 	char c = _getch();
