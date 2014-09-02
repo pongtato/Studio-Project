@@ -182,6 +182,7 @@ void collision()
 			{
 				if ( player.Lives != 0 && player.Invul != 1)
 				{
+					playGameSound(S_HURT);
 					player.Lives--;
 					player.Invul = 1;
 					player.coordinates.X = 3;

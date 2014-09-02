@@ -43,6 +43,10 @@ void playGameSound(SoundType snd)
 		break;
 	case S_POWERUP: sound.playSound("powerup");
 		break;
+	case S_SELECT: sound.playSound("select");
+		break;
+	case S_HURT: sound.playSound("hurt");
+		break;
 	}
 }
 
@@ -69,6 +73,8 @@ void init()
 	sound.loadWave("shoot2", "Sounds/Shoot2.wav");
 	sound.loadWave("shoot3", "Sounds/Shoot3.wav");
 	sound.loadWave("powerup", "Sounds/Powerup.wav");
+	sound.loadWave("select", "Sounds/Select.wav");
+	sound.loadWave("hurt", "Sounds/Hurt.wav");
 }
 void shutdown()
 {
