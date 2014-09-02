@@ -49,8 +49,7 @@ void loadfromtext(int loadcase)
 		{
 			if(indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >>
 				statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >>
-				combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2 >>
-				combined.enemySettings.bossmovespeed >> combined.enemySettings.bossshootspeed >> idfromtext)
+				combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2 >>combined.enemySettings.bossmovespeed >> combined.enemySettings.bossshootspeed >> idfromtext)
 			{
 			}
 		}

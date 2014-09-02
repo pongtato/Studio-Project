@@ -352,7 +352,14 @@ void stageclearscreen()
 	writeToBuffer(19, 9, result5, 0x0F);
 
 	std::stringstream temp6;
+	if ( combined.stats.accuracy != 0)
+	{
 	temp6 << combined.stats.accuracy << "%";
+	}
+	else
+	{
+	temp6 << "-";
+	}
 	std::string result6 = temp6.str();
 	writeToBuffer(28, 9, result6, 0x0C);
 
