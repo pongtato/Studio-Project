@@ -44,7 +44,7 @@ void winScreen()
 	gameoverscore();
 	Combotrophy();
 	Acctrophy();
-	trophyatlose();
+	//trophyatlose();
 	indata.close();
 	writeToBuffer(23,24,n[0],0x07);
 	flushBufferToConsole();
