@@ -71,7 +71,7 @@ void selection()
 	switch (c)
 	{
 	case '1': 
-		
+		restartGame();
 		playGameSound(S_SELECT);
 		combined.globalSettings.selection = '1';
 		planeselection();
