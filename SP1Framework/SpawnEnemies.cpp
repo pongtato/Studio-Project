@@ -33,7 +33,6 @@ std::string idfromtext;
 using std::ostringstream;
 unsigned int terrainfromtext = 100;
 
-
 int statefromtext;
 // CHOOSES AND READS FROM REQUIRED FILE
 void loadfromtext(int loadcase)
@@ -45,12 +44,21 @@ void loadfromtext(int loadcase)
 	std::ifstream indata;
 		//indata.open(intandtext);
 		indata.open(result);
-	if ( indata.is_open())
-	{
-		if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> idfromtext)
+		if ( indata.is_open())
 		{
+			if (typefromtext != "BOSS")
+			{
+				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2)
+				{
+				}
+			}
+			else
+			{
+				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
+				{
+				}
+			}
 		}
-	}
 
 	if (typefromtext == "BOSS")
 	{
@@ -564,6 +572,15 @@ void levelCheck()
 	}
 
 	if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "STAGE")
+	{
+		combined.globalSettings.stage++;
+		combined.globalSettings.loadlevel++;
+	}
+	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "STAGEEND")
+	{
+		stageclearscreen();
+	}
+	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "END")
 	{
 		combined.globalSettings.stage++;
 		combined.globalSettings.loadlevel++;

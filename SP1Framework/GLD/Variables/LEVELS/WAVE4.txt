@@ -1,5 +1,5 @@
-   ENEMY.2-1  1   1    10        2     0      25 WAVE
-// NAME     T/F  HP SCORE CHARICON STATE SPAWNNO TYPE
+   ENEMY.2-1  1   4    10        2     0      25 WAVE 0.5            6	     2
+// NAME     T/F  HP SCORE CHARICON STATE SPAWNNO TYPE SPEED SHOOTSPEEDR1 SHOOTSPEEDR2
 // Enemy 1
 
 	
