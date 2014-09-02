@@ -260,7 +260,7 @@ void restartStats()
 	powerUp.Active = false;
 	player.Invul = 0;
 	combined.globalSettings.globalscore = 0;
-	
+	combined.globalSettings.stage = 1;
 	if(combined.globalSettings.selection == '1')
 	{
 		loadPlayerFromText();
