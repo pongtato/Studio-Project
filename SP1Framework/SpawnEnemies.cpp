@@ -47,10 +47,24 @@ void loadfromtext(int loadcase)
 		indata.open(result);
 		if ( indata.is_open())
 		{
-			if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2 >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
+			if (typefromtext != "BOSS")
 			{
+				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.enemymovespeed >> combined.enemySettings.enemyshootspeedrange1 >> combined.enemySettings.enemyshootspeedrange2)
+				{
+				}
 			}
-
+			else if (typefromtext != "BONUS")
+			{
+				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
+				{
+				}
+			}
+			else
+			{
+				if (indata >> stagename >> activefromtext >> hpfromtext >> scorefromtext >> iconfromtext >> statefromtext >> spawnno >> typefromtext >> combined.enemySettings.bossmovespeed>> combined.enemySettings.bossshootspeed >> idfromtext)
+				{
+				}
+			}
 		}
 
 	if (typefromtext == "BOSS")
@@ -351,7 +365,7 @@ void enemyShooting()
 {
 	//Enemy shooting
 	static double timer_shoot = elapsedTime;
-	if (typefromtext == "BONUS" || typefromtext == "WAVE")
+	if (typefromtext != "BOSS")
 	{
 		for(unsigned int i =0; i<spawnno;i++)
 		{
@@ -373,7 +387,7 @@ void enemyShooting()
 			}
 		}
 	}
-	else if (typefromtext == "BOSS")
+	else
 	{
 		for(int i=0; i<1;i++)
 		{
@@ -566,8 +580,10 @@ void levelCheck()
 	}
 	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "END")
 	{
-		combined.globalSettings.stage++;
-		combined.globalSettings.loadlevel++;
+		winScreen();
+		flushBufferToConsole();
+		Sleep(2000);
+		menuscreen();
 	}
 }
 // PRINT WAVE STATS TO THE GAME
