@@ -1,12 +1,14 @@
 #include "SpawnEnemies.h"
 #include "game.h"
 #include "Shoot.h"
+#include "leveldesign.h"
 #include "Framework\console.h"
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include "common.h"
 #include <string>
+#include "MainMenu.h"
 ENEMY powerup[1];
 ENEMY counter[999];
 //top terrain
@@ -238,12 +240,27 @@ void renderEnemies()
 			writeToBuffer(counter[i].coordinates,counter[i].midrow, 0x0C);
 			writeToBuffer(counter[i].coordinates.X,counter[i].coordinates.Y+1,counter[i].botrow, 0x0D);
 			}
+			if(counter[i].coordinates.X <=2)
+			{
+				counter[i].Active = false;
+			    counter[i].icon = ' ';
+				clearBuffer(0x0F);
+				loseScreen();
+				flushBufferToConsole();
+				Sleep(3000);
+				menuscreen();
+			}
 		}
-		if(counter[i].coordinates.X <=2)
+		if(counter[i].coordinates.X <=1)
 		{
-			counter[i].Active = false;
-			counter[i].icon = ' ';
+			
+
 		}
+
+	
+		
+		
+		
 	}
 }
 void enemyMove()

@@ -7,6 +7,7 @@
 #include "Shoot.h"
 #include "MainMenu.h"
 
+string Score[99] = { "Score :"};
 
 void leveldesign()
 {
@@ -36,7 +37,9 @@ void loseScreen()
 				getline(indata, data);
 				writeToBuffer(0,j,data, 0x06);
 			}
+			writeToBuffer(48,12,Score[0],0x04);
 	}
+	gameoverscore();
 	Combotrophy();
 	Acctrophy();
 	trophyatlose();
@@ -300,8 +303,12 @@ void stageclearscreen()
 	std::string resultcombo2 = combo2.str();
 	writeToBuffer(41, 11, resultcombo2, 0x0C);
 
+	trophyatlose();
+	Acctrophy();
+	Combotrophy();
+
 	flushBufferToConsole();
-	Sleep(5000);
+	Sleep(3000);
 }
 void returntomenu()
 {

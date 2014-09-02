@@ -17,6 +17,15 @@ void normalscore()
 	writeToBuffer(57, 3, result, 0x03);
 
 }
+void gameoverscore()
+{
+	int a = combined.globalSettings.globalscore;
+	string result;
+	ostringstream convert;
+	convert << a;
+	result = convert.str();
+	writeToBuffer(56, 12, result, 0x07);
+}
 
 void Writetohighscore(){
 	ifstream indata;

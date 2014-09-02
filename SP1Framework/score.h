@@ -16,6 +16,7 @@ using std::endl;
 extern GLOBAL combined;
 
 void normalscore();
+void gameoverscore();
 void Writetohighscore();
 void print();
 void playerShoot();
