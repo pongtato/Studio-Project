@@ -111,12 +111,9 @@ void collision()
 	
 	if(!player.Active && player.Lives <= 0)
 	{
-		
 		clearBuffer(0x0F);
 		loseScreen();
-		flushBufferToConsole();
 		restartGame();
-		Sleep(5000);
 		introscreen();
 	}
 

@@ -66,6 +66,17 @@ void loseScreen()
 	Acctrophy();
 	Scoretrophy();
 	indata.close();
+	flushBufferToConsole();
+
+	char c = _getch();
+		switch (c)
+		{
+		case 'n':
+		break;
+		default:
+		loseScreen();
+		break;
+		}
 }
 void mainScreenIntro()
 {
@@ -291,19 +302,19 @@ void stageclearscreen()
 	std::stringstream temp;
 	temp << "SHOTS FIRED: ";
 	std::string result = temp.str();
-	writeToBuffer(21, 7, result, 0x0F);
+	writeToBuffer(19, 7, result, 0x0F);
 	std::stringstream temp4;
 	temp4 << combined.stats.bulletsfired;
 	std::string result4 = temp4.str();
-	writeToBuffer(33, 7, result4, 0x0C);
+	writeToBuffer(32, 7, result4, 0x0C);
 	std::stringstream temp2;
 	temp2 << "SHOTS MISSED: ";
 	std::string result2 = temp2.str();
-	writeToBuffer(44, 7, result2, 0x0F);
+	writeToBuffer(42, 7, result2, 0x0F);
 	std::stringstream temp3;
 	temp3 << combined.stats.bulletsmissed;
 	std::string result3 = temp3.str();
-	writeToBuffer(57, 7, result3, 0x0C);
+	writeToBuffer(55, 7, result3, 0x0C);
 
 	if ( combined.stats.bulletsfired != 0 && combined.stats.bulletsmissed !=0)
 	{
@@ -312,22 +323,22 @@ void stageclearscreen()
 	std::stringstream temp5;
 	temp5 << "ACCURACY: ";
 	std::string result5 = temp5.str();
-	writeToBuffer(33, 9, result5, 0x0F);
+	writeToBuffer(19, 9, result5, 0x0F);
 
 	std::stringstream temp6;
 	temp6 << combined.stats.accuracy << "%";
 	std::string result6 = temp6.str();
-	writeToBuffer(41, 9, result6, 0x0C);
+	writeToBuffer(28, 9, result6, 0x0C);
 
 	std::stringstream combo1;
 	combo1 << "COMBO: ";
 	std::string resultcombo = combo1.str();
-	writeToBuffer(34, 11, resultcombo, 0x0F);
+	writeToBuffer(42, 9, resultcombo, 0x0F);
 
 	std::stringstream combo2;
 	combo2 << combined.stats.combo;
 	std::string resultcombo2 = combo2.str();
-	writeToBuffer(41, 11, resultcombo2, 0x0C);
+	writeToBuffer(49, 9, resultcombo2, 0x0C);
 
 	Combotrophy();
 	Acctrophy();

@@ -60,7 +60,7 @@ void print(){
 	if (indata2.is_open())
 	{
 		getline(indata2, data);
-		writeToBuffer(35, 20, data, 0x07);
+		writeToBuffer(35, 18, data, 0x07);
 	}
 	indata2.close();
 

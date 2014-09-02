@@ -261,8 +261,6 @@ void renderEnemies()
 			    counter[i].icon = ' ';
 				clearBuffer(0x0F);
 				loseScreen();
-				flushBufferToConsole();
-				char c = _getch();
 				menuscreen();
 			}
 		}	

@@ -9,9 +9,9 @@
 #include "score.h"
 #include "Player.h"
 char c;
-string Instruction[99] = {"ESC: Pause Screen", "Space: Shoot", "ArrowKeys: Move"};
+string Instruction[99] = {"ESC: PauseScreen", "Space: Shoot", "ArrowKeys: Move", "b: ActivateShield", };
 string pongMenu[99] = {"1:","2:","3:", "4:",  /// 0 1 2 3
-	                   "StartGame", "HighScores", "Instruction", "Exit",  // 4 5 6 7
+	                   "StartGame", "HighScores", "Instructions", "Exit",  // 4 5 6 7
 	                   "Welcome to the Pongtato Invasion Game!!!", "Game Paused! Please Select your options.", "ResumeGame", "RestartGame", //8 9 10 11
                        "5:", "Stages", "Exit(Menu)"}; //12 13 14
 string SelectStage[99] = {"0", "1:", "2:", "3:", "4:", "5:", "6:", "7","8","9","10","11","12","13"};
@@ -28,18 +28,18 @@ void intro()
 {
 	clearBuffer(0x0F);
 	mainScreenIntro();
-	writeToBuffer(20,14,pongMenu[8],0x03);
+	writeToBuffer(20,13,pongMenu[8],0x03);
 	flushBufferToConsole(); Sleep(50);
-	writeToBuffer(31,18,pongMenu[0],0x06);
-	writeToBuffer(34,18,pongMenu[4],0x07);
-	writeToBuffer(31,19,pongMenu[1],0x06);
-	writeToBuffer(34,19,pongMenu[13],0x07);
-	writeToBuffer(31,20,pongMenu[2],0x06);
-	writeToBuffer(34,20,pongMenu[5],0x07);
-	writeToBuffer(31,21,pongMenu[3],0x06);
-	writeToBuffer(34,21,pongMenu[6],0x07);
-	writeToBuffer(31,22,pongMenu[12],0x06);
-	writeToBuffer(34,22,pongMenu[7],0x07);
+	writeToBuffer(31,17,pongMenu[0],0x06);
+	writeToBuffer(34,17,pongMenu[4],0x07);
+	writeToBuffer(31,18,pongMenu[1],0x06);
+	writeToBuffer(34,18,pongMenu[13],0x07);
+	writeToBuffer(31,19,pongMenu[2],0x06);
+	writeToBuffer(34,19,pongMenu[5],0x07);
+	writeToBuffer(31,20,pongMenu[3],0x06);
+	writeToBuffer(34,20,pongMenu[6],0x07);
+	writeToBuffer(31,21,pongMenu[12],0x06);
+	writeToBuffer(34,21,pongMenu[7],0x07);
 	flushBufferToConsole();
 
 }
@@ -53,17 +53,17 @@ void mainmenu()
 {
 	clearBuffer(0x0F);
 	mainScreen();
-	writeToBuffer(20,14,pongMenu[8],0x03);
-	writeToBuffer(31,18,pongMenu[0],0x06);
-	writeToBuffer(34,18,pongMenu[4],0x07);
-	writeToBuffer(31,19,pongMenu[1],0x06);
-	writeToBuffer(34,19,pongMenu[13],0x07);
-	writeToBuffer(31,20,pongMenu[2],0x06);
-	writeToBuffer(34,20,pongMenu[5],0x07);
-	writeToBuffer(31,21,pongMenu[3],0x06);
-	writeToBuffer(34,21,pongMenu[6],0x07);
-	writeToBuffer(31,22,pongMenu[12],0x06);
-	writeToBuffer(34,22,pongMenu[7],0x07);
+	writeToBuffer(20,13,pongMenu[8],0x03);
+	writeToBuffer(31,17,pongMenu[0],0x06);
+	writeToBuffer(34,17,pongMenu[4],0x07);
+	writeToBuffer(31,18,pongMenu[1],0x06);
+	writeToBuffer(34,18,pongMenu[13],0x07);
+	writeToBuffer(31,19,pongMenu[2],0x06);
+	writeToBuffer(34,19,pongMenu[5],0x07);
+	writeToBuffer(31,20,pongMenu[3],0x06);
+	writeToBuffer(34,20,pongMenu[6],0x07);
+	writeToBuffer(31,21,pongMenu[12],0x06);
+	writeToBuffer(34,21,pongMenu[7],0x07);
 	flushBufferToConsole();
 }
 void selection()
@@ -142,19 +142,20 @@ void instructions()
 {
 	clearBuffer(0x0F);
 	mainScreen();
-	writeToBuffer(20,14,pongMenu[8],0x03);
-	writeToBuffer(30,18, pongMenu[6],0x07);
-	writeToBuffer(30,20, Instruction[0],0x07);
-	writeToBuffer(30,21, Instruction[1],0x07);
-	writeToBuffer(30,22, Instruction[2],0x07);
+	writeToBuffer(20,13,pongMenu[8],0x03);
+	writeToBuffer(30,16, pongMenu[6],0x07);
+	writeToBuffer(30,18, Instruction[0],0x07);
+	writeToBuffer(30,19, Instruction[1],0x07);
+	writeToBuffer(30,20, Instruction[2],0x07);
+	writeToBuffer(30,21, Instruction[3],0x07);
 	flushBufferToConsole();
 }
 void score()
 {
 	clearBuffer(0x0F);
 	mainScreen();
-	writeToBuffer(20,14,pongMenu[8],0x03);
-	writeToBuffer(32, 18, pongMenu[5], 0x07);
+	writeToBuffer(20,13,pongMenu[8],0x03);
+	writeToBuffer(33, 16, pongMenu[5], 0x07);
 	print();
 	flushBufferToConsole();
 }
@@ -197,17 +198,17 @@ void pausemenu()
 {
 	clearBuffer(0x0F);
 	pauseScreen();
-	writeToBuffer(20,14,pongMenu[9],0x03);
-	writeToBuffer(31,18,pongMenu[0],0x06);
-	writeToBuffer(34,18,pongMenu[11],0x07);
-	writeToBuffer(31,19,pongMenu[1],0x06);
-	writeToBuffer(34,19,pongMenu[10],0x07);
-	writeToBuffer(31,20,pongMenu[2],0x06);
-	writeToBuffer(34,20,pongMenu[5],0x07);
-	writeToBuffer(31,21,pongMenu[3],0x06);
-	writeToBuffer(34,21,pongMenu[6],0x07);
-	writeToBuffer(31,22,pongMenu[12],0x06);
-	writeToBuffer(34,22,pongMenu[14],0x07);
+	writeToBuffer(20,13,pongMenu[9],0x03);
+	writeToBuffer(31,17,pongMenu[0],0x06);
+	writeToBuffer(34,17,pongMenu[11],0x07);
+	writeToBuffer(31,18,pongMenu[1],0x06);
+	writeToBuffer(34,18,pongMenu[10],0x07);
+	writeToBuffer(31,19,pongMenu[2],0x06);
+	writeToBuffer(34,19,pongMenu[5],0x07);
+	writeToBuffer(31,20,pongMenu[3],0x06);
+	writeToBuffer(34,20,pongMenu[6],0x07);
+	writeToBuffer(31,21,pongMenu[12],0x06);
+	writeToBuffer(34,21,pongMenu[14],0x07);
 	flushBufferToConsole();
 }
 void pSelection()
@@ -285,19 +286,20 @@ void pInstructions()
 {
 	clearBuffer(0x0F);
 	pauseScreen();
-	writeToBuffer(20,14,pongMenu[9],0x03);
-	writeToBuffer(30,18, pongMenu[6],0x07);
-	writeToBuffer(30,20, Instruction[0],0x07);
-	writeToBuffer(30,21, Instruction[1],0x07);
-	writeToBuffer(30,22, Instruction[2],0x07);
+	writeToBuffer(20,13,pongMenu[9],0x03);
+	writeToBuffer(30,16, pongMenu[6],0x07);
+	writeToBuffer(30,18, Instruction[0],0x07);
+	writeToBuffer(30,19, Instruction[1],0x07);
+	writeToBuffer(30,20, Instruction[2],0x07);
+	writeToBuffer(30,21, Instruction[3],0x07);
 	flushBufferToConsole();
 }
 void pScore()
 {
 	clearBuffer(0x0F);
 	pauseScreen();
-	writeToBuffer(20,14,pongMenu[9],0x03);
-	writeToBuffer(32, 18, pongMenu[5], 0x07);
+	writeToBuffer(20,13,pongMenu[9],0x03);
+	writeToBuffer(33, 16, pongMenu[5], 0x07);
 	print();
 	flushBufferToConsole();
 }
