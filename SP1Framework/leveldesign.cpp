@@ -25,6 +25,27 @@ void leveldesign()
 		indata.close();
 	}
 }
+void winScreen()
+{
+	ifstream indata;
+	string data; 
+	indata.open("GLD/Win.txt");
+	if (indata.is_open())
+	{
+			for(int j = 0; j<13;j++)
+			{
+				getline(indata, data);
+				writeToBuffer(0,j,data, 0x06);
+			}
+			writeToBuffer(48,12,Score[0],0x04);
+	}
+	gameoverscore();
+	Combotrophy();
+	Acctrophy();
+	trophyatlose();
+	indata.close();
+}
+
 void loseScreen()
 {
 	ifstream indata;

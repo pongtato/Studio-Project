@@ -9,6 +9,7 @@
 #include "common.h"
 #include <string>
 #include "MainMenu.h"
+#include <conio.h>  
 ENEMY powerup[1];
 ENEMY counter[999];
 //top terrain
@@ -247,20 +248,10 @@ void renderEnemies()
 				clearBuffer(0x0F);
 				loseScreen();
 				flushBufferToConsole();
-				Sleep(3000);
+				char c = _getch();
 				menuscreen();
 			}
-		}
-		if(counter[i].coordinates.X <=1)
-		{
-			
-
-		}
-
-	
-		
-		
-		
+		}	
 	}
 }
 void enemyMove()
