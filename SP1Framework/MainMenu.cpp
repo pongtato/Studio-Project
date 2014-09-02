@@ -69,22 +69,25 @@ void mainmenu()
 void selection()
 {
 	c = _getch();
-	playGameSound(S_SELECT);
 	switch (c)
 	{
 	case '1': 
+		
+		playGameSound(S_SELECT);
 		combined.globalSettings.selection = '1';
 		planeselection();
 		mainLoop();
 		break;
 
 	case '2':
+		playGameSound(S_SELECT);
 		combined.globalSettings.selection = '2';
 		stagemenu();
 		stageselection();
 		break;
 
 	case '3':
+		playGameSound(S_SELECT);
 		clearBuffer(0x0F);
 		score();
 		c = '0';
@@ -103,6 +106,7 @@ void selection()
 		break;
 
 	case '4':
+		playGameSound(S_SELECT);
 		clearBuffer(0x0F);
 		instructions();
 		c = '0';
@@ -119,6 +123,7 @@ void selection()
 		break;
 
 	case '5':
+		playGameSound(S_SELECT);
 		clearBuffer(0x0F);
 		exitScreen();
 		flushBufferToConsole();	
@@ -162,18 +167,21 @@ void planeselection()
 	flushBufferToConsole();
 
 	c = _getch();
-	playGameSound(S_SELECT);
+	
 	switch (c)
 	{
 	case '1':
+		playGameSound(S_SELECT);
 		loadPlayerFromText();  
 		break;
 
 	case '2': 
+		playGameSound(S_SELECT);
 		loadPlayer2FromText();  
 		break;
 
 	default: 
+		playGameSound(S_SELECT);
 		menuscreen();
 		break;
 	}
@@ -209,6 +217,7 @@ void pSelection()
 	switch (c)
 	{
 	case '1':
+		playGameSound(S_SELECT);
 		restartGame();
 		clearBuffer(0x0F);
 		mainLoop();
@@ -217,10 +226,12 @@ void pSelection()
 
 
 	case '2': 
+		playGameSound(S_SELECT);
 		mainLoop();
 		break;
 
 	case '3':
+		playGameSound(S_SELECT);
 		clearBuffer(0x0F);
 		pScore();
 		c = '0';
@@ -239,6 +250,7 @@ void pSelection()
 		break;
 
 	case '4':
+		playGameSound(S_SELECT);
 		clearBuffer(0x0F);
 		pInstructions();
 		c = '0';
@@ -255,6 +267,7 @@ void pSelection()
 		break;
 
 	case '5':
+		playGameSound(S_SELECT);
 		clearBuffer(0x0F);
 		returntomenu();
 		flushBufferToConsole();	
@@ -292,10 +305,11 @@ void pScore()
 void stageselection()
 {
 	c = _getch();
-	playGameSound(S_SELECT);
+	
 	switch (c)
 	{
 	case '1': 
+		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 1;
@@ -303,6 +317,7 @@ void stageselection()
 		break;
 
 	case '2':
+		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 4;
@@ -310,6 +325,7 @@ void stageselection()
 		break;
 
 	case '3':
+		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 5;
@@ -317,6 +333,7 @@ void stageselection()
 		break;
 
 	case '4':
+		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 7;
@@ -324,6 +341,7 @@ void stageselection()
 		break;
 
 	case '5':
+		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 10;
@@ -331,6 +349,7 @@ void stageselection()
 		break;
 
 	case '6':
+		playGameSound(S_SELECT);
 		restartGame();
 		planeselection();
 		combined.globalSettings.loadlevel = 11;
