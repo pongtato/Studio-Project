@@ -29,6 +29,7 @@ void leveldesign()
 }
 void winScreen()
 {
+	clearBuffer(0x0F);
 	ifstream indata;
 	string data; 
 	indata.open("GLD/Win.txt");
@@ -39,12 +40,12 @@ void winScreen()
 				getline(indata, data);
 				writeToBuffer(0,j,data, 0x06);
 			}
-			writeToBuffer(48,12,Score[0],0x04);
+			writeToBuffer(48,9,Score[0],0x04);
 	}
 	gameoverscore();
 	Combotrophy();
 	Acctrophy();
-	//trophyatlose();
+	Scoretrophy();
 	indata.close();
 	writeToBuffer(23,24,n[0],0x07);
 	flushBufferToConsole();
