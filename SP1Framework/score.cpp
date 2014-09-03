@@ -82,9 +82,9 @@ void Scoretrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(5, 14, Achievements[3]);
-				writeToBuffer(0, j, data, 0x06);
-				writeToBuffer(2, 22, Achievements[0], 0x06);
+				writeToBuffer(17, 14, Achievements[3]);
+				writeToBuffer(12, j, data, 0x06);
+				writeToBuffer(14, 22, Achievements[0], 0x06);
 			}
 		}
 	}
@@ -95,9 +95,9 @@ void Scoretrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(5, 14, Achievements[3]);
-				writeToBuffer(0, j, data);
-				writeToBuffer(2, 22, Achievements[1]);
+				writeToBuffer(17, 14, Achievements[3]);
+				writeToBuffer(12, j, data);
+				writeToBuffer(14, 22, Achievements[1]);
 			}
 		}
 	}
@@ -108,9 +108,9 @@ void Scoretrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(5, 14, Achievements[3]);
-				writeToBuffer(0, j, data, 0x0E);
-				writeToBuffer(2, 22, Achievements[2], 0x0E);
+				writeToBuffer(17, 14, Achievements[3]);
+				writeToBuffer(12, j, data, 0x0E);
+				writeToBuffer(14, 22, Achievements[2], 0x0E);
 			}
 		}
 	}
@@ -122,8 +122,8 @@ void Scoretrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata2, data2);
-				writeToBuffer(5, 14, Achievements[3]);
-				writeToBuffer(0, j, data2, 0x04);
+				writeToBuffer(17, 14, Achievements[3]);
+				writeToBuffer(12, j, data2, 0x04);
 			}
 		}
 	}
@@ -146,9 +146,9 @@ void Acctrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(23,14,Achievements[5]);
-				writeToBuffer(0, j, data, 0x06);
-				writeToBuffer(21, 22, Achievements[0], 0x06);
+				writeToBuffer(35,14,Achievements[5]);
+				writeToBuffer(12, j, data, 0x06);
+				writeToBuffer(33, 22, Achievements[0], 0x06);
 			}
 		}
 	}
@@ -159,9 +159,9 @@ void Acctrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(23, 14, Achievements[5]);
-				writeToBuffer(0, j, data);
-				writeToBuffer(21, 22, Achievements[1]);
+				writeToBuffer(35, 14, Achievements[5]);
+				writeToBuffer(12, j, data);
+				writeToBuffer(33, 22, Achievements[1]);
 			}
 		}
 	}
@@ -172,9 +172,9 @@ void Acctrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(23, 14, Achievements[5]);
-				writeToBuffer(0, j, data, 0x0E);
-				writeToBuffer(21, 22, Achievements[2], 0x0E);
+				writeToBuffer(35, 14, Achievements[5]);
+				writeToBuffer(12, j, data, 0x0E);
+				writeToBuffer(33, 22, Achievements[2], 0x0E);
 			}
 		}
 	}
@@ -186,8 +186,8 @@ void Acctrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata2, data2);
-				writeToBuffer(23, 14, Achievements[5]);
-				writeToBuffer(0, j, data2, 0x04);
+				writeToBuffer(35, 14, Achievements[5]);
+				writeToBuffer(12, j, data2, 0x04);
 			}
 		}
 	}
@@ -210,9 +210,9 @@ void Combotrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(43, 14, Achievements[4]);
-				writeToBuffer(0, j, data, 0x06);
-				writeToBuffer(40, 22, Achievements[0], 0x06);
+				writeToBuffer(55, 14, Achievements[4]);
+				writeToBuffer(12, j, data, 0x06);
+				writeToBuffer(52, 22, Achievements[0], 0x06);
 			}
 		}
 	}
@@ -223,9 +223,9 @@ void Combotrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(43, 14, Achievements[4]);
-				writeToBuffer(0, j, data, 0x07);
-				writeToBuffer(40, 22, Achievements[1], 0x07);
+				writeToBuffer(55, 14, Achievements[4]);
+				writeToBuffer(12, j, data, 0x07);
+				writeToBuffer(52, 22, Achievements[1], 0x07);
 			}
 		}
 	}
@@ -236,9 +236,9 @@ void Combotrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata, data);
-				writeToBuffer(43, 14, Achievements[4]);
-				writeToBuffer(0, j, data, 0x0E);
-				writeToBuffer(40, 22, Achievements[2], 0x0E);
+				writeToBuffer(55, 14, Achievements[4]);
+				writeToBuffer(12, j, data, 0x0E);
+				writeToBuffer(52, 22, Achievements[2], 0x0E);
 			}
 		}
 	}
@@ -250,8 +250,8 @@ void Combotrophy()
 			for (int j = 0; j<21; j++)
 			{
 				getline(indata2, data2);
-				writeToBuffer(43, 14, Achievements[4]);
-				writeToBuffer(0, j, data2, 0x04);
+				writeToBuffer(55, 14, Achievements[4]);
+				writeToBuffer(12, j, data2, 0x04);
 			}
 		}
 	}
