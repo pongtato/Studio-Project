@@ -101,7 +101,7 @@ void Scoretrophy()
 			}
 		}
 	}
-	else if (a > 40000)
+	else if (a >= 40000)
 	{
 		if (indata.is_open())
 		{
@@ -152,7 +152,7 @@ void Acctrophy()
 			}
 		}
 	}
-	else if (a > 70 && a< 100)
+	else if (a > 70 && a <= 80)
 	{
 		if (indata.is_open())
 		{
@@ -165,7 +165,7 @@ void Acctrophy()
 			}
 		}
 	}
-	else if (a == 100)
+	else if (a >80)
 	{
 		if (indata.is_open())
 		{
@@ -203,7 +203,7 @@ void Combotrophy()
 	int a;
 	a = combined.stats.combo;
 	indata.open("GLD/Variables/Trophies/Combotrophy.txt");
-	if (a ==5)
+	if (a >5 && a<12)
 	{
 		if (indata.is_open())
 		{
@@ -216,7 +216,7 @@ void Combotrophy()
 			}
 		}
 	}
-	else if (a > 12 && a <= 20)
+	else if (a >= 12 && a <= 20)
 	{
 		if (indata.is_open())
 		{
