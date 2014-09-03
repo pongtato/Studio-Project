@@ -16,6 +16,7 @@ string pongMenu[99] = {"1:","2:","3:", "4:",  /// 0 1 2 3
                        "5:", "Stages", "Exit(Menu)"}; //12 13 14
 string SelectStage[99] = {"0", "1:", "2:", "3:", "4:", "5:", "6:", "7","8","9","10","11","12","13"};
 string StageInfo[99] = {"0", "Wave 1-3", "Boss1", "Bonus1", "Wave 4-6", "Boss2", "Bonus2"}; 
+string Credits[99] = { "   Credits: Aloysius 144101S  Edmund 144112K  Kelvin 144117P  JieRong 143804Z"};
 extern GLOBAL combined;
 
 void introscreen()
@@ -29,7 +30,6 @@ void intro()
 	clearBuffer(0x0F);
 	mainScreenIntro();
 	writeToBuffer(20,13,pongMenu[8],0x03);
-	flushBufferToConsole(); Sleep(50);
 	writeToBuffer(31,17,pongMenu[0],0x06);
 	writeToBuffer(34,17,pongMenu[4],0x07);
 	writeToBuffer(31,18,pongMenu[1],0x06);
@@ -40,6 +40,7 @@ void intro()
 	writeToBuffer(34,20,pongMenu[6],0x07);
 	writeToBuffer(31,21,pongMenu[12],0x06);
 	writeToBuffer(34,21,pongMenu[7],0x07);
+	writeToBuffer(0,24,Credits[0],0x03);
 	flushBufferToConsole();
 
 }
@@ -64,6 +65,7 @@ void mainmenu()
 	writeToBuffer(34,20,pongMenu[6],0x07);
 	writeToBuffer(31,21,pongMenu[12],0x06);
 	writeToBuffer(34,21,pongMenu[7],0x07);
+	writeToBuffer(0,24,Credits[0],0x03);
 	flushBufferToConsole();
 }
 void selection()
@@ -148,6 +150,7 @@ void instructions()
 	writeToBuffer(30,19, Instruction[1],0x07);
 	writeToBuffer(30,20, Instruction[2],0x07);
 	writeToBuffer(30,21, Instruction[3],0x07);
+	writeToBuffer(0,24,Credits[0],0x03);
 	flushBufferToConsole();
 }
 void score()
@@ -157,6 +160,7 @@ void score()
 	writeToBuffer(20,13,pongMenu[8],0x03);
 	writeToBuffer(33, 16, pongMenu[5], 0x07);
 	print();
+	writeToBuffer(0,24,Credits[0],0x03);
 	flushBufferToConsole();
 }
 void planeselection()

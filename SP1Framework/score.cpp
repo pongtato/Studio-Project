@@ -24,7 +24,7 @@ void gameoverscore()
 	ostringstream convert;
 	convert << a;
 	result = convert.str();
-	writeToBuffer(56, 12, result, 0x07);
+	writeToBuffer(56, 9, result, 0x07);
 }
 
 void Writetohighscore(){
