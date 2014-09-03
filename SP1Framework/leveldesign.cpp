@@ -306,6 +306,7 @@ void stageclearscreen()
 	}
 	indata.close();
 	//Clear existing Bullets on screen
+	
 	restartBullet();
 	
 	std::stringstream temp;

@@ -139,6 +139,10 @@ void PrintStats()
 	{
 		combined.stats.accuracy = ((combined.stats.shotshit/(combined.stats.shotshit+combined.stats.bulletsmissed)) * 100);
 	}
+	else if (combined.stats.bulletsmissed == 0 && combined.stats.shotshit !=0)
+	{
+		combined.stats.accuracy = 100;
+	}
 	std::stringstream temp5;
 	temp5 << "ACCURACY: ";
 	std::string result5 = temp5.str();

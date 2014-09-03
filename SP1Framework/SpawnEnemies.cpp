@@ -559,9 +559,10 @@ void levelCheck()
 		combined.globalSettings.stage++;
 		combined.globalSettings.loadlevel++;
 	}
-	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "STAGEEND")
+	if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "STAGEEND")
 	{
 		stageclearscreen();
+		combined.globalSettings.stage++;
 		combined.globalSettings.loadlevel++;
 	}
 	else if (combined.enemySettings.stagechecker[combined.globalSettings.loadlevel] == "END")

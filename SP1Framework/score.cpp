@@ -19,7 +19,7 @@ void normalscore()
 }
 void gameoverscore()
 {
-	int a = combined.globalSettings.globalscore;
+	int a = combined.globalSettings.globalscore * ((100 + combined.stats.accuracy)/100);
 	string result;
 	ostringstream convert;
 	convert << a;
