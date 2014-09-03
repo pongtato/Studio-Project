@@ -375,8 +375,6 @@ void stageclearscreen()
 	writeToBuffer(49, 9, resultcombo2, 0x0C);
 
 	Combotrophy();
-
-
 	Acctrophy();
 	Scoretrophy();
 
