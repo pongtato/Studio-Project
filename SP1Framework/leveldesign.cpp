@@ -23,9 +23,8 @@ void leveldesign()
 				getline(indata, data);
 				writeToBuffer(0,j,data);
 			}
-		
-		indata.close();
 	}
+	indata.close();
 }
 void winScreen()
 {
@@ -169,10 +168,8 @@ void mainScreen()
 				getline(indata, data);
 				writeToBuffer(0,i,data, 0x06);
 			}
-			
-		
-		indata.close();
 	}
+	indata.close();
 	//playGameSound(S_MUSIC);
 
 }
@@ -191,10 +188,8 @@ void pauseScreen()
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);
 			}
-			
-		
-		indata.close();
 	}
+	indata.close();
 }
 void exitScreen()
 {
@@ -211,10 +206,8 @@ void exitScreen()
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);
 			}
-			
-		
-		indata.close();
 	}
+	indata.close();
 }
 void planeScreen()
 {
@@ -231,10 +224,8 @@ void planeScreen()
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);
 			}
-			
-		
-		indata.close();
 	}
+	indata.close();
 
 	ifstream indata2;
 	string data2;
@@ -250,7 +241,7 @@ void planeScreen()
 				writeToBuffer(0,i,data2,0x08);
 			}
 			
-		
+	}
 		indata2.close();
 
 		 
@@ -277,11 +268,6 @@ void planeScreen()
 		writeToBuffer(f.X+11,f.Y-1,planestats[2],0x0C);
 		writeToBuffer(f.X,f.Y,planestats[6],0x0F);
 		writeToBuffer(f.X+6,f.Y,planestats[4],0x0C);
-
-	}
-
-
-
 }
 void stagesScreen()
 {
@@ -298,10 +284,8 @@ void stagesScreen()
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);
 			}
-			
-		
-		indata.close();
 	}
+	indata.close();
 }
 void stageclearscreen()
 {
@@ -319,10 +303,8 @@ void stageclearscreen()
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);
 			}
-			
-		
-		indata.close();
 	}
+	indata.close();
 	//Clear existing Bullets on screen
 	restartBullet();
 	
@@ -408,8 +390,6 @@ void returntomenu()
 				getline(indata, data);
 				writeToBuffer(0,i,data,0x06);
 			}
-			
-		
-		indata.close();
 	}
+	indata.close();
 }
